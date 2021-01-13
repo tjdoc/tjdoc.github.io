@@ -5,6 +5,16 @@
     <link>https://tjdoc.github.io/</link>
     <description>Recent content on my journal</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://tjdoc.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Thu, 14 Jan 2021 02:08:36 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2021 01 14 Test</title>
+      <link>https://tjdoc.github.io/posts/2021-01-14-test/</link>
+      <pubDate>Thu, 14 Jan 2021 02:08:36 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-14-test/</guid>
+      <description>test entry</description>
+    </item>
+    
   </channel>
 </rss>
