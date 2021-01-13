@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>my journal</title>
+    <title>ps126.5</title>
     <link>https://tjdoc.github.io/</link>
-    <description>Recent content on my journal</description>
+    <description>Recent content on ps126.5</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Jan 2021 02:08:36 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Jan 2021 02:38:37 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>2021 01 14 Test</title>
-      <link>https://tjdoc.github.io/posts/2021-01-14-test/</link>
-      <pubDate>Thu, 14 Jan 2021 02:08:36 +0900</pubDate>
+      <title>2021 01 14 Start</title>
+      <link>https://tjdoc.github.io/posts/2021-01-14-start/</link>
+      <pubDate>Thu, 14 Jan 2021 02:38:37 +0900</pubDate>
       
-      <guid>https://tjdoc.github.io/posts/2021-01-14-test/</guid>
-      <description>test entry</description>
+      <guid>https://tjdoc.github.io/posts/2021-01-14-start/</guid>
+      <description>They that sow in tears shall reap in joy. ps 126:5
+ start</description>
     </item>
     
   </channel>
