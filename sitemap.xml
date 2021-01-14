@@ -3,6 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://tjdoc.github.io/posts/</loc>
+    <lastmod>2021-01-15T05:52:58+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tjdoc.github.io/</loc>
+    <lastmod>2021-01-15T05:52:58+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tjdoc.github.io/tags/reflection/</loc>
+    <lastmod>2021-01-15T05:52:58+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tjdoc.github.io/posts/2021-01-15-sleep/</loc>
+    <lastmod>2021-01-15T05:52:58+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tjdoc.github.io/tags/</loc>
+    <lastmod>2021-01-15T05:52:58+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://tjdoc.github.io/tags/coursera/</loc>
     <lastmod>2021-01-14T21:06:56+09:00</lastmod>
   </url>
@@ -15,26 +40,6 @@
   <url>
     <loc>https://tjdoc.github.io/posts/2021-01-14-coursera_w1/</loc>
     <lastmod>2021-01-14T21:06:56+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tjdoc.github.io/posts/</loc>
-    <lastmod>2021-01-14T21:06:56+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tjdoc.github.io/</loc>
-    <lastmod>2021-01-14T21:06:56+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tjdoc.github.io/tags/</loc>
-    <lastmod>2021-01-14T21:06:56+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tjdoc.github.io/tags/reflection/</loc>
-    <lastmod>2021-01-14T02:38:37+09:00</lastmod>
   </url>
   
   <url>
