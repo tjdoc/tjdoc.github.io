@@ -6,7 +6,33 @@
     <description>Recent content in Posts on ps126.5</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Jan 2021 08:47:21 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Jan 2021 00:18:49 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Galatians 6:9</title>
+      <link>https://tjdoc.github.io/posts/2021-01-18-gal69/</link>
+      <pubDate>Mon, 18 Jan 2021 00:18:49 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-18-gal69/</guid>
+      <description>NKRV gal 6:9 우리가 선을 행하되 낙심하지 말지니 포기하지 아니하면 때가 이르매 거두리라
+CJB gal 6:9. So let us not grow weary of doing what is good; for if we don’t give up, we will in due time reap the harvest.
+ Amen!</description>
+    </item>
+    
+    <item>
+      <title>Neural Networks and Deep Learning W2: Logistic Regression as a Neural Network</title>
+      <link>https://tjdoc.github.io/posts/2021-01-15-coursera_w2/</link>
+      <pubDate>Fri, 15 Jan 2021 10:52:30 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-15-coursera_w2/</guid>
+      <description>Logistic Regression Given x, we want \({\hat y} = P(y=1 |_x)\) where
+input vector: \( x \in \Re^{n_x} \)
+Parameters: \(w \in \Re^{n_x}\), \(b \in \Re \)
+Output: \({\hat y} = \sigma (w^T x + b)\)
+Here, \( \sigma(z) = \frac{1}{1+e^{-z}} \) is the sigmoid function that enforces \( 0 \le {\hat y} \le 1 \)
+Given \( \{{ (x^{(1)} , y^{(1)}) , &amp;hellip;, (x^{(m)} , y^{(m)}) \}} \)
+we want \( {\hat y}^{(i)} \approx y^{(i)} \)</description>
+    </item>
+    
     <item>
       <title>Psalm 20</title>
       <link>https://tjdoc.github.io/posts/2021-01-15-ps20/</link>

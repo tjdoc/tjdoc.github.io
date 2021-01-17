@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.80.0" />
+
+
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
+
+
+<title>Neural Networks and Deep Learning W2: Logistic Regression as a Neural Network - ps126.5</title>
+
+
+
+
+<meta name="keywords" content="coursera, neural network" />
+
+
+<meta property="og:title" content="Neural Networks and Deep Learning W2: Logistic Regression as a Neural Network" />
+<meta name="twitter:title" content="Neural Networks and Deep Learning W2: Logistic Regression as a Neural Network" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tjdoc.github.io/posts/2021-01-15-coursera_w2/" /><meta property="og:description" content="Logistic Regression Given x, we want \({\hat y} = P(y=1 |_x)\) where
+input vector: \( x \in \Re^{n_x} \)
+Parameters: \(w \in \Re^{n_x}\), \(b \in \Re \)
+Output: \({\hat y} = \sigma (w^T x &#43; b)\)
+Here, \( \sigma(z) = \frac{1}{1&#43;e^{-z}} \) is the sigmoid function that enforces \( 0 \le {\hat y} \le 1 \)
+Given \( \{{ (x^{(1)} , y^{(1)}) , &hellip;, (x^{(m)} , y^{(m)}) \}} \)
+we want \( {\hat y}^{(i)} \approx y^{(i)} \)" />
+<meta name="twitter:description" content="Logistic Regression Given x, we want \({\hat y} = P(y=1 |_x)\) where
+input vector: \( x \in \Re^{n_x} \)
+Parameters: \(w \in \Re^{n_x}\), \(b \in \Re \)
+Output: \({\hat y} = \sigma (w^T x &#43; b)\)
+Here, \( \sigma(z) = \frac{1}{1&#43;e^{-z}} \) is the sigmoid function that enforces \( 0 \le {\hat y} \le 1 \)
+Given \( \{{ (x^{(1)} , y^{(1)}) , &hellip;, (x^{(m)} , y^{(m)}) \}} \)
+we want \( {\hat y}^{(i)} \approx y^{(i)} \)" /><meta name="twitter:card" content="summary" /><meta property="article:published_time" content="2021-01-15T10:52:30+09:00" /><meta property="article:modified_time" content="2021-01-15T10:52:30+09:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://tjdoc.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://tjdoc.github.io/">ps126.5</a>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-15-coursera_w2/">Neural Networks and Deep Learning W2: Logistic Regression as a Neural Network</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-15</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2 id="logistic-regression">Logistic Regression</h2>
+<p>Given x, we want \({\hat y} = P(y=1 |_x)\) where</p>
+<p>input vector: \( x \in \Re^{n_x} \)</p>
+<p>Parameters: \(w \in \Re^{n_x}\), \(b \in \Re \)</p>
+<p>Output: \({\hat y} = \sigma (w^T x + b)\)</p>
+<p>Here, \( \sigma(z) = \frac{1}{1+e^{-z}} \) is the sigmoid function that enforces \( 0 \le {\hat y} \le 1 \)</p>
+<p>Given \( \{{ (x^{(1)} , y^{(1)}) , &hellip;, (x^{(m)} , y^{(m)}) \}} \)</p>
+<p>we want \( {\hat y}^{(i)} \approx y^{(i)} \)</p>
+<p><img class="img-zoomable" src="/coursera/sigmoid.svg" alt="Sigmoid function" />
+</p>
+<h2 id="loss-function-and-cost-function">Loss function and Cost Function</h2>
+<dl>
+<dt>Loss function</dt>
+<dd>The difference between the actual output and the predicted output from the
+model for the single training example</dd>
+<dt>Cost function</dt>
+<dd>The average of the loss function for all the training example. I.e., the overall cost of your parameters.</dd>
+</dl>
+<h3 id="loss-error-function">Loss (error) function</h3>
+<p>$$ \mathcal{L} ({\hat y}, y) = \frac{1}{2}({\hat y} - y)^2 $$</p>
+<p>This form for optimization turns out to be non-convex, so for gradient descent,
+we use a different form for the Loss function.</p>
+<p>The actual form we use is</p>
+<p>$$ \mathcal{L}({\hat y}, y) = - \left[ y \log {\hat y} + (1-y) \log (1-{\hat y}) \right] $$</p>
+<ul>
+<li>If \( y=1: \mathcal{L}({\hat y}, y) = - \log {\hat y} \leftarrow \) want
+\( \log \hat y \) large, want \( \hat y \) large.</li>
+<li>If \( y=0: \mathcal{L}({\hat y}, y) = - \log {1-\hat y} \leftarrow \) want
+\( \log (1- \hat y) \) large, want \( \hat y \) small</li>
+</ul>
+<p>Basically, when \( y = 1 \) we want \( \hat y \) large, and when \( y = 0 \) we want \( \hat y \) small.</p>
+<h3 id="cost-function-j">Cost function J</h3>
+<p>$$ J(w, b) = \frac{1}{m} \sum_{i=1}^m \mathcal{L}({\hat y}^{(i)}, y^{(i)}) =
+-\frac{1}{m} \sum_{i=1}^m \left[ \mathcal{L} = - (y^{(i)} \log {\hat y}^{(i)}+
+(1-y^{(i)} ) \log (1-{\hat y^{(i)}})) \right] $$</p>
+<h2 id="gradient-descent">Gradient Descent</h2>
+<p>We want to find \( w, b \) that minimize \( J(w, b) \). We achieve this with Gradient Descent.</p>
+<p><img class="img-zoomable" src="/coursera/gradient_descent.png" alt="Gradient Descent" />
+</p>
+<p>then, \( w, b \) can be obtained by</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> iteration <span style="color:#f92672">in</span> range(epoch):
+    w <span style="color:#f92672">-=</span>  alpha <span style="color:#f92672">*</span> d(J(w,b))<span style="color:#f92672">/</span>dw
+    b <span style="color:#f92672">-=</span>  alpha <span style="color:#f92672">*</span> d(J(w,b))<span style="color:#f92672">/</span>db
+</code></pre></div><p>where alpha is the learning rate. For convenience, we&rsquo;ll denote</p>
+<p>$$ \frac{d(J(w,b))}{dw} \rightarrow dw $$
+$$ \frac{d(J(w,b))}{db} \rightarrow db $$</p>
+<p>as this notation is widely used as convention.</p>
+<h2 id="derivatives-with-a-computation-graph">Derivatives with a Computation Graph</h2>
+<p>In your code, <code>dvar</code> by convention, denotes the derivative of the <code>FinalOutputVar</code> with respect to <code>var</code>.</p>
+<p>Let&rsquo;s say</p>
+<p>$$ J(a,b,c) = 3(a+bc) $$
+where
+$$ u = bc $$
+$$ v = a + u $$
+$$ J = 3v $$</p>
+<p><img class="img-zoomable" src="/coursera/deriv_computation_graph.jpeg" alt="Derivation Computation Graph" />
+</p>
+<p>then,</p>
+<p>$$ \frac{dJ}{du} = \frac{dJ}{dv} \frac{dv}{du} = 3*1 = 3 $$</p>
+<p>Similarly,</p>
+<p>$$ \frac{dJ}{db} = \frac{dJ}{du} \frac{du}{db} = 3*c = 3c $$</p>
+<p>Computation Graph shows how chain rule is being applied.</p>
+<h2 id="logistic-regression-gradient-descent">Logistic Regression Gradient Descent</h2>
+<p><img class="img-zoomable" src="/coursera/logisticRegGD.jpeg" alt="Logistic Regression Gradient Descent" />
+</p>
+<p>$$ da \equiv \frac{d\mathcal{L(a,y)}}{da} = - \frac{d}{da} \left( y \log a +
+(1-y) \log(1-a) \right) = - \frac{y}{a} + \frac{1-y}{1-a} $$
+$$ dz \equiv \frac{d\mathcal{L(a,y)}}{dz} = \frac{d\mathcal{L(a,y)}}{da} \frac{da}{dz} $$
+$$ \frac{da}{dz} = -a^2 e^{-z} = -a^2 (1/a -1) = a(1-a) $$
+$$ \therefore dz = a-y $$</p>
+<p>Why not compute as the following?
+$$ dz \equiv \frac{d\mathcal{L(a,y)}}{dz} = \frac{d\mathcal{L(a,y)}}{dy} \frac{dy}{dz}? $$
+This does not work because we cannot compute \( \frac{d\mathcal{L(a,y)}}{dy}  \) since
+\( y \) is the <strong>true</strong> value which we do not know.</p>
+<p>To perform logistic regression gradient descent for the above figure,</p>
+<p>$$ dw_1 \equiv \frac{d\mathcal{L}}{d w_1} = \frac{d\mathcal{L}}{da}
+\frac{da}{dz} \frac{dz}{dw_1} = \frac{d\mathcal{L}}{dz} \frac{dz}{dw_1} = x_1
+dz = x_1 (a-y) $$
+$$ dw_2 = x_2 dz = x_2 (a-y) $$
+$$ db = dz = (a-y) $$</p>
+<p>in code</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">w1 <span style="color:#f92672">-=</span> alpha <span style="color:#f92672">*</span> dw1
+w2 <span style="color:#f92672">-=</span> alpha <span style="color:#f92672">*</span> dw2
+b  <span style="color:#f92672">-=</span> alpha <span style="color:#f92672">*</span> db
+</code></pre></div><h2 id="gradient-descent-on-m-examples">Gradient Descent on m examples</h2>
+<p>$$ J(w,b) = \frac{1}{m} \sum_{i=1}^m \mathcal{L} (a^{(i)}, y^{(i)}) $$
+where
+$$ a^{(i)} = {\hat y}^{(i)} = \sigma (z^{(i)}) = \sigma (w^T x^{(i)} + b) $$
+then
+$$ \frac{\partial }{\partial w_1} J(w,b) = \frac{1}{m} \sum_{i=1}^m
+\frac{\partial}{\partial w_1} \mathcal{L} (a^{(i)}, y^{(i)}) =  \frac{1}{m}
+\sum_{i=1}^m dw_1^{(i)}$$</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># this code is most likely wrong...</span>
+<span style="color:#66d9ef">for</span> iteration <span style="color:#f92672">in</span> range(epoch):
+    J <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    dw1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    dw2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    db <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">for</span> ii <span style="color:#f92672">in</span> range(m):
+        temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">for</span> jj <span style="color:#f92672">in</span> range(num_features):
+            temp <span style="color:#f92672">+=</span> w[jj]<span style="color:#f92672">.</span>transpose() <span style="color:#f92672">*</span> x[jj][ii]
+        z[ii] <span style="color:#f92672">=</span> temp <span style="color:#f92672">+</span> b
+        a[ii] <span style="color:#f92672">=</span> sigmoid(z[ii])
+        J <span style="color:#f92672">+=</span> ( y[ii] <span style="color:#f92672">*</span> log(a[ii]) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>y[ii])<span style="color:#f92672">*</span>log(<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>a[ii]) )
+        dz[ii] <span style="color:#f92672">=</span> a[ii]<span style="color:#f92672">-</span>y[ii]
+        <span style="color:#66d9ef">for</span> jj <span style="color:#f92672">in</span> range(num_features):
+            dw[jj] <span style="color:#f92672">+=</span> x[jj][ii]<span style="color:#f92672">*</span>dz[ii]
+            dw[jj] <span style="color:#f92672">+=</span> x[jj][ii]<span style="color:#f92672">*</span>dz[ii]
+        db <span style="color:#f92672">+=</span> dz[ii]
+    J <span style="color:#f92672">/=</span> m
+    <span style="color:#66d9ef">for</span> jj <span style="color:#f92672">in</span> range(num_features):
+        dw[jj] <span style="color:#f92672">/=</span> m
+    db <span style="color:#f92672">/=</span> m
+
+    <span style="color:#66d9ef">for</span> jj <span style="color:#f92672">in</span> range(num_features):
+        w[jj] <span style="color:#f92672">-=</span> alpha <span style="color:#f92672">*</span> dw[jj]
+    b  <span style="color:#f92672">-=</span> alpha <span style="color:#f92672">*</span> db
+
+</code></pre></div><p>try to avoid nested for-loops. Using <strong>vectorization</strong> is very important.</p>
+<h2 id="python-and-vectorization">Python and Vectorization</h2>
+<p>dot product example</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> time
+tsize <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>_000_000
+a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(tsize)
+b <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(tsize)
+
+tic <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+c <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>dot(a,b)
+elapsedV <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()<span style="color:#f92672">-</span>tic
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;Vectorized:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{elapsedV:E} ms</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">c = {c}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+
+c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+tic <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+<span style="color:#66d9ef">for</span> ii <span style="color:#f92672">in</span> range(tsize):
+    c <span style="color:#f92672">+=</span> a[ii]<span style="color:#f92672">*</span>b[ii]
+elapsedL <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()<span style="color:#f92672">-</span>tic
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;Loop:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{elapsedL:E} ms</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">c = {c}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;Loop takes {elapsedL/elapsedV} times more&#34;</span>)
+
+</code></pre></div><p>result</p>
+<pre><code>Vectorized:
+4.878044E-04 ms
+c = 250031.37981182418
+
+Loop:
+5.323858E-01 ms
+c = 250031.37981182235
+
+Loop takes 1091.3919843597264 times more
+</code></pre><p><strong>SIMD</strong> (single insturction, multiple data) makes this difference. GPU is particularly good at this.</p>
+<p>start here!
+continue coursera w2 Python and Vectorization Video: More Vectorization Examples</p>
+<h2 id="broadcasting-in-python">Broadcasting in python</h2>
+<p>[numppy boardcasting rules)(https://numpy.org/doc/stable/user/basics.broadcasting.html)</p>
+<p>example:</p>
+<pre><code>A op B
+
+A      (4d array):  8 x 1 x 6 x 1
+B      (3d array):      7 x 1 x 5
+Result (4d array):  8 x 7 x 6 x 5
+
+A      (2d array):  5 x 4
+B      (1d array):      1
+Result (2d array):  5 x 4
+
+A      (2d array):  5 x 4
+B      (1d array):      4
+Result (2d array):  5 x 4
+
+A      (3d array):  15 x 3 x 5
+B      (3d array):  15 x 1 x 5
+Result (3d array):  15 x 3 x 5
+
+A      (3d array):  15 x 3 x 5
+B      (2d array):       3 x 5
+Result (3d array):  15 x 3 x 5
+
+A      (3d array):  15 x 3 x 5
+B      (2d array):       3 x 1
+Result (3d array):  15 x 3 x 5
+</code></pre>
+<p>examples of shapes that do not broadcast</p>
+<pre><code>A      (1d array):  3
+B      (1d array):  4 # trailing dimensions do not match
+
+A      (2d array):      2 x 1
+B      (3d array):  8 x 4 x 3 # second from last dimensions mismatched
+</code></pre>
+<p>example of broadcasting in practice</p>
+<pre><code>&gt;&gt;&gt; x = np.arange(4)
+&gt;&gt;&gt; xx = x.reshape(4,1)
+&gt;&gt;&gt; y = np.ones(5)
+&gt;&gt;&gt; z = np.ones((3,4))
+
+&gt;&gt;&gt; x.shape
+(4,)
+
+&gt;&gt;&gt; y.shape
+(5,)
+
+&gt;&gt;&gt; x + y
+ValueError: operands could not be broadcast together with shapes (4,) (5,)
+
+&gt;&gt;&gt; xx.shape
+(4, 1)
+
+&gt;&gt;&gt; y.shape
+(5,)
+
+&gt;&gt;&gt; (xx + y).shape
+(4, 5)
+
+&gt;&gt;&gt; xx + y
+array([[ 1.,  1.,  1.,  1.,  1.],
+       [ 2.,  2.,  2.,  2.,  2.],
+       [ 3.,  3.,  3.,  3.,  3.],
+       [ 4.,  4.,  4.,  4.,  4.]])
+
+&gt;&gt;&gt; x.shape
+(4,)
+
+&gt;&gt;&gt; z.shape
+(3, 4)
+
+&gt;&gt;&gt; (x + z).shape
+(3, 4)
+
+&gt;&gt;&gt; x + z
+array([[ 1.,  2.,  3.,  4.],
+       [ 1.,  2.,  3.,  4.],
+       [ 1.,  2.,  3.,  4.]])
+</code></pre>
+<p>to take an outer product, you can utilize <code>np.newaxis</code></p>
+<pre><code>&gt;&gt;&gt; a = np.array([0.0, 10.0, 20.0, 30.0])   # shape (4,)
+&gt;&gt;&gt; b = np.array([1.0, 2.0, 3.0])           # shape (3,)
+&gt;&gt;&gt; a[:, np.newaxis] + b                    # shape (4,1) + (3,)
+array([[  1.,   2.,   3.],                  # shape (4,3)
+       [ 11.,  12.,  13.],
+       [ 21.,  22.,  23.],
+       [ 31.,  32.,  33.]])
+</code></pre>
+<h2 id="explanation-of-logistic-regression-cost-function">Explanation of logistic regression cost function</h2>
+<p>$$ {\hat y} = \sigma (w^T x + b) $$
+where
+$$ \sigma (z) = \frac{1}{1+e^{-z}} $$
+Interpret \( {\hat y} \) as the probability of \( y=1 \) for a given set of input features \( x \):
+$$ {\hat y} = P(y=1 | x) $$</p>
+<p>$$ \text{If }  y=1 :  P(y|x) = {\hat y} $$
+$$ \text{If }  y=0 :  P(y|x) = 1-{\hat y} $$
+This is a binary classification case so there can only be y = 1 or 0.
+These two expression can be summarized as
+$$ P(y|x) = {\hat y}^y(1-{\hat y})^{(1-y)} $$
+Now, becasue the log function is a strictly monotonically increasing function, your maximizing \( \log P(y|x) \) should give you a similar result as optimizing \( P(y|x) \).
+$$ \log P(y|x) = y \log {\hat y} + (1-y) \log \left( 1- {\hat y} \right) \equiv -\mathcal{L}({\hat y}, y)$$
+This is because we want the probability as larage as possible but minimum in terms of loss function.
+The cost function of the entire training examples mean, the probability of all labeled training set
+$$ P(\text{labels in training set}) = \Pi_{i=1}^m P(y^{(i)} | x^{(i)}) $$
+$$ \log P(\text{labels in training set}) = \sum_{i=1}^m \log P(y^{(i)} | x^{(i)}) = - \sum_{i=1}^m \mathcal{L}({\hat y}^{(i)}, y^{(i)})$$
+$$ \text{Cost: } J(w,b ) = \frac{1}{m} \sum_{i=1}^m \mathcal{L}({\hat y}^{(i)}, y^{(i)}) $$
+provided that the training examples are IID (Identically and Independently Distributed) where \( 1/m \) is the scaling factor.</p>
+
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#logistic-regression">Logistic Regression</a></li>
+    <li><a href="#loss-function-and-cost-function">Loss function and Cost Function</a>
+      <ul>
+        <li><a href="#loss-error-function">Loss (error) function</a></li>
+        <li><a href="#cost-function-j">Cost function J</a></li>
+      </ul>
+    </li>
+    <li><a href="#gradient-descent">Gradient Descent</a></li>
+    <li><a href="#derivatives-with-a-computation-graph">Derivatives with a Computation Graph</a></li>
+    <li><a href="#logistic-regression-gradient-descent">Logistic Regression Gradient Descent</a></li>
+    <li><a href="#gradient-descent-on-m-examples">Gradient Descent on m examples</a></li>
+    <li><a href="#python-and-vectorization">Python and Vectorization</a></li>
+    <li><a href="#broadcasting-in-python">Broadcasting in python</a></li>
+    <li><a href="#explanation-of-logistic-regression-cost-function">Explanation of logistic regression cost function</a></li>
+  </ul>
+</nav></div>
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021
+                <a href="https://tjdoc.github.io/"></a>
+                
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.0/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>
