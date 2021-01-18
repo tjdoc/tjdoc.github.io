@@ -6,7 +6,26 @@
     <description>Recent content in neural network on ps126.5</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Jan 2021 10:52:30 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/tags/neural-network/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Jan 2021 18:42:17 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/tags/neural-network/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Neural Networksand Deep Learning W2: Lab</title>
+      <link>https://tjdoc.github.io/posts/2021-01-18-w2_lab/</link>
+      <pubDate>Mon, 18 Jan 2021 18:42:17 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-18-w2_lab/</guid>
+      <description>packages import numpy as np import matplotlib.pyplot as plt import h5py import scipy from PIL import Image from scipy import ndimage from lr_utils import load_dataset %matplotlib inline load dataset import numpy as np import h5py def load_dataset(): train_dataset = h5py.File(&amp;#39;datasets/train_catvnoncat.h5&amp;#39;, &amp;#34;r&amp;#34;) train_set_x_orig = np.array(train_dataset[&amp;#34;train_set_x&amp;#34;][:]) # your train set features train_set_y_orig = np.array(train_dataset[&amp;#34;train_set_y&amp;#34;][:]) # your train set labels test_dataset = h5py.File(&amp;#39;datasets/test_catvnoncat.h5&amp;#39;, &amp;#34;r&amp;#34;) test_set_x_orig = np.array(test_dataset[&amp;#34;test_set_x&amp;#34;][:]) # your test set features test_set_y_orig = np.</description>
+    </item>
+    
+    <item>
+      <title>Coursera W2 Numpy Code</title>
+      <link>https://tjdoc.github.io/posts/2021-01-18-coursera_w2_code/</link>
+      <pubDate>Mon, 18 Jan 2021 14:57:04 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-18-coursera_w2_code/</guid>
+      <description>Sigmoid function import math import numpy as np def basic_sigmoid(x): return 1/(1+math.exp(-x)) def sigmoid(x) return 1/(1+np.exp(-x)) Derivative of sigmoid \[ \sigma &#39; (x) = \sigma(x)(1-\sigma(x)) \]
+def sigmoid_derivative(x): s = sigmoid(x) ds = s*(1-s) return ds Reshaping arbitrary dimension numpy array to a column vector def image2vector(image): &amp;#34;&amp;#34;&amp;#34; Argument: image -- a numpy array of shape (length, height, depth) Returns: v -- a vector of shape (length*height*depth, 1) &amp;#34;&amp;#34;&amp;#34; # v = image.</description>
+    </item>
+    
     <item>
       <title>Neural Networks and Deep Learning W2: Logistic Regression as a Neural Network</title>
       <link>https://tjdoc.github.io/posts/2021-01-15-coursera_w2/</link>

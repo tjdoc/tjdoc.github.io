@@ -136,7 +136,7 @@ we use a different form for the Loss function.</p>
 <p>Basically, when \( y = 1 \) we want \( \hat y \) large, and when \( y = 0 \) we want \( \hat y \) small.</p>
 <h3 id="cost-function-j">Cost function J</h3>
 <p>$$ J(w, b) = \frac{1}{m} \sum_{i=1}^m \mathcal{L}({\hat y}^{(i)}, y^{(i)}) =
--\frac{1}{m} \sum_{i=1}^m \left[ \mathcal{L} = - (y^{(i)} \log {\hat y}^{(i)}+
+-\frac{1}{m} \sum_{i=1}^m \left[ (y^{(i)} \log {\hat y}^{(i)}+
 (1-y^{(i)} ) \log (1-{\hat y^{(i)}})) \right] $$</p>
 <h2 id="gradient-descent">Gradient Descent</h2>
 <p>We want to find \( w, b \) that minimize \( J(w, b) \). We achieve this with Gradient Descent.</p>
@@ -195,34 +195,7 @@ then
 $$ \frac{\partial }{\partial w_1} J(w,b) = \frac{1}{m} \sum_{i=1}^m
 \frac{\partial}{\partial w_1} \mathcal{L} (a^{(i)}, y^{(i)}) =  \frac{1}{m}
 \sum_{i=1}^m dw_1^{(i)}$$</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># this code is most likely wrong...</span>
-<span style="color:#66d9ef">for</span> iteration <span style="color:#f92672">in</span> range(epoch):
-    J <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-    dw1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-    dw2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-    db <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-    <span style="color:#66d9ef">for</span> ii <span style="color:#f92672">in</span> range(m):
-        temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-        <span style="color:#66d9ef">for</span> jj <span style="color:#f92672">in</span> range(num_features):
-            temp <span style="color:#f92672">+=</span> w[jj]<span style="color:#f92672">.</span>transpose() <span style="color:#f92672">*</span> x[jj][ii]
-        z[ii] <span style="color:#f92672">=</span> temp <span style="color:#f92672">+</span> b
-        a[ii] <span style="color:#f92672">=</span> sigmoid(z[ii])
-        J <span style="color:#f92672">+=</span> ( y[ii] <span style="color:#f92672">*</span> log(a[ii]) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>y[ii])<span style="color:#f92672">*</span>log(<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>a[ii]) )
-        dz[ii] <span style="color:#f92672">=</span> a[ii]<span style="color:#f92672">-</span>y[ii]
-        <span style="color:#66d9ef">for</span> jj <span style="color:#f92672">in</span> range(num_features):
-            dw[jj] <span style="color:#f92672">+=</span> x[jj][ii]<span style="color:#f92672">*</span>dz[ii]
-            dw[jj] <span style="color:#f92672">+=</span> x[jj][ii]<span style="color:#f92672">*</span>dz[ii]
-        db <span style="color:#f92672">+=</span> dz[ii]
-    J <span style="color:#f92672">/=</span> m
-    <span style="color:#66d9ef">for</span> jj <span style="color:#f92672">in</span> range(num_features):
-        dw[jj] <span style="color:#f92672">/=</span> m
-    db <span style="color:#f92672">/=</span> m
-
-    <span style="color:#66d9ef">for</span> jj <span style="color:#f92672">in</span> range(num_features):
-        w[jj] <span style="color:#f92672">-=</span> alpha <span style="color:#f92672">*</span> dw[jj]
-    b  <span style="color:#f92672">-=</span> alpha <span style="color:#f92672">*</span> db
-
-</code></pre></div><p>try to avoid nested for-loops. Using <strong>vectorization</strong> is very important.</p>
+<p>try to avoid nested for-loops. Using <strong>vectorization</strong> is very important.</p>
 <h2 id="python-and-vectorization">Python and Vectorization</h2>
 <p>dot product example</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
@@ -497,6 +470,10 @@ provided that the training examples are IID (Identically and Independently Distr
         </div>
     </div>
 </footer>
+
+</body>
+
+</html>
 
     
 <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>

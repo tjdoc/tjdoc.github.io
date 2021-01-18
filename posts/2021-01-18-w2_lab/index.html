@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.80.0" />
+
+
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
+
+
+<title>Neural Networksand Deep Learning W2: Lab - ps126.5</title>
+
+
+
+
+<meta name="keywords" content="coursera, neural network" />
+
+
+<meta property="og:title" content="Neural Networksand Deep Learning W2: Lab" />
+<meta name="twitter:title" content="Neural Networksand Deep Learning W2: Lab" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tjdoc.github.io/posts/2021-01-18-w2_lab/" /><meta property="og:description" content="packages import numpy as np import matplotlib.pyplot as plt import h5py import scipy from PIL import Image from scipy import ndimage from lr_utils import load_dataset %matplotlib inline load dataset import numpy as np import h5py def load_dataset(): train_dataset = h5py.File(&#39;datasets/train_catvnoncat.h5&#39;, &#34;r&#34;) train_set_x_orig = np.array(train_dataset[&#34;train_set_x&#34;][:]) # your train set features train_set_y_orig = np.array(train_dataset[&#34;train_set_y&#34;][:]) # your train set labels test_dataset = h5py.File(&#39;datasets/test_catvnoncat.h5&#39;, &#34;r&#34;) test_set_x_orig = np.array(test_dataset[&#34;test_set_x&#34;][:]) # your test set features test_set_y_orig = np." />
+<meta name="twitter:description" content="packages import numpy as np import matplotlib.pyplot as plt import h5py import scipy from PIL import Image from scipy import ndimage from lr_utils import load_dataset %matplotlib inline load dataset import numpy as np import h5py def load_dataset(): train_dataset = h5py.File(&#39;datasets/train_catvnoncat.h5&#39;, &#34;r&#34;) train_set_x_orig = np.array(train_dataset[&#34;train_set_x&#34;][:]) # your train set features train_set_y_orig = np.array(train_dataset[&#34;train_set_y&#34;][:]) # your train set labels test_dataset = h5py.File(&#39;datasets/test_catvnoncat.h5&#39;, &#34;r&#34;) test_set_x_orig = np.array(test_dataset[&#34;test_set_x&#34;][:]) # your test set features test_set_y_orig = np." /><meta name="twitter:card" content="summary" /><meta property="article:published_time" content="2021-01-18T18:42:17+09:00" /><meta property="article:modified_time" content="2021-01-18T18:42:17+09:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://tjdoc.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://tjdoc.github.io/">ps126.5</a>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-18-w2_lab/">Neural Networksand Deep Learning W2: Lab</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-18</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2 id="packages">packages</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> h5py
+<span style="color:#f92672">import</span> scipy
+<span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
+<span style="color:#f92672">from</span> scipy <span style="color:#f92672">import</span> ndimage
+<span style="color:#f92672">from</span> lr_utils <span style="color:#f92672">import</span> load_dataset
+
+<span style="color:#f92672">%</span>matplotlib inline
+</code></pre></div><h2 id="load-dataset">load dataset</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> h5py
+    
+    
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">load_dataset</span>():
+    train_dataset <span style="color:#f92672">=</span> h5py<span style="color:#f92672">.</span>File(<span style="color:#e6db74">&#39;datasets/train_catvnoncat.h5&#39;</span>, <span style="color:#e6db74">&#34;r&#34;</span>)
+    train_set_x_orig <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(train_dataset[<span style="color:#e6db74">&#34;train_set_x&#34;</span>][:]) <span style="color:#75715e"># your train set features</span>
+    train_set_y_orig <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(train_dataset[<span style="color:#e6db74">&#34;train_set_y&#34;</span>][:]) <span style="color:#75715e"># your train set labels</span>
+
+    test_dataset <span style="color:#f92672">=</span> h5py<span style="color:#f92672">.</span>File(<span style="color:#e6db74">&#39;datasets/test_catvnoncat.h5&#39;</span>, <span style="color:#e6db74">&#34;r&#34;</span>)
+    test_set_x_orig <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(test_dataset[<span style="color:#e6db74">&#34;test_set_x&#34;</span>][:]) <span style="color:#75715e"># your test set features</span>
+    test_set_y_orig <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(test_dataset[<span style="color:#e6db74">&#34;test_set_y&#34;</span>][:]) <span style="color:#75715e"># your test set labels</span>
+
+    classes <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(test_dataset[<span style="color:#e6db74">&#34;list_classes&#34;</span>][:]) <span style="color:#75715e"># the list of classes</span>
+    
+    train_set_y_orig <span style="color:#f92672">=</span> train_set_y_orig<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">1</span>, train_set_y_orig<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]))
+    test_set_y_orig <span style="color:#f92672">=</span> test_set_y_orig<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">1</span>, test_set_y_orig<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]))
+    
+    <span style="color:#66d9ef">return</span> train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Loading the data (cat/non-cat)</span>
+train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes <span style="color:#f92672">=</span> load_dataset()
+
+<span style="color:#75715e"># Example of a picture</span>
+index <span style="color:#f92672">=</span> <span style="color:#ae81ff">25</span>
+plt<span style="color:#f92672">.</span>imshow(train_set_x_orig[index])
+<span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;y = &#34;</span> <span style="color:#f92672">+</span> str(train_set_y[:, index]) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;, it&#39;s a &#39;&#34;</span> <span style="color:#f92672">+</span> classes[np<span style="color:#f92672">.</span>squeeze(train_set_y[:, index])]<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#34;utf-8&#34;</span>) <span style="color:#f92672">+</span>  <span style="color:#e6db74">&#34;&#39; picture.&#34;</span>)
+</code></pre></div><p>output</p>
+<pre><code>y = [1], it's a 'cat' picture.
+</code></pre><p><img class="img-zoomable" src="/coursera/cat_01.png" alt="cat" />
+</p>
+<p>find dimensions of your dataset</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">m_train <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>squeeze(train_set_y)<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]
+m_test <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>squeeze(test_set_y)<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]
+num_px <span style="color:#f92672">=</span> train_set_x_orig<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]
+
+<span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;Number of training examples: m_train = &#34;</span> <span style="color:#f92672">+</span> str(m_train))
+<span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;Number of testing examples: m_test = &#34;</span> <span style="color:#f92672">+</span> str(m_test))
+<span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;Height/Width of each image: num_px = &#34;</span> <span style="color:#f92672">+</span> str(num_px))
+<span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;Each image is of size: (&#34;</span> <span style="color:#f92672">+</span> str(num_px) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">+</span> str(num_px) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;, 3)&#34;</span>)
+<span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;train_set_x shape: &#34;</span> <span style="color:#f92672">+</span> str(train_set_x_orig<span style="color:#f92672">.</span>shape))
+<span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;train_set_y shape: &#34;</span> <span style="color:#f92672">+</span> str(train_set_y<span style="color:#f92672">.</span>shape))
+<span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;test_set_x shape: &#34;</span> <span style="color:#f92672">+</span> str(test_set_x_orig<span style="color:#f92672">.</span>shape))
+<span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;test_set_y shape: &#34;</span> <span style="color:#f92672">+</span> str(test_set_y<span style="color:#f92672">.</span>shape))
+
+</code></pre></div><p>output</p>
+<pre><code>
+Number of training examples: m_train = 209
+Number of testing examples: m_test = 50
+Height/Width of each image: num_px = 64
+Each image is of size: (64, 64, 3)
+train_set_x shape: (209, 64, 64, 3)
+train_set_y shape: (1, 209)
+test_set_x shape: (50, 64, 64, 3)
+test_set_y shape: (1, 50)
+
+</code></pre><p>reshape the training and test examples</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">train_set_x_flatten <span style="color:#f92672">=</span> train_set_x_orig<span style="color:#f92672">.</span>reshape(train_set_x_orig<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>],<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>T
+<span style="color:#75715e"># train_set_x_flatten = train_set_x_orig.reshape(-1, train_set_x_orig.shape[0],-1) # this will result in error! Verify by examining the image. </span>
+test_set_x_flatten <span style="color:#f92672">=</span> test_set_x_orig<span style="color:#f92672">.</span>reshape(test_set_x_orig<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>T
+
+<span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;train_set_x_flatten shape: &#34;</span> <span style="color:#f92672">+</span> str(train_set_x_flatten<span style="color:#f92672">.</span>shape))
+<span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;train_set_y shape: &#34;</span> <span style="color:#f92672">+</span> str(train_set_y<span style="color:#f92672">.</span>shape))
+<span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;test_set_x_flatten shape: &#34;</span> <span style="color:#f92672">+</span> str(test_set_x_flatten<span style="color:#f92672">.</span>shape))
+<span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;test_set_y shape: &#34;</span> <span style="color:#f92672">+</span> str(test_set_y<span style="color:#f92672">.</span>shape))
+<span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;sanity check after reshaping: &#34;</span> <span style="color:#f92672">+</span> str(train_set_x_flatten[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">0</span>]))
+
+</code></pre></div><p>normalize dataset</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">train_set_x <span style="color:#f92672">=</span> train_set_x_flatten<span style="color:#f92672">/</span><span style="color:#ae81ff">255.</span>
+test_set_x <span style="color:#f92672">=</span> test_set_x_flatten<span style="color:#f92672">/</span><span style="color:#ae81ff">255.</span>
+</code></pre></div><h2 id="helper-functions">helper functions</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sigmoid</span>(z):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Compute the sigmoid of z
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    Arguments:
+</span><span style="color:#e6db74">    z -- A scalar or numpy array of any size.
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    Return:
+</span><span style="color:#e6db74">    s -- sigmoid(z)
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    s <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span>np<span style="color:#f92672">.</span>exp(<span style="color:#f92672">-</span>z))
+    <span style="color:#66d9ef">return</span> s
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">initialize_with_zeros</span>(dim):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    This function creates a vector of zeros of shape (dim, 1) for w and initializes b to 0.
+</span><span style="color:#e6db74">    
+</span><span style="color:#e6db74">    Argument:
+</span><span style="color:#e6db74">    dim -- size of the w vector we want (or number of parameters in this case)
+</span><span style="color:#e6db74">    
+</span><span style="color:#e6db74">    Returns:
+</span><span style="color:#e6db74">    w -- initialized vector of shape (dim, 1)
+</span><span style="color:#e6db74">    b -- initialized scalar (corresponds to the bias)
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    
+    w <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((dim,<span style="color:#ae81ff">1</span>))
+    b <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+    <span style="color:#66d9ef">assert</span>(w<span style="color:#f92672">.</span>shape <span style="color:#f92672">==</span> (dim, <span style="color:#ae81ff">1</span>))
+    <span style="color:#66d9ef">assert</span>(isinstance(b, float) <span style="color:#f92672">or</span> isinstance(b, int))
+    
+    <span style="color:#66d9ef">return</span> w, b
+
+</code></pre></div><h2 id="forward-and-backward-propagation">forward and backward propagation</h2>
+<p>Forward Propagation:</p>
+<ul>
+<li>You get $$X$$</li>
+<li>You compute $$A = \sigma(w^T X + b) = (a^{(1)}, a^{(2)}, \cdots, a^{(m-1)}, a^{(m)})$$</li>
+<li>You calculate the cost function $$J = -\frac{1}{m} \sum_{i=1}^m y^{(i)} \log(a^{(i)}) + (1-y^{(i)}) \log(1- a^{(i)}) $$</li>
+</ul>
+<p>Also, you&rsquo;ll need</p>
+<p>$$ \frac{\partial J}{\partial w} = \frac{1}{m} X(A-Y)^T $$</p>
+<p>$$ \frac{\partial J}{\partial b} = \frac{1}{m} \sum_{i=1}^m (a^{(i)} - y^{(i)}) $$</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">propagate</span>(w, b, X, Y):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Implement the cost function and its gradient for the propagation explained above
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    Arguments:
+</span><span style="color:#e6db74">    w -- weights, a numpy array of size (num_px * num_px * 3, 1)
+</span><span style="color:#e6db74">    b -- bias, a scalar
+</span><span style="color:#e6db74">    X -- data of size (num_px * num_px * 3, number of examples)
+</span><span style="color:#e6db74">    Y -- true &#34;label&#34; vector (containing 0 if non-cat, 1 if cat) of size (1, number of examples)
+</span><span style="color:#e6db74">    
+</span><span style="color:#e6db74">    Intermediate:
+</span><span style="color:#e6db74">    A -- activation: size (1, m)
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    Return:
+</span><span style="color:#e6db74">    cost -- negative log-likelihood cost for logistic regression
+</span><span style="color:#e6db74">    dw -- gradient of the loss with respect to w, thus same shape as w
+</span><span style="color:#e6db74">    db -- gradient of the loss with respect to b, thus same shape as b
+</span><span style="color:#e6db74">    
+</span><span style="color:#e6db74">    Tips:
+</span><span style="color:#e6db74">    - Write your code step by step for the propagation. np.log(), np.dot()
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    
+    m <span style="color:#f92672">=</span> X<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]
+    
+    <span style="color:#75715e"># FORWARD PROPAGATION (FROM X TO COST)</span>
+    A <span style="color:#f92672">=</span> sigmoid(np<span style="color:#f92672">.</span>dot(w<span style="color:#f92672">.</span>T, X)<span style="color:#f92672">+</span>b)                                    <span style="color:#75715e"># compute activation</span>
+    cost <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>np<span style="color:#f92672">.</span>sum(Y<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>log(A)<span style="color:#f92672">+</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>Y)<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>log(<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>A), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">/</span>m                                 <span style="color:#75715e"># compute cost</span>
+    
+    <span style="color:#75715e"># BACKWARD PROPAGATION (TO FIND GRAD)</span>
+    dw <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>dot(X, (A<span style="color:#f92672">-</span>Y)<span style="color:#f92672">.</span>T)<span style="color:#f92672">/</span>m
+    db <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sum(A<span style="color:#f92672">-</span>Y, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">/</span>m
+
+    <span style="color:#66d9ef">assert</span>(dw<span style="color:#f92672">.</span>shape <span style="color:#f92672">==</span> w<span style="color:#f92672">.</span>shape)
+    <span style="color:#66d9ef">assert</span>(db<span style="color:#f92672">.</span>dtype <span style="color:#f92672">==</span> float)
+    cost <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>squeeze(cost)
+    <span style="color:#66d9ef">assert</span>(cost<span style="color:#f92672">.</span>shape <span style="color:#f92672">==</span> ())
+    
+    grads <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;dw&#34;</span>: dw,
+             <span style="color:#e6db74">&#34;db&#34;</span>: db}
+    
+    <span style="color:#66d9ef">return</span> grads, cost
+
+</code></pre></div><h2 id="optimization-gradient-descent">optimization (gradient descent)</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">optimize</span>(w, b, X, Y, num_iterations, learning_rate, print_cost <span style="color:#f92672">=</span> False):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    This function optimizes w and b by running a gradient descent algorithm
+</span><span style="color:#e6db74">    
+</span><span style="color:#e6db74">    Arguments:
+</span><span style="color:#e6db74">    w -- weights, a numpy array of size (num_px * num_px * 3, 1)
+</span><span style="color:#e6db74">    b -- bias, a scalar
+</span><span style="color:#e6db74">    X -- data of shape (num_px * num_px * 3, number of examples)
+</span><span style="color:#e6db74">    Y -- true &#34;label&#34; vector (containing 0 if non-cat, 1 if cat), of shape (1, number of examples)
+</span><span style="color:#e6db74">    num_iterations -- number of iterations of the optimization loop
+</span><span style="color:#e6db74">    learning_rate -- learning rate of the gradient descent update rule
+</span><span style="color:#e6db74">    print_cost -- True to print the loss every 100 steps
+</span><span style="color:#e6db74">    
+</span><span style="color:#e6db74">    Returns:
+</span><span style="color:#e6db74">    params -- dictionary containing the weights w and bias b
+</span><span style="color:#e6db74">    grads -- dictionary containing the gradients of the weights and bias with respect to the cost function
+</span><span style="color:#e6db74">    costs -- list of all the costs computed during the optimization, this will be used to plot the learning curve.
+</span><span style="color:#e6db74">    
+</span><span style="color:#e6db74">    Tips:
+</span><span style="color:#e6db74">    You basically need to write down two steps and iterate through them:
+</span><span style="color:#e6db74">        1) Calculate the cost and the gradient for the current parameters. Use propagate().
+</span><span style="color:#e6db74">        2) Update the parameters using gradient descent rule for w and b.
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    
+    costs <span style="color:#f92672">=</span> []
+    
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(num_iterations):
+        
+        
+        <span style="color:#75715e"># Cost and gradient calculation (≈ 1-4 lines of code)</span>
+        grads, cost <span style="color:#f92672">=</span> propagate(w, b, X, Y)
+        
+        <span style="color:#75715e"># Retrieve derivatives from grads</span>
+        dw <span style="color:#f92672">=</span> grads[<span style="color:#e6db74">&#34;dw&#34;</span>]
+        db <span style="color:#f92672">=</span> grads[<span style="color:#e6db74">&#34;db&#34;</span>]
+        
+        <span style="color:#75715e"># update rule (≈ 2 lines of code)</span>
+        w <span style="color:#f92672">-=</span> learning_rate<span style="color:#f92672">*</span>dw
+        b <span style="color:#f92672">-=</span> learning_rate<span style="color:#f92672">*</span>db
+        
+        <span style="color:#75715e"># Record the costs</span>
+        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            costs<span style="color:#f92672">.</span>append(cost)
+        
+        <span style="color:#75715e"># Print the cost every 100 training iterations</span>
+        <span style="color:#66d9ef">if</span> print_cost <span style="color:#f92672">and</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;Cost after iteration </span><span style="color:#e6db74">%i</span><span style="color:#e6db74">: </span><span style="color:#e6db74">%f</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span>(i, cost))
+    
+    params <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;w&#34;</span>: w,
+              <span style="color:#e6db74">&#34;b&#34;</span>: b}
+    
+    grads <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;dw&#34;</span>: dw,
+             <span style="color:#e6db74">&#34;db&#34;</span>: db}
+    
+    <span style="color:#66d9ef">return</span> params, grads, costs
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">predict</span>(w, b, X):
+    <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">    Predict whether the label is 0 or 1 using learned logistic regression parameters (w, b)
+</span><span style="color:#e6db74">    
+</span><span style="color:#e6db74">    Arguments:
+</span><span style="color:#e6db74">    w -- weights, a numpy array of size (num_px * num_px * 3, 1)
+</span><span style="color:#e6db74">    b -- bias, a scalar
+</span><span style="color:#e6db74">    X -- data of size (num_px * num_px * 3, number of examples)
+</span><span style="color:#e6db74">    
+</span><span style="color:#e6db74">    Intermediate:
+</span><span style="color:#e6db74">    A -- activation, size(1, m)
+</span><span style="color:#e6db74">    
+</span><span style="color:#e6db74">    Returns:
+</span><span style="color:#e6db74">    Y_prediction -- a numpy array (vector) containing all predictions (0/1) for the examples in X
+</span><span style="color:#e6db74">    &#39;&#39;&#39;</span>
+    
+    m <span style="color:#f92672">=</span> X<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]
+    Y_prediction <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((<span style="color:#ae81ff">1</span>,m))
+    w <span style="color:#f92672">=</span> w<span style="color:#f92672">.</span>reshape(X<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">1</span>)
+    
+    <span style="color:#75715e"># Compute vector &#34;A&#34; predicting the probabilities of a cat being present in the picture</span>
+    A <span style="color:#f92672">=</span> sigmoid(np<span style="color:#f92672">.</span>dot(w<span style="color:#f92672">.</span>T, X)<span style="color:#f92672">+</span>b)
+    
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(A<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]):
+        
+        <span style="color:#75715e"># Convert probabilities A[0,i] to actual predictions p[0,i]</span>
+        Y_prediction[<span style="color:#ae81ff">0</span>,i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">if</span> A[<span style="color:#ae81ff">0</span>,i] <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.5</span> <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">1</span>
+    
+    <span style="color:#66d9ef">assert</span>(Y_prediction<span style="color:#f92672">.</span>shape <span style="color:#f92672">==</span> (<span style="color:#ae81ff">1</span>, m))
+    
+    <span style="color:#66d9ef">return</span> Y_prediction
+
+</code></pre></div><h2 id="final-model">final model</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">model</span>(X_train, Y_train, X_test, Y_test, num_iterations <span style="color:#f92672">=</span> <span style="color:#ae81ff">2000</span>, learning_rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>, print_cost <span style="color:#f92672">=</span> False):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Builds the logistic regression model by calling the function you&#39;ve implemented previously
+</span><span style="color:#e6db74">    
+</span><span style="color:#e6db74">    Arguments:
+</span><span style="color:#e6db74">    X_train -- training set represented by a numpy array of shape (num_px * num_px * 3, m_train)
+</span><span style="color:#e6db74">    Y_train -- training labels represented by a numpy array (vector) of shape (1, m_train)
+</span><span style="color:#e6db74">    X_test -- test set represented by a numpy array of shape (num_px * num_px * 3, m_test)
+</span><span style="color:#e6db74">    Y_test -- test labels represented by a numpy array (vector) of shape (1, m_test)
+</span><span style="color:#e6db74">    num_iterations -- hyperparameter representing the number of iterations to optimize the parameters
+</span><span style="color:#e6db74">    learning_rate -- hyperparameter representing the learning rate used in the update rule of optimize()
+</span><span style="color:#e6db74">    print_cost -- Set to true to print the cost every 100 iterations
+</span><span style="color:#e6db74">    
+</span><span style="color:#e6db74">    Intermediate:
+</span><span style="color:#e6db74">    w -- 
+</span><span style="color:#e6db74">    b -- 
+</span><span style="color:#e6db74">    Returns:
+</span><span style="color:#e6db74">    d -- dictionary containing information about the model.
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    
+    <span style="color:#75715e"># initialize parameters with zeros (≈ 1 line of code)</span>
+    w, b <span style="color:#f92672">=</span> initialize_with_zeros(X_train<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>])
+
+    <span style="color:#75715e"># Gradient descent (≈ 1 line of code)</span>
+    parameters, grads, costs <span style="color:#f92672">=</span> optimize(w, b, X_train, Y_train, num_iterations, learning_rate, print_cost)
+    
+    <span style="color:#75715e"># Retrieve parameters w and b from dictionary &#34;parameters&#34;</span>
+    w <span style="color:#f92672">=</span> parameters[<span style="color:#e6db74">&#34;w&#34;</span>]
+    b <span style="color:#f92672">=</span> parameters[<span style="color:#e6db74">&#34;b&#34;</span>]
+    
+    <span style="color:#75715e"># Predict test/train set examples (≈ 2 lines of code)</span>
+    Y_prediction_test <span style="color:#f92672">=</span> predict(w, b, X_test)
+    Y_prediction_train <span style="color:#f92672">=</span> predict(w, b, X_train)
+
+    <span style="color:#75715e"># Print train/test Errors</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;train accuracy: {} %&#34;</span><span style="color:#f92672">.</span>format(<span style="color:#ae81ff">100</span> <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>mean(np<span style="color:#f92672">.</span>abs(Y_prediction_train <span style="color:#f92672">-</span> Y_train)) <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>))
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;test accuracy: {} %&#34;</span><span style="color:#f92672">.</span>format(<span style="color:#ae81ff">100</span> <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>mean(np<span style="color:#f92672">.</span>abs(Y_prediction_test <span style="color:#f92672">-</span> Y_test)) <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>))
+
+    
+    d <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;costs&#34;</span>: costs,
+         <span style="color:#e6db74">&#34;Y_prediction_test&#34;</span>: Y_prediction_test, 
+         <span style="color:#e6db74">&#34;Y_prediction_train&#34;</span> : Y_prediction_train, 
+         <span style="color:#e6db74">&#34;w&#34;</span> : w, 
+         <span style="color:#e6db74">&#34;b&#34;</span> : b,
+         <span style="color:#e6db74">&#34;learning_rate&#34;</span> : learning_rate,
+         <span style="color:#e6db74">&#34;num_iterations&#34;</span>: num_iterations}
+    
+    <span style="color:#66d9ef">return</span> d
+
+</code></pre></div><pre><code>&gt;&gt;&gt; d = model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations = 2000, learning_rate = 0.005, print_cost = True)
+
+Cost after iteration 0: 0.693147
+Cost after iteration 100: 0.584508
+Cost after iteration 200: 0.466949
+Cost after iteration 300: 0.376007
+Cost after iteration 400: 0.331463
+Cost after iteration 500: 0.303273
+Cost after iteration 600: 0.279880
+Cost after iteration 700: 0.260042
+Cost after iteration 800: 0.242941
+Cost after iteration 900: 0.228004
+Cost after iteration 1000: 0.214820
+Cost after iteration 1100: 0.203078
+Cost after iteration 1200: 0.192544
+Cost after iteration 1300: 0.183033
+Cost after iteration 1400: 0.174399
+Cost after iteration 1500: 0.166521
+Cost after iteration 1600: 0.159305
+Cost after iteration 1700: 0.152667
+Cost after iteration 1800: 0.146542
+Cost after iteration 1900: 0.140872
+train accuracy: 99.04306220095694 %
+test accuracy: 70.0 %
+
+</code></pre><h2 id="plot-learning-curve">plot learning curve</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Plot learning curve (with costs)</span>
+costs <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>squeeze(d[<span style="color:#e6db74">&#39;costs&#39;</span>])
+plt<span style="color:#f92672">.</span>plot(costs)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;cost&#39;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;iterations (per hundreds)&#39;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Learning rate =&#34;</span> <span style="color:#f92672">+</span> str(d[<span style="color:#e6db74">&#34;learning_rate&#34;</span>]))
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img class="img-zoomable" src="/coursera/learning_curve.png" alt="learningCurve" />
+</p>
+<h2 id="with-different-learing-rate">with different learing rate</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">learning_rates <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">0.001</span>, <span style="color:#ae81ff">0.0001</span>]
+models <span style="color:#f92672">=</span> {}
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> learning_rates:
+    <span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#34;learning rate is: &#34;</span> <span style="color:#f92672">+</span> str(i))
+    models[str(i)] <span style="color:#f92672">=</span> model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations <span style="color:#f92672">=</span> <span style="color:#ae81ff">1500</span>, learning_rate <span style="color:#f92672">=</span> i, print_cost <span style="color:#f92672">=</span> False)
+    <span style="color:#66d9ef">print</span> (<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-------------------------------------------------------&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> learning_rates:
+    plt<span style="color:#f92672">.</span>plot(np<span style="color:#f92672">.</span>squeeze(models[str(i)][<span style="color:#e6db74">&#34;costs&#34;</span>]), label<span style="color:#f92672">=</span> str(models[str(i)][<span style="color:#e6db74">&#34;learning_rate&#34;</span>]))
+
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;cost&#39;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;iterations (hundreds)&#39;</span>)
+
+legend <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper center&#39;</span>, shadow<span style="color:#f92672">=</span>True)
+frame <span style="color:#f92672">=</span> legend<span style="color:#f92672">.</span>get_frame()
+frame<span style="color:#f92672">.</span>set_facecolor(<span style="color:#e6db74">&#39;0.90&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+
+</code></pre></div><p>output</p>
+<pre><code>
+learning rate is: 0.01
+train accuracy: 99.52153110047847 %
+test accuracy: 68.0 %
+
+-------------------------------------------------------
+
+learning rate is: 0.001
+train accuracy: 88.99521531100478 %
+test accuracy: 64.0 %
+
+-------------------------------------------------------
+
+learning rate is: 0.0001
+train accuracy: 68.42105263157895 %
+test accuracy: 36.0 %
+
+-------------------------------------------------------
+
+</code></pre><p><img class="img-zoomable" src="/coursera/learning_rate_sensitivity.png" alt="learningRateSensitivity" />
+</p>
+
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#packages">packages</a></li>
+    <li><a href="#load-dataset">load dataset</a></li>
+    <li><a href="#helper-functions">helper functions</a></li>
+    <li><a href="#forward-and-backward-propagation">forward and backward propagation</a></li>
+    <li><a href="#optimization-gradient-descent">optimization (gradient descent)</a></li>
+    <li><a href="#final-model">final model</a></li>
+    <li><a href="#plot-learning-curve">plot learning curve</a></li>
+    <li><a href="#with-different-learing-rate">with different learing rate</a></li>
+  </ul>
+</nav></div>
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021
+                <a href="https://tjdoc.github.io/"></a>
+                
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+</body>
+
+</html>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.0/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>
