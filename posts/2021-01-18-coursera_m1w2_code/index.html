@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.80.0" />
+
+
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
+
+
+<title>Coursera W2 Numpy Code - ps126.5</title>
+
+
+
+
+<meta name="keywords" content="coursera, neural network" />
+
+
+<meta property="og:title" content="Coursera W2 Numpy Code" />
+<meta name="twitter:title" content="Coursera W2 Numpy Code" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tjdoc.github.io/posts/2021-01-18-coursera_m1w2_code/" /><meta property="og:description" content="Sigmoid function import math import numpy as np def basic_sigmoid(x): return 1/(1&#43;math.exp(-x)) def sigmoid(x) return 1/(1&#43;np.exp(-x)) Derivative of sigmoid $$ \sigma &#39; (x) = \sigma(x)(1-\sigma(x)) $$
+def sigmoid_derivative(x): s = sigmoid(x) ds = s*(1-s) return ds Reshaping arbitrary dimension numpy array to a column vector def image2vector(image): &#34;&#34;&#34; Argument: image -- a numpy array of shape (length, height, depth) Returns: v -- a vector of shape (length*height*depth, 1) &#34;&#34;&#34; # v = image." />
+<meta name="twitter:description" content="Sigmoid function import math import numpy as np def basic_sigmoid(x): return 1/(1&#43;math.exp(-x)) def sigmoid(x) return 1/(1&#43;np.exp(-x)) Derivative of sigmoid $$ \sigma &#39; (x) = \sigma(x)(1-\sigma(x)) $$
+def sigmoid_derivative(x): s = sigmoid(x) ds = s*(1-s) return ds Reshaping arbitrary dimension numpy array to a column vector def image2vector(image): &#34;&#34;&#34; Argument: image -- a numpy array of shape (length, height, depth) Returns: v -- a vector of shape (length*height*depth, 1) &#34;&#34;&#34; # v = image." /><meta name="twitter:card" content="summary" /><meta property="article:published_time" content="2021-01-18T14:57:04+09:00" /><meta property="article:modified_time" content="2021-01-18T14:57:04+09:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://tjdoc.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://tjdoc.github.io/">ps126.5</a>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-18-coursera_m1w2_code/">Coursera W2 Numpy Code</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-18</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2 id="sigmoid-function">Sigmoid function</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> math
+<span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<span style="color:#fff;font-weight:bold">def</span> basic_sigmoid(x):
+    <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">1</span>/(<span style="color:#ff0;font-weight:bold">1</span>+math.exp(-x))
+
+<span style="color:#fff;font-weight:bold">def</span> sigmoid(x)
+    <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">1</span>/(<span style="color:#ff0;font-weight:bold">1</span>+np.exp(-x))
+</code></pre></div><h2 id="derivative-of-sigmoid">Derivative of sigmoid</h2>
+<p>$$ \sigma ' (x) = \sigma(x)(1-\sigma(x)) $$</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> sigmoid_derivative(x):
+    s = sigmoid(x)
+    ds = s*(<span style="color:#ff0;font-weight:bold">1</span>-s)
+    <span style="color:#fff;font-weight:bold">return</span> ds
+</code></pre></div><h2 id="reshaping-arbitrary-dimension-numpy-array-to-a-column-vector">Reshaping arbitrary dimension numpy array to a column vector</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> image2vector(image):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Argument:
+</span><span style="color:#0ff;font-weight:bold">    image -- a numpy array of shape (length, height, depth)
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    v -- a vector of shape (length*height*depth, 1)
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    <span style="color:#007f7f"># v = image.reshape(np.prod(image.shape),1)</span>
+    v = image.reshape(-<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    <span style="color:#fff;font-weight:bold">return</span> v
+
+</code></pre></div><h2 id="normalizing-rows">Normalizing rows</h2>
+<p>Gradient descent converges much faster after normalization. Here, by normalization, we mean changing \( x \) to \( \frac{x}{||x||} \) (dividing each row vector of x by its norm.
+for example</p>
+<p>$$
+x =
+\begin{bmatrix}
+0 &amp; 3 &amp; 4 \<br>
+2 &amp; 6 &amp; 4
+\end{bmatrix}
+$$</p>
+<p>then</p>
+<p>$$
+||x|| = \text{np.linalg.norm(x, axis = 1, keepdims = True)} = \begin{bmatrix} 5 \ \sqrt{56} \end{bmatrix}
+$$</p>
+<p>and</p>
+<p>$$
+\text{x_normalized} = \frac{x}{||x||} =
+\begin{bmatrix}
+0 &amp; \frac{3}{5} &amp; \frac{4}{5} \<br>
+\frac{2}{\sqrt{56}} &amp; \frac{6}{\sqrt{56}} &amp; \frac{4}{\sqrt{56}}
+\end{bmatrix}
+$$</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> normalizeRows(x):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement a function that normalizes each row of the matrix x (to have unit length).
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Argument:
+</span><span style="color:#0ff;font-weight:bold">    x -- A numpy matrix of shape (n, m)
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    x -- The normalized (by row) numpy matrix. You are allowed to modify x.
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    <span style="color:#007f7f"># Compute x_norm as the norm 2 of x. Use np.linalg.norm(..., ord = 2, axis = ..., keepdims = True)</span>
+    x_norm = np.linalg.norm(x, <span style="color:#fff;font-weight:bold">ord</span>=<span style="color:#ff0;font-weight:bold">2</span>, axis=<span style="color:#ff0;font-weight:bold">1</span>, keepdims=True)
+    <span style="color:#007f7f"># Divide x by its norm.</span>
+    <span style="color:#007f7f">## x /= x_norm # broadcasting does not work this way. </span>
+    x = x/x_norm
+    <span style="color:#fff;font-weight:bold">return</span> x
+
+</code></pre></div><h2 id="softmax-function">Softmax function</h2>
+<p>For a vector \( x \in \Re^{1 \times n} \),</p>
+<p>$$ \text{softmax(x)} = \text{softmax}([ x_1 \quad x_2 \quad &hellip; \quad x_3]) = \left[\frac{e^{x_1}}{\sum_j e^{x_j}} \quad \frac{e^{x_j}}{\sum_j e^{x_j}} \quad &hellip; \quad \frac{e^{x_n}}{\sum_j e^{x_j}} \right] $$</p>
+<p>For a matrix \(x \in \Re^{m\times n}\) where \(x_{ij}\) maps to the element in the \(i^{th}\) row and \(j^{th}\) column of x</p>
+<p>$$
+\begin{aligned}
+\text{softmax(x)} &amp; = &amp; \text{softmax}
+\begin{bmatrix}
+x_{11} &amp; x_{12} &amp; x_{13} &amp; \cdots &amp; x_{1n} \\
+x_{21} &amp; x_{22} &amp; x_{23} &amp; \cdots &amp; x_{2n} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{m1} &amp; x_{m2} &amp; x_{m3} &amp; \cdots &amp; x_{mn} \\
+\end{bmatrix}
+\\ &amp; = &amp; \begin{bmatrix}
+\frac{e^{x_{11}}}{\sum_{j} e^{x_{1j}}} &amp; \frac{e^{x_{12}}}{\sum_{j} e^{x_{1j}}} &amp; \frac{e^{x_{13}}}{\sum_{j} e^{x_{1j}}}&amp; &hellip; &amp; \frac{e^{x_{1n}}}{\sum_{j} e^{x_{1j}}} \\
+\frac{e^{x_{21}}}{\sum_{j} e^{x_{2j}}} &amp; \frac{e^{x_{22}}}{\sum_{j} e^{x_{2j}}} &amp; \frac{e^{x_{23}}}{\sum_{j} e^{x_{2j}}}&amp; &hellip; &amp; \frac{e^{x_{2n}}}{\sum_{j} e^{x_{2j}}} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\frac{e^{x_{m1}}}{\sum_{j} e^{x_{mj}}} &amp; \frac{e^{x_{m2}}}{\sum_{j} e^{x_{mj}}} &amp; \frac{e^{x_{m3}}}{\sum_{j} e^{x_{mj}}}&amp; &hellip; &amp; \frac{e^{x_{mn}}}{\sum_{j} e^{x_{mj}}} \\
+\end{bmatrix}
+\\&amp; = &amp; \begin{bmatrix}
+\text{softmax first row of x} \\
+\text{softmax second row of x} \\
+\vdots \\
+\text{softmax mth row of x} \\
+\end{bmatrix}
+\end{aligned}
+$$</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> softmax(x):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;Calculates the softmax for each row of the input x.
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Your code should work for a row vector and also for matrices of shape (m,n).
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Argument:
+</span><span style="color:#0ff;font-weight:bold">    x -- A numpy matrix of shape (m,n)
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    s -- A numpy matrix equal to the softmax of x, of shape (m,n)
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    <span style="color:#007f7f"># Apply exp() element-wise to x. Use np.exp(...).</span>
+    x_exp = np.exp(x)
+
+    <span style="color:#007f7f"># Create a vector x_sum that sums each row of x_exp. Use np.sum(..., axis = 1, keepdims = True).</span>
+    x_sum = np.sum(x_exp, axis=<span style="color:#ff0;font-weight:bold">1</span>, keepdims=True)
+    
+    <span style="color:#007f7f"># Compute softmax(x) by dividing x_exp by x_sum. It should automatically use numpy broadcasting.</span>
+    s = x_exp / x_sum
+    <span style="color:#fff;font-weight:bold">return</span> s
+
+</code></pre></div><h2 id="vectorization">Vectorization</h2>
+<p>Loop implementation</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> time
+
+x1 = [<span style="color:#ff0;font-weight:bold">9</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">7</span>, <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">9</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>]
+x2 = [<span style="color:#ff0;font-weight:bold">9</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">9</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">9</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">9</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>]
+
+<span style="color:#007f7f">### CLASSIC DOT PRODUCT OF VECTORS IMPLEMENTATION ###</span>
+tic = time.process_time()
+dot = <span style="color:#ff0;font-weight:bold">0</span>
+<span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#fff;font-weight:bold">len</span>(x1)):
+    dot+= x1[i]*x2[i]
+toc = time.process_time()
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;dot = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(dot) + <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold"> ----- Computation time = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(<span style="color:#ff0;font-weight:bold">1000</span>*(toc - tic)) + <span style="color:#0ff;font-weight:bold">&#34;ms&#34;</span>)
+
+<span style="color:#007f7f">### CLASSIC OUTER PRODUCT IMPLEMENTATION ###</span>
+tic = time.process_time()
+outer = np.zeros((<span style="color:#fff;font-weight:bold">len</span>(x1),<span style="color:#fff;font-weight:bold">len</span>(x2))) <span style="color:#007f7f"># we create a len(x1)*len(x2) matrix with only zeros</span>
+<span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#fff;font-weight:bold">len</span>(x1)):
+    <span style="color:#fff;font-weight:bold">for</span> j in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#fff;font-weight:bold">len</span>(x2)):
+        outer[i,j] = x1[i]*x2[j]
+toc = time.process_time()
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;outer = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(outer) + <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold"> ----- Computation time = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(<span style="color:#ff0;font-weight:bold">1000</span>*(toc - tic)) + <span style="color:#0ff;font-weight:bold">&#34;ms&#34;</span>)
+
+<span style="color:#007f7f">### CLASSIC ELEMENTWISE IMPLEMENTATION ###</span>
+tic = time.process_time()
+mul = np.zeros(<span style="color:#fff;font-weight:bold">len</span>(x1))
+<span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#fff;font-weight:bold">len</span>(x1)):
+    mul[i] = x1[i]*x2[i]
+toc = time.process_time()
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;elementwise multiplication = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(mul) + <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold"> ----- Computation time = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(<span style="color:#ff0;font-weight:bold">1000</span>*(toc - tic)) + <span style="color:#0ff;font-weight:bold">&#34;ms&#34;</span>)
+
+<span style="color:#007f7f">### CLASSIC GENERAL DOT PRODUCT IMPLEMENTATION ###</span>
+W = np.random.rand(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#fff;font-weight:bold">len</span>(x1)) <span style="color:#007f7f"># Random 3*len(x1) numpy array</span>
+tic = time.process_time()
+gdot = np.zeros(W.shape[<span style="color:#ff0;font-weight:bold">0</span>])
+<span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(W.shape[<span style="color:#ff0;font-weight:bold">0</span>]):
+    <span style="color:#fff;font-weight:bold">for</span> j in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#fff;font-weight:bold">len</span>(x1)):
+        gdot[i] += W[i,j]*x1[j]
+toc = time.process_time()
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;gdot = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(gdot) + <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold"> ----- Computation time = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(<span style="color:#ff0;font-weight:bold">1000</span>*(toc - tic)) + <span style="color:#0ff;font-weight:bold">&#34;ms&#34;</span>)
+
+</code></pre></div><p>result</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">dot = 278
+ ----- Computation time = 0.08187999999997864ms
+outer = [[ 81.  18.  18.  81.   0.  81.  18.  45.   0.   0.  81.  18.  45.   0.  0.]
+ [ 18.   4.   4.  18.   0.  18.   4.  10.   0.   0.  18.   4.  10.   0.  0.]
+ [ 45.  10.  10.  45.   0.  45.  10.  25.   0.   0.  45.  10.  25.   0.  0.]
+ [  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.  0.]
+ [  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.  0.]
+ [ 63.  14.  14.  63.   0.  63.  14.  35.   0.   0.  63.  14.  35.   0.  0.]
+ [ 45.  10.  10.  45.   0.  45.  10.  25.   0.   0.  45.  10.  25.   0.  0.]
+ [  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.  0.]
+ [  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.  0.]
+ [  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.  0.]
+ [ 81.  18.  18.  81.   0.  81.  18.  45.   0.   0.  81.  18.  45.   0.  0.]
+ [ 18.   4.   4.  18.   0.  18.   4.  10.   0.   0.  18.   4.  10.   0.  0.]
+ [ 45.  10.  10.  45.   0.  45.  10.  25.   0.   0.  45.  10.  25.   0.  0.]
+ [  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.  0.]
+ [  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.  0.]]
+ ----- Computation time = 0.19985199999994485ms
+elementwise multiplication = [ 81.   4.  10.   0.   0.  63.  10.   0.   0.   0.  81.   4.  25.   0.   0.]
+ ----- Computation time = 0.1048129999999814ms
+gdot = [ 23.07324532  22.70084514  28.28956235]
+ ----- Computation time = 0.14529200000001907ms
+
+</code></pre></div><p>Vectorized version</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x1 = [<span style="color:#ff0;font-weight:bold">9</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">7</span>, <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">9</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>]
+x2 = [<span style="color:#ff0;font-weight:bold">9</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">9</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">9</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">9</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>]
+
+<span style="color:#007f7f">### VECTORIZED DOT PRODUCT OF VECTORS ###</span>
+tic = time.process_time()
+dot = np.dot(x1,x2)
+toc = time.process_time()
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;dot = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(dot) + <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold"> ----- Computation time = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(<span style="color:#ff0;font-weight:bold">1000</span>*(toc - tic)) + <span style="color:#0ff;font-weight:bold">&#34;ms&#34;</span>)
+
+<span style="color:#007f7f">### VECTORIZED OUTER PRODUCT ###</span>
+tic = time.process_time()
+outer = np.outer(x1,x2)
+toc = time.process_time()
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;outer = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(outer) + <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold"> ----- Computation time = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(<span style="color:#ff0;font-weight:bold">1000</span>*(toc - tic)) + <span style="color:#0ff;font-weight:bold">&#34;ms&#34;</span>)
+
+<span style="color:#007f7f">### VECTORIZED ELEMENTWISE MULTIPLICATION ###</span>
+tic = time.process_time()
+mul = np.multiply(x1,x2)
+toc = time.process_time()
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;elementwise multiplication = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(mul) + <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold"> ----- Computation time = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(<span style="color:#ff0;font-weight:bold">1000</span>*(toc - tic)) + <span style="color:#0ff;font-weight:bold">&#34;ms&#34;</span>)
+
+<span style="color:#007f7f">### VECTORIZED GENERAL DOT PRODUCT ###</span>
+tic = time.process_time()
+dot = np.dot(W,x1)
+toc = time.process_time()
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;gdot = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(dot) + <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold"> ----- Computation time = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(<span style="color:#ff0;font-weight:bold">1000</span>*(toc - tic)) + <span style="color:#0ff;font-weight:bold">&#34;ms&#34;</span>)
+</code></pre></div><p>results</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">dot = 278
+ ----- Computation time = 0.08351000000006437ms
+outer = [[81 18 18 81  0 81 18 45  0  0 81 18 45  0  0]
+ [18  4  4 18  0 18  4 10  0  0 18  4 10  0  0]
+ [45 10 10 45  0 45 10 25  0  0 45 10 25  0  0]
+ [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ [63 14 14 63  0 63 14 35  0  0 63 14 35  0  0]
+ [45 10 10 45  0 45 10 25  0  0 45 10 25  0  0]
+ [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ [81 18 18 81  0 81 18 45  0  0 81 18 45  0  0]
+ [18  4  4 18  0 18  4 10  0  0 18  4 10  0  0]
+ [45 10 10 45  0 45 10 25  0  0 45 10 25  0  0]
+ [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]]
+ ----- Computation time = 0.08121599999999507ms
+elementwise multiplication = [81  4 10  0  0 63 10  0  0  0 81  4 25  0  0]
+ ----- Computation time = 0.05891099999999483ms
+gdot = [ 23.07324532  22.70084514  28.28956235]
+ ----- Computation time = 0.15670399999989648ms
+
+</code></pre></div><p><code>np.dot</code> performs matrix-matrix or matrix-vector multiplication while <code>np.multiply</code> performs element-wise multiplication.</p>
+<h2 id="l1-l2-loss-functions">L1, L2 loss functions</h2>
+<p>$$ L_1 ({\hat y}, y) = \sum_{i=1}^m | {\hat y}^{(i)} - y^{(i)} | $$</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> L1(yhat, y):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    yhat -- vector of size m (predicted labels)
+</span><span style="color:#0ff;font-weight:bold">    y -- vector of size m (true labels)
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    loss -- the value of the L1 loss function defined above
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    loss = np.sum(np.abs(yhat-y))
+    <span style="color:#fff;font-weight:bold">return</span> loss
+</code></pre></div><p>$$ L_2 ({\hat y}, y) = \sum_{i=1}^m ( {\hat y}^{(i)} - y^{(i)} )^2 $$</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> L2(yhat, y):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    yhat -- vector of size m (predicted labels)
+</span><span style="color:#0ff;font-weight:bold">    y -- vector of size m (true labels)
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    loss -- the value of the L2 loss function defined above
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    loss = np.sum((yhat-y)**<span style="color:#ff0;font-weight:bold">2</span>)
+    <span style="color:#fff;font-weight:bold">return</span> loss
+
+</code></pre></div>
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#sigmoid-function">Sigmoid function</a></li>
+    <li><a href="#derivative-of-sigmoid">Derivative of sigmoid</a></li>
+    <li><a href="#reshaping-arbitrary-dimension-numpy-array-to-a-column-vector">Reshaping arbitrary dimension numpy array to a column vector</a></li>
+    <li><a href="#normalizing-rows">Normalizing rows</a></li>
+    <li><a href="#softmax-function">Softmax function</a></li>
+    <li><a href="#vectorization">Vectorization</a></li>
+    <li><a href="#l1-l2-loss-functions">L1, L2 loss functions</a></li>
+  </ul>
+</nav></div>
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021
+                <a href="https://tjdoc.github.io/"></a>
+                
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.0/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>

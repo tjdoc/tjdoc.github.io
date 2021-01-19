@@ -6,7 +6,26 @@
     <description>Recent content in Posts on ps126.5</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Jan 2021 06:55:37 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 19 Jan 2021 19:12:37 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>M1W3 Code</title>
+      <link>https://tjdoc.github.io/posts/2021-01-19-m1w3_code/</link>
+      <pubDate>Tue, 19 Jan 2021 19:12:37 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-19-m1w3_code/</guid>
+      <description>Planar utils import matplotlib.pyplot as plt import numpy as np import sklearn import sklearn.datasets import sklearn.linear_model def plot_decision_boundary(model, X, y): # Set min and max values and give it some padding x_min, x_max = X[0, :].min() - 1, X[0, :].max() + 1 y_min, y_max = X[1, :].min() - 1, X[1, :].max() + 1 h = 0.01 # Generate a grid of points with distance h between them xx, yy = np.</description>
+    </item>
+    
+    <item>
+      <title>Neural Networks and Deep Learning W3: Shallow Neural Network</title>
+      <link>https://tjdoc.github.io/posts/2021-01-19-coursera_m1w3/</link>
+      <pubDate>Tue, 19 Jan 2021 10:27:23 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-19-coursera_m1w3/</guid>
+      <description>2 layer neural network Unlike logistic regression, neural network contains hidden layer(s). The figure above depicts a shallow neural network, 2 layer NN to be precise. The input layer (layer zero) does not count as a layer so the two layers are 1 hidden layer and the output layer. With the hidden layer, layer numbers are identified by the bracket superscript.
+vectorizing across multiple examples activation functions If you don&amp;rsquo;t know which activation function works best, test them.</description>
+    </item>
+    
     <item>
       <title>Psalm 27</title>
       <link>https://tjdoc.github.io/posts/2021-01-19-ps27/</link>
@@ -31,20 +50,20 @@ Just one thing have I asked of Adonai;</description>
     
     <item>
       <title>Neural Networksand Deep Learning W2: Lab</title>
-      <link>https://tjdoc.github.io/posts/2021-01-18-w2_lab/</link>
+      <link>https://tjdoc.github.io/posts/2021-01-18-coursera_m1w2_lab/</link>
       <pubDate>Mon, 18 Jan 2021 18:42:17 +0900</pubDate>
       
-      <guid>https://tjdoc.github.io/posts/2021-01-18-w2_lab/</guid>
+      <guid>https://tjdoc.github.io/posts/2021-01-18-coursera_m1w2_lab/</guid>
       <description>packages import numpy as np import matplotlib.pyplot as plt import h5py import scipy from PIL import Image from scipy import ndimage from lr_utils import load_dataset %matplotlib inline load dataset import numpy as np import h5py def load_dataset(): train_dataset = h5py.File(&amp;#39;datasets/train_catvnoncat.h5&amp;#39;, &amp;#34;r&amp;#34;) train_set_x_orig = np.array(train_dataset[&amp;#34;train_set_x&amp;#34;][:]) # your train set features train_set_y_orig = np.array(train_dataset[&amp;#34;train_set_y&amp;#34;][:]) # your train set labels test_dataset = h5py.File(&amp;#39;datasets/test_catvnoncat.h5&amp;#39;, &amp;#34;r&amp;#34;) test_set_x_orig = np.array(test_dataset[&amp;#34;test_set_x&amp;#34;][:]) # your test set features test_set_y_orig = np.</description>
     </item>
     
     <item>
       <title>Coursera W2 Numpy Code</title>
-      <link>https://tjdoc.github.io/posts/2021-01-18-coursera_w2_code/</link>
+      <link>https://tjdoc.github.io/posts/2021-01-18-coursera_m1w2_code/</link>
       <pubDate>Mon, 18 Jan 2021 14:57:04 +0900</pubDate>
       
-      <guid>https://tjdoc.github.io/posts/2021-01-18-coursera_w2_code/</guid>
-      <description>Sigmoid function import math import numpy as np def basic_sigmoid(x): return 1/(1+math.exp(-x)) def sigmoid(x) return 1/(1+np.exp(-x)) Derivative of sigmoid \[ \sigma &#39; (x) = \sigma(x)(1-\sigma(x)) \]
+      <guid>https://tjdoc.github.io/posts/2021-01-18-coursera_m1w2_code/</guid>
+      <description>Sigmoid function import math import numpy as np def basic_sigmoid(x): return 1/(1+math.exp(-x)) def sigmoid(x) return 1/(1+np.exp(-x)) Derivative of sigmoid $$ \sigma &#39; (x) = \sigma(x)(1-\sigma(x)) $$
 def sigmoid_derivative(x): s = sigmoid(x) ds = s*(1-s) return ds Reshaping arbitrary dimension numpy array to a column vector def image2vector(image): &amp;#34;&amp;#34;&amp;#34; Argument: image -- a numpy array of shape (length, height, depth) Returns: v -- a vector of shape (length*height*depth, 1) &amp;#34;&amp;#34;&amp;#34; # v = image.</description>
     </item>
     
@@ -61,10 +80,10 @@ CJB gal 6:9. So let us not grow weary of doing what is good; for if we don’t g
     
     <item>
       <title>Neural Networks and Deep Learning W2: Logistic Regression as a Neural Network</title>
-      <link>https://tjdoc.github.io/posts/2021-01-15-coursera_w2/</link>
+      <link>https://tjdoc.github.io/posts/2021-01-15-coursera_m1w2/</link>
       <pubDate>Fri, 15 Jan 2021 10:52:30 +0900</pubDate>
       
-      <guid>https://tjdoc.github.io/posts/2021-01-15-coursera_w2/</guid>
+      <guid>https://tjdoc.github.io/posts/2021-01-15-coursera_m1w2/</guid>
       <description>Logistic Regression Given x, we want \({\hat y} = P(y=1 |_x)\) where
 input vector: \( x \in \Re^{n_x} \)
 Parameters: \(w \in \Re^{n_x}\), \(b \in \Re \)
@@ -96,10 +115,10 @@ we want \( {\hat y}^{(i)} \approx y^{(i)} \)</description>
     
     <item>
       <title>Neural Networks and Deep Learning W1: What is a neural network?</title>
-      <link>https://tjdoc.github.io/posts/2021-01-14-coursera_w1/</link>
+      <link>https://tjdoc.github.io/posts/2021-01-14-coursera_m1w1/</link>
       <pubDate>Thu, 14 Jan 2021 21:06:56 +0900</pubDate>
       
-      <guid>https://tjdoc.github.io/posts/2021-01-14-coursera_w1/</guid>
+      <guid>https://tjdoc.github.io/posts/2021-01-14-coursera_m1w1/</guid>
       <description>Terminology  x: input y: output Deep Learning: Same thing as Neural Network but sounds better brandwise  Application Standard Neural Network
  Real estate Online Advertising  Convolutional NN (CNN)
  Image data Photo tagging  Recurrent NN (RNN)

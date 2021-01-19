@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.80.0" />
+
+
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
+
+
+<title>M1W3 Code - ps126.5</title>
+
+
+
+
+<meta name="keywords" content="coursera, neural network" />
+
+
+<meta property="og:title" content="M1W3 Code" />
+<meta name="twitter:title" content="M1W3 Code" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tjdoc.github.io/posts/2021-01-19-m1w3_code/" /><meta property="og:description" content="Planar utils import matplotlib.pyplot as plt import numpy as np import sklearn import sklearn.datasets import sklearn.linear_model def plot_decision_boundary(model, X, y): # Set min and max values and give it some padding x_min, x_max = X[0, :].min() - 1, X[0, :].max() &#43; 1 y_min, y_max = X[1, :].min() - 1, X[1, :].max() &#43; 1 h = 0.01 # Generate a grid of points with distance h between them xx, yy = np." />
+<meta name="twitter:description" content="Planar utils import matplotlib.pyplot as plt import numpy as np import sklearn import sklearn.datasets import sklearn.linear_model def plot_decision_boundary(model, X, y): # Set min and max values and give it some padding x_min, x_max = X[0, :].min() - 1, X[0, :].max() &#43; 1 y_min, y_max = X[1, :].min() - 1, X[1, :].max() &#43; 1 h = 0.01 # Generate a grid of points with distance h between them xx, yy = np." /><meta name="twitter:card" content="summary" /><meta property="article:published_time" content="2021-01-19T19:12:37+09:00" /><meta property="article:modified_time" content="2021-01-19T19:12:37+09:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://tjdoc.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://tjdoc.github.io/">ps126.5</a>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-19-m1w3_code/">M1W3 Code</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-19</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2 id="planar-utils">Planar utils</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> matplotlib.pyplot <span style="color:#fff;font-weight:bold">as</span> plt
+<span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<span style="color:#fff;font-weight:bold">import</span> sklearn
+<span style="color:#fff;font-weight:bold">import</span> sklearn.datasets
+<span style="color:#fff;font-weight:bold">import</span> sklearn.linear_model
+
+<span style="color:#fff;font-weight:bold">def</span> plot_decision_boundary(model, X, y):
+    <span style="color:#007f7f"># Set min and max values and give it some padding</span>
+    x_min, x_max = X[<span style="color:#ff0;font-weight:bold">0</span>, :].min() - <span style="color:#ff0;font-weight:bold">1</span>, X[<span style="color:#ff0;font-weight:bold">0</span>, :].max() + <span style="color:#ff0;font-weight:bold">1</span>
+    y_min, y_max = X[<span style="color:#ff0;font-weight:bold">1</span>, :].min() - <span style="color:#ff0;font-weight:bold">1</span>, X[<span style="color:#ff0;font-weight:bold">1</span>, :].max() + <span style="color:#ff0;font-weight:bold">1</span>
+    h = <span style="color:#ff0;font-weight:bold">0.01</span>
+    <span style="color:#007f7f"># Generate a grid of points with distance h between them</span>
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+    <span style="color:#007f7f"># Predict the function value for the whole grid</span>
+    Z = model(np.c_[xx.ravel(), yy.ravel()])
+    Z = Z.reshape(xx.shape)
+    <span style="color:#007f7f"># Plot the contour and training examples</span>
+    plt.contourf(xx, yy, Z, cmap=plt.cm.Spectral)
+    plt.ylabel(<span style="color:#0ff;font-weight:bold">&#39;x2&#39;</span>)
+    plt.xlabel(<span style="color:#0ff;font-weight:bold">&#39;x1&#39;</span>)
+    plt.scatter(X[<span style="color:#ff0;font-weight:bold">0</span>, :], X[<span style="color:#ff0;font-weight:bold">1</span>, :], c=y, cmap=plt.cm.Spectral)
+
+
+<span style="color:#fff;font-weight:bold">def</span> sigmoid(x):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Compute the sigmoid of x
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    x -- A scalar or numpy array of any size.
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Return:
+</span><span style="color:#0ff;font-weight:bold">    s -- sigmoid(x)
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    s = <span style="color:#ff0;font-weight:bold">1</span>/(<span style="color:#ff0;font-weight:bold">1</span>+np.exp(-x))
+    <span style="color:#fff;font-weight:bold">return</span> s
+
+<span style="color:#fff;font-weight:bold">def</span> load_planar_dataset():
+    np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
+    m = <span style="color:#ff0;font-weight:bold">400</span> <span style="color:#007f7f"># number of examples</span>
+    N = <span style="color:#fff;font-weight:bold">int</span>(m/<span style="color:#ff0;font-weight:bold">2</span>) <span style="color:#007f7f"># number of points per class</span>
+    D = <span style="color:#ff0;font-weight:bold">2</span> <span style="color:#007f7f"># dimensionality</span>
+    X = np.zeros((m,D)) <span style="color:#007f7f"># data matrix where each row is a single example</span>
+    Y = np.zeros((m,<span style="color:#ff0;font-weight:bold">1</span>), dtype=<span style="color:#0ff;font-weight:bold">&#39;uint8&#39;</span>) <span style="color:#007f7f"># labels vector (0 for red, 1 for blue)</span>
+    a = <span style="color:#ff0;font-weight:bold">4</span> <span style="color:#007f7f"># maximum ray of the flower</span>
+
+    <span style="color:#fff;font-weight:bold">for</span> j in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">2</span>):
+        ix = <span style="color:#fff;font-weight:bold">range</span>(N*j,N*(j+<span style="color:#ff0;font-weight:bold">1</span>))
+        t = np.linspace(j*<span style="color:#ff0;font-weight:bold">3.12</span>,(j+<span style="color:#ff0;font-weight:bold">1</span>)*<span style="color:#ff0;font-weight:bold">3.12</span>,N) + np.random.randn(N)*<span style="color:#ff0;font-weight:bold">0.2</span> <span style="color:#007f7f"># theta</span>
+        r = a*np.sin(<span style="color:#ff0;font-weight:bold">4</span>*t) + np.random.randn(N)*<span style="color:#ff0;font-weight:bold">0.2</span> <span style="color:#007f7f"># radius</span>
+        X[ix] = np.c_[r*np.sin(t), r*np.cos(t)]
+        Y[ix] = j
+
+    X = X.T
+    Y = Y.T
+
+    <span style="color:#fff;font-weight:bold">return</span> X, Y
+
+<span style="color:#fff;font-weight:bold">def</span> load_extra_datasets():  
+    N = <span style="color:#ff0;font-weight:bold">200</span>
+    noisy_circles = sklearn.datasets.make_circles(n_samples=N, factor=.<span style="color:#ff0;font-weight:bold">5</span>, noise=.<span style="color:#ff0;font-weight:bold">3</span>)
+    noisy_moons = sklearn.datasets.make_moons(n_samples=N, noise=.<span style="color:#ff0;font-weight:bold">2</span>)
+    blobs = sklearn.datasets.make_blobs(n_samples=N, random_state=<span style="color:#ff0;font-weight:bold">5</span>, n_features=<span style="color:#ff0;font-weight:bold">2</span>, centers=<span style="color:#ff0;font-weight:bold">6</span>)
+    gaussian_quantiles = sklearn.datasets.make_gaussian_quantiles(mean=None, cov=<span style="color:#ff0;font-weight:bold">0.5</span>, n_samples=N, n_features=<span style="color:#ff0;font-weight:bold">2</span>, n_classes=<span style="color:#ff0;font-weight:bold">2</span>, shuffle=True, random_state=None)
+    no_structure = np.random.rand(N, <span style="color:#ff0;font-weight:bold">2</span>), np.random.rand(N, <span style="color:#ff0;font-weight:bold">2</span>)
+
+    <span style="color:#fff;font-weight:bold">return</span> noisy_circles, noisy_moons, blobs, gaussian_quantiles, no_structure
+</code></pre></div><h2 id="package-import">Package import</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<span style="color:#fff;font-weight:bold">import</span> matplotlib.pyplot <span style="color:#fff;font-weight:bold">as</span> plt
+<span style="color:#fff;font-weight:bold">from</span> testCases_v2 <span style="color:#fff;font-weight:bold">import</span> *
+<span style="color:#fff;font-weight:bold">import</span> sklearn
+<span style="color:#fff;font-weight:bold">import</span> sklearn.datasets
+<span style="color:#fff;font-weight:bold">import</span> sklearn.linear_model
+<span style="color:#fff;font-weight:bold">from</span> planar_utils <span style="color:#fff;font-weight:bold">import</span> plot_decision_boundary, sigmoid, load_planar_dataset, load_extra_datasets
+
+%matplotlib inline
+
+np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>) <span style="color:#007f7f"># set a seed so that the results are consistent</span>
+
+</code></pre></div><h2 id="dataset">Dataset</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X, Y = load_planar_dataset()
+<span style="color:#007f7f"># Visualize the data:</span>
+plt.scatter(X[<span style="color:#ff0;font-weight:bold">0</span>, :], X[<span style="color:#ff0;font-weight:bold">1</span>, :], c=Y, s=<span style="color:#ff0;font-weight:bold">40</span>, cmap=plt.cm.Spectral);
+</code></pre></div><p><img class="img-zoomable" src="/coursera/planar_dataset.png" alt="planar dataset" />
+</p>
+<p>You have:</p>
+<ul>
+<li>a numpy-array (matrix) X that contains your features (x1, x2)</li>
+<li>a numpy-array (vector) Y that contains your labels (red:0, blue:1).</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shape_X = X.shape
+shape_Y = Y.shape
+m = shape_X[<span style="color:#ff0;font-weight:bold">1</span>]  <span style="color:#007f7f"># training set size</span>
+
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#39;The shape of X is: &#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(shape_X))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#39;The shape of Y is: &#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(shape_Y))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#39;I have m = </span><span style="color:#0ff;font-weight:bold">%d</span><span style="color:#0ff;font-weight:bold"> training examples!&#39;</span> % (m))
+
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">The shape of X is: (2, 400)
+The shape of Y is: (1, 400)
+I have m = 400 training examples!
+</code></pre></div><h2 id="simple-logistic-regression">Simple logistic regression</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># Train the logistic regression classifier</span>
+clf = sklearn.linear_model.LogisticRegressionCV();
+clf.fit(X.T, Y.T);
+<span style="color:#007f7f"># Plot the decision boundary for logistic regression</span>
+plot_decision_boundary(<span style="color:#fff;font-weight:bold">lambda</span> x: clf.predict(x), X, Y)
+plt.title(<span style="color:#0ff;font-weight:bold">&#34;Logistic Regression&#34;</span>)
+
+<span style="color:#007f7f"># Print accuracy</span>
+LR_predictions = clf.predict(X.T)
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#39;Accuracy of logistic regression: </span><span style="color:#0ff;font-weight:bold">%d</span><span style="color:#0ff;font-weight:bold"> &#39;</span> % <span style="color:#fff;font-weight:bold">float</span>((np.dot(Y,LR_predictions) + np.dot(<span style="color:#ff0;font-weight:bold">1</span>-Y,<span style="color:#ff0;font-weight:bold">1</span>-LR_predictions))/<span style="color:#fff;font-weight:bold">float</span>(Y.size)*<span style="color:#ff0;font-weight:bold">100</span>) +
+       <span style="color:#0ff;font-weight:bold">&#39;% &#39;</span> + <span style="color:#0ff;font-weight:bold">&#34;(percentage of correctly labelled datapoints)&#34;</span>)
+
+</code></pre></div><p><img class="img-zoomable" src="/coursera/planar_logistic_regression.png" alt="planar logistic regression" />
+</p>
+<p><img class="img-zoomable" src="/coursera/classification_kiank.png" alt="classification_kiank" />
+</p>
+<p>For one example \(x^{(i)}\) :</p>
+<p>$$z^{[1] (i)} =  W^{[1]} x^{(i)} + b^{[1]}\tag{1}$$</p>
+<p>$$a^{[1] (i)} = \tanh(z^{[1] (i)})\tag{2}$$</p>
+<p>$$z^{[2] (i)} = W^{[2]} a^{[1] (i)} + b^{[2]}\tag{3}$$</p>
+<p>$$\hat{y}^{(i)} = a^{[2] (i)} = \sigma(z^{ [2] (i)})\tag{4}$$</p>
+<p>$$y^{(i)}_{prediction} = \begin{cases} 1 &amp; \text{if } a^{[2](i)} &gt; 0.5 \\ 0 &amp; \text{otherwise } \end{cases}\tag{5}$$</p>
+<p>Given the predictions on all the examples, you can also compute the cost \(J\) as follows:</p>
+<p>$$J = - \frac{1}{m} \sum\limits_{i = 0}^{m} \large\left(\small y^{(i)}\log\left(a^{[2] (i)}\right) + (1-y^{(i)})\log\left(1- a^{[2] (i)}\right)  \large  \right) \small \tag{6}$$</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> layer_sizes(X, Y):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    X -- input dataset of shape (input size, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    Y -- labels of shape (output size, number of examples)
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    n_x -- the size of the input layer
+</span><span style="color:#0ff;font-weight:bold">    n_h -- the size of the hidden layer
+</span><span style="color:#0ff;font-weight:bold">    n_y -- the size of the output layer
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    n_x = X.shape[<span style="color:#ff0;font-weight:bold">0</span>] <span style="color:#007f7f"># size of input layer</span>
+    n_h = <span style="color:#ff0;font-weight:bold">4</span>
+    n_y = Y.shape[<span style="color:#ff0;font-weight:bold">0</span>] <span style="color:#007f7f"># size of output layer</span>
+    <span style="color:#fff;font-weight:bold">return</span> (n_x, n_h, n_y)
+X_assess, Y_assess = layer_sizes_test_case()
+(n_x, n_h, n_y) = layer_sizes(X_assess, Y_assess)
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;The size of the input layer is: n_x = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(n_x))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;The size of the hidden layer is: n_h = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(n_h))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;The size of the output layer is: n_y = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(n_y))
+
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">The size of the input layer is: n_x = 5
+The size of the hidden layer is: n_h = 4
+The size of the output layer is: n_y = 2
+
+</code></pre></div><h2 id="initialize-model-parameters">Initialize model parameters</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> initialize_parameters(n_x, n_h, n_y):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Argument:
+</span><span style="color:#0ff;font-weight:bold">    n_x -- size of the input layer
+</span><span style="color:#0ff;font-weight:bold">    n_h -- size of the hidden layer
+</span><span style="color:#0ff;font-weight:bold">    n_y -- size of the output layer
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    params -- python dictionary containing your parameters:
+</span><span style="color:#0ff;font-weight:bold">                    W1 -- weight matrix of shape (n_h, n_x)
+</span><span style="color:#0ff;font-weight:bold">                    b1 -- bias vector of shape (n_h, 1)
+</span><span style="color:#0ff;font-weight:bold">                    W2 -- weight matrix of shape (n_y, n_h)
+</span><span style="color:#0ff;font-weight:bold">                    b2 -- bias vector of shape (n_y, 1)
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+
+    np.random.seed(<span style="color:#ff0;font-weight:bold">2</span>) <span style="color:#007f7f"># we set up a seed so that your output matches ours although the initialization is random.</span>
+
+    W1 = np.random.randn(n_h, n_x)*<span style="color:#ff0;font-weight:bold">0.01</span>
+    b1 = np.zeros((n_h, <span style="color:#ff0;font-weight:bold">1</span>))
+    W2 = np.random.randn(n_y, n_h)*<span style="color:#ff0;font-weight:bold">0.01</span>
+    b2 = np.zeros((n_y,<span style="color:#ff0;font-weight:bold">1</span>))
+
+    <span style="color:#fff;font-weight:bold">assert</span> (W1.shape == (n_h, n_x))
+    <span style="color:#fff;font-weight:bold">assert</span> (b1.shape == (n_h, <span style="color:#ff0;font-weight:bold">1</span>))
+    <span style="color:#fff;font-weight:bold">assert</span> (W2.shape == (n_y, n_h))
+    <span style="color:#fff;font-weight:bold">assert</span> (b2.shape == (n_y, <span style="color:#ff0;font-weight:bold">1</span>))
+
+    parameters = {<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>: W1,
+                  <span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>: b1,
+                  <span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>: W2,
+                  <span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>: b2}
+
+    <span style="color:#fff;font-weight:bold">return</span> parameters
+
+n_x, n_h, n_y = initialize_parameters_test_case()
+
+parameters = initialize_parameters(n_x, n_h, n_y)
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;W1 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;b1 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;W2 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;b2 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>]))
+
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">W1 = [[-0.00416758 -0.00056267]
+ [-0.02136196  0.01640271]
+ [-0.01793436 -0.00841747]
+ [ 0.00502881 -0.01245288]]
+b1 = [[ 0.]
+ [ 0.]
+ [ 0.]
+ [ 0.]]
+W2 = [[-0.01057952 -0.00909008  0.00551454  0.02292208]]
+b2 = [[ 0.]]
+</code></pre></div><h2 id="loop">Loop</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> forward_propagation(X, parameters):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Argument:
+</span><span style="color:#0ff;font-weight:bold">    X -- input data of size (n_x, m)
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your parameters (output of initialization function)
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    A2 -- The sigmoid output of the second activation
+</span><span style="color:#0ff;font-weight:bold">    cache -- a dictionary containing &#34;Z1&#34;, &#34;A1&#34;, &#34;Z2&#34; and &#34;A2&#34;
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    <span style="color:#007f7f"># Retrieve each parameter from the dictionary &#34;parameters&#34;</span>
+    W1 = parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>]
+    b1 = parameters[<span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>]
+    W2 = parameters[<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>]
+    b2 = parameters[<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>]
+
+    <span style="color:#007f7f"># Implement Forward Propagation to calculate A2 (probabilities)</span>
+    Z1 = np.dot(W1,X)+b1
+    A1 = np.tanh(Z1)
+    Z2 = np.dot(W2,A1)+b2
+    A2 = sigmoid(Z2)
+
+    <span style="color:#fff;font-weight:bold">assert</span>(A2.shape == (<span style="color:#ff0;font-weight:bold">1</span>, X.shape[<span style="color:#ff0;font-weight:bold">1</span>]))
+
+    cache = {<span style="color:#0ff;font-weight:bold">&#34;Z1&#34;</span>: Z1,
+             <span style="color:#0ff;font-weight:bold">&#34;A1&#34;</span>: A1,
+             <span style="color:#0ff;font-weight:bold">&#34;Z2&#34;</span>: Z2,
+             <span style="color:#0ff;font-weight:bold">&#34;A2&#34;</span>: A2}
+
+    <span style="color:#fff;font-weight:bold">return</span> A2, cache
+
+X_assess, parameters = forward_propagation_test_case()
+A2, cache = forward_propagation(X_assess, parameters)
+
+<span style="color:#007f7f"># Note: we use the mean here just to make sure that your output matches ours. </span>
+<span style="color:#fff;font-weight:bold">print</span>(np.mean(cache[<span style="color:#0ff;font-weight:bold">&#39;Z1&#39;</span>]) ,np.mean(cache[<span style="color:#0ff;font-weight:bold">&#39;A1&#39;</span>]),np.mean(cache[<span style="color:#0ff;font-weight:bold">&#39;Z2&#39;</span>]),np.mean(cache[<span style="color:#0ff;font-weight:bold">&#39;A2&#39;</span>]))
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">0.262818640198 0.091999045227 -1.31505816974 0.211641684558
+</code></pre></div><p>Now that you have computed \(A^{[2]}\) (in the Python variable &ldquo;<code>A2</code>&quot;), which contains \(a^{[2](i)}\) for every example, you can compute the cost function as follows:</p>
+<p>$$J = - \frac{1}{m} \sum\limits_{i = 1}^{m} \large{(} \small y^{(i)}\log\left(a^{[2] (i)}\right) + (1-y^{(i)})\log\left(1- a^{[2] (i)}\right) \large{)} $$</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> compute_cost(A2, Y, parameters):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Computes the cross-entropy cost given in equation (13)
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    A2 -- The sigmoid output of the second activation, of shape (1, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    Y -- &#34;true&#34; labels vector of shape (1, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your parameters W1, b1, W2 and b2
+</span><span style="color:#0ff;font-weight:bold">    [Note that the parameters argument is not used in this function, 
+</span><span style="color:#0ff;font-weight:bold">    but the auto-grader currently expects this parameter.
+</span><span style="color:#0ff;font-weight:bold">    Future version of this notebook will fix both the notebook 
+</span><span style="color:#0ff;font-weight:bold">    and the auto-grader so that `parameters` is not needed.
+</span><span style="color:#0ff;font-weight:bold">    For now, please include `parameters` in the function signature,
+</span><span style="color:#0ff;font-weight:bold">    and also when invoking this function.]
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    cost -- cross-entropy cost given equation (13)
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+
+    m = Y.shape[<span style="color:#ff0;font-weight:bold">1</span>] <span style="color:#007f7f"># number of example</span>
+
+    <span style="color:#007f7f"># Compute the cross-entropy cost</span>
+    cost = -(np.dot(Y, np.log(A2).T)+np.dot(<span style="color:#ff0;font-weight:bold">1</span>-Y,np.log(<span style="color:#ff0;font-weight:bold">1</span>-A2).T))/m
+
+    cost = <span style="color:#fff;font-weight:bold">float</span>(np.squeeze(cost))  <span style="color:#007f7f"># makes sure cost is the dimension we expect. </span>
+                                    <span style="color:#007f7f"># E.g., turns [[17]] into 17 </span>
+    <span style="color:#fff;font-weight:bold">assert</span>(<span style="color:#fff;font-weight:bold">isinstance</span>(cost, <span style="color:#fff;font-weight:bold">float</span>))
+
+    <span style="color:#fff;font-weight:bold">return</span> cost
+
+A2, Y_assess, parameters = compute_cost_test_case()
+
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;cost = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(compute_cost(A2, Y_assess, parameters)))
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cost = 0.6930587610394646
+</code></pre></div><p><img class="img-zoomable" src="/coursera/grad_summary.png" alt="back propagation" />
+</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> backward_propagation(parameters, cache, X, Y):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the backward propagation using the instructions above.
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing our parameters 
+</span><span style="color:#0ff;font-weight:bold">    cache -- a dictionary containing &#34;Z1&#34;, &#34;A1&#34;, &#34;Z2&#34; and &#34;A2&#34;.
+</span><span style="color:#0ff;font-weight:bold">    X -- input data of shape (2, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    Y -- &#34;true&#34; labels vector of shape (1, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    grads -- python dictionary containing your gradients with respect to different parameters
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    m = X.shape[<span style="color:#ff0;font-weight:bold">1</span>]
+    
+    <span style="color:#007f7f"># First, retrieve W1 and W2 from the dictionary &#34;parameters&#34;.</span>
+    W1 = parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>]
+    W2 = parameters[<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>]
+        
+    <span style="color:#007f7f"># Retrieve also A1 and A2 from dictionary &#34;cache&#34;.</span>
+    A1 = cache[<span style="color:#0ff;font-weight:bold">&#34;A1&#34;</span>]
+    A2 = cache[<span style="color:#0ff;font-weight:bold">&#34;A2&#34;</span>]
+    
+    <span style="color:#007f7f"># Backward propagation: calculate dW1, db1, dW2, db2. </span>
+    dZ2 = A2-Y
+    dW2 = np.dot(dZ2, A1.T)/m
+    db2 = np.sum(dZ2, axis=<span style="color:#ff0;font-weight:bold">1</span>, keepdims=True)/m
+    dZ1 = np.dot(W2.T, dZ2)*(<span style="color:#ff0;font-weight:bold">1</span>-np.power(A1,<span style="color:#ff0;font-weight:bold">2</span>))
+    dW1 = np.dot(dZ1,X.T)/m
+    db1 = np.sum(dZ1, axis=<span style="color:#ff0;font-weight:bold">1</span>, keepdims=True)/m
+    
+    grads = {<span style="color:#0ff;font-weight:bold">&#34;dW1&#34;</span>: dW1,
+             <span style="color:#0ff;font-weight:bold">&#34;db1&#34;</span>: db1,
+             <span style="color:#0ff;font-weight:bold">&#34;dW2&#34;</span>: dW2,
+             <span style="color:#0ff;font-weight:bold">&#34;db2&#34;</span>: db2}
+    
+    <span style="color:#fff;font-weight:bold">return</span> grads
+
+
+parameters, cache, X_assess, Y_assess = backward_propagation_test_case()
+
+grads = backward_propagation(parameters, cache, X_assess, Y_assess)
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;dW1 = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(grads[<span style="color:#0ff;font-weight:bold">&#34;dW1&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;db1 = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(grads[<span style="color:#0ff;font-weight:bold">&#34;db1&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;dW2 = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(grads[<span style="color:#0ff;font-weight:bold">&#34;dW2&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;db2 = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(grads[<span style="color:#0ff;font-weight:bold">&#34;db2&#34;</span>]))
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+dW1 = [[ 0.00301023 -0.00747267]
+ [ 0.00257968 -0.00641288]
+ [-0.00156892  0.003893  ]
+ [-0.00652037  0.01618243]]
+db1 = [[ 0.00176201]
+ [ 0.00150995]
+ [-0.00091736]
+ [-0.00381422]]
+dW2 = [[ 0.00078841  0.01765429 -0.00084166 -0.01022527]]
+db2 = [[-0.16655712]]
+
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> update_parameters(parameters, grads, learning_rate = <span style="color:#ff0;font-weight:bold">1.2</span>):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Updates parameters using the gradient descent update rule given above
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your parameters 
+</span><span style="color:#0ff;font-weight:bold">    grads -- python dictionary containing your gradients 
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your updated parameters 
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    <span style="color:#007f7f"># Retrieve each parameter from the dictionary &#34;parameters&#34;</span>
+    W1 = parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>]
+    b1 = parameters[<span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>]
+    W2 = parameters[<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>]
+    b2 = parameters[<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>]
+    
+    <span style="color:#007f7f"># Retrieve each gradient from the dictionary &#34;grads&#34;</span>
+    dW1 = grads[<span style="color:#0ff;font-weight:bold">&#34;dW1&#34;</span>]
+    db1 = grads[<span style="color:#0ff;font-weight:bold">&#34;db1&#34;</span>]
+    dW2 = grads[<span style="color:#0ff;font-weight:bold">&#34;dW2&#34;</span>]
+    db2 = grads[<span style="color:#0ff;font-weight:bold">&#34;db2&#34;</span>]
+    
+    <span style="color:#007f7f"># Update rule for each parameter</span>
+    W1 = W1 - learning_rate * dW1
+    b1 = b1 - learning_rate * db1
+    W2 = W2 - learning_rate * dW2
+    b2 = b2 - learning_rate * db2
+    
+    parameters = {<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>: W1,
+                  <span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>: b1,
+                  <span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>: W2,
+                  <span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>: b2}
+    
+    <span style="color:#fff;font-weight:bold">return</span> parameters
+
+parameters, grads = update_parameters_test_case()
+parameters = update_parameters(parameters, grads)
+
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;W1 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;b1 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;W2 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;b2 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>]))
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">W1 = [[-0.00643025  0.01936718]
+ [-0.02410458  0.03978052]
+ [-0.01653973 -0.02096177]
+ [ 0.01046864 -0.05990141]]
+b1 = [[ -1.02420756e-06]
+ [  1.27373948e-05]
+ [  8.32996807e-07]
+ [ -3.20136836e-06]]
+W2 = [[-0.01041081 -0.04463285  0.01758031  0.04747113]]
+b2 = [[ 0.00010457]]
+</code></pre></div><h2 id="integrate-parts">Integrate parts</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> nn_model(X, Y, n_h, num_iterations = <span style="color:#ff0;font-weight:bold">10000</span>, print_cost=False):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    X -- dataset of shape (2, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    Y -- labels of shape (1, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    n_h -- size of the hidden layer
+</span><span style="color:#0ff;font-weight:bold">    num_iterations -- Number of iterations in gradient descent loop
+</span><span style="color:#0ff;font-weight:bold">    print_cost -- if True, print the cost every 1000 iterations
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- parameters learnt by the model. They can then be used to predict.
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    np.random.seed(<span style="color:#ff0;font-weight:bold">3</span>)
+    n_x = layer_sizes(X, Y)[<span style="color:#ff0;font-weight:bold">0</span>]
+    n_y = layer_sizes(X, Y)[<span style="color:#ff0;font-weight:bold">2</span>]
+    
+    <span style="color:#007f7f"># Initialize parameters</span>
+    <span style="color:#007f7f">### START CODE HERE ### (≈ 1 line of code)</span>
+    parameters = initialize_parameters(n_x, n_h, n_y)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Loop (gradient descent)</span>
+
+    <span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">0</span>, num_iterations):
+         
+        <span style="color:#007f7f">### START CODE HERE ### (≈ 4 lines of code)</span>
+        <span style="color:#007f7f"># Forward propagation. Inputs: &#34;X, parameters&#34;. Outputs: &#34;A2, cache&#34;.</span>
+        A2, cache = forward_propagation(X, parameters)
+        
+        <span style="color:#007f7f"># Cost function. Inputs: &#34;A2, Y, parameters&#34;. Outputs: &#34;cost&#34;.</span>
+        cost = compute_cost(A2, Y, parameters)
+ 
+        <span style="color:#007f7f"># Backpropagation. Inputs: &#34;parameters, cache, X, Y&#34;. Outputs: &#34;grads&#34;.</span>
+        grads = backward_propagation(parameters, cache, X, Y)
+ 
+        <span style="color:#007f7f"># Gradient descent parameter update. Inputs: &#34;parameters, grads&#34;. Outputs: &#34;parameters&#34;.</span>
+        parameters = update_parameters(parameters, grads)
+        
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+        
+        <span style="color:#007f7f"># Print the cost every 1000 iterations</span>
+        <span style="color:#fff;font-weight:bold">if</span> print_cost and i % <span style="color:#ff0;font-weight:bold">1000</span> == <span style="color:#ff0;font-weight:bold">0</span>:
+            <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Cost after iteration </span><span style="color:#0ff;font-weight:bold">%i</span><span style="color:#0ff;font-weight:bold">: </span><span style="color:#0ff;font-weight:bold">%f</span><span style="color:#0ff;font-weight:bold">&#34;</span> %(i, cost))
+
+    <span style="color:#fff;font-weight:bold">return</span> parameters
+
+X_assess, Y_assess = nn_model_test_case()
+parameters = nn_model(X_assess, Y_assess, <span style="color:#ff0;font-weight:bold">4</span>, num_iterations=<span style="color:#ff0;font-weight:bold">10000</span>, print_cost=True)
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;W1 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;b1 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;W2 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;b2 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>]))
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+Cost after iteration 0: 0.692739
+Cost after iteration 1000: 0.000218
+Cost after iteration 2000: 0.000107
+Cost after iteration 3000: 0.000071
+Cost after iteration 4000: 0.000053
+Cost after iteration 5000: 0.000042
+Cost after iteration 6000: 0.000035
+Cost after iteration 7000: 0.000030
+Cost after iteration 8000: 0.000026
+Cost after iteration 9000: 0.000023
+W1 = [[-0.65848169  1.21866811]
+ [-0.76204273  1.39377573]
+ [ 0.5792005  -1.10397703]
+ [ 0.76773391 -1.41477129]]
+b1 = [[ 0.287592  ]
+ [ 0.3511264 ]
+ [-0.2431246 ]
+ [-0.35772805]]
+W2 = [[-2.45566237 -3.27042274  2.00784958  3.36773273]]
+b2 = [[ 0.20459656]]
+</code></pre></div><h2 id="predictions">Predictions</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> predict(parameters, X):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Using the learned parameters, predicts a class for each example in X
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your parameters 
+</span><span style="color:#0ff;font-weight:bold">    X -- input data of size (n_x, m)
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns
+</span><span style="color:#0ff;font-weight:bold">    predictions -- vector of predictions of our model (red: 0 / blue: 1)
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    <span style="color:#007f7f"># Computes probabilities using forward propagation, and classifies to 0/1 using 0.5 as the threshold.</span>
+    <span style="color:#007f7f">### START CODE HERE ### (≈ 2 lines of code)</span>
+    A2, cache = forward_propagation(X, parameters)
+    predictions = (A2 &gt; <span style="color:#ff0;font-weight:bold">0.5</span>)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">return</span> predictions
+
+
+parameters, X_assess = predict_test_case()
+
+predictions = predict(parameters, X_assess)
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;predictions mean = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(np.mean(predictions)))
+
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">predictions mean = 0.666666666667
+
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># Build a model with a n_h-dimensional hidden layer</span>
+parameters = nn_model(X, Y, n_h = <span style="color:#ff0;font-weight:bold">4</span>, num_iterations = <span style="color:#ff0;font-weight:bold">10000</span>, print_cost=True)
+
+<span style="color:#007f7f"># Plot the decision boundary</span>
+plot_decision_boundary(<span style="color:#fff;font-weight:bold">lambda</span> x: predict(parameters, x.T), X, Y)
+plt.title(<span style="color:#0ff;font-weight:bold">&#34;Decision Boundary for hidden layer size &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(<span style="color:#ff0;font-weight:bold">4</span>))
+
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Cost after iteration 0: 0.693048
+Cost after iteration 1000: 0.288083
+Cost after iteration 2000: 0.254385
+Cost after iteration 3000: 0.233864
+Cost after iteration 4000: 0.226792
+Cost after iteration 5000: 0.222644
+Cost after iteration 6000: 0.219731
+Cost after iteration 7000: 0.217504
+Cost after iteration 8000: 0.219472
+Cost after iteration 9000: 0.218562
+
+</code></pre></div><p><img class="img-zoomable" src="/coursera/decision_boundary_nn.png" alt="decision boundary" />
+</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># Print accuracy</span>
+predictions = predict(parameters, X)
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#39;Accuracy: </span><span style="color:#0ff;font-weight:bold">%d</span><span style="color:#0ff;font-weight:bold">&#39;</span> % <span style="color:#fff;font-weight:bold">float</span>((np.dot(Y,predictions.T) + np.dot(<span style="color:#ff0;font-weight:bold">1</span>-Y,<span style="color:#ff0;font-weight:bold">1</span>-predictions.T))/<span style="color:#fff;font-weight:bold">float</span>(Y.size)*<span style="color:#ff0;font-weight:bold">100</span>) + <span style="color:#0ff;font-weight:bold">&#39;%&#39;</span>)
+
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Accuracy: 90%
+</code></pre></div><h2 id="tuning-hidden-layer-size">Tuning hidden layer size</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt.figure(figsize=(<span style="color:#ff0;font-weight:bold">16</span>, <span style="color:#ff0;font-weight:bold">32</span>))
+hidden_layer_sizes = [<span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">3</span>, <span style="color:#ff0;font-weight:bold">4</span>, <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">20</span>, <span style="color:#ff0;font-weight:bold">50</span>]
+<span style="color:#fff;font-weight:bold">for</span> i, n_h in <span style="color:#fff;font-weight:bold">enumerate</span>(hidden_layer_sizes):
+    plt.subplot(<span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">2</span>, i+<span style="color:#ff0;font-weight:bold">1</span>)
+    plt.title(<span style="color:#0ff;font-weight:bold">&#39;Hidden Layer of size </span><span style="color:#0ff;font-weight:bold">%d</span><span style="color:#0ff;font-weight:bold">&#39;</span> % n_h)
+    parameters = nn_model(X, Y, n_h, num_iterations = <span style="color:#ff0;font-weight:bold">5000</span>)
+    plot_decision_boundary(<span style="color:#fff;font-weight:bold">lambda</span> x: predict(parameters, x.T), X, Y)
+    predictions = predict(parameters, X)
+    accuracy = <span style="color:#fff;font-weight:bold">float</span>((np.dot(Y,predictions.T) + np.dot(<span style="color:#ff0;font-weight:bold">1</span>-Y,<span style="color:#ff0;font-weight:bold">1</span>-predictions.T))/<span style="color:#fff;font-weight:bold">float</span>(Y.size)*<span style="color:#ff0;font-weight:bold">100</span>)
+    <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Accuracy for {} hidden units: {} %&#34;</span>.format(n_h, accuracy))
+
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+Accuracy for 1 hidden units: 67.5 %
+Accuracy for 2 hidden units: 67.25 %
+Accuracy for 3 hidden units: 90.75 %
+Accuracy for 4 hidden units: 90.5 %
+Accuracy for 5 hidden units: 91.25 %
+Accuracy for 20 hidden units: 90.5 %
+Accuracy for 50 hidden units: 90.25 %
+
+</code></pre></div><p><img class="img-zoomable" src="/coursera/hidden_layer_sizes.png" alt="hidden layer sizez" />
+</p>
+<ul>
+<li>The larger models (with more hidden units) are able to fit the training set better, until eventually the largest models overfit the data.</li>
+<li>The best hidden layer size seems to be around n_h = 5. Indeed, a value around here seems to fits the data well without also incurring noticeable overfitting.</li>
+<li>You will also learn later about regularization, which lets you use very large models (such as n_h = 50) without much overfitting.</li>
+</ul>
+<p>This is as result with leaky relu activation function.</p>
+<p><img class="img-zoomable" src="/coursera/hidden_layer_sizes_leakyrelu.png" alt="results with leaky relu activation" />
+</p>
+
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#planar-utils">Planar utils</a></li>
+    <li><a href="#package-import">Package import</a></li>
+    <li><a href="#dataset">Dataset</a></li>
+    <li><a href="#simple-logistic-regression">Simple logistic regression</a></li>
+    <li><a href="#initialize-model-parameters">Initialize model parameters</a></li>
+    <li><a href="#loop">Loop</a></li>
+    <li><a href="#integrate-parts">Integrate parts</a></li>
+    <li><a href="#predictions">Predictions</a></li>
+    <li><a href="#tuning-hidden-layer-size">Tuning hidden layer size</a></li>
+  </ul>
+</nav></div>
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021
+                <a href="https://tjdoc.github.io/"></a>
+                
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.0/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>

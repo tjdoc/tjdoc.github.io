@@ -3,13 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://tjdoc.github.io/tags/coursera/</loc>
+    <lastmod>2021-01-19T19:12:37+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tjdoc.github.io/posts/2021-01-19-m1w3_code/</loc>
+    <lastmod>2021-01-19T19:12:37+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tjdoc.github.io/tags/neural-network/</loc>
+    <lastmod>2021-01-19T19:12:37+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://tjdoc.github.io/posts/</loc>
-    <lastmod>2021-01-19T06:55:37+09:00</lastmod>
+    <lastmod>2021-01-19T19:12:37+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://tjdoc.github.io/</loc>
-    <lastmod>2021-01-19T06:55:37+09:00</lastmod>
+    <lastmod>2021-01-19T19:12:37+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tjdoc.github.io/tags/</loc>
+    <lastmod>2021-01-19T19:12:37+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tjdoc.github.io/posts/2021-01-19-coursera_m1w3/</loc>
+    <lastmod>2021-01-19T10:27:23+09:00</lastmod>
   </url>
   
   <url>
@@ -23,27 +48,12 @@
   </url>
   
   <url>
-    <loc>https://tjdoc.github.io/tags/</loc>
-    <lastmod>2021-01-19T06:55:37+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tjdoc.github.io/tags/coursera/</loc>
+    <loc>https://tjdoc.github.io/posts/2021-01-18-coursera_m1w2_lab/</loc>
     <lastmod>2021-01-18T18:42:17+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://tjdoc.github.io/tags/neural-network/</loc>
-    <lastmod>2021-01-18T18:42:17+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tjdoc.github.io/posts/2021-01-18-w2_lab/</loc>
-    <lastmod>2021-01-18T18:42:17+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tjdoc.github.io/posts/2021-01-18-coursera_w2_code/</loc>
+    <loc>https://tjdoc.github.io/posts/2021-01-18-coursera_m1w2_code/</loc>
     <lastmod>2021-01-18T14:57:04+09:00</lastmod>
   </url>
   
@@ -53,7 +63,7 @@
   </url>
   
   <url>
-    <loc>https://tjdoc.github.io/posts/2021-01-15-coursera_w2/</loc>
+    <loc>https://tjdoc.github.io/posts/2021-01-15-coursera_m1w2/</loc>
     <lastmod>2021-01-15T10:52:30+09:00</lastmod>
   </url>
   
@@ -68,7 +78,7 @@
   </url>
   
   <url>
-    <loc>https://tjdoc.github.io/posts/2021-01-14-coursera_w1/</loc>
+    <loc>https://tjdoc.github.io/posts/2021-01-14-coursera_m1w1/</loc>
     <lastmod>2021-01-14T21:06:56+09:00</lastmod>
   </url>
   
