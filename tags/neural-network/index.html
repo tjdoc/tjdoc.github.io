@@ -24,7 +24,7 @@
 <meta property="og:title" content="neural network" />
 <meta name="twitter:title" content="neural network" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://tjdoc.github.io/tags/neural-network/" /><meta name="twitter:card" content="summary" /><meta property="og:updated_time" content="2021-01-19T19:12:37+09:00" />
+<meta property="og:url" content="https://tjdoc.github.io/tags/neural-network/" /><meta name="twitter:card" content="summary" /><meta property="og:updated_time" content="2021-01-22T21:09:54+09:00" />
 
 
 <style>
@@ -83,6 +83,48 @@
 </div>
 
 
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4p2/">m1w4p2</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-22</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        import numpy as np import matplotlib.pyplot as plt import h5py def sigmoid(Z): &#34;&#34;&#34; Implements the sigmoid activation in numpy Arguments: Z -- numpy array of any shape Returns: A -- output of sigmoid(z), same shape as Z cache -- returns Z as well, useful during backpropagation &#34;&#34;&#34; A = 1/(1+np.exp(-Z)) cache = Z return A, cache def relu(Z): &#34;&#34;&#34; Implement the RELU function. Arguments: Z -- Output of the linear layer, of any shape Returns: A -- Post-activation parameter, of the same shape as Z cache -- a python dictionary containing &#34;A&#34; ; stored for computing the backward pass efficiently &#34;&#34;&#34; A = np.
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4p1/">coursera m1w4 p1</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-22</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        dnn utility import numpy as np def sigmoid(Z): &#34;&#34;&#34; Implements the sigmoid activation in numpy Arguments: Z -- numpy array of any shape Returns: A -- output of sigmoid(z), same shape as Z cache -- returns Z as well, useful during backpropagation &#34;&#34;&#34; A = 1/(1+np.exp(-Z)) cache = Z return A, cache def relu(Z): &#34;&#34;&#34; Implement the RELU function. Arguments: Z -- Output of the linear layer, of any shape Returns: A -- Post-activation parameter, of the same shape as Z cache -- a python dictionary containing &#34;A&#34; ; stored for computing the backward pass efficiently &#34;&#34;&#34; A = np.
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4/">Neural Networks and Deep Learning W4: Deepl L-layer neural network</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-22</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        Terminology  L number of layers \(n^{[l]}\) number of units in layer l \(a^{[l]}\) activations in layer l, \( a^{[l]} = g^{[l]} (z^{[l]}) \)  Forward propagation in deep network $$ \begin{aligned} Z^{[l]} =&amp; W^{[l]} A^{[l-1]} + b^{[l]} \\ A^{[l]} =&amp; g^{[l]} (Z^{[l]}) \end{aligned} $$
+where \( A^{[0]} = X \)
+You will need an explict for-loop for computing each layers.
+Getting your matrix dimensions right $$ \begin{aligned} W^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\ b^{[l]} &amp;: (n^{[l]}, 1) \\ dW^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\ db^{[l]} &amp;: (n^{[l]}, 1) \\ \end{aligned} $$
+    </div>
+</div>
 
 <div class="post">
     <h2 class="post-item post-title">

@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.80.0" />
+
+
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
+
+
+<title>m1w4p2 - ps126.5</title>
+
+
+
+
+<meta name="keywords" content="coursera, neural network" />
+
+
+<meta property="og:title" content="m1w4p2" />
+<meta name="twitter:title" content="m1w4p2" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4p2/" /><meta property="og:description" content="import numpy as np import matplotlib.pyplot as plt import h5py def sigmoid(Z): &#34;&#34;&#34; Implements the sigmoid activation in numpy Arguments: Z -- numpy array of any shape Returns: A -- output of sigmoid(z), same shape as Z cache -- returns Z as well, useful during backpropagation &#34;&#34;&#34; A = 1/(1&#43;np.exp(-Z)) cache = Z return A, cache def relu(Z): &#34;&#34;&#34; Implement the RELU function. Arguments: Z -- Output of the linear layer, of any shape Returns: A -- Post-activation parameter, of the same shape as Z cache -- a python dictionary containing &#34;A&#34; ; stored for computing the backward pass efficiently &#34;&#34;&#34; A = np." />
+<meta name="twitter:description" content="import numpy as np import matplotlib.pyplot as plt import h5py def sigmoid(Z): &#34;&#34;&#34; Implements the sigmoid activation in numpy Arguments: Z -- numpy array of any shape Returns: A -- output of sigmoid(z), same shape as Z cache -- returns Z as well, useful during backpropagation &#34;&#34;&#34; A = 1/(1&#43;np.exp(-Z)) cache = Z return A, cache def relu(Z): &#34;&#34;&#34; Implement the RELU function. Arguments: Z -- Output of the linear layer, of any shape Returns: A -- Post-activation parameter, of the same shape as Z cache -- a python dictionary containing &#34;A&#34; ; stored for computing the backward pass efficiently &#34;&#34;&#34; A = np." /><meta name="twitter:card" content="summary" /><meta property="article:published_time" content="2021-01-22T21:09:54+09:00" /><meta property="article:modified_time" content="2021-01-22T21:09:54+09:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://tjdoc.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://tjdoc.github.io/">ps126.5</a>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4p2/">m1w4p2</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-22</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<span style="color:#fff;font-weight:bold">import</span> matplotlib.pyplot <span style="color:#fff;font-weight:bold">as</span> plt
+<span style="color:#fff;font-weight:bold">import</span> h5py
+
+
+<span style="color:#fff;font-weight:bold">def</span> sigmoid(Z):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implements the sigmoid activation in numpy
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    Z -- numpy array of any shape
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    A -- output of sigmoid(z), same shape as Z
+</span><span style="color:#0ff;font-weight:bold">    cache -- returns Z as well, useful during backpropagation
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    A = <span style="color:#ff0;font-weight:bold">1</span>/(<span style="color:#ff0;font-weight:bold">1</span>+np.exp(-Z))
+    cache = Z
+    
+    <span style="color:#fff;font-weight:bold">return</span> A, cache
+
+<span style="color:#fff;font-weight:bold">def</span> relu(Z):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the RELU function.
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    Z -- Output of the linear layer, of any shape
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    A -- Post-activation parameter, of the same shape as Z
+</span><span style="color:#0ff;font-weight:bold">    cache -- a python dictionary containing &#34;A&#34; ; stored for computing the backward pass efficiently
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    A = np.maximum(<span style="color:#ff0;font-weight:bold">0</span>,Z)
+    
+    <span style="color:#fff;font-weight:bold">assert</span>(A.shape == Z.shape)
+    
+    cache = Z 
+    <span style="color:#fff;font-weight:bold">return</span> A, cache
+
+
+<span style="color:#fff;font-weight:bold">def</span> relu_backward(dA, cache):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the backward propagation for a single RELU unit.
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    dA -- post-activation gradient, of any shape
+</span><span style="color:#0ff;font-weight:bold">    cache -- &#39;Z&#39; where we store for computing backward propagation efficiently
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    dZ -- Gradient of the cost with respect to Z
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    Z = cache
+    dZ = np.array(dA, copy=True) <span style="color:#007f7f"># just converting dz to a correct object.</span>
+    
+    <span style="color:#007f7f"># When z &lt;= 0, you should set dz to 0 as well. </span>
+    dZ[Z &lt;= <span style="color:#ff0;font-weight:bold">0</span>] = <span style="color:#ff0;font-weight:bold">0</span>
+    
+    <span style="color:#fff;font-weight:bold">assert</span> (dZ.shape == Z.shape)
+    
+    <span style="color:#fff;font-weight:bold">return</span> dZ
+
+<span style="color:#fff;font-weight:bold">def</span> sigmoid_backward(dA, cache):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the backward propagation for a single SIGMOID unit.
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    dA -- post-activation gradient, of any shape
+</span><span style="color:#0ff;font-weight:bold">    cache -- &#39;Z&#39; where we store for computing backward propagation efficiently
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    dZ -- Gradient of the cost with respect to Z
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    Z = cache
+    
+    s = <span style="color:#ff0;font-weight:bold">1</span>/(<span style="color:#ff0;font-weight:bold">1</span>+np.exp(-Z))
+    dZ = dA * s * (<span style="color:#ff0;font-weight:bold">1</span>-s)
+    
+    <span style="color:#fff;font-weight:bold">assert</span> (dZ.shape == Z.shape)
+    
+    <span style="color:#fff;font-weight:bold">return</span> dZ
+
+
+<span style="color:#fff;font-weight:bold">def</span> load_data():
+    train_dataset = h5py.File(<span style="color:#0ff;font-weight:bold">&#39;datasets/train_catvnoncat.h5&#39;</span>, <span style="color:#0ff;font-weight:bold">&#34;r&#34;</span>)
+    train_set_x_orig = np.array(train_dataset[<span style="color:#0ff;font-weight:bold">&#34;train_set_x&#34;</span>][:]) <span style="color:#007f7f"># your train set features</span>
+    train_set_y_orig = np.array(train_dataset[<span style="color:#0ff;font-weight:bold">&#34;train_set_y&#34;</span>][:]) <span style="color:#007f7f"># your train set labels</span>
+
+    test_dataset = h5py.File(<span style="color:#0ff;font-weight:bold">&#39;datasets/test_catvnoncat.h5&#39;</span>, <span style="color:#0ff;font-weight:bold">&#34;r&#34;</span>)
+    test_set_x_orig = np.array(test_dataset[<span style="color:#0ff;font-weight:bold">&#34;test_set_x&#34;</span>][:]) <span style="color:#007f7f"># your test set features</span>
+    test_set_y_orig = np.array(test_dataset[<span style="color:#0ff;font-weight:bold">&#34;test_set_y&#34;</span>][:]) <span style="color:#007f7f"># your test set labels</span>
+
+    classes = np.array(test_dataset[<span style="color:#0ff;font-weight:bold">&#34;list_classes&#34;</span>][:]) <span style="color:#007f7f"># the list of classes</span>
+    
+    train_set_y_orig = train_set_y_orig.reshape((<span style="color:#ff0;font-weight:bold">1</span>, train_set_y_orig.shape[<span style="color:#ff0;font-weight:bold">0</span>]))
+    test_set_y_orig = test_set_y_orig.reshape((<span style="color:#ff0;font-weight:bold">1</span>, test_set_y_orig.shape[<span style="color:#ff0;font-weight:bold">0</span>]))
+    
+    <span style="color:#fff;font-weight:bold">return</span> train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
+
+
+<span style="color:#fff;font-weight:bold">def</span> initialize_parameters(n_x, n_h, n_y):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Argument:
+</span><span style="color:#0ff;font-weight:bold">    n_x -- size of the input layer
+</span><span style="color:#0ff;font-weight:bold">    n_h -- size of the hidden layer
+</span><span style="color:#0ff;font-weight:bold">    n_y -- size of the output layer
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your parameters:
+</span><span style="color:#0ff;font-weight:bold">                    W1 -- weight matrix of shape (n_h, n_x)
+</span><span style="color:#0ff;font-weight:bold">                    b1 -- bias vector of shape (n_h, 1)
+</span><span style="color:#0ff;font-weight:bold">                    W2 -- weight matrix of shape (n_y, n_h)
+</span><span style="color:#0ff;font-weight:bold">                    b2 -- bias vector of shape (n_y, 1)
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
+    
+    W1 = np.random.randn(n_h, n_x)*<span style="color:#ff0;font-weight:bold">0.01</span>
+    b1 = np.zeros((n_h, <span style="color:#ff0;font-weight:bold">1</span>))
+    W2 = np.random.randn(n_y, n_h)*<span style="color:#ff0;font-weight:bold">0.01</span>
+    b2 = np.zeros((n_y, <span style="color:#ff0;font-weight:bold">1</span>))
+    
+    <span style="color:#fff;font-weight:bold">assert</span>(W1.shape == (n_h, n_x))
+    <span style="color:#fff;font-weight:bold">assert</span>(b1.shape == (n_h, <span style="color:#ff0;font-weight:bold">1</span>))
+    <span style="color:#fff;font-weight:bold">assert</span>(W2.shape == (n_y, n_h))
+    <span style="color:#fff;font-weight:bold">assert</span>(b2.shape == (n_y, <span style="color:#ff0;font-weight:bold">1</span>))
+    
+    parameters = {<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>: W1,
+                  <span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>: b1,
+                  <span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>: W2,
+                  <span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>: b2}
+    
+    <span style="color:#fff;font-weight:bold">return</span> parameters     
+
+
+<span style="color:#fff;font-weight:bold">def</span> initialize_parameters_deep(layer_dims):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    layer_dims -- python array (list) containing the dimensions of each layer in our network
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your parameters &#34;W1&#34;, &#34;b1&#34;, ..., &#34;WL&#34;, &#34;bL&#34;:
+</span><span style="color:#0ff;font-weight:bold">                    Wl -- weight matrix of shape (layer_dims[l], layer_dims[l-1])
+</span><span style="color:#0ff;font-weight:bold">                    bl -- bias vector of shape (layer_dims[l], 1)
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
+    parameters = {}
+    L = <span style="color:#fff;font-weight:bold">len</span>(layer_dims)            <span style="color:#007f7f"># number of layers in the network</span>
+
+    <span style="color:#fff;font-weight:bold">for</span> l in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">1</span>, L):
+        parameters[<span style="color:#0ff;font-weight:bold">&#39;W&#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(l)] = np.random.randn(layer_dims[l], layer_dims[l-<span style="color:#ff0;font-weight:bold">1</span>]) / np.sqrt(layer_dims[l-<span style="color:#ff0;font-weight:bold">1</span>]) <span style="color:#007f7f">#*0.01</span>
+        parameters[<span style="color:#0ff;font-weight:bold">&#39;b&#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(l)] = np.zeros((layer_dims[l], <span style="color:#ff0;font-weight:bold">1</span>))
+        
+        <span style="color:#fff;font-weight:bold">assert</span>(parameters[<span style="color:#0ff;font-weight:bold">&#39;W&#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(l)].shape == (layer_dims[l], layer_dims[l-<span style="color:#ff0;font-weight:bold">1</span>]))
+        <span style="color:#fff;font-weight:bold">assert</span>(parameters[<span style="color:#0ff;font-weight:bold">&#39;b&#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(l)].shape == (layer_dims[l], <span style="color:#ff0;font-weight:bold">1</span>))
+
+        
+    <span style="color:#fff;font-weight:bold">return</span> parameters
+
+<span style="color:#fff;font-weight:bold">def</span> linear_forward(A, W, b):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the linear part of a layer&#39;s forward propagation.
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    A -- activations from previous layer (or input data): (size of previous layer, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    W -- weights matrix: numpy array of shape (size of current layer, size of previous layer)
+</span><span style="color:#0ff;font-weight:bold">    b -- bias vector, numpy array of shape (size of the current layer, 1)
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    Z -- the input of the activation function, also called pre-activation parameter 
+</span><span style="color:#0ff;font-weight:bold">    cache -- a python dictionary containing &#34;A&#34;, &#34;W&#34; and &#34;b&#34; ; stored for computing the backward pass efficiently
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    Z = W.dot(A) + b
+    
+    <span style="color:#fff;font-weight:bold">assert</span>(Z.shape == (W.shape[<span style="color:#ff0;font-weight:bold">0</span>], A.shape[<span style="color:#ff0;font-weight:bold">1</span>]))
+    cache = (A, W, b)
+    
+    <span style="color:#fff;font-weight:bold">return</span> Z, cache
+
+<span style="color:#fff;font-weight:bold">def</span> linear_activation_forward(A_prev, W, b, activation):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the forward propagation for the LINEAR-&gt;ACTIVATION layer
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    A_prev -- activations from previous layer (or input data): (size of previous layer, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    W -- weights matrix: numpy array of shape (size of current layer, size of previous layer)
+</span><span style="color:#0ff;font-weight:bold">    b -- bias vector, numpy array of shape (size of the current layer, 1)
+</span><span style="color:#0ff;font-weight:bold">    activation -- the activation to be used in this layer, stored as a text string: &#34;sigmoid&#34; or &#34;relu&#34;
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    A -- the output of the activation function, also called the post-activation value 
+</span><span style="color:#0ff;font-weight:bold">    cache -- a python dictionary containing &#34;linear_cache&#34; and &#34;activation_cache&#34;;
+</span><span style="color:#0ff;font-weight:bold">             stored for computing the backward pass efficiently
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    <span style="color:#fff;font-weight:bold">if</span> activation == <span style="color:#0ff;font-weight:bold">&#34;sigmoid&#34;</span>:
+        <span style="color:#007f7f"># Inputs: &#34;A_prev, W, b&#34;. Outputs: &#34;A, activation_cache&#34;.</span>
+        Z, linear_cache = linear_forward(A_prev, W, b)
+        A, activation_cache = sigmoid(Z)
+    
+    <span style="color:#fff;font-weight:bold">elif</span> activation == <span style="color:#0ff;font-weight:bold">&#34;relu&#34;</span>:
+        <span style="color:#007f7f"># Inputs: &#34;A_prev, W, b&#34;. Outputs: &#34;A, activation_cache&#34;.</span>
+        Z, linear_cache = linear_forward(A_prev, W, b)
+        A, activation_cache = relu(Z)
+    
+    <span style="color:#fff;font-weight:bold">assert</span> (A.shape == (W.shape[<span style="color:#ff0;font-weight:bold">0</span>], A_prev.shape[<span style="color:#ff0;font-weight:bold">1</span>]))
+    cache = (linear_cache, activation_cache)
+
+    <span style="color:#fff;font-weight:bold">return</span> A, cache
+
+<span style="color:#fff;font-weight:bold">def</span> L_model_forward(X, parameters):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement forward propagation for the [LINEAR-&gt;RELU]*(L-1)-&gt;LINEAR-&gt;SIGMOID computation
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    X -- data, numpy array of shape (input size, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    parameters -- output of initialize_parameters_deep()
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    AL -- last post-activation value
+</span><span style="color:#0ff;font-weight:bold">    caches -- list of caches containing:
+</span><span style="color:#0ff;font-weight:bold">                every cache of linear_relu_forward() (there are L-1 of them, indexed from 0 to L-2)
+</span><span style="color:#0ff;font-weight:bold">                the cache of linear_sigmoid_forward() (there is one, indexed L-1)
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+
+    caches = []
+    A = X
+    L = <span style="color:#fff;font-weight:bold">len</span>(parameters) // <span style="color:#ff0;font-weight:bold">2</span>                  <span style="color:#007f7f"># number of layers in the neural network</span>
+    
+    <span style="color:#007f7f"># Implement [LINEAR -&gt; RELU]*(L-1). Add &#34;cache&#34; to the &#34;caches&#34; list.</span>
+    <span style="color:#fff;font-weight:bold">for</span> l in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">1</span>, L):
+        A_prev = A 
+        A, cache = linear_activation_forward(A_prev, parameters[<span style="color:#0ff;font-weight:bold">&#39;W&#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(l)], parameters[<span style="color:#0ff;font-weight:bold">&#39;b&#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(l)], activation = <span style="color:#0ff;font-weight:bold">&#34;relu&#34;</span>)
+        caches.append(cache)
+    
+    <span style="color:#007f7f"># Implement LINEAR -&gt; SIGMOID. Add &#34;cache&#34; to the &#34;caches&#34; list.</span>
+    AL, cache = linear_activation_forward(A, parameters[<span style="color:#0ff;font-weight:bold">&#39;W&#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(L)], parameters[<span style="color:#0ff;font-weight:bold">&#39;b&#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(L)], activation = <span style="color:#0ff;font-weight:bold">&#34;sigmoid&#34;</span>)
+    caches.append(cache)
+    
+    <span style="color:#fff;font-weight:bold">assert</span>(AL.shape == (<span style="color:#ff0;font-weight:bold">1</span>,X.shape[<span style="color:#ff0;font-weight:bold">1</span>]))
+            
+    <span style="color:#fff;font-weight:bold">return</span> AL, caches
+
+<span style="color:#fff;font-weight:bold">def</span> compute_cost(AL, Y):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the cost function defined by equation (7).
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    AL -- probability vector corresponding to your label predictions, shape (1, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    Y -- true &#34;label&#34; vector (for example: containing 0 if non-cat, 1 if cat), shape (1, number of examples)
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    cost -- cross-entropy cost
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    m = Y.shape[<span style="color:#ff0;font-weight:bold">1</span>]
+
+    <span style="color:#007f7f"># Compute loss from aL and y.</span>
+    cost = (<span style="color:#ff0;font-weight:bold">1.</span>/m) * (-np.dot(Y,np.log(AL).T) - np.dot(<span style="color:#ff0;font-weight:bold">1</span>-Y, np.log(<span style="color:#ff0;font-weight:bold">1</span>-AL).T))
+    
+    cost = np.squeeze(cost)      <span style="color:#007f7f"># To make sure your cost&#39;s shape is what we expect (e.g. this turns [[17]] into 17).</span>
+    <span style="color:#fff;font-weight:bold">assert</span>(cost.shape == ())
+    
+    <span style="color:#fff;font-weight:bold">return</span> cost
+
+<span style="color:#fff;font-weight:bold">def</span> linear_backward(dZ, cache):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the linear portion of backward propagation for a single layer (layer l)
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    dZ -- Gradient of the cost with respect to the linear output (of current layer l)
+</span><span style="color:#0ff;font-weight:bold">    cache -- tuple of values (A_prev, W, b) coming from the forward propagation in the current layer
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    dA_prev -- Gradient of the cost with respect to the activation (of the previous layer l-1), same shape as A_prev
+</span><span style="color:#0ff;font-weight:bold">    dW -- Gradient of the cost with respect to W (current layer l), same shape as W
+</span><span style="color:#0ff;font-weight:bold">    db -- Gradient of the cost with respect to b (current layer l), same shape as b
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    A_prev, W, b = cache
+    m = A_prev.shape[<span style="color:#ff0;font-weight:bold">1</span>]
+
+    dW = <span style="color:#ff0;font-weight:bold">1.</span>/m * np.dot(dZ,A_prev.T)
+    db = <span style="color:#ff0;font-weight:bold">1.</span>/m * np.sum(dZ, axis = <span style="color:#ff0;font-weight:bold">1</span>, keepdims = True)
+    dA_prev = np.dot(W.T,dZ)
+    
+    <span style="color:#fff;font-weight:bold">assert</span> (dA_prev.shape == A_prev.shape)
+    <span style="color:#fff;font-weight:bold">assert</span> (dW.shape == W.shape)
+    <span style="color:#fff;font-weight:bold">assert</span> (db.shape == b.shape)
+    
+    <span style="color:#fff;font-weight:bold">return</span> dA_prev, dW, db
+
+<span style="color:#fff;font-weight:bold">def</span> linear_activation_backward(dA, cache, activation):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the backward propagation for the LINEAR-&gt;ACTIVATION layer.
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    dA -- post-activation gradient for current layer l 
+</span><span style="color:#0ff;font-weight:bold">    cache -- tuple of values (linear_cache, activation_cache) we store for computing backward propagation efficiently
+</span><span style="color:#0ff;font-weight:bold">    activation -- the activation to be used in this layer, stored as a text string: &#34;sigmoid&#34; or &#34;relu&#34;
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    dA_prev -- Gradient of the cost with respect to the activation (of the previous layer l-1), same shape as A_prev
+</span><span style="color:#0ff;font-weight:bold">    dW -- Gradient of the cost with respect to W (current layer l), same shape as W
+</span><span style="color:#0ff;font-weight:bold">    db -- Gradient of the cost with respect to b (current layer l), same shape as b
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    linear_cache, activation_cache = cache
+    
+    <span style="color:#fff;font-weight:bold">if</span> activation == <span style="color:#0ff;font-weight:bold">&#34;relu&#34;</span>:
+        dZ = relu_backward(dA, activation_cache)
+        dA_prev, dW, db = linear_backward(dZ, linear_cache)
+        
+    <span style="color:#fff;font-weight:bold">elif</span> activation == <span style="color:#0ff;font-weight:bold">&#34;sigmoid&#34;</span>:
+        dZ = sigmoid_backward(dA, activation_cache)
+        dA_prev, dW, db = linear_backward(dZ, linear_cache)
+    
+    <span style="color:#fff;font-weight:bold">return</span> dA_prev, dW, db
+
+<span style="color:#fff;font-weight:bold">def</span> L_model_backward(AL, Y, caches):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the backward propagation for the [LINEAR-&gt;RELU] * (L-1) -&gt; LINEAR -&gt; SIGMOID group
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    AL -- probability vector, output of the forward propagation (L_model_forward())
+</span><span style="color:#0ff;font-weight:bold">    Y -- true &#34;label&#34; vector (containing 0 if non-cat, 1 if cat)
+</span><span style="color:#0ff;font-weight:bold">    caches -- list of caches containing:
+</span><span style="color:#0ff;font-weight:bold">                every cache of linear_activation_forward() with &#34;relu&#34; (there are (L-1) or them, indexes from 0 to L-2)
+</span><span style="color:#0ff;font-weight:bold">                the cache of linear_activation_forward() with &#34;sigmoid&#34; (there is one, index L-1)
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    grads -- A dictionary with the gradients
+</span><span style="color:#0ff;font-weight:bold">             grads[&#34;dA&#34; + str(l)] = ... 
+</span><span style="color:#0ff;font-weight:bold">             grads[&#34;dW&#34; + str(l)] = ...
+</span><span style="color:#0ff;font-weight:bold">             grads[&#34;db&#34; + str(l)] = ... 
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    grads = {}
+    L = <span style="color:#fff;font-weight:bold">len</span>(caches) <span style="color:#007f7f"># the number of layers</span>
+    m = AL.shape[<span style="color:#ff0;font-weight:bold">1</span>]
+    Y = Y.reshape(AL.shape) <span style="color:#007f7f"># after this line, Y is the same shape as AL</span>
+    
+    <span style="color:#007f7f"># Initializing the backpropagation</span>
+    dAL = - (np.divide(Y, AL) - np.divide(<span style="color:#ff0;font-weight:bold">1</span> - Y, <span style="color:#ff0;font-weight:bold">1</span> - AL))
+    
+    <span style="color:#007f7f"># Lth layer (SIGMOID -&gt; LINEAR) gradients. Inputs: &#34;AL, Y, caches&#34;. Outputs: &#34;grads[&#34;dAL&#34;], grads[&#34;dWL&#34;], grads[&#34;dbL&#34;]</span>
+    current_cache = caches[L-<span style="color:#ff0;font-weight:bold">1</span>]
+    grads[<span style="color:#0ff;font-weight:bold">&#34;dA&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(L-<span style="color:#ff0;font-weight:bold">1</span>)], grads[<span style="color:#0ff;font-weight:bold">&#34;dW&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(L)], grads[<span style="color:#0ff;font-weight:bold">&#34;db&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(L)] = linear_activation_backward(dAL, current_cache, activation = <span style="color:#0ff;font-weight:bold">&#34;sigmoid&#34;</span>)
+    
+    <span style="color:#fff;font-weight:bold">for</span> l in <span style="color:#fff;font-weight:bold">reversed</span>(<span style="color:#fff;font-weight:bold">range</span>(L-<span style="color:#ff0;font-weight:bold">1</span>)):
+        <span style="color:#007f7f"># lth layer: (RELU -&gt; LINEAR) gradients.</span>
+        current_cache = caches[l]
+        dA_prev_temp, dW_temp, db_temp = linear_activation_backward(grads[<span style="color:#0ff;font-weight:bold">&#34;dA&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l + <span style="color:#ff0;font-weight:bold">1</span>)], current_cache, activation = <span style="color:#0ff;font-weight:bold">&#34;relu&#34;</span>)
+        grads[<span style="color:#0ff;font-weight:bold">&#34;dA&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l)] = dA_prev_temp
+        grads[<span style="color:#0ff;font-weight:bold">&#34;dW&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l + <span style="color:#ff0;font-weight:bold">1</span>)] = dW_temp
+        grads[<span style="color:#0ff;font-weight:bold">&#34;db&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l + <span style="color:#ff0;font-weight:bold">1</span>)] = db_temp
+
+    <span style="color:#fff;font-weight:bold">return</span> grads
+
+<span style="color:#fff;font-weight:bold">def</span> update_parameters(parameters, grads, learning_rate):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Update parameters using gradient descent
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your parameters 
+</span><span style="color:#0ff;font-weight:bold">    grads -- python dictionary containing your gradients, output of L_model_backward
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your updated parameters 
+</span><span style="color:#0ff;font-weight:bold">                  parameters[&#34;W&#34; + str(l)] = ... 
+</span><span style="color:#0ff;font-weight:bold">                  parameters[&#34;b&#34; + str(l)] = ...
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    L = <span style="color:#fff;font-weight:bold">len</span>(parameters) // <span style="color:#ff0;font-weight:bold">2</span> <span style="color:#007f7f"># number of layers in the neural network</span>
+
+    <span style="color:#007f7f"># Update rule for each parameter. Use a for loop.</span>
+    <span style="color:#fff;font-weight:bold">for</span> l in <span style="color:#fff;font-weight:bold">range</span>(L):
+        parameters[<span style="color:#0ff;font-weight:bold">&#34;W&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)] = parameters[<span style="color:#0ff;font-weight:bold">&#34;W&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)] - learning_rate * grads[<span style="color:#0ff;font-weight:bold">&#34;dW&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)]
+        parameters[<span style="color:#0ff;font-weight:bold">&#34;b&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)] = parameters[<span style="color:#0ff;font-weight:bold">&#34;b&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)] - learning_rate * grads[<span style="color:#0ff;font-weight:bold">&#34;db&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)]
+        
+    <span style="color:#fff;font-weight:bold">return</span> parameters
+
+<span style="color:#fff;font-weight:bold">def</span> predict(X, y, parameters):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    This function is used to predict the results of a  L-layer neural network.
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    X -- data set of examples you would like to label
+</span><span style="color:#0ff;font-weight:bold">    parameters -- parameters of the trained model
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    p -- predictions for the given dataset X
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    m = X.shape[<span style="color:#ff0;font-weight:bold">1</span>]
+    n = <span style="color:#fff;font-weight:bold">len</span>(parameters) // <span style="color:#ff0;font-weight:bold">2</span> <span style="color:#007f7f"># number of layers in the neural network</span>
+    p = np.zeros((<span style="color:#ff0;font-weight:bold">1</span>,m))
+    
+    <span style="color:#007f7f"># Forward propagation</span>
+    probas, caches = L_model_forward(X, parameters)
+
+    
+    <span style="color:#007f7f"># convert probas to 0/1 predictions</span>
+    <span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">0</span>, probas.shape[<span style="color:#ff0;font-weight:bold">1</span>]):
+        <span style="color:#fff;font-weight:bold">if</span> probas[<span style="color:#ff0;font-weight:bold">0</span>,i] &gt; <span style="color:#ff0;font-weight:bold">0.5</span>:
+            p[<span style="color:#ff0;font-weight:bold">0</span>,i] = <span style="color:#ff0;font-weight:bold">1</span>
+        <span style="color:#fff;font-weight:bold">else</span>:
+            p[<span style="color:#ff0;font-weight:bold">0</span>,i] = <span style="color:#ff0;font-weight:bold">0</span>
+    
+    <span style="color:#007f7f">#print results</span>
+    <span style="color:#007f7f">#print (&#34;predictions: &#34; + str(p))</span>
+    <span style="color:#007f7f">#print (&#34;true labels: &#34; + str(y))</span>
+    <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Accuracy: &#34;</span>  + <span style="color:#fff;font-weight:bold">str</span>(np.sum((p == y)/m)))
+        
+    <span style="color:#fff;font-weight:bold">return</span> p
+
+<span style="color:#fff;font-weight:bold">def</span> print_mislabeled_images(classes, X, y, p):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Plots images where predictions and truth were different.
+</span><span style="color:#0ff;font-weight:bold">    X -- dataset
+</span><span style="color:#0ff;font-weight:bold">    y -- true labels
+</span><span style="color:#0ff;font-weight:bold">    p -- predictions
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    a = p + y
+    mislabeled_indices = np.asarray(np.where(a == <span style="color:#ff0;font-weight:bold">1</span>))
+    plt.rcParams[<span style="color:#0ff;font-weight:bold">&#39;figure.figsize&#39;</span>] = (<span style="color:#ff0;font-weight:bold">40.0</span>, <span style="color:#ff0;font-weight:bold">40.0</span>) <span style="color:#007f7f"># set default size of plots</span>
+    num_images = <span style="color:#fff;font-weight:bold">len</span>(mislabeled_indices[<span style="color:#ff0;font-weight:bold">0</span>])
+    <span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(num_images):
+        index = mislabeled_indices[<span style="color:#ff0;font-weight:bold">1</span>][i]
+        
+        plt.subplot(<span style="color:#ff0;font-weight:bold">2</span>, num_images, i + <span style="color:#ff0;font-weight:bold">1</span>)
+        plt.imshow(X[:,index].reshape(<span style="color:#ff0;font-weight:bold">64</span>,<span style="color:#ff0;font-weight:bold">64</span>,<span style="color:#ff0;font-weight:bold">3</span>), interpolation=<span style="color:#0ff;font-weight:bold">&#39;nearest&#39;</span>)
+        plt.axis(<span style="color:#0ff;font-weight:bold">&#39;off&#39;</span>)
+        plt.title(<span style="color:#0ff;font-weight:bold">&#34;Prediction: &#34;</span> + classes[<span style="color:#fff;font-weight:bold">int</span>(p[<span style="color:#ff0;font-weight:bold">0</span>,index])].decode(<span style="color:#0ff;font-weight:bold">&#34;utf-8&#34;</span>) + <span style="color:#0ff;font-weight:bold">&#34; </span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold"> Class: &#34;</span> + classes[y[<span style="color:#ff0;font-weight:bold">0</span>,index]].decode(<span style="color:#0ff;font-weight:bold">&#34;utf-8&#34;</span>))
+
+</code></pre></div><h2 id="import-packages">import packages</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> time
+<span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<span style="color:#fff;font-weight:bold">import</span> h5py
+<span style="color:#fff;font-weight:bold">import</span> matplotlib.pyplot <span style="color:#fff;font-weight:bold">as</span> plt
+<span style="color:#fff;font-weight:bold">import</span> scipy
+<span style="color:#fff;font-weight:bold">from</span> PIL <span style="color:#fff;font-weight:bold">import</span> Image
+<span style="color:#fff;font-weight:bold">from</span> scipy <span style="color:#fff;font-weight:bold">import</span> ndimage
+<span style="color:#fff;font-weight:bold">from</span> dnn_app_utils_v3 <span style="color:#fff;font-weight:bold">import</span> *
+
+%matplotlib inline
+plt.rcParams[<span style="color:#0ff;font-weight:bold">&#39;figure.figsize&#39;</span>] = (<span style="color:#ff0;font-weight:bold">5.0</span>, <span style="color:#ff0;font-weight:bold">4.0</span>) <span style="color:#007f7f"># set default size of plots</span>
+plt.rcParams[<span style="color:#0ff;font-weight:bold">&#39;image.interpolation&#39;</span>] = <span style="color:#0ff;font-weight:bold">&#39;nearest&#39;</span>
+plt.rcParams[<span style="color:#0ff;font-weight:bold">&#39;image.cmap&#39;</span>] = <span style="color:#0ff;font-weight:bold">&#39;gray&#39;</span>
+
+%load_ext autoreload
+%autoreload <span style="color:#ff0;font-weight:bold">2</span>
+
+np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
+</code></pre></div><h2 id="dataset">Dataset</h2>
+<p>You will use the same &ldquo;Cat vs non-Cat&rdquo; dataset as in &ldquo;Logistic Regression as a Neural Network&rdquo; (Assignment 2). The model you had built had 70% test accuracy on classifying cats vs non-cats images. Hopefully, your new model will perform a better!</p>
+<p><strong>Problem Statement</strong>: You are given a dataset (&ldquo;data.h5&rdquo;) containing:
+- a training set of m_train images labelled as cat (1) or non-cat (0)
+- a test set of m_test images labelled as cat and non-cat
+- each image is of shape (num_px, num_px, 3) where 3 is for the 3 channels (RGB).</p>
+<p>Let&rsquo;s get more familiar with the dataset. Load the data by running the cell below.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">train_x_orig, train_y, test_x_orig, test_y, classes = load_data()
+
+<span style="color:#007f7f"># Example of a picture</span>
+index = <span style="color:#ff0;font-weight:bold">10</span>
+plt.imshow(train_x_orig[index])
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;y = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(train_y[<span style="color:#ff0;font-weight:bold">0</span>,index]) + <span style="color:#0ff;font-weight:bold">&#34;. It&#39;s a &#34;</span> + classes[train_y[<span style="color:#ff0;font-weight:bold">0</span>,index]].decode(<span style="color:#0ff;font-weight:bold">&#34;utf-8&#34;</span>) +  <span style="color:#0ff;font-weight:bold">&#34; picture.&#34;</span>)
+
+<span style="color:#007f7f"># shows a bird piture, </span>
+<span style="color:#007f7f"># output</span>
+<span style="color:#007f7f"># y = 0. It&#39;s a non-cat picture.</span>
+
+<span style="color:#007f7f"># Explore your dataset </span>
+m_train = train_x_orig.shape[<span style="color:#ff0;font-weight:bold">0</span>]
+num_px = train_x_orig.shape[<span style="color:#ff0;font-weight:bold">1</span>]
+m_test = test_x_orig.shape[<span style="color:#ff0;font-weight:bold">0</span>]
+
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Number of training examples: &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(m_train))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Number of testing examples: &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(m_test))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Each image is of size: (&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(num_px) + <span style="color:#0ff;font-weight:bold">&#34;, &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(num_px) + <span style="color:#0ff;font-weight:bold">&#34;, 3)&#34;</span>)
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;train_x_orig shape: &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(train_x_orig.shape))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;train_y shape: &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(train_y.shape))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;test_x_orig shape: &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(test_x_orig.shape))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;test_y shape: &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(test_y.shape))
+</code></pre></div><p>reshape and standardize images</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># Reshape the training and test examples 
+train_x_flatten = train_x_orig.reshape(train_x_orig.shape[0], -1).T   # The &#34;-1&#34; makes reshape flatten the remaining dimensions
+test_x_flatten = test_x_orig.reshape(test_x_orig.shape[0], -1).T
+
+# Standardize data to have feature values between 0 and 1.
+train_x = train_x_flatten/255.
+test_x = test_x_flatten/255.
+
+print (&#34;train_x&#39;s shape: &#34; + str(train_x.shape))
+print (&#34;test_x&#39;s shape: &#34; + str(test_x.shape))
+
+</code></pre></div><p><img class="img-zoomable" src="/coursera/2layerNN_kiank.png" alt="2 layer nn" />
+</p>
+<ul>
+<li>The input is a (64,64,3) image which is flattened to a vector of size \((12288,1)\).</li>
+<li>The corresponding vector: \([x_0,x_1,&hellip;,x_{12287}]^T\) is then multiplied by the weight matrix \(W^{[1]}\) of size \((n^{[1]}, 12288)\).</li>
+<li>You then add a bias term and take its relu to get the following vector: \([a_0^{[1]}, a_1^{[1]},&hellip;, a_{n^{[1]}-1}^{[1]}]^T\).</li>
+<li>You then repeat the same process.</li>
+<li>You multiply the resulting vector by \(W^{[2]}\) and add your intercept (bias).</li>
+<li>Finally, you take the sigmoid of the result. If it is greater than 0.5, you classify it to be a cat.</li>
+</ul>
+<h3 id="l-layer-deep-neural-network">L-layer deep neural network</h3>
+<p>It is hard to represent an L-layer deep neural network with the above representation. However, here is a simplified network representation:</p>
+<p><img class="img-zoomable" src="/coursera/LlayerNN_kiank.png" alt="L layer nn" />
+</p>
+<ul>
+<li>The input is a (64,64,3) image which is flattened to a vector of size (12288,1).</li>
+<li>The corresponding vector: \( [x_0,x_1,&hellip;,x_{12287}]^T \) is then multiplied by the weight matrix \(W^{[1]}\) and then you add the intercept \(b^{[1]}\). The result is called the linear unit.</li>
+<li>Next, you take the relu of the linear unit. This process could be repeated several times for each \((W^{[l]}, b^{[l]})\) depending on the model architecture.</li>
+<li>Finally, you take the sigmoid of the final linear unit. If it is greater than 0.5, you classify it to be a cat.</li>
+</ul>
+<h3 id="general-methodology">General methodology</h3>
+<p>As usual you will follow the Deep Learning methodology to build the model:</p>
+<ol>
+<li>Initialize parameters / Define hyperparameters</li>
+<li>Loop for num_iterations:
+a. Forward propagation
+b. Compute cost function
+c. Backward propagation
+d. Update parameters (using parameters, and grads from backprop)</li>
+<li>Use trained parameters to predict labels</li>
+</ol>
+<p>Let&rsquo;s now implement those two models!</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f">### CONSTANTS DEFINING THE MODEL ####</span>
+n_x = <span style="color:#ff0;font-weight:bold">12288</span>     <span style="color:#007f7f"># num_px * num_px * 3</span>
+n_h = <span style="color:#ff0;font-weight:bold">7</span>
+n_y = <span style="color:#ff0;font-weight:bold">1</span>
+layers_dims = (n_x, n_h, n_y)
+<span style="color:#007f7f"># GRADED FUNCTION: two_layer_model</span>
+
+<span style="color:#fff;font-weight:bold">def</span> two_layer_model(X, Y, layers_dims, learning_rate = <span style="color:#ff0;font-weight:bold">0.0075</span>, num_iterations = <span style="color:#ff0;font-weight:bold">3000</span>, print_cost=False):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implements a two-layer neural network: LINEAR-&gt;RELU-&gt;LINEAR-&gt;SIGMOID.
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    X -- input data, of shape (n_x, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    Y -- true &#34;label&#34; vector (containing 0 if cat, 1 if non-cat), of shape (1, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    layers_dims -- dimensions of the layers (n_x, n_h, n_y)
+</span><span style="color:#0ff;font-weight:bold">    num_iterations -- number of iterations of the optimization loop
+</span><span style="color:#0ff;font-weight:bold">    learning_rate -- learning rate of the gradient descent update rule
+</span><span style="color:#0ff;font-weight:bold">    print_cost -- If set to True, this will print the cost every 100 iterations 
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- a dictionary containing W1, W2, b1, and b2
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
+    grads = {}
+    costs = []                              <span style="color:#007f7f"># to keep track of the cost</span>
+    m = X.shape[<span style="color:#ff0;font-weight:bold">1</span>]                           <span style="color:#007f7f"># number of examples</span>
+    (n_x, n_h, n_y) = layers_dims
+    
+    <span style="color:#007f7f"># Initialize parameters dictionary, by calling one of the functions you&#39;d previously implemented</span>
+    <span style="color:#007f7f">### START CODE HERE ### (≈ 1 line of code)</span>
+    parameters = initialize_parameters(n_x, n_h, n_y)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Get W1, b1, W2 and b2 from the dictionary parameters.</span>
+    W1 = parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>]
+    b1 = parameters[<span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>]
+    W2 = parameters[<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>]
+    b2 = parameters[<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>]
+    
+    <span style="color:#007f7f"># Loop (gradient descent)</span>
+
+    <span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">0</span>, num_iterations):
+
+        <span style="color:#007f7f"># Forward propagation: LINEAR -&gt; RELU -&gt; LINEAR -&gt; SIGMOID. Inputs: &#34;X, W1, b1, W2, b2&#34;. Output: &#34;A1, cache1, A2, cache2&#34;.</span>
+        <span style="color:#007f7f">### START CODE HERE ### (≈ 2 lines of code)</span>
+        A1, cache1 = linear_activation_forward(X, W1, b1, activation=<span style="color:#0ff;font-weight:bold">&#39;relu&#39;</span>)
+        A2, cache2 = linear_activation_forward(A1,W2, b2, activation=<span style="color:#0ff;font-weight:bold">&#39;sigmoid&#39;</span>)
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+        
+        <span style="color:#007f7f"># Compute cost</span>
+        <span style="color:#007f7f">### START CODE HERE ### (≈ 1 line of code)</span>
+        cost = compute_cost(A2, Y)
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+        
+        <span style="color:#007f7f"># Initializing backward propagation</span>
+        dA2 = - (np.divide(Y, A2) - np.divide(<span style="color:#ff0;font-weight:bold">1</span> - Y, <span style="color:#ff0;font-weight:bold">1</span> - A2))
+        
+        <span style="color:#007f7f"># Backward propagation. Inputs: &#34;dA2, cache2, cache1&#34;. Outputs: &#34;dA1, dW2, db2; also dA0 (not used), dW1, db1&#34;.</span>
+        <span style="color:#007f7f">### START CODE HERE ### (≈ 2 lines of code)</span>
+        dA1, dW2, db2 = linear_activation_backward(dA2, cache2, activation=<span style="color:#0ff;font-weight:bold">&#39;sigmoid&#39;</span>)
+        dA0, dW1, db1 = linear_activation_backward(dA1, cache1, activation=<span style="color:#0ff;font-weight:bold">&#39;relu&#39;</span>)
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+        
+        <span style="color:#007f7f"># Set grads[&#39;dWl&#39;] to dW1, grads[&#39;db1&#39;] to db1, grads[&#39;dW2&#39;] to dW2, grads[&#39;db2&#39;] to db2</span>
+        grads[<span style="color:#0ff;font-weight:bold">&#39;dW1&#39;</span>] = dW1
+        grads[<span style="color:#0ff;font-weight:bold">&#39;db1&#39;</span>] = db1
+        grads[<span style="color:#0ff;font-weight:bold">&#39;dW2&#39;</span>] = dW2
+        grads[<span style="color:#0ff;font-weight:bold">&#39;db2&#39;</span>] = db2
+        
+        <span style="color:#007f7f"># Update parameters.</span>
+        <span style="color:#007f7f">### START CODE HERE ### (approx. 1 line of code)</span>
+        parameters = update_parameters(parameters, grads, learning_rate)
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+
+        <span style="color:#007f7f"># Retrieve W1, b1, W2, b2 from parameters</span>
+        W1 = parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>]
+        b1 = parameters[<span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>]
+        W2 = parameters[<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>]
+        b2 = parameters[<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>]
+        
+        <span style="color:#007f7f"># Print the cost every 100 training example</span>
+        <span style="color:#fff;font-weight:bold">if</span> print_cost and i % <span style="color:#ff0;font-weight:bold">100</span> == <span style="color:#ff0;font-weight:bold">0</span>:
+            <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Cost after iteration {}: {}&#34;</span>.format(i, np.squeeze(cost)))
+        <span style="color:#fff;font-weight:bold">if</span> print_cost and i % <span style="color:#ff0;font-weight:bold">100</span> == <span style="color:#ff0;font-weight:bold">0</span>:
+            costs.append(cost)
+       
+    <span style="color:#007f7f"># plot the cost</span>
+
+    plt.plot(np.squeeze(costs))
+    plt.ylabel(<span style="color:#0ff;font-weight:bold">&#39;cost&#39;</span>)
+    plt.xlabel(<span style="color:#0ff;font-weight:bold">&#39;iterations (per tens)&#39;</span>)
+    plt.title(<span style="color:#0ff;font-weight:bold">&#34;Learning rate =&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(learning_rate))
+    plt.show()
+    
+    <span style="color:#fff;font-weight:bold">return</span> parameters
+parameters = two_layer_model(train_x, train_y, layers_dims = (n_x, n_h, n_y), num_iterations = <span style="color:#ff0;font-weight:bold">2500</span>, print_cost=True)
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Cost after iteration 0: 0.6930497356599888
+Cost after iteration 100: 0.6464320953428849
+Cost after iteration 200: 0.6325140647912677
+Cost after iteration 300: 0.6015024920354665
+Cost after iteration 400: 0.5601966311605747
+Cost after iteration 500: 0.5158304772764729
+Cost after iteration 600: 0.47549013139433255
+Cost after iteration 700: 0.43391631512257495
+Cost after iteration 800: 0.400797753620389
+Cost after iteration 900: 0.3580705011323798
+Cost after iteration 1000: 0.3394281538366411
+Cost after iteration 1100: 0.3052753636196264
+Cost after iteration 1200: 0.2749137728213018
+Cost after iteration 1300: 0.24681768210614854
+Cost after iteration 1400: 0.19850735037466094
+Cost after iteration 1500: 0.17448318112556666
+Cost after iteration 1600: 0.17080762978096128
+Cost after iteration 1700: 0.11306524562164724
+Cost after iteration 1800: 0.09629426845937152
+Cost after iteration 1900: 0.08342617959726856
+Cost after iteration 2000: 0.07439078704319078
+Cost after iteration 2100: 0.06630748132267927
+Cost after iteration 2200: 0.05919329501038164
+Cost after iteration 2300: 0.05336140348560553
+Cost after iteration 2400: 0.048554785628770115
+
+</code></pre></div><p><img class="img-zoomable" src="/coursera/2layer_cost.png" alt="2 layer cost" />
+</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">predictions_train = predict(train_x, train_y, parameters)
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Accuracy: 1.0
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">predictions_test = predict(test_x, test_y, parameters)
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Accuracy: 0.72
+</code></pre></div><h2 id="l-layer-neural-network">L layer neural network</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f">### CONSTANTS ###</span>
+layers_dims = [<span style="color:#ff0;font-weight:bold">12288</span>, <span style="color:#ff0;font-weight:bold">20</span>, <span style="color:#ff0;font-weight:bold">7</span>, <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">1</span>] <span style="color:#007f7f">#  4-layer model</span>
+<span style="color:#007f7f"># GRADED FUNCTION: L_layer_model</span>
+
+<span style="color:#fff;font-weight:bold">def</span> L_layer_model(X, Y, layers_dims, learning_rate = <span style="color:#ff0;font-weight:bold">0.0075</span>, num_iterations = <span style="color:#ff0;font-weight:bold">3000</span>, print_cost=False):<span style="color:#007f7f">#lr was 0.009 0.0075</span>
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implements a L-layer neural network: [LINEAR-&gt;RELU]*(L-1)-&gt;LINEAR-&gt;SIGMOID.
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    X -- data, numpy array of shape (number of examples, num_px * num_px * 3)
+</span><span style="color:#0ff;font-weight:bold">    Y -- true &#34;label&#34; vector (containing 0 if cat, 1 if non-cat), of shape (1, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    layers_dims -- list containing the input size and each layer size, of length (number of layers + 1).
+</span><span style="color:#0ff;font-weight:bold">    learning_rate -- learning rate of the gradient descent update rule
+</span><span style="color:#0ff;font-weight:bold">    num_iterations -- number of iterations of the optimization loop
+</span><span style="color:#0ff;font-weight:bold">    print_cost -- if True, it prints the cost every 100 steps
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- parameters learnt by the model. They can then be used to predict.
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+
+    np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
+    costs = []                         <span style="color:#007f7f"># keep track of cost</span>
+    
+    <span style="color:#007f7f"># Parameters initialization. (≈ 1 line of code)</span>
+    <span style="color:#007f7f">### START CODE HERE ###</span>
+    parameters = initialize_parameters_deep(layers_dims)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Loop (gradient descent)</span>
+    <span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">0</span>, num_iterations):
+
+        <span style="color:#007f7f"># Forward propagation: [LINEAR -&gt; RELU]*(L-1) -&gt; LINEAR -&gt; SIGMOID.</span>
+        <span style="color:#007f7f">### START CODE HERE ### (≈ 1 line of code)</span>
+        AL, caches = L_model_forward(X, parameters)
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+        
+        <span style="color:#007f7f"># Compute cost.</span>
+        <span style="color:#007f7f">### START CODE HERE ### (≈ 1 line of code)</span>
+        cost = compute_cost(AL, Y)
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+        <span style="color:#007f7f"># Backward propagation.</span>
+        <span style="color:#007f7f">### START CODE HERE ### (≈ 1 line of code)</span>
+        grads = L_model_backward(AL, Y, caches)
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+ 
+        <span style="color:#007f7f"># Update parameters.</span>
+        <span style="color:#007f7f">### START CODE HERE ### (≈ 1 line of code)</span>
+        parameters = update_parameters(parameters, grads, learning_rate)
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+                
+        <span style="color:#007f7f"># Print the cost every 100 training example</span>
+        <span style="color:#fff;font-weight:bold">if</span> print_cost and i % <span style="color:#ff0;font-weight:bold">100</span> == <span style="color:#ff0;font-weight:bold">0</span>:
+            <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Cost after iteration </span><span style="color:#0ff;font-weight:bold">%i</span><span style="color:#0ff;font-weight:bold">: </span><span style="color:#0ff;font-weight:bold">%f</span><span style="color:#0ff;font-weight:bold">&#34;</span> %(i, cost))
+        <span style="color:#fff;font-weight:bold">if</span> print_cost and i % <span style="color:#ff0;font-weight:bold">100</span> == <span style="color:#ff0;font-weight:bold">0</span>:
+            costs.append(cost)
+            
+    <span style="color:#007f7f"># plot the cost</span>
+    plt.plot(np.squeeze(costs))
+    plt.ylabel(<span style="color:#0ff;font-weight:bold">&#39;cost&#39;</span>)
+    plt.xlabel(<span style="color:#0ff;font-weight:bold">&#39;iterations (per tens)&#39;</span>)
+    plt.title(<span style="color:#0ff;font-weight:bold">&#34;Learning rate =&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(learning_rate))
+    plt.show()
+    
+    <span style="color:#fff;font-weight:bold">return</span> parameters
+parameters = L_layer_model(train_x, train_y, layers_dims, num_iterations = <span style="color:#ff0;font-weight:bold">2500</span>, print_cost = True)
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Cost after iteration 0: 0.695046
+Cost after iteration 100: 0.589260
+Cost after iteration 200: 0.523261
+Cost after iteration 300: 0.449769
+Cost after iteration 400: 0.420900
+Cost after iteration 500: 0.372464
+Cost after iteration 600: 0.347421
+Cost after iteration 700: 0.317192
+Cost after iteration 800: 0.266438
+Cost after iteration 900: 0.219914
+Cost after iteration 1000: 0.143579
+Cost after iteration 1100: 0.453092
+Cost after iteration 1200: 0.094994
+Cost after iteration 1300: 0.080141
+Cost after iteration 1400: 0.069402
+Cost after iteration 1500: 0.060217
+Cost after iteration 1600: 0.053274
+Cost after iteration 1700: 0.047629
+Cost after iteration 1800: 0.042976
+Cost after iteration 1900: 0.039036
+Cost after iteration 2000: 0.035683
+Cost after iteration 2100: 0.032915
+Cost after iteration 2200: 0.030472
+Cost after iteration 2300: 0.028388
+Cost after iteration 2400: 0.026615
+</code></pre></div><p><img class="img-zoomable" src="/coursera/4layer_nn_cost.png" alt="4 layer NN" />
+</p>
+<h2 id="test">test</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f">## START CODE HERE ##</span>
+my_image = <span style="color:#0ff;font-weight:bold">&#34;funny.jpg&#34;</span> <span style="color:#007f7f"># change this to the name of your image file </span>
+my_label_y = [<span style="color:#ff0;font-weight:bold">1</span>] <span style="color:#007f7f"># the true class of your image (1 -&gt; cat, 0 -&gt; non-cat)</span>
+<span style="color:#007f7f">## END CODE HERE ##</span>
+
+<span style="color:#007f7f">#fname = &#34;images/&#34; + my_image</span>
+fname = my_image
+image = np.array(ndimage.imread(fname, flatten=False))
+my_image = scipy.misc.imresize(image, size=(num_px,num_px)).reshape((num_px*num_px*<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">1</span>))
+my_image = my_image/<span style="color:#ff0;font-weight:bold">255.</span>
+my_predicted_image = predict(my_image, my_label_y, parameters)
+
+plt.imshow(image)
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;y = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(np.squeeze(my_predicted_image)) + <span style="color:#0ff;font-weight:bold">&#34;, your L-layer model predicts a </span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">&#34;</span> + classes[<span style="color:#fff;font-weight:bold">int</span>(np.squeeze(my_predicted_image)),].decode(<span style="color:#0ff;font-weight:bold">&#34;utf-8&#34;</span>) +  <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold"> picture.&#34;</span>)
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Accuracy: 1.0
+y = 1.0, your L-layer model predicts a &#34;cat&#34; picture.
+</code></pre></div><p><img class="img-zoomable" src="/coursera/funny.jpg" alt="test image of cat" />
+</p>
+
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#import-packages">import packages</a></li>
+    <li><a href="#dataset">Dataset</a>
+      <ul>
+        <li><a href="#l-layer-deep-neural-network">L-layer deep neural network</a></li>
+        <li><a href="#general-methodology">General methodology</a></li>
+      </ul>
+    </li>
+    <li><a href="#l-layer-neural-network">L layer neural network</a></li>
+    <li><a href="#test">test</a></li>
+  </ul>
+</nav></div>
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021
+                <a href="https://tjdoc.github.io/"></a>
+                
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.0/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>

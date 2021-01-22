@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.80.0" />
+
+
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
+
+
+<title>coursera m1w4 p1 - ps126.5</title>
+
+
+
+
+<meta name="keywords" content="coursera, neural network" />
+
+
+<meta property="og:title" content="coursera m1w4 p1" />
+<meta name="twitter:title" content="coursera m1w4 p1" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4p1/" /><meta property="og:description" content="dnn utility import numpy as np def sigmoid(Z): &#34;&#34;&#34; Implements the sigmoid activation in numpy Arguments: Z -- numpy array of any shape Returns: A -- output of sigmoid(z), same shape as Z cache -- returns Z as well, useful during backpropagation &#34;&#34;&#34; A = 1/(1&#43;np.exp(-Z)) cache = Z return A, cache def relu(Z): &#34;&#34;&#34; Implement the RELU function. Arguments: Z -- Output of the linear layer, of any shape Returns: A -- Post-activation parameter, of the same shape as Z cache -- a python dictionary containing &#34;A&#34; ; stored for computing the backward pass efficiently &#34;&#34;&#34; A = np." />
+<meta name="twitter:description" content="dnn utility import numpy as np def sigmoid(Z): &#34;&#34;&#34; Implements the sigmoid activation in numpy Arguments: Z -- numpy array of any shape Returns: A -- output of sigmoid(z), same shape as Z cache -- returns Z as well, useful during backpropagation &#34;&#34;&#34; A = 1/(1&#43;np.exp(-Z)) cache = Z return A, cache def relu(Z): &#34;&#34;&#34; Implement the RELU function. Arguments: Z -- Output of the linear layer, of any shape Returns: A -- Post-activation parameter, of the same shape as Z cache -- a python dictionary containing &#34;A&#34; ; stored for computing the backward pass efficiently &#34;&#34;&#34; A = np." /><meta name="twitter:card" content="summary" /><meta property="article:published_time" content="2021-01-22T18:24:13+09:00" /><meta property="article:modified_time" content="2021-01-22T18:24:13+09:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://tjdoc.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://tjdoc.github.io/">ps126.5</a>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4p1/">coursera m1w4 p1</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-22</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2 id="dnn-utility">dnn utility</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+
+<span style="color:#fff;font-weight:bold">def</span> sigmoid(Z):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implements the sigmoid activation in numpy
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    Z -- numpy array of any shape
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    A -- output of sigmoid(z), same shape as Z
+</span><span style="color:#0ff;font-weight:bold">    cache -- returns Z as well, useful during backpropagation
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    A = <span style="color:#ff0;font-weight:bold">1</span>/(<span style="color:#ff0;font-weight:bold">1</span>+np.exp(-Z))
+    cache = Z
+    
+    <span style="color:#fff;font-weight:bold">return</span> A, cache
+
+<span style="color:#fff;font-weight:bold">def</span> relu(Z):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the RELU function.
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    Z -- Output of the linear layer, of any shape
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    A -- Post-activation parameter, of the same shape as Z
+</span><span style="color:#0ff;font-weight:bold">    cache -- a python dictionary containing &#34;A&#34; ; stored for computing the backward pass efficiently
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    A = np.maximum(<span style="color:#ff0;font-weight:bold">0</span>,Z)
+    
+    <span style="color:#fff;font-weight:bold">assert</span>(A.shape == Z.shape)
+    
+    cache = Z 
+    <span style="color:#fff;font-weight:bold">return</span> A, cache
+
+
+<span style="color:#fff;font-weight:bold">def</span> relu_backward(dA, cache):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the backward propagation for a single RELU unit.
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    dA -- post-activation gradient, of any shape
+</span><span style="color:#0ff;font-weight:bold">    cache -- &#39;Z&#39; where we store for computing backward propagation efficiently
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    dZ -- Gradient of the cost with respect to Z
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    Z = cache
+    dZ = np.array(dA, copy=True) <span style="color:#007f7f"># just converting dz to a correct object.</span>
+    
+    <span style="color:#007f7f"># When z &lt;= 0, you should set dz to 0 as well. </span>
+    dZ[Z &lt;= <span style="color:#ff0;font-weight:bold">0</span>] = <span style="color:#ff0;font-weight:bold">0</span>
+    
+    <span style="color:#fff;font-weight:bold">assert</span> (dZ.shape == Z.shape)
+    
+    <span style="color:#fff;font-weight:bold">return</span> dZ
+
+<span style="color:#fff;font-weight:bold">def</span> sigmoid_backward(dA, cache):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the backward propagation for a single SIGMOID unit.
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    dA -- post-activation gradient, of any shape
+</span><span style="color:#0ff;font-weight:bold">    cache -- &#39;Z&#39; where we store for computing backward propagation efficiently
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    dZ -- Gradient of the cost with respect to Z
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    Z = cache
+    
+    s = <span style="color:#ff0;font-weight:bold">1</span>/(<span style="color:#ff0;font-weight:bold">1</span>+np.exp(-Z))
+    dZ = dA * s * (<span style="color:#ff0;font-weight:bold">1</span>-s)
+    
+    <span style="color:#fff;font-weight:bold">assert</span> (dZ.shape == Z.shape)
+    
+    <span style="color:#fff;font-weight:bold">return</span> dZ
+
+</code></pre></div><h2 id="test-cases">test cases</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+
+<span style="color:#fff;font-weight:bold">def</span> linear_forward_test_case():
+    np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    X = np.array([[-1.02387576, 1.12397796],
+</span><span style="color:#0ff;font-weight:bold"> [-1.62328545, 0.64667545],
+</span><span style="color:#0ff;font-weight:bold"> [-1.74314104, -0.59664964]])
+</span><span style="color:#0ff;font-weight:bold">    W = np.array([[ 0.74505627, 1.97611078, -1.24412333]])
+</span><span style="color:#0ff;font-weight:bold">    b = np.array([[1]])
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    A = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">2</span>)
+    W = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">3</span>)
+    b = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    
+    <span style="color:#fff;font-weight:bold">return</span> A, W, b
+
+<span style="color:#fff;font-weight:bold">def</span> linear_activation_forward_test_case():
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    X = np.array([[-1.02387576, 1.12397796],
+</span><span style="color:#0ff;font-weight:bold"> [-1.62328545, 0.64667545],
+</span><span style="color:#0ff;font-weight:bold"> [-1.74314104, -0.59664964]])
+</span><span style="color:#0ff;font-weight:bold">    W = np.array([[ 0.74505627, 1.97611078, -1.24412333]])
+</span><span style="color:#0ff;font-weight:bold">    b = 5
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    np.random.seed(<span style="color:#ff0;font-weight:bold">2</span>)
+    A_prev = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">2</span>)
+    W = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">3</span>)
+    b = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    <span style="color:#fff;font-weight:bold">return</span> A_prev, W, b
+
+<span style="color:#fff;font-weight:bold">def</span> L_model_forward_test_case():
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    X = np.array([[-1.02387576, 1.12397796],
+</span><span style="color:#0ff;font-weight:bold"> [-1.62328545, 0.64667545],
+</span><span style="color:#0ff;font-weight:bold"> [-1.74314104, -0.59664964]])
+</span><span style="color:#0ff;font-weight:bold">    parameters = {&#39;W1&#39;: np.array([[ 1.62434536, -0.61175641, -0.52817175],
+</span><span style="color:#0ff;font-weight:bold">        [-1.07296862,  0.86540763, -2.3015387 ]]),
+</span><span style="color:#0ff;font-weight:bold"> &#39;W2&#39;: np.array([[ 1.74481176, -0.7612069 ]]),
+</span><span style="color:#0ff;font-weight:bold"> &#39;b1&#39;: np.array([[ 0.],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.]]),
+</span><span style="color:#0ff;font-weight:bold"> &#39;b2&#39;: np.array([[ 0.]])}
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
+    X = np.random.randn(<span style="color:#ff0;font-weight:bold">4</span>,<span style="color:#ff0;font-weight:bold">2</span>)
+    W1 = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">4</span>)
+    b1 = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    W2 = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">3</span>)
+    b2 = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    parameters = {<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>: W1,
+                  <span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>: b1,
+                  <span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>: W2,
+                  <span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>: b2}
+    
+    <span style="color:#fff;font-weight:bold">return</span> X, parameters
+
+<span style="color:#fff;font-weight:bold">def</span> compute_cost_test_case():
+    Y = np.asarray([[<span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">0</span>]])
+    aL = np.array([[.<span style="color:#ff0;font-weight:bold">8</span>,.<span style="color:#ff0;font-weight:bold">9</span>,<span style="color:#ff0;font-weight:bold">0.4</span>]])
+    
+    <span style="color:#fff;font-weight:bold">return</span> Y, aL
+
+<span style="color:#fff;font-weight:bold">def</span> linear_backward_test_case():
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    z, linear_cache = (np.array([[-0.8019545 ,  3.85763489]]), (np.array([[-1.02387576,  1.12397796],
+</span><span style="color:#0ff;font-weight:bold">       [-1.62328545,  0.64667545],
+</span><span style="color:#0ff;font-weight:bold">       [-1.74314104, -0.59664964]]), np.array([[ 0.74505627,  1.97611078, -1.24412333]]), np.array([[1]]))
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
+    dZ = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">4</span>)
+    A = np.random.randn(<span style="color:#ff0;font-weight:bold">5</span>,<span style="color:#ff0;font-weight:bold">4</span>)
+    W = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">5</span>)
+    b = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    linear_cache = (A, W, b)
+    <span style="color:#fff;font-weight:bold">return</span> dZ, linear_cache
+
+<span style="color:#fff;font-weight:bold">def</span> linear_activation_backward_test_case():
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    aL, linear_activation_cache = (np.array([[ 3.1980455 ,  7.85763489]]), ((np.array([[-1.02387576,  1.12397796], [-1.62328545,  0.64667545], [-1.74314104, -0.59664964]]), np.array([[ 0.74505627,  1.97611078, -1.24412333]]), 5), np.array([[ 3.1980455 ,  7.85763489]])))
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    np.random.seed(<span style="color:#ff0;font-weight:bold">2</span>)
+    dA = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">2</span>)
+    A = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">2</span>)
+    W = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">3</span>)
+    b = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    Z = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">2</span>)
+    linear_cache = (A, W, b)
+    activation_cache = Z
+    linear_activation_cache = (linear_cache, activation_cache)
+    
+    <span style="color:#fff;font-weight:bold">return</span> dA, linear_activation_cache
+
+<span style="color:#fff;font-weight:bold">def</span> L_model_backward_test_case():
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    X = np.random.rand(3,2)
+</span><span style="color:#0ff;font-weight:bold">    Y = np.array([[1, 1]])
+</span><span style="color:#0ff;font-weight:bold">    parameters = {&#39;W1&#39;: np.array([[ 1.78862847,  0.43650985,  0.09649747]]), &#39;b1&#39;: np.array([[ 0.]])}
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    aL, caches = (np.array([[ 0.60298372,  0.87182628]]), [((np.array([[ 0.20445225,  0.87811744],
+</span><span style="color:#0ff;font-weight:bold">           [ 0.02738759,  0.67046751],
+</span><span style="color:#0ff;font-weight:bold">           [ 0.4173048 ,  0.55868983]]),
+</span><span style="color:#0ff;font-weight:bold">    np.array([[ 1.78862847,  0.43650985,  0.09649747]]),
+</span><span style="color:#0ff;font-weight:bold">    np.array([[ 0.]])),
+</span><span style="color:#0ff;font-weight:bold">   np.array([[ 0.41791293,  1.91720367]]))])
+</span><span style="color:#0ff;font-weight:bold">   &#34;&#34;&#34;</span>
+    np.random.seed(<span style="color:#ff0;font-weight:bold">3</span>)
+    AL = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">2</span>)
+    Y = np.array([[<span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">0</span>]])
+
+    A1 = np.random.randn(<span style="color:#ff0;font-weight:bold">4</span>,<span style="color:#ff0;font-weight:bold">2</span>)
+    W1 = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">4</span>)
+    b1 = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    Z1 = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">2</span>)
+    linear_cache_activation_1 = ((A1, W1, b1), Z1)
+
+    A2 = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">2</span>)
+    W2 = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">3</span>)
+    b2 = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    Z2 = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">2</span>)
+    linear_cache_activation_2 = ((A2, W2, b2), Z2)
+
+    caches = (linear_cache_activation_1, linear_cache_activation_2)
+
+    <span style="color:#fff;font-weight:bold">return</span> AL, Y, caches
+
+<span style="color:#fff;font-weight:bold">def</span> update_parameters_test_case():
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    parameters = {&#39;W1&#39;: np.array([[ 1.78862847,  0.43650985,  0.09649747],
+</span><span style="color:#0ff;font-weight:bold">        [-1.8634927 , -0.2773882 , -0.35475898],
+</span><span style="color:#0ff;font-weight:bold">        [-0.08274148, -0.62700068, -0.04381817],
+</span><span style="color:#0ff;font-weight:bold">        [-0.47721803, -1.31386475,  0.88462238]]),
+</span><span style="color:#0ff;font-weight:bold"> &#39;W2&#39;: np.array([[ 0.88131804,  1.70957306,  0.05003364, -0.40467741],
+</span><span style="color:#0ff;font-weight:bold">        [-0.54535995, -1.54647732,  0.98236743, -1.10106763],
+</span><span style="color:#0ff;font-weight:bold">        [-1.18504653, -0.2056499 ,  1.48614836,  0.23671627]]),
+</span><span style="color:#0ff;font-weight:bold"> &#39;W3&#39;: np.array([[-1.02378514, -0.7129932 ,  0.62524497],
+</span><span style="color:#0ff;font-weight:bold">        [-0.16051336, -0.76883635, -0.23003072]]),
+</span><span style="color:#0ff;font-weight:bold"> &#39;b1&#39;: np.array([[ 0.],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.]]),
+</span><span style="color:#0ff;font-weight:bold"> &#39;b2&#39;: np.array([[ 0.],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.]]),
+</span><span style="color:#0ff;font-weight:bold"> &#39;b3&#39;: np.array([[ 0.],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.]])}
+</span><span style="color:#0ff;font-weight:bold">    grads = {&#39;dW1&#39;: np.array([[ 0.63070583,  0.66482653,  0.18308507],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.        ,  0.        ,  0.        ],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.        ,  0.        ,  0.        ],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.        ,  0.        ,  0.        ]]),
+</span><span style="color:#0ff;font-weight:bold"> &#39;dW2&#39;: np.array([[ 1.62934255,  0.        ,  0.        ,  0.        ],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.        ,  0.        ,  0.        ,  0.        ],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.        ,  0.        ,  0.        ,  0.        ]]),
+</span><span style="color:#0ff;font-weight:bold"> &#39;dW3&#39;: np.array([[-1.40260776,  0.        ,  0.        ]]),
+</span><span style="color:#0ff;font-weight:bold"> &#39;da1&#39;: np.array([[ 0.70760786,  0.65063504],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.17268975,  0.15878569],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.03817582,  0.03510211]]),
+</span><span style="color:#0ff;font-weight:bold"> &#39;da2&#39;: np.array([[ 0.39561478,  0.36376198],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.7674101 ,  0.70562233],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.0224596 ,  0.02065127],
+</span><span style="color:#0ff;font-weight:bold">        [-0.18165561, -0.16702967]]),
+</span><span style="color:#0ff;font-weight:bold"> &#39;da3&#39;: np.array([[ 0.44888991,  0.41274769],
+</span><span style="color:#0ff;font-weight:bold">        [ 0.31261975,  0.28744927],
+</span><span style="color:#0ff;font-weight:bold">        [-0.27414557, -0.25207283]]),
+</span><span style="color:#0ff;font-weight:bold"> &#39;db1&#39;: 0.75937676204411464,
+</span><span style="color:#0ff;font-weight:bold"> &#39;db2&#39;: 0.86163759922811056,
+</span><span style="color:#0ff;font-weight:bold"> &#39;db3&#39;: -0.84161956022334572}
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    np.random.seed(<span style="color:#ff0;font-weight:bold">2</span>)
+    W1 = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">4</span>)
+    b1 = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    W2 = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">3</span>)
+    b2 = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    parameters = {<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>: W1,
+                  <span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>: b1,
+                  <span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>: W2,
+                  <span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>: b2}
+    np.random.seed(<span style="color:#ff0;font-weight:bold">3</span>)
+    dW1 = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">4</span>)
+    db1 = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    dW2 = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">3</span>)
+    db2 = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    grads = {<span style="color:#0ff;font-weight:bold">&#34;dW1&#34;</span>: dW1,
+             <span style="color:#0ff;font-weight:bold">&#34;db1&#34;</span>: db1,
+             <span style="color:#0ff;font-weight:bold">&#34;dW2&#34;</span>: dW2,
+             <span style="color:#0ff;font-weight:bold">&#34;db2&#34;</span>: db2}
+    
+    <span style="color:#fff;font-weight:bold">return</span> parameters, grads
+
+
+<span style="color:#fff;font-weight:bold">def</span> L_model_forward_test_case_2hidden():
+    np.random.seed(<span style="color:#ff0;font-weight:bold">6</span>)
+    X = np.random.randn(<span style="color:#ff0;font-weight:bold">5</span>,<span style="color:#ff0;font-weight:bold">4</span>)
+    W1 = np.random.randn(<span style="color:#ff0;font-weight:bold">4</span>,<span style="color:#ff0;font-weight:bold">5</span>)
+    b1 = np.random.randn(<span style="color:#ff0;font-weight:bold">4</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    W2 = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">4</span>)
+    b2 = np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+    W3 = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">3</span>)
+    b3 = np.random.randn(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">1</span>)
+  
+    parameters = {<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>: W1,
+                  <span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>: b1,
+                  <span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>: W2,
+                  <span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>: b2,
+                  <span style="color:#0ff;font-weight:bold">&#34;W3&#34;</span>: W3,
+                  <span style="color:#0ff;font-weight:bold">&#34;b3&#34;</span>: b3}
+    
+    <span style="color:#fff;font-weight:bold">return</span> X, parameters
+
+<span style="color:#fff;font-weight:bold">def</span> print_grads(grads):
+    <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;dW1 = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(grads[<span style="color:#0ff;font-weight:bold">&#34;dW1&#34;</span>]))
+    <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;db1 = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(grads[<span style="color:#0ff;font-weight:bold">&#34;db1&#34;</span>]))
+    <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;dA1 = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(grads[<span style="color:#0ff;font-weight:bold">&#34;dA1&#34;</span>]))     
+    
+</code></pre></div><h2 id="import-packages">import packages</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<span style="color:#fff;font-weight:bold">import</span> h5py
+<span style="color:#fff;font-weight:bold">import</span> matplotlib.pyplot <span style="color:#fff;font-weight:bold">as</span> plt
+<span style="color:#fff;font-weight:bold">from</span> testCases_v4a <span style="color:#fff;font-weight:bold">import</span> *
+<span style="color:#fff;font-weight:bold">from</span> dnn_utils_v2 <span style="color:#fff;font-weight:bold">import</span> sigmoid, sigmoid_backward, relu, relu_backward
+
+%matplotlib inline
+plt.rcParams[<span style="color:#0ff;font-weight:bold">&#39;figure.figsize&#39;</span>] = (<span style="color:#ff0;font-weight:bold">5.0</span>, <span style="color:#ff0;font-weight:bold">4.0</span>) <span style="color:#007f7f"># set default size of plots</span>
+plt.rcParams[<span style="color:#0ff;font-weight:bold">&#39;image.interpolation&#39;</span>] = <span style="color:#0ff;font-weight:bold">&#39;nearest&#39;</span>
+plt.rcParams[<span style="color:#0ff;font-weight:bold">&#39;image.cmap&#39;</span>] = <span style="color:#0ff;font-weight:bold">&#39;gray&#39;</span>
+
+%load_ext autoreload
+%autoreload <span style="color:#ff0;font-weight:bold">2</span>
+
+np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
+</code></pre></div><h2 id="outline">outline</h2>
+<p>To build your neural network, you will be implementing several &ldquo;helper functions&rdquo;. These helper functions will be used in the next assignment to build a two-layer neural network and an L-layer neural network. Each small helper function you will implement will have detailed instructions that will walk you through the necessary steps. Here is an outline of this assignment, you will:</p>
+<ul>
+<li>Initialize the parameters for a two-layer network and for an $L$-layer neural network.</li>
+<li>Implement the forward propagation module (shown in purple in the figure below).
+<ul>
+<li>Complete the LINEAR part of a layer&rsquo;s forward propagation step (resulting in $Z^{[l]}$).</li>
+<li>We give you the ACTIVATION function (relu/sigmoid).</li>
+<li>Combine the previous two steps into a new [LINEAR-&gt;ACTIVATION] forward function.</li>
+<li>Stack the [LINEAR-&gt;RELU] forward function L-1 time (for layers 1 through L-1) and add a [LINEAR-&gt;SIGMOID] at the end (for the final layer $L$). This gives you a new L_model_forward function.</li>
+</ul>
+</li>
+<li>Compute the loss.</li>
+<li>Implement the backward propagation module (denoted in red in the figure below).
+<ul>
+<li>Complete the LINEAR part of a layer&rsquo;s backward propagation step.</li>
+<li>We give you the gradient of the ACTIVATE function (relu_backward/sigmoid_backward)</li>
+<li>Combine the previous two steps into a new [LINEAR-&gt;ACTIVATION] backward function.</li>
+<li>Stack [LINEAR-&gt;RELU] backward L-1 times and add [LINEAR-&gt;SIGMOID] backward in a new L_model_backward function</li>
+</ul>
+</li>
+<li>Finally update the parameters.</li>
+</ul>
+<p><img class="img-zoomable" src="/coursera/m1w4p1_outline.png" alt="outline" />
+</p>
+<p><strong>Note</strong> that for every forward function, there is a corresponding backward function. That is why at every step of your forward module you will be storing some values in a cache. The cached values are useful for computing gradients. In the backpropagation module you will then use the cache to calculate the gradients. This assignment will show you exactly how to carry out each of these steps.</p>
+<h2 id="initialization">Initialization</h2>
+<p>You will write two helper functions that will initialize the parameters for your model. The first function will be used to initialize parameters for a two layer model. The second one will generalize this initialization process to $L$ layers.</p>
+<h3 id="2-layer-neural-network">2-layer Neural Network</h3>
+<p><strong>Instructions</strong>:</p>
+<ul>
+<li>The model&rsquo;s structure is: <em>LINEAR -&gt; RELU -&gt; LINEAR -&gt; SIGMOID</em>.</li>
+<li>Use random initialization for the weight matrices. Use <code>np.random.randn(shape)*0.01</code> with the correct shape.</li>
+<li>Use zero initialization for the biases. Use <code>np.zeros(shape)</code>.</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> initialize_parameters(n_x, n_h, n_y):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Argument:
+</span><span style="color:#0ff;font-weight:bold">    n_x -- size of the input layer
+</span><span style="color:#0ff;font-weight:bold">    n_h -- size of the hidden layer
+</span><span style="color:#0ff;font-weight:bold">    n_y -- size of the output layer
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your parameters:
+</span><span style="color:#0ff;font-weight:bold">                    W1 -- weight matrix of shape (n_h, n_x)
+</span><span style="color:#0ff;font-weight:bold">                    b1 -- bias vector of shape (n_h, 1)
+</span><span style="color:#0ff;font-weight:bold">                    W2 -- weight matrix of shape (n_y, n_h)
+</span><span style="color:#0ff;font-weight:bold">                    b2 -- bias vector of shape (n_y, 1)
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
+    
+    W1 = np.random.randn(n_h, n_x)*<span style="color:#ff0;font-weight:bold">0.01</span>
+    b1 = np.zeros((n_h, <span style="color:#ff0;font-weight:bold">1</span>))
+    W2 = np.random.randn(n_y, n_h)*<span style="color:#ff0;font-weight:bold">0.01</span>
+    b2 = np.zeros((n_y, <span style="color:#ff0;font-weight:bold">1</span>))
+    
+    <span style="color:#fff;font-weight:bold">assert</span>(W1.shape == (n_h, n_x))
+    <span style="color:#fff;font-weight:bold">assert</span>(b1.shape == (n_h, <span style="color:#ff0;font-weight:bold">1</span>))
+    <span style="color:#fff;font-weight:bold">assert</span>(W2.shape == (n_y, n_h))
+    <span style="color:#fff;font-weight:bold">assert</span>(b2.shape == (n_y, <span style="color:#ff0;font-weight:bold">1</span>))
+    
+    parameters = {<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>: W1,
+                  <span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>: b1,
+                  <span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>: W2,
+                  <span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>: b2}
+    
+    <span style="color:#fff;font-weight:bold">return</span> parameters    
+
+</code></pre></div><p>notice the difference in randn and zeros shape syntax.</p>
+<ul>
+<li><code>np.random.randn(nx, ny)</code></li>
+<li><code>np.zeros((nx,ny))</code></li>
+</ul>
+<h3 id="l-layer-neural-network">L-layer Neural Network</h3>
+<p>The initialization for a deeper L-layer neural network is more complicated because there are many more weight matrices and bias vectors. When completing the <code>initialize_parameters_deep</code>, you should make sure that your dimensions match between each layer. Recall that \(n^{[l]}\) is the number of units in layer \(l\). Thus for example if the size of our input \(X\) is \((12288, 209)\) (with \(m=209\) examples) then:</p>
+<p><img class="img-zoomable" src="/coursera/llayer_table.png" alt="l layer table" />
+</p>
+<p>Remember that when we compute \(W X + b\) in python, it carries out broadcasting. For example, if:</p>
+<p>$$
+W = \begin{bmatrix}
+j  &amp; k  &amp; l \\
+m  &amp; n &amp; o \\
+p  &amp; q &amp; r
+\end{bmatrix}  \\
+X = \begin{bmatrix}
+a  &amp; b  &amp; c\\
+d  &amp; e &amp; f \\
+g  &amp; h &amp; i
+\end{bmatrix} \\
+b =\begin{bmatrix}
+s  \\
+t  \\
+u
+\end{bmatrix}
+$$</p>
+<p>Then \(WX + b\) will be:</p>
+<p>$$ WX + b = \begin{bmatrix}
+(ja + kd + lg) + s  &amp; (jb + ke + lh) + s  &amp; (jc + kf + li)+ s\\
+(ma + nd + og) + t &amp; (mb + ne + oh) + t &amp; (mc + nf + oi) + t\\
+(pa + qd + rg) + u &amp; (pb + qe + rh) + u &amp; (pc + qf + ri)+ u
+\end{bmatrix}  $$</p>
+<p><strong>Exercise</strong>: Implement initialization for an L-layer Neural Network.</p>
+<p><strong>Instructions</strong>:</p>
+<ul>
+<li>The model&rsquo;s structure is <em>[LINEAR -&gt; RELU]  \(\times\) (L-1) -&gt; LINEAR -&gt; SIGMOID</em>. I.e., it has \(L-1\) layers using a ReLU activation function followed by an output layer with a sigmoid activation function.</li>
+<li>Use random initialization for the weight matrices. Use <code>np.random.randn(shape) * 0.01</code>.</li>
+<li>Use zeros initialization for the biases. Use <code>np.zeros(shape)</code>.</li>
+<li>We will store $n^{[l]}$, the number of units in different layers, in a variable <code>layer_dims</code>. For example, the <code>layer_dims</code> for the &ldquo;Planar Data classification model&rdquo; from last week would have been [2,4,1]: There were two inputs, one hidden layer with 4 hidden units, and an output layer with 1 output unit. This means <code>W1</code>&rsquo;s shape was (4,2), <code>b1</code> was (4,1), <code>W2</code> was (1,4) and <code>b2</code> was (1,1). Now you will generalize this to \(L\) layers!</li>
+<li>Here is the implementation for \(L=1\) (one layer neural network). It should inspire you to implement the general case (L-layer neural network).</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    <span style="color:#fff;font-weight:bold">if</span> L == <span style="color:#ff0;font-weight:bold">1</span>:
+        parameters[<span style="color:#0ff;font-weight:bold">&#34;W&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(L)] = np.random.randn(layer_dims[<span style="color:#ff0;font-weight:bold">1</span>], layer_dims[<span style="color:#ff0;font-weight:bold">0</span>]) * <span style="color:#ff0;font-weight:bold">0.01</span>
+        parameters[<span style="color:#0ff;font-weight:bold">&#34;b&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(L)] = np.zeros((layer_dims[<span style="color:#ff0;font-weight:bold">1</span>], <span style="color:#ff0;font-weight:bold">1</span>))
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> initialize_parameters_deep(layer_dims):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    layer_dims -- python array (list) containing the dimensions of each layer in our network
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your parameters &#34;W1&#34;, &#34;b1&#34;, ..., &#34;WL&#34;, &#34;bL&#34;:
+</span><span style="color:#0ff;font-weight:bold">                    Wl -- weight matrix of shape (layer_dims[l], layer_dims[l-1])
+</span><span style="color:#0ff;font-weight:bold">                    bl -- bias vector of shape (layer_dims[l], 1)
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    np.random.seed(<span style="color:#ff0;font-weight:bold">3</span>)
+    parameters = {}
+    L = <span style="color:#fff;font-weight:bold">len</span>(layer_dims)            <span style="color:#007f7f"># number of layers in the network</span>
+
+    <span style="color:#fff;font-weight:bold">for</span> l in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">1</span>, L):
+        parameters[<span style="color:#0ff;font-weight:bold">&#39;W&#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(l)] = np.random.randn(layer_dims[l], layer_dims[l-<span style="color:#ff0;font-weight:bold">1</span>])*<span style="color:#ff0;font-weight:bold">0.01</span>
+        parameters[<span style="color:#0ff;font-weight:bold">&#39;b&#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(l)] = np.zeros((layer_dims[l], <span style="color:#ff0;font-weight:bold">1</span>))
+        
+        <span style="color:#fff;font-weight:bold">assert</span>(parameters[<span style="color:#0ff;font-weight:bold">&#39;W&#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(l)].shape == (layer_dims[l], layer_dims[l-<span style="color:#ff0;font-weight:bold">1</span>]))
+        <span style="color:#fff;font-weight:bold">assert</span>(parameters[<span style="color:#0ff;font-weight:bold">&#39;b&#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(l)].shape == (layer_dims[l], <span style="color:#ff0;font-weight:bold">1</span>))
+
+        
+    <span style="color:#fff;font-weight:bold">return</span> parameters
+
+</code></pre></div><h2 id="forward-propagation">forward propagation</h2>
+<h3 id="linear-forward">linear forward</h3>
+<p>Now that you have initialized your parameters, you will do the forward propagation module. You will start by implementing some basic functions that you will use later when implementing the model. You will complete three functions in this order:</p>
+<ul>
+<li>LINEAR</li>
+<li>LINEAR -&gt; ACTIVATION where ACTIVATION will be either ReLU or Sigmoid.</li>
+<li>[LINEAR -&gt; RELU] $\times$ (L-1) -&gt; LINEAR -&gt; SIGMOID (whole model)</li>
+</ul>
+<p>The linear forward module (vectorized over all the examples) computes the following equations:</p>
+<p>$$Z^{[l]} = W^{[l]}A^{[l-1]} +b^{[l]}$$</p>
+<p>where \(A^{[0]} = X\).</p>
+<p>The mathematical representation of this unit is \(Z^{[l]} = W^{[l]}A^{[l-1]} +b^{[l]}\). You may also find <code>np.dot()</code> useful. If your dimensions don&rsquo;t match, printing <code>W.shape</code> may help.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> linear_forward(A, W, b):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the linear part of a layer&#39;s forward propagation.
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    A -- activations from previous layer (or input data): (size of previous layer, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    W -- weights matrix: numpy array of shape (size of current layer, size of previous layer)
+</span><span style="color:#0ff;font-weight:bold">    b -- bias vector, numpy array of shape (size of the current layer, 1)
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    Z -- the input of the activation function, also called pre-activation parameter 
+</span><span style="color:#0ff;font-weight:bold">    cache -- a python tuple containing &#34;A&#34;, &#34;W&#34; and &#34;b&#34; ; stored for computing the backward pass efficiently
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    <span style="color:#007f7f">### START CODE HERE ### (≈ 1 line of code)</span>
+    Z = np.dot(W, A) + b
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">assert</span>(Z.shape == (W.shape[<span style="color:#ff0;font-weight:bold">0</span>], A.shape[<span style="color:#ff0;font-weight:bold">1</span>]))
+    cache = (A, W, b)
+    
+    <span style="color:#fff;font-weight:bold">return</span> Z, cache
+
+A, W, b = linear_forward_test_case()
+
+Z, linear_cache = linear_forward(A, W, b)
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Z = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(Z))
+
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Z = [[ 3.26295337 -1.23429987]]
+
+</code></pre></div><h3 id="linear-activation-forward">linear activation forward</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> linear_activation_forward(A_prev, W, b, activation):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the forward propagation for the LINEAR-&gt;ACTIVATION layer
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    A_prev -- activations from previous layer (or input data): (size of previous layer, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    W -- weights matrix: numpy array of shape (size of current layer, size of previous layer)
+</span><span style="color:#0ff;font-weight:bold">    b -- bias vector, numpy array of shape (size of the current layer, 1)
+</span><span style="color:#0ff;font-weight:bold">    activation -- the activation to be used in this layer, stored as a text string: &#34;sigmoid&#34; or &#34;relu&#34;
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    A -- the output of the activation function, also called the post-activation value 
+</span><span style="color:#0ff;font-weight:bold">    cache -- a python tuple containing &#34;linear_cache&#34; and &#34;activation_cache&#34;;
+</span><span style="color:#0ff;font-weight:bold">             stored for computing the backward pass efficiently
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    <span style="color:#fff;font-weight:bold">if</span> activation == <span style="color:#0ff;font-weight:bold">&#34;sigmoid&#34;</span>:
+        <span style="color:#007f7f"># Inputs: &#34;A_prev, W, b&#34;. Outputs: &#34;A, activation_cache&#34;.</span>
+        <span style="color:#007f7f">### START CODE HERE ### (≈ 2 lines of code)</span>
+        Z, linear_cache = linear_forward(A_prev, W, b)
+        A, activation_cache = sigmoid(Z)
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">elif</span> activation == <span style="color:#0ff;font-weight:bold">&#34;relu&#34;</span>:
+        <span style="color:#007f7f"># Inputs: &#34;A_prev, W, b&#34;. Outputs: &#34;A, activation_cache&#34;.</span>
+        <span style="color:#007f7f">### START CODE HERE ### (≈ 2 lines of code)</span>
+        Z, linear_cache = linear_forward(A_prev, W, b)
+        A, activation_cache = relu(Z)
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">assert</span> (A.shape == (W.shape[<span style="color:#ff0;font-weight:bold">0</span>], A_prev.shape[<span style="color:#ff0;font-weight:bold">1</span>]))
+    cache = (linear_cache, activation_cache)
+
+    <span style="color:#fff;font-weight:bold">return</span> A, cache
+
+A_prev, W, b = linear_activation_forward_test_case()
+
+A, linear_activation_cache = linear_activation_forward(A_prev, W, b, activation = <span style="color:#0ff;font-weight:bold">&#34;sigmoid&#34;</span>)
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;With sigmoid: A = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(A))
+
+A, linear_activation_cache = linear_activation_forward(A_prev, W, b, activation = <span style="color:#0ff;font-weight:bold">&#34;relu&#34;</span>)
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;With ReLU: A = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(A))
+
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">With sigmoid: A = [[ 0.96890023  0.11013289]]
+With ReLU: A = [[ 3.43896131  0.        ]]
+</code></pre></div><p><img class="img-zoomable" src="/coursera/model_architecture_kiank.png" alt="model architecture" />
+</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> L_model_forward(X, parameters):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement forward propagation for the [LINEAR-&gt;RELU]*(L-1)-&gt;LINEAR-&gt;SIGMOID computation
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    X -- data, numpy array of shape (input size, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    parameters -- output of initialize_parameters_deep()
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    AL -- last post-activation value
+</span><span style="color:#0ff;font-weight:bold">    caches -- list of caches containing:
+</span><span style="color:#0ff;font-weight:bold">                every cache of linear_activation_forward() (there are L-1 of them, indexed from 0 to L-1)
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+
+    caches = []
+    A = X
+    L = <span style="color:#fff;font-weight:bold">len</span>(parameters) // <span style="color:#ff0;font-weight:bold">2</span>                  <span style="color:#007f7f"># number of layers in the neural network</span>
+    
+    <span style="color:#007f7f"># Implement [LINEAR -&gt; RELU]*(L-1). Add &#34;cache&#34; to the &#34;caches&#34; list.</span>
+    <span style="color:#fff;font-weight:bold">for</span> l in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">1</span>, L):
+        A_prev = A 
+        <span style="color:#007f7f">### START CODE HERE ### (≈ 2 lines of code)</span>
+        A, cache = linear_activation_forward(A_prev, parameters[<span style="color:#0ff;font-weight:bold">&#39;W&#39;</span>+<span style="color:#fff;font-weight:bold">str</span>(l)], parameters[<span style="color:#0ff;font-weight:bold">&#39;b&#39;</span>+<span style="color:#fff;font-weight:bold">str</span>(l)], activation=<span style="color:#0ff;font-weight:bold">&#39;relu&#39;</span>)
+        caches.append(cache)
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Implement LINEAR -&gt; SIGMOID. Add &#34;cache&#34; to the &#34;caches&#34; list.</span>
+    <span style="color:#007f7f">### START CODE HERE ### (≈ 2 lines of code)</span>
+    AL, cache = linear_activation_forward(A, parameters[<span style="color:#0ff;font-weight:bold">&#39;W&#39;</span>+<span style="color:#fff;font-weight:bold">str</span>(L)], parameters[<span style="color:#0ff;font-weight:bold">&#39;b&#39;</span>+<span style="color:#fff;font-weight:bold">str</span>(L)], activation=<span style="color:#0ff;font-weight:bold">&#39;sigmoid&#39;</span>)
+    caches.append(cache)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">assert</span>(AL.shape == (<span style="color:#ff0;font-weight:bold">1</span>,X.shape[<span style="color:#ff0;font-weight:bold">1</span>]))
+            
+    <span style="color:#fff;font-weight:bold">return</span> AL, caches
+
+X, parameters = L_model_forward_test_case_2hidden()
+AL, caches = L_model_forward(X, parameters)
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;AL = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(AL))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Length of caches list = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(<span style="color:#fff;font-weight:bold">len</span>(caches)))
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">AL = [[ 0.03921668  0.70498921  0.19734387  0.04728177]]
+Length of caches list = 3
+</code></pre></div><h2 id="cost-function">Cost function</h2>
+<p>Now you will implement forward and backward propagation. You need to compute the cost, because you want to check if your model is actually learning.</p>
+<p>Compute the cross-entropy cost \(J\), using the following formula:</p>
+<p>$$ -\frac{1}{m} \sum\limits_{i = 1}^{m} (y^{(i)}\log\left(a^{\lbrack L \rbrack (i)}\right) + (1-y^{(i)})\log\left(1- a^{\lbrack L \rbrack (i)}\right)) $$</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#fff;font-weight:bold">def</span> compute_cost(AL, Y):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the cost function defined by equation (7).
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    AL -- probability vector corresponding to your label predictions, shape (1, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    Y -- true &#34;label&#34; vector (for example: containing 0 if non-cat, 1 if cat), shape (1, number of examples)
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    cost -- cross-entropy cost
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    m = Y.shape[<span style="color:#ff0;font-weight:bold">1</span>]
+
+    <span style="color:#007f7f"># Compute loss from aL and y.</span>
+    cost = -np.sum(Y*np.log(AL)+(<span style="color:#ff0;font-weight:bold">1</span>-Y)*np.log(<span style="color:#ff0;font-weight:bold">1</span>-AL), axis=<span style="color:#ff0;font-weight:bold">1</span>)/m
+    
+    cost = np.squeeze(cost)      <span style="color:#007f7f"># To make sure your cost&#39;s shape is what we expect (e.g. this turns [[17]] into 17).</span>
+    <span style="color:#fff;font-weight:bold">assert</span>(cost.shape == ())
+    
+    <span style="color:#fff;font-weight:bold">return</span> cost
+
+Y, AL = compute_cost_test_case()
+
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;cost = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(compute_cost(AL, Y)))
+
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cost = 0.2797765635793423
+
+</code></pre></div><h2 id="backward-propagation">Backward Propagation</h2>
+<p><img class="img-zoomable" src="/coursera/backprop_kiank.png" alt="backward propagation" />
+</p>
+<p>Now, similar to forward propagation, you are going to build the backward propagation in three steps:</p>
+<ul>
+<li>LINEAR backward</li>
+<li>LINEAR -&gt; ACTIVATION backward where ACTIVATION computes the derivative of either the ReLU or sigmoid activation</li>
+<li>[LINEAR -&gt; RELU] \( \times\) (L-1) -&gt; LINEAR -&gt; SIGMOID backward (whole model)</li>
+</ul>
+<p>For layer \(l\), the linear part is: \(Z^{[l]} = W^{[l]} A^{[l-1]} + b^{[l]}\) (followed by an activation).</p>
+<p>Suppose you have already calculated the derivative \(dZ^{[l]} = \frac{\partial \mathcal{L} }{\partial Z^{[l]}}\). You want to get \((dW^{[l]}, db^{[l]}, dA^{[l-1]})\).</p>
+<h3 id="linear-backward">linear backward</h3>
+<p><img class="img-zoomable" src="/coursera/linearback_kiank.png" alt="linear backward" />
+</p>
+<p>The three outputs \((dW^{[l]}, db^{[l]}, dA^{[l-1]})\) are computed using the input \(dZ^{[l]}\).Here are the formulas you need:</p>
+<p>$$ dW^{[l]} = \frac{\partial \mathcal{J} }{\partial W^{[l]}} = \frac{1}{m} dZ^{[l]} A^{[l-1] T}$$
+$$ db^{[l]} = \frac{\partial \mathcal{J} }{\partial b^{[l]}} = \frac{1}{m} \sum_{i = 1}^{m} dZ^{\lbrack l \rbrack (i)}$$
+$$ dA^{[l-1]} = \frac{\partial \mathcal{L} }{\partial A^{[l-1]}} = W^{[l] T} dZ^{[l]}$$</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> linear_backward(dZ, cache):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the linear portion of backward propagation for a single layer (layer l)
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    dZ -- Gradient of the cost with respect to the linear output (of current layer l)
+</span><span style="color:#0ff;font-weight:bold">    cache -- tuple of values (A_prev, W, b) coming from the forward propagation in the current layer
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    dA_prev -- Gradient of the cost with respect to the activation (of the previous layer l-1), same shape as A_prev
+</span><span style="color:#0ff;font-weight:bold">    dW -- Gradient of the cost with respect to W (current layer l), same shape as W
+</span><span style="color:#0ff;font-weight:bold">    db -- Gradient of the cost with respect to b (current layer l), same shape as b
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    A_prev, W, b = cache
+    m = A_prev.shape[<span style="color:#ff0;font-weight:bold">1</span>]
+
+    <span style="color:#007f7f">### START CODE HERE ### (≈ 3 lines of code)</span>
+    dW = np.dot(dZ, cache[<span style="color:#ff0;font-weight:bold">0</span>].T)/m
+    db = np.sum(dZ, axis=<span style="color:#ff0;font-weight:bold">1</span>, keepdims=True)/m
+    dA_prev = np.dot(cache[<span style="color:#ff0;font-weight:bold">1</span>].T, dZ)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">assert</span> (dA_prev.shape == A_prev.shape)
+    <span style="color:#fff;font-weight:bold">assert</span> (dW.shape == W.shape)
+    <span style="color:#fff;font-weight:bold">assert</span> (db.shape == b.shape)
+    
+    <span style="color:#fff;font-weight:bold">return</span> dA_prev, dW, db
+
+<span style="color:#007f7f"># Set up some test inputs</span>
+dZ, linear_cache = linear_backward_test_case()
+
+dA_prev, dW, db = linear_backward(dZ, linear_cache)
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;dA_prev = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(dA_prev))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;dW = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(dW))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;db = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(db))
+
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">dA_prev = 
+[[-1.15171336  0.06718465 -0.3204696   2.09812712]
+ [ 0.60345879 -3.72508701  5.81700741 -3.84326836]
+ [-0.4319552  -1.30987417  1.72354705  0.05070578]
+ [-0.38981415  0.60811244 -1.25938424  1.47191593]
+ [-2.52214926  2.67882552 -0.67947465  1.48119548]]
+dW = 
+[[ 0.07313866 -0.0976715  -0.87585828  0.73763362  0.00785716]
+ [ 0.85508818  0.37530413 -0.59912655  0.71278189 -0.58931808]
+ [ 0.97913304 -0.24376494 -0.08839671  0.55151192 -0.10290907]]
+db = 
+[[-0.14713786]
+ [-0.11313155]
+ [-0.13209101]]
+
+</code></pre></div><h3 id="linear-activation-backward">linear activation backward</h3>
+<p>Next, you will create a function that merges the two helper functions: <strong><code>linear_backward</code></strong> and the backward step for the activation <strong><code>linear_activation_backward</code></strong>.</p>
+<p>To help you implement <code>linear_activation_backward</code>, we provided two backward functions:</p>
+<ul>
+<li><strong><code>sigmoid_backward</code></strong>: Implements the backward propagation for SIGMOID unit. You can call it as follows:</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dZ = sigmoid_backward(dA, activation_cache)
+</code></pre></div><ul>
+<li><strong><code>relu_backward</code></strong>: Implements the backward propagation for RELU unit. You can call it as follows:</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dZ = relu_backward(dA, activation_cache)
+</code></pre></div><p>If $g(.)$ is the activation function,
+<code>sigmoid_backward</code> and <code>relu_backward</code> compute $$dZ^{[l]} = dA^{[l]} * g'(Z^{[l]})$$.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#fff;font-weight:bold">def</span> linear_activation_backward(dA, cache, activation):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the backward propagation for the LINEAR-&gt;ACTIVATION layer.
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    dA -- post-activation gradient for current layer l 
+</span><span style="color:#0ff;font-weight:bold">    cache -- tuple of values (linear_cache, activation_cache) we store for computing backward propagation efficiently
+</span><span style="color:#0ff;font-weight:bold">    activation -- the activation to be used in this layer, stored as a text string: &#34;sigmoid&#34; or &#34;relu&#34;
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    dA_prev -- Gradient of the cost with respect to the activation (of the previous layer l-1), same shape as A_prev
+</span><span style="color:#0ff;font-weight:bold">    dW -- Gradient of the cost with respect to W (current layer l), same shape as W
+</span><span style="color:#0ff;font-weight:bold">    db -- Gradient of the cost with respect to b (current layer l), same shape as b
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    linear_cache, activation_cache = cache
+    
+    <span style="color:#fff;font-weight:bold">if</span> activation == <span style="color:#0ff;font-weight:bold">&#34;relu&#34;</span>:
+        <span style="color:#007f7f">### START CODE HERE ### (≈ 2 lines of code)</span>
+        dZ = relu_backward(dA, activation_cache)
+        dA_prev, dW, db = linear_backward(dZ, linear_cache)
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+        
+    <span style="color:#fff;font-weight:bold">elif</span> activation == <span style="color:#0ff;font-weight:bold">&#34;sigmoid&#34;</span>:
+        <span style="color:#007f7f">### START CODE HERE ### (≈ 2 lines of code)</span>
+        dZ = sigmoid_backward(dA, activation_cache)
+        dA_prev, dW, db = linear_backward(dZ, linear_cache)
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">return</span> dA_prev, dW, db
+
+dAL, linear_activation_cache = linear_activation_backward_test_case()
+
+dA_prev, dW, db = linear_activation_backward(dAL, linear_activation_cache, activation = <span style="color:#0ff;font-weight:bold">&#34;sigmoid&#34;</span>)
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;sigmoid:&#34;</span>)
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;dA_prev = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(dA_prev))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;dW = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(dW))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;db = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(db) + <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span>)
+
+dA_prev, dW, db = linear_activation_backward(dAL, linear_activation_cache, activation = <span style="color:#0ff;font-weight:bold">&#34;relu&#34;</span>)
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;relu:&#34;</span>)
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;dA_prev = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(dA_prev))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;dW = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(dW))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;db = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(db))
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sigmoid:
+dA_prev = [[ 0.11017994  0.01105339]
+ [ 0.09466817  0.00949723]
+ [-0.05743092 -0.00576154]]
+dW = [[ 0.10266786  0.09778551 -0.01968084]]
+db = [[-0.05729622]]
+
+relu:
+dA_prev = [[ 0.44090989 -0.        ]
+ [ 0.37883606 -0.        ]
+ [-0.2298228   0.        ]]
+dW = [[ 0.44513824  0.37371418 -0.10478989]]
+db = [[-0.20837892]]
+</code></pre></div><h3 id="l-model-backward">L model backward</h3>
+<p><img class="img-zoomable" src="/coursera/mn_backward.png" alt="backward pass" />
+</p>
+<p>Now you will implement the backward function for the whole network. Recall that when you implemented the <code>L_model_forward</code> function, at each iteration, you stored a cache which contains (X,W,b, and z). In the back propagation module, you will use those variables to compute the gradients. Therefore, in the <code>L_model_backward</code> function, you will iterate through all the hidden layers backward, starting from layer \(L\). On each step, you will use the cached values for layer \(l\) to backpropagate through layer \(l\). Figure 5 below shows the backward pass.</p>
+<p><strong>Initializing backpropagation</strong></p>
+<p>To backpropagate through this network, we know that the output is,
+\(A^{[L]} = \sigma(Z^{[L]})\). Your code thus needs to compute <code>dAL</code> \(= \frac{\partial \mathcal{L}}{\partial A^{[L]}}\).
+To do so, use this formula (derived using calculus which you don&rsquo;t need in-depth knowledge of):</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dAL = - (np.divide(Y, AL) - np.divide(<span style="color:#ff0;font-weight:bold">1</span> - Y, <span style="color:#ff0;font-weight:bold">1</span> - AL)) <span style="color:#007f7f"># derivative of cost with respect to AL</span>
+</code></pre></div><p>You can then use this post-activation gradient <code>dAL</code> to keep going backward. As seen in Figure 5, you can now feed in <code>dAL</code> into the LINEAR-&gt;SIGMOID backward function you implemented (which will use the cached values stored by the L_model_forward function). After that, you will have to use a <code>for</code> loop to iterate through all the other layers using the LINEAR-&gt;RELU backward function. You should store each dA, dW, and db in the grads dictionary. To do so, use this formula :</p>
+<p>$$grads[&ldquo;dW&rdquo; + str(l)] = dW^{[l]}\tag{15} $$</p>
+<p>For example, for \(l=3\) this would store \(dW^{[l]}\) in <code>grads[&quot;dW3&quot;]</code>.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> L_model_backward(AL, Y, caches):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implement the backward propagation for the [LINEAR-&gt;RELU] * (L-1) -&gt; LINEAR -&gt; SIGMOID group
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    AL -- probability vector, output of the forward propagation (L_model_forward())
+</span><span style="color:#0ff;font-weight:bold">    Y -- true &#34;label&#34; vector (containing 0 if non-cat, 1 if cat)
+</span><span style="color:#0ff;font-weight:bold">    caches -- list of caches containing:
+</span><span style="color:#0ff;font-weight:bold">                every cache of linear_activation_forward() with &#34;relu&#34; (it&#39;s caches[l], for l in range(L-1) i.e l = 0...L-2)
+</span><span style="color:#0ff;font-weight:bold">                the cache of linear_activation_forward() with &#34;sigmoid&#34; (it&#39;s caches[L-1])
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    grads -- A dictionary with the gradients
+</span><span style="color:#0ff;font-weight:bold">             grads[&#34;dA&#34; + str(l)] = ... 
+</span><span style="color:#0ff;font-weight:bold">             grads[&#34;dW&#34; + str(l)] = ...
+</span><span style="color:#0ff;font-weight:bold">             grads[&#34;db&#34; + str(l)] = ... 
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    grads = {}
+    L = <span style="color:#fff;font-weight:bold">len</span>(caches) <span style="color:#007f7f"># the number of layers</span>
+    m = AL.shape[<span style="color:#ff0;font-weight:bold">1</span>]
+    Y = Y.reshape(AL.shape) <span style="color:#007f7f"># after this line, Y is the same shape as AL</span>
+    
+    <span style="color:#007f7f"># Initializing the backpropagation</span>
+    <span style="color:#007f7f">### START CODE HERE ### (1 line of code)</span>
+    dAL = - (np.divide(Y, AL) - np.divide(<span style="color:#ff0;font-weight:bold">1</span> - Y, <span style="color:#ff0;font-weight:bold">1</span> - AL)) 
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Lth layer (SIGMOID -&gt; LINEAR) gradients. Inputs: &#34;dAL, current_cache&#34;. Outputs: &#34;grads[&#34;dAL-1&#34;], grads[&#34;dWL&#34;], grads[&#34;dbL&#34;]</span>
+    <span style="color:#007f7f">### START CODE HERE ### (approx. 2 lines)</span>
+    current_cache = caches[L-<span style="color:#ff0;font-weight:bold">1</span>]
+    grads[<span style="color:#0ff;font-weight:bold">&#34;dA&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(L-<span style="color:#ff0;font-weight:bold">1</span>)], grads[<span style="color:#0ff;font-weight:bold">&#34;dW&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(L)], grads[<span style="color:#0ff;font-weight:bold">&#34;db&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(L)] =linear_activation_backward(dAL, current_cache, activation=<span style="color:#0ff;font-weight:bold">&#39;sigmoid&#39;</span>)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Loop from l=L-2 to l=0</span>
+    <span style="color:#fff;font-weight:bold">for</span> l in <span style="color:#fff;font-weight:bold">reversed</span>(<span style="color:#fff;font-weight:bold">range</span>(L-<span style="color:#ff0;font-weight:bold">1</span>)):
+        <span style="color:#007f7f"># lth layer: (RELU -&gt; LINEAR) gradients.</span>
+        <span style="color:#007f7f"># Inputs: &#34;grads[&#34;dA&#34; + str(l + 1)], current_cache&#34;. Outputs: &#34;grads[&#34;dA&#34; + str(l)] , grads[&#34;dW&#34; + str(l + 1)] , grads[&#34;db&#34; + str(l + 1)] </span>
+        <span style="color:#007f7f">### START CODE HERE ### (approx. 5 lines)</span>
+        current_cache = caches[l]
+        dA_prev_temp, dW_temp, db_temp = linear_activation_backward(grads[<span style="color:#0ff;font-weight:bold">&#34;dA&#34;</span>+<span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)], current_cache, activation=<span style="color:#0ff;font-weight:bold">&#34;relu&#34;</span>)
+        grads[<span style="color:#0ff;font-weight:bold">&#34;dA&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l)] = dA_prev_temp
+        grads[<span style="color:#0ff;font-weight:bold">&#34;dW&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l + <span style="color:#ff0;font-weight:bold">1</span>)] = dW_temp
+        grads[<span style="color:#0ff;font-weight:bold">&#34;db&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l + <span style="color:#ff0;font-weight:bold">1</span>)] = db_temp
+        <span style="color:#007f7f">### END CODE HERE ###</span>
+
+    <span style="color:#fff;font-weight:bold">return</span> grads
+
+AL, Y_assess, caches = L_model_backward_test_case()
+grads = L_model_backward(AL, Y_assess, caches)
+print_grads(grads)
+
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">dW1 = [[ 0.41010002  0.07807203  0.13798444  0.10502167]
+ [ 0.          0.          0.          0.        ]
+ [ 0.05283652  0.01005865  0.01777766  0.0135308 ]]
+db1 = [[-0.22007063]
+ [ 0.        ]
+ [-0.02835349]]
+dA1 = [[ 0.12913162 -0.44014127]
+ [-0.14175655  0.48317296]
+ [ 0.01663708 -0.05670698]]
+
+</code></pre></div><h2 id="gradient-descent---update-parameters">gradient descent - update parameters</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> update_parameters(parameters, grads, learning_rate):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Update parameters using gradient descent
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your parameters 
+</span><span style="color:#0ff;font-weight:bold">    grads -- python dictionary containing your gradients, output of L_model_backward
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your updated parameters 
+</span><span style="color:#0ff;font-weight:bold">                  parameters[&#34;W&#34; + str(l)] = ... 
+</span><span style="color:#0ff;font-weight:bold">                  parameters[&#34;b&#34; + str(l)] = ...
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    L = <span style="color:#fff;font-weight:bold">len</span>(parameters) // <span style="color:#ff0;font-weight:bold">2</span> <span style="color:#007f7f"># number of layers in the neural network</span>
+
+    <span style="color:#007f7f"># Update rule for each parameter. Use a for loop.</span>
+    <span style="color:#007f7f">### START CODE HERE ### (≈ 3 lines of code)</span>
+    <span style="color:#fff;font-weight:bold">for</span> l in <span style="color:#fff;font-weight:bold">range</span>(L):
+        parameters[<span style="color:#0ff;font-weight:bold">&#34;W&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)] -= learning_rate * grads[<span style="color:#0ff;font-weight:bold">&#34;dW&#34;</span>+<span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)]
+        parameters[<span style="color:#0ff;font-weight:bold">&#34;b&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)] -= learning_rate * grads[<span style="color:#0ff;font-weight:bold">&#34;db&#34;</span>+<span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)]
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    <span style="color:#fff;font-weight:bold">return</span> parameters
+    
+parameters, grads = update_parameters_test_case()
+parameters = update_parameters(parameters, grads, <span style="color:#ff0;font-weight:bold">0.1</span>)
+
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;W1 = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;b1 = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;W2 = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>]))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;b2 = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>]))
+
+</code></pre></div><p>output</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">W1 = [[-0.59562069 -0.09991781 -2.14584584  1.82662008]
+ [-1.76569676 -0.80627147  0.51115557 -1.18258802]
+ [-1.0535704  -0.86128581  0.68284052  2.20374577]]
+b1 = [[-0.04659241]
+ [-1.28888275]
+ [ 0.53405496]]
+W2 = [[-0.55569196  0.0354055   1.32964895]]
+b2 = [[-0.84610769]]
+
+</code></pre></div>
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#dnn-utility">dnn utility</a></li>
+    <li><a href="#test-cases">test cases</a></li>
+    <li><a href="#import-packages">import packages</a></li>
+    <li><a href="#outline">outline</a></li>
+    <li><a href="#initialization">Initialization</a>
+      <ul>
+        <li><a href="#2-layer-neural-network">2-layer Neural Network</a></li>
+        <li><a href="#l-layer-neural-network">L-layer Neural Network</a></li>
+      </ul>
+    </li>
+    <li><a href="#forward-propagation">forward propagation</a>
+      <ul>
+        <li><a href="#linear-forward">linear forward</a></li>
+        <li><a href="#linear-activation-forward">linear activation forward</a></li>
+      </ul>
+    </li>
+    <li><a href="#cost-function">Cost function</a></li>
+    <li><a href="#backward-propagation">Backward Propagation</a>
+      <ul>
+        <li><a href="#linear-backward">linear backward</a></li>
+        <li><a href="#linear-activation-backward">linear activation backward</a></li>
+        <li><a href="#l-model-backward">L model backward</a></li>
+      </ul>
+    </li>
+    <li><a href="#gradient-descent---update-parameters">gradient descent - update parameters</a></li>
+  </ul>
+</nav></div>
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021
+                <a href="https://tjdoc.github.io/"></a>
+                
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.0/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>
