@@ -175,7 +175,7 @@ np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>) <span style="
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X, Y = load_planar_dataset()
 <span style="color:#007f7f"># Visualize the data:</span>
 plt.scatter(X[<span style="color:#ff0;font-weight:bold">0</span>, :], X[<span style="color:#ff0;font-weight:bold">1</span>, :], c=Y, s=<span style="color:#ff0;font-weight:bold">40</span>, cmap=plt.cm.Spectral);
-</code></pre></div><p><img class="img-zoomable" src="/coursera/planar_dataset.png" alt="planar dataset" />
+</code></pre></div><p><img class="img-zoomable" src="/coursera_dl/planar_dataset.png" alt="planar dataset" />
 </p>
 <p>You have:</p>
 <ul>
@@ -207,9 +207,9 @@ LR_predictions = clf.predict(X.T)
 <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#39;Accuracy of logistic regression: </span><span style="color:#0ff;font-weight:bold">%d</span><span style="color:#0ff;font-weight:bold"> &#39;</span> % <span style="color:#fff;font-weight:bold">float</span>((np.dot(Y,LR_predictions) + np.dot(<span style="color:#ff0;font-weight:bold">1</span>-Y,<span style="color:#ff0;font-weight:bold">1</span>-LR_predictions))/<span style="color:#fff;font-weight:bold">float</span>(Y.size)*<span style="color:#ff0;font-weight:bold">100</span>) +
        <span style="color:#0ff;font-weight:bold">&#39;% &#39;</span> + <span style="color:#0ff;font-weight:bold">&#34;(percentage of correctly labelled datapoints)&#34;</span>)
 
-</code></pre></div><p><img class="img-zoomable" src="/coursera/planar_logistic_regression.png" alt="planar logistic regression" />
+</code></pre></div><p><img class="img-zoomable" src="/coursera_dl/planar_logistic_regression.png" alt="planar logistic regression" />
 </p>
-<p><img class="img-zoomable" src="/coursera/classification_kiank.png" alt="classification_kiank" />
+<p><img class="img-zoomable" src="/coursera_dl/classification_kiank.png" alt="classification_kiank" />
 </p>
 <p>For one example \(x^{(i)}\) :</p>
 <p>$$z^{[1] (i)} =  W^{[1]} x^{(i)} + b^{[1]}\tag{1}$$</p>
@@ -376,7 +376,7 @@ A2, Y_assess, parameters = compute_cost_test_case()
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;cost = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(compute_cost(A2, Y_assess, parameters)))
 </code></pre></div><p>output</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cost = 0.6930587610394646
-</code></pre></div><p><img class="img-zoomable" src="/coursera/grad_summary.png" alt="back propagation" />
+</code></pre></div><p><img class="img-zoomable" src="/coursera_dl/grad_summary.png" alt="back propagation" />
 </p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> backward_propagation(parameters, cache, X, Y):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
@@ -616,7 +616,7 @@ Cost after iteration 7000: 0.217504
 Cost after iteration 8000: 0.219472
 Cost after iteration 9000: 0.218562
 
-</code></pre></div><p><img class="img-zoomable" src="/coursera/decision_boundary_nn.png" alt="decision boundary" />
+</code></pre></div><p><img class="img-zoomable" src="/coursera_dl/decision_boundary_nn.png" alt="decision boundary" />
 </p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># Print accuracy</span>
 predictions = predict(parameters, X)
@@ -646,7 +646,7 @@ Accuracy for 5 hidden units: 91.25 %
 Accuracy for 20 hidden units: 90.5 %
 Accuracy for 50 hidden units: 90.25 %
 
-</code></pre></div><p><img class="img-zoomable" src="/coursera/hidden_layer_sizes.png" alt="hidden layer sizez" />
+</code></pre></div><p><img class="img-zoomable" src="/coursera_dl/hidden_layer_sizes.png" alt="hidden layer sizez" />
 </p>
 <ul>
 <li>The larger models (with more hidden units) are able to fit the training set better, until eventually the largest models overfit the data.</li>
@@ -654,7 +654,7 @@ Accuracy for 50 hidden units: 90.25 %
 <li>You will also learn later about regularization, which lets you use very large models (such as n_h = 50) without much overfitting.</li>
 </ul>
 <p>This is as result with leaky relu activation function.</p>
-<p><img class="img-zoomable" src="/coursera/hidden_layer_sizes_leakyrelu.png" alt="results with leaky relu activation" />
+<p><img class="img-zoomable" src="/coursera_dl/hidden_layer_sizes_leakyrelu.png" alt="results with leaky relu activation" />
 </p>
 
     </div>
@@ -686,6 +686,10 @@ Accuracy for 50 hidden units: 90.25 %
             
             <span>
                 <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
             </span>
             
             <span>
@@ -748,6 +752,10 @@ Accuracy for 50 hidden units: 90.25 %
             
             <span>
                 <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
             </span>
             
             <span>

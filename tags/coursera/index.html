@@ -24,7 +24,7 @@
 <meta property="og:title" content="coursera" />
 <meta name="twitter:title" content="coursera" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://tjdoc.github.io/tags/coursera/" /><meta name="twitter:card" content="summary" /><meta property="og:updated_time" content="2021-01-22T21:09:54+09:00" />
+<meta property="og:url" content="https://tjdoc.github.io/tags/coursera/" /><meta name="twitter:card" content="summary" /><meta property="og:updated_time" content="2021-01-25T16:53:28+09:00" />
 
 
 <style>
@@ -86,6 +86,49 @@
 
 <div class="post">
     <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-25-coursera_m2w1p/">coursera m2w1p</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-25</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        Initialization init util import numpy as np import matplotlib.pyplot as plt import h5py import sklearn import sklearn.datasets def sigmoid(x): &#34;&#34;&#34; Compute the sigmoid of x Arguments: x -- A scalar or numpy array of any size. Return: s -- sigmoid(x) &#34;&#34;&#34; s = 1/(1+np.exp(-x)) return s def relu(x): &#34;&#34;&#34; Compute the relu of x Arguments: x -- A scalar or numpy array of any size. Return: s -- relu(x) &#34;&#34;&#34; s = np.
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-24-coursera_m2w1/">Improving Deep Neural Networks m2w1</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-25</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;<a href="/tags/hyperparameter-tuning">hyperparameter tuning</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        Train / dev / test sets Previously:
+ Train: Test = 70% : 30% Train : dev : test = 60% : 20% : 20%  However, in the big data era where you have more than 1 million sets
+ Train : dev : test = 1,000,000 : 10,000 : 10,000 Train : dev : test = 99.5% : 0.25% : 0.25% Train : dev : test = 99.5% : 0.
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-23-m1w4p2_review/">coursera m1w4p2 review</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-23</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        python stuff learned elementwise min max for relu, you use elementwise maximum function which can be done by
+np.maximum / np.minimum  np.dot for a given numpy array a and b, for a dot product, both expressions are identical
+np.dot(a, b) a.dot(b)  decision boundary plot import matplotlib.pyplot as plt import numpy as np import sklearn import sklearn.datasets import sklearn.linear_model def plot_decision_boundary(model, X, y): # Set min and max values and give it some padding x_min, x_max = X[0, :].
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
         <a href="https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4p2/">m1w4p2</a>
     </h2>
     <div class="post-item post-meta">
@@ -119,10 +162,11 @@
 
     </div>
     <div class="post-item post-summary markdown-body">
-        Terminology  L number of layers \(n^{[l]}\) number of units in layer l \(a^{[l]}\) activations in layer l, \( a^{[l]} = g^{[l]} (z^{[l]}) \)  Forward propagation in deep network $$ \begin{aligned} Z^{[l]} =&amp; W^{[l]} A^{[l-1]} + b^{[l]} \\ A^{[l]} =&amp; g^{[l]} (Z^{[l]}) \end{aligned} $$
+        Terminology  L number of layers \(n^{[l]}\) number of units in layer l \(a^{[l]}\) activations in layer l, \( a^{[l]} = g^{[l]} (z^{[l]}) \)  Forward propagation in deep network $$ \begin{aligned} Z^{[l]} =&amp; W^{[l]} A^{[l-1]} + b^{[l]} \\
+A^{[l]} =&amp; g^{[l]} (Z^{[l]}) \end{aligned} $$
 where \( A^{[0]} = X \)
 You will need an explict for-loop for computing each layers.
-Getting your matrix dimensions right $$ \begin{aligned} W^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\ b^{[l]} &amp;: (n^{[l]}, 1) \\ dW^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\ db^{[l]} &amp;: (n^{[l]}, 1) \\ \end{aligned} $$
+Getting your matrix dimensions right $$ \begin{aligned} W^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\
     </div>
 </div>
 
@@ -251,6 +295,10 @@ we want \( {\hat y}^{(i)} \approx y^{(i)} \)
             </span>
             
             <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
+            </span>
+            
+            <span>
                 <a href="/tags/neural-network/">neural network</a>
             </span>
             
@@ -299,6 +347,10 @@ we want \( {\hat y}^{(i)} \approx y^{(i)} \)
             
             <span>
                 <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
             </span>
             
             <span>

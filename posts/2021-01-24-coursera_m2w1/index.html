@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.80.0" />
+
+
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
+
+
+<title>Improving Deep Neural Networks m2w1 - ps126.5</title>
+
+
+
+
+<meta name="keywords" content="coursera, neural network, hyperparameter tuning" />
+
+
+<meta property="og:title" content="Improving Deep Neural Networks m2w1" />
+<meta name="twitter:title" content="Improving Deep Neural Networks m2w1" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tjdoc.github.io/posts/2021-01-24-coursera_m2w1/" /><meta property="og:description" content="Train / dev / test sets Previously:
+ Train: Test = 70% : 30% Train : dev : test = 60% : 20% : 20%  However, in the big data era where you have more than 1 million sets
+ Train : dev : test = 1,000,000 : 10,000 : 10,000 Train : dev : test = 99.5% : 0.25% : 0.25% Train : dev : test = 99.5% : 0." />
+<meta name="twitter:description" content="Train / dev / test sets Previously:
+ Train: Test = 70% : 30% Train : dev : test = 60% : 20% : 20%  However, in the big data era where you have more than 1 million sets
+ Train : dev : test = 1,000,000 : 10,000 : 10,000 Train : dev : test = 99.5% : 0.25% : 0.25% Train : dev : test = 99.5% : 0." /><meta name="twitter:card" content="summary" /><meta property="article:published_time" content="2021-01-25T10:10:50+09:00" /><meta property="article:modified_time" content="2021-01-25T10:10:50+09:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://tjdoc.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://tjdoc.github.io/">ps126.5</a>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-24-coursera_m2w1/">Improving Deep Neural Networks m2w1</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-25</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;<a href="/tags/hyperparameter-tuning">hyperparameter tuning</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2 id="train--dev--test-sets">Train / dev / test sets</h2>
+<p>Previously:</p>
+<ul>
+<li>Train: Test = 70% : 30%</li>
+<li>Train : dev : test = 60% : 20% : 20%</li>
+</ul>
+<p>However, in the big data era where you have more than 1 million sets</p>
+<ul>
+<li>Train : dev : test = 1,000,000 : 10,000 : 10,000</li>
+<li>Train : dev : test = 99.5% : 0.25% : 0.25%</li>
+<li>Train : dev : test = 99.5% : 0.4% : 0.1%</li>
+</ul>
+<h2 id="mismatched-train--test-distribution">mismatched train / test distribution</h2>
+<p>Training set: Cat pictures from webpages<br>
+Dev / test sets: Cat pictures from users using your app</p>
+<p>This can be problamatic. <strong>Make sure dev and test set come from the same distribution.</strong></p>
+<h2 id="bias--variance">Bias / Variance</h2>
+<p><img class="img-zoomable" src="/coursera_dl/bias_variance.jpeg" alt="bias and variance" />
+</p>
+<ul>
+<li>high bias: underfitting data</li>
+<li>just right</li>
+<li>high variance: overfitting data</li>
+</ul>
+<p>let&rsquo;s say</p>
+<ul>
+<li>train set error: 1%</li>
+<li>dev set error: 11%</li>
+</ul>
+<p>you have <em>high variance</em>, an indication of overfitting of data</p>
+<p>another example</p>
+<ul>
+<li>train set error: 15%</li>
+<li>dev set error: 16%</li>
+</ul>
+<p>if humans have 0% error</p>
+<p>this will indicate you have <em>high bias</em></p>
+<p>another example</p>
+<ul>
+<li>train set error: 15%</li>
+<li>dev set error: 30%</li>
+</ul>
+<p>if humans have 0% error</p>
+<p>you have <em>high bias and high variance</em> (worst case)</p>
+<p>another example</p>
+<ul>
+<li>train set error: 0.5%</li>
+<li>dev set error: 1%</li>
+</ul>
+<p>if humans have 0% error</p>
+<p><em>low bias, low variance</em></p>
+<h2 id="basic-recipe-for-machine-learning">Basic recipe for machine learning</h2>
+<h3 id="high-bias">High bias?</h3>
+<p>training data performance:</p>
+<ul>
+<li>bigger network</li>
+<li>train longer</li>
+<li>NN architechure search</li>
+</ul>
+<h3 id="high-variance">High variance?</h3>
+<p>dev set performance</p>
+<ul>
+<li>more data</li>
+<li>regularization</li>
+<li>NN architecture search</li>
+</ul>
+<h2 id="bias-variance-trade-off">Bias variance trade-off</h2>
+<p>there used to be trade-offs for fixing bias or variance problems i.e.,</p>
+<ul>
+<li>bias improvement, variance degrade</li>
+<li>variance improvement, bias degrade</li>
+</ul>
+<p>in the pre bigdata era. However, thesedays, we see that using bigger networks
+almost always don&rsquo;t have negative effect on variance. Similarly, using more data does not affect bias.</p>
+<p>However, regularization does show some sign of bias-variance tradeoff.</p>
+<h2 id="regularization">Regularization</h2>
+<h3 id="logistic-regression-regularization">logistic regression regularization</h3>
+<p><img class="img-zoomable" src="/coursera_dl/log_regularization.jpeg" alt="logistic regression regularization" />
+</p>
+<h3 id="neural-network-regularizaiton-l2-regularization">neural network regularizaiton (L2 regularization)</h3>
+<p><img class="img-zoomable" src="/coursera_dl/nn_regularization.jpeg" alt="neural network regularization" />
+</p>
+<p>type in the figure. The correct form of the Frobenius norm formula is</p>
+<p>$$ || w^{[l]} ||^2 = \sum_{i=1}^{n^{[l]}} \sum_{j=1}^{n^{[l-1]}} (w_{i,j}^{[l]})^2 $$</p>
+<ul>
+<li>the limit of summation of i should be from 1 to \(n^{[l]}\)</li>
+<li>the limit of summation of j should be from 1 to \(n^{[l-1]}\)</li>
+<li>the rows i of the matrix should be the number of neurons in the current layer \(n^{[l]}\)</li>
+<li>the columns j of the weight matrix should equal the number of neurons in the previous layer \(n^{[l-1]}\)</li>
+</ul>
+<h2 id="how-does-regularization-prevent-overfitting">How does regularization prevent overfitting?</h2>
+<p>increasing \(\lammda\) will nudge the weights to be closer to zero, resulting
+in your model to be closer to a simpler model (resembling a logistic regression
+model).</p>
+<p><img class="img-zoomable" src="/coursera_dl/regularization_action.png" alt="regularization in action" />
+</p>
+<p>$$ \lambda \uparrow \implies w^{[l]} \downarrow \implies z^{[l]}= w^{[l]} a^{[l-1]} + b^{[l]} \downarrow $$</p>
+<ul>
+<li>decreased range of z indicate that for a activation function like \(\tanh\), the function will be nearly linear</li>
+<li>linear activation function results in linear function behavior</li>
+</ul>
+<h2 id="dropout-regularization">Dropout regularization</h2>
+<p><img class="img-zoomable" src="/coursera_dl/dropout_reg.jpeg" alt="dropout regularization" />
+</p>
+<h3 id="imprementing-dropout---inverted-dropout">imprementing dropout - inverted dropout</h3>
+<p>illulstraet with layer l=3. keep_prob = 0.8</p>
+<pre><code>d3 = np.random.rand(a3.shape[0], a3.shape[1]) &lt; keep_prob
+a3 = np.multiply(a3, d3)
+a3 /= keep_prob # inverted dropout
+</code></pre>
+<p>if you have 50 units, 10 units shut off</p>
+<p>$$ z^{[4]} = w^{[4]} \cdot a^{[3]} + b^{[4]} $$</p>
+<p>\(a^{[3]}\) is reduced by 20%</p>
+<p><img class="img-zoomable" src="/coursera_dl/dropout_ex.png" alt="drop out example" />
+</p>
+<h3 id="pros-and-cons-of-dropout">pros and cons of dropout</h3>
+<p>what dropout does</p>
+<ul>
+<li>randomly knocking out units on your network</li>
+<li>does not let you rely on any one feature because any one feature could go away at random</li>
+<li>spreading weight effect</li>
+</ul>
+<p>pros</p>
+<ul>
+<li>regularization effect</li>
+<li>remedy overfitting</li>
+<li>computer vision almost always suffer with insufficient data \(\implies\) overfitting</li>
+<li>thus, computer vision almost always use dropout</li>
+</ul>
+<p>cons</p>
+<ul>
+<li>random eliminiation of units makes cost function unreliable</li>
+</ul>
+<p>thus, when developing your network, use keep_prop = 1 and ensure that your cost
+function decreases monotonically with iteration.  once this is confirmed, then
+turn of keep_prop and let&rsquo;s hope that your network will work properly.</p>
+<h2 id="other-regularization-methods">other regularization methods</h2>
+<h3 id="data-augmentation">data augmentation</h3>
+<p><img class="img-zoomable" src="/coursera_dl/data_augmentation.jpeg" alt="data augmentation" />
+</p>
+<p>images</p>
+<ul>
+<li>flipping images horizontally</li>
+<li>take random crops of the image (including translation, rotation, etc)</li>
+</ul>
+<p>character recognition</p>
+<ul>
+<li>subtle distortion of the image</li>
+<li>rotation</li>
+</ul>
+<h2 id="early-stopping">early stopping</h2>
+<p><img class="img-zoomable" src="/coursera_dl/early_stopping.png" alt="early stopping" />
+</p>
+<ul>
+<li>make sure your J training error decrease monotonically with iteration</li>
+<li>compare with dev set error decrease. if it starts to increase at some point, you decrease the training iteration</li>
+</ul>
+<p><strong>downside</strong>: orthogonalization is not possible with early stopping</p>
+<h3 id="orthogonalizaiton">orthogonalizaiton</h3>
+<ul>
+<li>optimize cost function J</li>
+<li>do not overfit</li>
+</ul>
+<p>separate each issues and focus on each issue as much as possible. However, early stopping mixes those two procedures.</p>
+<p>In practice, L2 regularization works well but you need to experiment with different values of \(\lambda\).</p>
+<h2 id="normalizing-inputs">Normalizing inputs</h2>
+<p><img class="img-zoomable" src="/coursera_dl/normalization.jpeg" alt="normalization" />
+</p>
+<p>subtract mean:</p>
+<p>$$ \mu = \frac{1}{m} \sum_{i=1}^m x^{(i)} $$
+$$ x \equiv x - \mu $$</p>
+<p>normalize variance</p>
+<p>$$ \sigma^2 = \frac{1}{m} \sum_{i=1}^m x^{(i)}**2 \text{ element-wise} $$
+$$ x /= \sigma $$</p>
+<p>thus, the normalization is</p>
+<p>$$ x = \frac{x-\mu}{\sigma} $$</p>
+<h3 id="why-normalize-inputs">why normalize inputs?</h3>
+<p><img class="img-zoomable" src="/coursera_dl/normalization_effects.png" alt="normalization effects" />
+</p>
+<p>gradient descent is much more efficient</p>
+<h2 id="vanishing--exploding-gradients">vanishing / exploding gradients</h2>
+<p>deep neural networks often suffer from vanishing for exploding gradients depending on the weight eigenvalue.
+careful initiazition of the weight may partially mitigate this problem.</p>
+<h2 id="weight-initialization-for-deep-networks">weight initialization for deep networks</h2>
+<p><img class="img-zoomable" src="/coursera_dl/weight_init.jpeg" alt="weight initialization" />
+</p>
+<p>for large n, we want smaller \(w_i\).</p>
+<p>$$ Var(w_i) = \frac{1}{n} $$
+$$ W^{[l]} = np.random.randn(W.shape)*np.sqrt(\frac{1}{n^{[l-1]}}) $$</p>
+<h3 id="for-relu-activation-function">for ReLU activation function</h3>
+<p>$$ Var(w_i) = \frac{2}{n} $$
+$$ W^{[l]} = np.random.randn(W.shape)*np.sqrt(\frac{2}{n^{[l-1]}}) $$</p>
+<h3 id="for-tanh">for \(\tanh\)</h3>
+<p>$$ Var(w_i) = \frac{1}{n} $$
+$$ W^{[l]} = np.random.randn(W.shape)*np.sqrt(\frac{1}{n^{[l-1]}}) $$
+which is known as Xavier initialization, or
+$$ W^{[l]} = np.random.randn(W.shape)*np.sqrt(\frac{2}{n^{[l-1]}+ n^{[l]}}) $$</p>
+<h2 id="gradient-checking">gradient checking</h2>
+<p><img class="img-zoomable" src="/coursera_dl/grad_check.jpeg" alt="gradient check" />
+</p>
+<p>for each i:</p>
+<p>$$
+\begin{aligned}
+d\theta_{approx [i]} &amp;= \frac{J(\theta_1, \theta_2, \cdots, \theta_i + \epsilon, \cdots) - J(\theta_1, \theta_2, \cdots, \theta_i - \epsilon, \cdots)}{2\epsilon} \\
+&amp;= d\theta_{[i]} \\
+&amp;= \frac{\partial J}{\partial \theta_i}
+\end{aligned}
+$$</p>
+<p>how do we know if \(d\theta_{approx} \approx d\theta \)?</p>
+<p>check</p>
+<p>$$
+\frac{|| d\theta_{approx} - d\theta||_2}{||d\theta_{approx}||_2 + ||d\theta||_2} \approx \begin{cases}
+10^{-7} &amp;: \text{great!} \\
+10^{-5} &amp; \\
+10^{-3} &amp;: \text{worry} \\
+\end{cases}
+$$</p>
+<p>where \(\epsilon = 10^{-7}\)</p>
+<h2 id="gradient-checking-implementation-notes">gradient checking implementation notes</h2>
+<ul>
+<li>don&rsquo;t use in training. only to debug</li>
+<li>if algorithm fails grad check, look at components to try to identify bug</li>
+<li>remember regularization</li>
+<li>grad check does not work with dropout: keep_prob = 1.0 and compute</li>
+<li>run at random initialization, perhaps again after some training</li>
+</ul>
+
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#train--dev--test-sets">Train / dev / test sets</a></li>
+    <li><a href="#mismatched-train--test-distribution">mismatched train / test distribution</a></li>
+    <li><a href="#bias--variance">Bias / Variance</a></li>
+    <li><a href="#basic-recipe-for-machine-learning">Basic recipe for machine learning</a>
+      <ul>
+        <li><a href="#high-bias">High bias?</a></li>
+        <li><a href="#high-variance">High variance?</a></li>
+      </ul>
+    </li>
+    <li><a href="#bias-variance-trade-off">Bias variance trade-off</a></li>
+    <li><a href="#regularization">Regularization</a>
+      <ul>
+        <li><a href="#logistic-regression-regularization">logistic regression regularization</a></li>
+        <li><a href="#neural-network-regularizaiton-l2-regularization">neural network regularizaiton (L2 regularization)</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-does-regularization-prevent-overfitting">How does regularization prevent overfitting?</a></li>
+    <li><a href="#dropout-regularization">Dropout regularization</a>
+      <ul>
+        <li><a href="#imprementing-dropout---inverted-dropout">imprementing dropout - inverted dropout</a></li>
+        <li><a href="#pros-and-cons-of-dropout">pros and cons of dropout</a></li>
+      </ul>
+    </li>
+    <li><a href="#other-regularization-methods">other regularization methods</a>
+      <ul>
+        <li><a href="#data-augmentation">data augmentation</a></li>
+      </ul>
+    </li>
+    <li><a href="#early-stopping">early stopping</a>
+      <ul>
+        <li><a href="#orthogonalizaiton">orthogonalizaiton</a></li>
+      </ul>
+    </li>
+    <li><a href="#normalizing-inputs">Normalizing inputs</a>
+      <ul>
+        <li><a href="#why-normalize-inputs">why normalize inputs?</a></li>
+      </ul>
+    </li>
+    <li><a href="#vanishing--exploding-gradients">vanishing / exploding gradients</a></li>
+    <li><a href="#weight-initialization-for-deep-networks">weight initialization for deep networks</a>
+      <ul>
+        <li><a href="#for-relu-activation-function">for ReLU activation function</a></li>
+        <li><a href="#for-tanh">for \(\tanh\)</a></li>
+      </ul>
+    </li>
+    <li><a href="#gradient-checking">gradient checking</a></li>
+    <li><a href="#gradient-checking-implementation-notes">gradient checking implementation notes</a></li>
+  </ul>
+</nav></div>
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021
+                <a href="https://tjdoc.github.io/"></a>
+                
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.0/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>

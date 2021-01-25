@@ -427,7 +427,7 @@ np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
 </li>
 <li>Finally update the parameters.</li>
 </ul>
-<p><img class="img-zoomable" src="/coursera/m1w4p1_outline.png" alt="outline" />
+<p><img class="img-zoomable" src="/coursera_dl/m1w4p1_outline.png" alt="outline" />
 </p>
 <p><strong>Note</strong> that for every forward function, there is a corresponding backward function. That is why at every step of your forward module you will be storing some values in a cache. The cached values are useful for computing gradients. In the backpropagation module you will then use the cache to calculate the gradients. This assignment will show you exactly how to carry out each of these steps.</p>
 <h2 id="initialization">Initialization</h2>
@@ -480,7 +480,7 @@ np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
 </ul>
 <h3 id="l-layer-neural-network">L-layer Neural Network</h3>
 <p>The initialization for a deeper L-layer neural network is more complicated because there are many more weight matrices and bias vectors. When completing the <code>initialize_parameters_deep</code>, you should make sure that your dimensions match between each layer. Recall that \(n^{[l]}\) is the number of units in layer \(l\). Thus for example if the size of our input \(X\) is \((12288, 209)\) (with \(m=209\) examples) then:</p>
-<p><img class="img-zoomable" src="/coursera/llayer_table.png" alt="l layer table" />
+<p><img class="img-zoomable" src="/coursera_dl/llayer_table.png" alt="l layer table" />
 </p>
 <p>Remember that when we compute \(W X + b\) in python, it carries out broadcasting. For example, if:</p>
 <p>$$
@@ -633,7 +633,7 @@ A, linear_activation_cache = linear_activation_forward(A_prev, W, b, activation 
 </code></pre></div><p>output</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">With sigmoid: A = [[ 0.96890023  0.11013289]]
 With ReLU: A = [[ 3.43896131  0.        ]]
-</code></pre></div><p><img class="img-zoomable" src="/coursera/model_architecture_kiank.png" alt="model architecture" />
+</code></pre></div><p><img class="img-zoomable" src="/coursera_dl/model_architecture_kiank.png" alt="model architecture" />
 </p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> L_model_forward(X, parameters):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
@@ -713,7 +713,7 @@ Y, AL = compute_cost_test_case()
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cost = 0.2797765635793423
 
 </code></pre></div><h2 id="backward-propagation">Backward Propagation</h2>
-<p><img class="img-zoomable" src="/coursera/backprop_kiank.png" alt="backward propagation" />
+<p><img class="img-zoomable" src="/coursera_dl/backprop_kiank.png" alt="backward propagation" />
 </p>
 <p>Now, similar to forward propagation, you are going to build the backward propagation in three steps:</p>
 <ul>
@@ -724,7 +724,7 @@ Y, AL = compute_cost_test_case()
 <p>For layer \(l\), the linear part is: \(Z^{[l]} = W^{[l]} A^{[l-1]} + b^{[l]}\) (followed by an activation).</p>
 <p>Suppose you have already calculated the derivative \(dZ^{[l]} = \frac{\partial \mathcal{L} }{\partial Z^{[l]}}\). You want to get \((dW^{[l]}, db^{[l]}, dA^{[l-1]})\).</p>
 <h3 id="linear-backward">linear backward</h3>
-<p><img class="img-zoomable" src="/coursera/linearback_kiank.png" alt="linear backward" />
+<p><img class="img-zoomable" src="/coursera_dl/linearback_kiank.png" alt="linear backward" />
 </p>
 <p>The three outputs \((dW^{[l]}, db^{[l]}, dA^{[l-1]})\) are computed using the input \(dZ^{[l]}\).Here are the formulas you need:</p>
 <p>$$ dW^{[l]} = \frac{\partial \mathcal{J} }{\partial W^{[l]}} = \frac{1}{m} dZ^{[l]} A^{[l-1] T}$$
@@ -854,7 +854,7 @@ dA_prev = [[ 0.44090989 -0.        ]
 dW = [[ 0.44513824  0.37371418 -0.10478989]]
 db = [[-0.20837892]]
 </code></pre></div><h3 id="l-model-backward">L model backward</h3>
-<p><img class="img-zoomable" src="/coursera/mn_backward.png" alt="backward pass" />
+<p><img class="img-zoomable" src="/coursera_dl/mn_backward.png" alt="backward pass" />
 </p>
 <p>Now you will implement the backward function for the whole network. Recall that when you implemented the <code>L_model_forward</code> function, at each iteration, you stored a cache which contains (X,W,b, and z). In the back propagation module, you will use those variables to compute the gradients. Therefore, in the <code>L_model_backward</code> function, you will iterate through all the hidden layers backward, starting from layer \(L\). On each step, you will use the cached values for layer \(l\) to backpropagate through layer \(l\). Figure 5 below shows the backward pass.</p>
 <p><strong>Initializing backpropagation</strong></p>
@@ -1003,6 +1003,10 @@ b2 = [[-0.84610769]]
             </span>
             
             <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
+            </span>
+            
+            <span>
                 <a href="/tags/neural-network/">neural network</a>
             </span>
             
@@ -1078,6 +1082,10 @@ b2 = [[-0.84610769]]
             
             <span>
                 <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
             </span>
             
             <span>

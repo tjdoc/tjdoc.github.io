@@ -6,7 +6,38 @@
     <description>Recent content on ps126.5</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 Jan 2021 21:09:54 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Jan 2021 16:53:28 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>coursera m2w1p</title>
+      <link>https://tjdoc.github.io/posts/2021-01-25-coursera_m2w1p/</link>
+      <pubDate>Mon, 25 Jan 2021 16:53:28 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-25-coursera_m2w1p/</guid>
+      <description>Initialization init util import numpy as np import matplotlib.pyplot as plt import h5py import sklearn import sklearn.datasets def sigmoid(x): &amp;#34;&amp;#34;&amp;#34; Compute the sigmoid of x Arguments: x -- A scalar or numpy array of any size. Return: s -- sigmoid(x) &amp;#34;&amp;#34;&amp;#34; s = 1/(1+np.exp(-x)) return s def relu(x): &amp;#34;&amp;#34;&amp;#34; Compute the relu of x Arguments: x -- A scalar or numpy array of any size. Return: s -- relu(x) &amp;#34;&amp;#34;&amp;#34; s = np.</description>
+    </item>
+    
+    <item>
+      <title>Improving Deep Neural Networks m2w1</title>
+      <link>https://tjdoc.github.io/posts/2021-01-24-coursera_m2w1/</link>
+      <pubDate>Mon, 25 Jan 2021 10:10:50 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-24-coursera_m2w1/</guid>
+      <description>Train / dev / test sets Previously:
+ Train: Test = 70% : 30% Train : dev : test = 60% : 20% : 20%  However, in the big data era where you have more than 1 million sets
+ Train : dev : test = 1,000,000 : 10,000 : 10,000 Train : dev : test = 99.5% : 0.25% : 0.25% Train : dev : test = 99.5% : 0.</description>
+    </item>
+    
+    <item>
+      <title>coursera m1w4p2 review</title>
+      <link>https://tjdoc.github.io/posts/2021-01-23-m1w4p2_review/</link>
+      <pubDate>Sat, 23 Jan 2021 20:02:24 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-23-m1w4p2_review/</guid>
+      <description>python stuff learned elementwise min max for relu, you use elementwise maximum function which can be done by
+np.maximum / np.minimum  np.dot for a given numpy array a and b, for a dot product, both expressions are identical
+np.dot(a, b) a.dot(b)  decision boundary plot import matplotlib.pyplot as plt import numpy as np import sklearn import sklearn.datasets import sklearn.linear_model def plot_decision_boundary(model, X, y): # Set min and max values and give it some padding x_min, x_max = X[0, :].</description>
+    </item>
+    
     <item>
       <title>m1w4p2</title>
       <link>https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4p2/</link>
@@ -31,10 +62,11 @@
       <pubDate>Fri, 22 Jan 2021 16:13:24 +0900</pubDate>
       
       <guid>https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4/</guid>
-      <description>Terminology  L number of layers \(n^{[l]}\) number of units in layer l \(a^{[l]}\) activations in layer l, \( a^{[l]} = g^{[l]} (z^{[l]}) \)  Forward propagation in deep network $$ \begin{aligned} Z^{[l]} =&amp;amp; W^{[l]} A^{[l-1]} + b^{[l]} \\ A^{[l]} =&amp;amp; g^{[l]} (Z^{[l]}) \end{aligned} $$
+      <description>Terminology  L number of layers \(n^{[l]}\) number of units in layer l \(a^{[l]}\) activations in layer l, \( a^{[l]} = g^{[l]} (z^{[l]}) \)  Forward propagation in deep network $$ \begin{aligned} Z^{[l]} =&amp;amp; W^{[l]} A^{[l-1]} + b^{[l]} \\
+A^{[l]} =&amp;amp; g^{[l]} (Z^{[l]}) \end{aligned} $$
 where \( A^{[0]} = X \)
 You will need an explict for-loop for computing each layers.
-Getting your matrix dimensions right $$ \begin{aligned} W^{[l]} &amp;amp;: (n^{[l]}, n^{[l-1]}) \\ b^{[l]} &amp;amp;: (n^{[l]}, 1) \\ dW^{[l]} &amp;amp;: (n^{[l]}, n^{[l-1]}) \\ db^{[l]} &amp;amp;: (n^{[l]}, 1) \\ \end{aligned} $$</description>
+Getting your matrix dimensions right $$ \begin{aligned} W^{[l]} &amp;amp;: (n^{[l]}, n^{[l-1]}) \\</description>
     </item>
     
     <item>

@@ -111,7 +111,7 @@ we want \( {\hat y}^{(i)} \approx y^{(i)} \)" /><meta name="twitter:card" conten
 <p>Here, \( \sigma(z) = \frac{1}{1+e^{-z}} \) is the sigmoid function that enforces \( 0 \le {\hat y} \le 1 \)</p>
 <p>Given \( \{{ (x^{(1)} , y^{(1)}) , &hellip;, (x^{(m)} , y^{(m)}) \}} \)</p>
 <p>we want \( {\hat y}^{(i)} \approx y^{(i)} \)</p>
-<p><img class="img-zoomable" src="/coursera/sigmoid.svg" alt="Sigmoid function" />
+<p><img class="img-zoomable" src="/coursera_dl/sigmoid.svg" alt="Sigmoid function" />
 </p>
 <h2 id="loss-function-and-cost-function">Loss function and Cost Function</h2>
 <dl>
@@ -140,7 +140,7 @@ we use a different form for the Loss function.</p>
 (1-y^{(i)} ) \log (1-{\hat y^{(i)}})) \right] $$</p>
 <h2 id="gradient-descent">Gradient Descent</h2>
 <p>We want to find \( w, b \) that minimize \( J(w, b) \). We achieve this with Gradient Descent.</p>
-<p><img class="img-zoomable" src="/coursera/gradient_descent.png" alt="Gradient Descent" />
+<p><img class="img-zoomable" src="/coursera_dl/gradient_descent.png" alt="Gradient Descent" />
 </p>
 <p>then, \( w, b \) can be obtained by</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">for</span> iteration in <span style="color:#fff;font-weight:bold">range</span>(epoch):
@@ -158,7 +158,7 @@ where
 $$ u = bc $$
 $$ v = a + u $$
 $$ J = 3v $$</p>
-<p><img class="img-zoomable" src="/coursera/deriv_computation_graph.jpeg" alt="Derivation Computation Graph" />
+<p><img class="img-zoomable" src="/coursera_dl/deriv_computation_graph.jpeg" alt="Derivation Computation Graph" />
 </p>
 <p>then,</p>
 <p>$$ \frac{dJ}{du} = \frac{dJ}{dv} \frac{dv}{du} = 3*1 = 3 $$</p>
@@ -166,7 +166,7 @@ $$ J = 3v $$</p>
 <p>$$ \frac{dJ}{db} = \frac{dJ}{du} \frac{du}{db} = 3*c = 3c $$</p>
 <p>Computation Graph shows how chain rule is being applied.</p>
 <h2 id="logistic-regression-gradient-descent">Logistic Regression Gradient Descent</h2>
-<p><img class="img-zoomable" src="/coursera/logisticRegGD.jpeg" alt="Logistic Regression Gradient Descent" />
+<p><img class="img-zoomable" src="/coursera_dl/logisticRegGD.jpeg" alt="Logistic Regression Gradient Descent" />
 </p>
 <p>$$ da \equiv \frac{d\mathcal{L(a,y)}}{da} = - \frac{d}{da} \left( y \log a +
 (1-y) \log(1-a) \right) = - \frac{y}{a} + \frac{1-y}{1-a} $$
@@ -372,6 +372,10 @@ provided that the training examples are IID (Identically and Independently Distr
             </span>
             
             <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
+            </span>
+            
+            <span>
                 <a href="/tags/neural-network/">neural network</a>
             </span>
             
@@ -436,6 +440,10 @@ provided that the training examples are IID (Identically and Independently Distr
             
             <span>
                 <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
             </span>
             
             <span>

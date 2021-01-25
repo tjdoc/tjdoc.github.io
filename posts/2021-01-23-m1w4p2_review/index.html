@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.80.0" />
+
+
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
+
+
+<title>coursera m1w4p2 review - ps126.5</title>
+
+
+
+
+<meta name="keywords" content="coursera, neural network" />
+
+
+<meta property="og:title" content="coursera m1w4p2 review" />
+<meta name="twitter:title" content="coursera m1w4p2 review" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tjdoc.github.io/posts/2021-01-23-m1w4p2_review/" /><meta property="og:description" content="python stuff learned elementwise min max for relu, you use elementwise maximum function which can be done by
+np.maximum / np.minimum  np.dot for a given numpy array a and b, for a dot product, both expressions are identical
+np.dot(a, b) a.dot(b)  decision boundary plot import matplotlib.pyplot as plt import numpy as np import sklearn import sklearn.datasets import sklearn.linear_model def plot_decision_boundary(model, X, y): # Set min and max values and give it some padding x_min, x_max = X[0, :]." />
+<meta name="twitter:description" content="python stuff learned elementwise min max for relu, you use elementwise maximum function which can be done by
+np.maximum / np.minimum  np.dot for a given numpy array a and b, for a dot product, both expressions are identical
+np.dot(a, b) a.dot(b)  decision boundary plot import matplotlib.pyplot as plt import numpy as np import sklearn import sklearn.datasets import sklearn.linear_model def plot_decision_boundary(model, X, y): # Set min and max values and give it some padding x_min, x_max = X[0, :]." /><meta name="twitter:card" content="summary" /><meta property="article:published_time" content="2021-01-23T20:02:24+09:00" /><meta property="article:modified_time" content="2021-01-23T20:02:24+09:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://tjdoc.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://tjdoc.github.io/">ps126.5</a>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-23-m1w4p2_review/">coursera m1w4p2 review</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-23</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2 id="python-stuff-learned">python stuff learned</h2>
+<h3 id="elementwise-min-max">elementwise min max</h3>
+<p>for relu, you use elementwise maximum function which can be done by</p>
+<pre><code>np.maximum / np.minimum
+</code></pre>
+<h3 id="npdot">np.dot</h3>
+<p>for a given numpy array a and b, for a dot product, both expressions are identical</p>
+<pre><code>np.dot(a, b)
+a.dot(b)
+</code></pre>
+<h2 id="decision-boundary-plot">decision boundary plot</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> matplotlib.pyplot <span style="color:#fff;font-weight:bold">as</span> plt
+<span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<span style="color:#fff;font-weight:bold">import</span> sklearn
+<span style="color:#fff;font-weight:bold">import</span> sklearn.datasets
+<span style="color:#fff;font-weight:bold">import</span> sklearn.linear_model
+
+<span style="color:#fff;font-weight:bold">def</span> plot_decision_boundary(model, X, y):
+    <span style="color:#007f7f"># Set min and max values and give it some padding</span>
+    x_min, x_max = X[<span style="color:#ff0;font-weight:bold">0</span>, :].min() - <span style="color:#ff0;font-weight:bold">1</span>, X[<span style="color:#ff0;font-weight:bold">0</span>, :].max() + <span style="color:#ff0;font-weight:bold">1</span>
+    y_min, y_max = X[<span style="color:#ff0;font-weight:bold">1</span>, :].min() - <span style="color:#ff0;font-weight:bold">1</span>, X[<span style="color:#ff0;font-weight:bold">1</span>, :].max() + <span style="color:#ff0;font-weight:bold">1</span>
+    h = <span style="color:#ff0;font-weight:bold">0.01</span>
+    <span style="color:#007f7f"># Generate a grid of points with distance h between them</span>
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+    <span style="color:#007f7f"># Predict the function value for the whole grid</span>
+    Z = model(np.c_[xx.ravel(), yy.ravel()])
+    Z = Z.reshape(xx.shape)
+    <span style="color:#007f7f"># Plot the contour and training examples</span>
+    plt.contourf(xx, yy, Z, cmap=plt.cm.Spectral)
+    plt.ylabel(<span style="color:#0ff;font-weight:bold">&#39;x2&#39;</span>)
+    plt.xlabel(<span style="color:#0ff;font-weight:bold">&#39;x1&#39;</span>)
+    plt.scatter(X[<span style="color:#ff0;font-weight:bold">0</span>, :], X[<span style="color:#ff0;font-weight:bold">1</span>, :], c=y, cmap=plt.cm.Spectral)
+</code></pre></div><pre><code>np.c_[arr1, arr2]
+</code></pre>
+<p>acts like column stack, useful especially working with meshgrid.</p>
+<pre><code>[ins] In [21]: aa
+Out[21]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+[ins] In [22]: bb
+Out[22]: array([100, 101, 102, 103, 104, 105, 106, 107, 108, 109])
+
+[ins] In [23]: aa.shape
+Out[23]: (10,)
+
+[ins] In [24]: bb.shape
+Out[24]: (10,)
+
+[ins] In [25]: cc = np.c_[aa,bb]
+
+[ins] In [26]: cc
+Out[26]:
+array([[  0, 100],
+       [  1, 101],
+       [  2, 102],
+       [  3, 103],
+       [  4, 104],
+       [  5, 105],
+       [  6, 106],
+       [  7, 107],
+       [  8, 108],
+       [  9, 109]])
+
+[ins] In [27]: cc.shape
+Out[27]: (10, 2)
+</code></pre>
+<h2 id="neural-network">neural network</h2>
+<p>2 layer neural network layer_dims</p>
+<pre><code>[n_x, n_h, n_y]
+[12288, 7, 1]
+</code></pre>
+<p>cost after 2400 iteration: 0.048554</p>
+<p>4 layer neural network layer_dims</p>
+<pre><code>[12288, 20, 7, 5, 1]
+</code></pre>
+<p>cost after 2400 iteration: 0.026615</p>
+<p>deeper network learns better but it is still unclear how the number of units of the hidden layers are determined.</p>
+
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#python-stuff-learned">python stuff learned</a>
+      <ul>
+        <li><a href="#elementwise-min-max">elementwise min max</a></li>
+        <li><a href="#npdot">np.dot</a></li>
+      </ul>
+    </li>
+    <li><a href="#decision-boundary-plot">decision boundary plot</a></li>
+    <li><a href="#neural-network">neural network</a></li>
+  </ul>
+</nav></div>
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021
+                <a href="https://tjdoc.github.io/"></a>
+                
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.0/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+</body>
+
+</html>

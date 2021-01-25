@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hyperparameter tuning on ps126.5</title>
+    <link>https://tjdoc.github.io/tags/hyperparameter-tuning/</link>
+    <description>Recent content in hyperparameter tuning on ps126.5</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 25 Jan 2021 10:10:50 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/tags/hyperparameter-tuning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Improving Deep Neural Networks m2w1</title>
+      <link>https://tjdoc.github.io/posts/2021-01-24-coursera_m2w1/</link>
+      <pubDate>Mon, 25 Jan 2021 10:10:50 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-24-coursera_m2w1/</guid>
+      <description>Train / dev / test sets Previously:
+ Train: Test = 70% : 30% Train : dev : test = 60% : 20% : 20%  However, in the big data era where you have more than 1 million sets
+ Train : dev : test = 1,000,000 : 10,000 : 10,000 Train : dev : test = 99.5% : 0.25% : 0.25% Train : dev : test = 99.5% : 0.</description>
+    </item>
+    
+  </channel>
+</rss>

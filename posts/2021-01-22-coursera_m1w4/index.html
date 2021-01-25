@@ -26,14 +26,16 @@
 <meta property="og:title" content="Neural Networks and Deep Learning W4: Deepl L-layer neural network" />
 <meta name="twitter:title" content="Neural Networks and Deep Learning W4: Deepl L-layer neural network" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4/" /><meta property="og:description" content="Terminology  L number of layers \(n^{[l]}\) number of units in layer l \(a^{[l]}\) activations in layer l, \( a^{[l]} = g^{[l]} (z^{[l]}) \)  Forward propagation in deep network $$ \begin{aligned} Z^{[l]} =&amp; W^{[l]} A^{[l-1]} &#43; b^{[l]} \\ A^{[l]} =&amp; g^{[l]} (Z^{[l]}) \end{aligned} $$
+<meta property="og:url" content="https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4/" /><meta property="og:description" content="Terminology  L number of layers \(n^{[l]}\) number of units in layer l \(a^{[l]}\) activations in layer l, \( a^{[l]} = g^{[l]} (z^{[l]}) \)  Forward propagation in deep network $$ \begin{aligned} Z^{[l]} =&amp; W^{[l]} A^{[l-1]} &#43; b^{[l]} \\
+A^{[l]} =&amp; g^{[l]} (Z^{[l]}) \end{aligned} $$
 where \( A^{[0]} = X \)
 You will need an explict for-loop for computing each layers.
-Getting your matrix dimensions right $$ \begin{aligned} W^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\ b^{[l]} &amp;: (n^{[l]}, 1) \\ dW^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\ db^{[l]} &amp;: (n^{[l]}, 1) \\ \end{aligned} $$" />
-<meta name="twitter:description" content="Terminology  L number of layers \(n^{[l]}\) number of units in layer l \(a^{[l]}\) activations in layer l, \( a^{[l]} = g^{[l]} (z^{[l]}) \)  Forward propagation in deep network $$ \begin{aligned} Z^{[l]} =&amp; W^{[l]} A^{[l-1]} &#43; b^{[l]} \\ A^{[l]} =&amp; g^{[l]} (Z^{[l]}) \end{aligned} $$
+Getting your matrix dimensions right $$ \begin{aligned} W^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\" />
+<meta name="twitter:description" content="Terminology  L number of layers \(n^{[l]}\) number of units in layer l \(a^{[l]}\) activations in layer l, \( a^{[l]} = g^{[l]} (z^{[l]}) \)  Forward propagation in deep network $$ \begin{aligned} Z^{[l]} =&amp; W^{[l]} A^{[l-1]} &#43; b^{[l]} \\
+A^{[l]} =&amp; g^{[l]} (Z^{[l]}) \end{aligned} $$
 where \( A^{[0]} = X \)
 You will need an explict for-loop for computing each layers.
-Getting your matrix dimensions right $$ \begin{aligned} W^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\ b^{[l]} &amp;: (n^{[l]}, 1) \\ dW^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\ db^{[l]} &amp;: (n^{[l]}, 1) \\ \end{aligned} $$" /><meta name="twitter:card" content="summary" /><meta property="article:published_time" content="2021-01-22T16:13:24+09:00" /><meta property="article:modified_time" content="2021-01-22T16:13:24+09:00" />
+Getting your matrix dimensions right $$ \begin{aligned} W^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\" /><meta name="twitter:card" content="summary" /><meta property="article:published_time" content="2021-01-22T16:13:24+09:00" /><meta property="article:modified_time" content="2021-01-22T16:13:24+09:00" />
 
 
 <style>
@@ -109,7 +111,7 @@ Getting your matrix dimensions right $$ \begin{aligned} W^{[l]} &amp;: (n^{[l]},
 <h2 id="forward-propagation-in-deep-network">Forward propagation in deep network</h2>
 <p>$$
 \begin{aligned}
-Z^{[l]} =&amp; W^{[l]} A^{[l-1]} + b^{[l]} \\
+Z^{[l]} =&amp; W^{[l]} A^{[l-1]} + b^{[l]} \\<br>
 A^{[l]} =&amp; g^{[l]} (Z^{[l]})
 \end{aligned}
 $$</p>
@@ -118,37 +120,37 @@ $$</p>
 <h2 id="getting-your-matrix-dimensions-right">Getting your matrix dimensions right</h2>
 <p>$$
 \begin{aligned}
-W^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\
-b^{[l]} &amp;: (n^{[l]}, 1) \\
-dW^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\
-db^{[l]} &amp;: (n^{[l]}, 1) \\
+W^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\<br>
+b^{[l]} &amp;: (n^{[l]}, 1) \\<br>
+dW^{[l]} &amp;: (n^{[l]}, n^{[l-1]}) \\<br>
+db^{[l]} &amp;: (n^{[l]}, 1) \\<br>
 \end{aligned}
 $$</p>
-<p><img class="img-zoomable" src="/coursera/mat_dimension.jpeg" alt="matrix dimension" />
+<p><img class="img-zoomable" src="/coursera_dl/mat_dimension.jpeg" alt="matrix dimension" />
 </p>
 <p>correction: in the upper left side of the figure, a and z should be swapped, i.e., it should be</p>
 <p>$$ a^{[l]} = g^{[l]}(z^{[l]}) $$</p>
 <h3 id="vectorized-implementation">Vectorized implementation</h3>
 <p>$$
 \begin{aligned}
-Z^{[l]}, A^{[l]} &amp;: (n^{[l]}, m) \\
-l=0, A^{[0]} = X &amp;: (n^{[0]}, m) \\
+Z^{[l]}, A^{[l]} &amp;: (n^{[l]}, m) \\<br>
+l=0, A^{[0]} = X &amp;: (n^{[0]}, m) \\<br>
 dZ^{[l]}, dA^{[l]} &amp;: (n^{[l]}, m)
 \end{aligned}
 $$</p>
-<p><img class="img-zoomable" src="/coursera/mat_dimension.jpeg" alt="matrix dimension" />
+<p><img class="img-zoomable" src="/coursera_dl/mat_dimension.jpeg" alt="matrix dimension" />
 </p>
 <h2 id="building-blocks-of-deep-neural-networks">building blocks of deep neural networks</h2>
-<p><img class="img-zoomable" src="/coursera/fb_dl.jpeg" alt="forward backward propagation building blocks" />
+<p><img class="img-zoomable" src="/coursera_dl/fb_dl.jpeg" alt="forward backward propagation building blocks" />
 </p>
-<p><img class="img-zoomable" src="/coursera/fb_dl2.jpeg" alt="forward backward propagation building blocks 2" />
+<p><img class="img-zoomable" src="/coursera_dl/fb_dl2.jpeg" alt="forward backward propagation building blocks 2" />
 </p>
-<p><img class="img-zoomable" src="/coursera/forward_step.jpeg" alt="forward step" />
+<p><img class="img-zoomable" src="/coursera_dl/forward_step.jpeg" alt="forward step" />
 </p>
-<p><img class="img-zoomable" src="/coursera/backward_step.jpeg" alt="backward step" />
+<p><img class="img-zoomable" src="/coursera_dl/backward_step.jpeg" alt="backward step" />
 </p>
 <p>correction: \(dw^{[l]} = dz^{[l]} * a^{[l-1]T} \) : a should be transposed</p>
-<p><img class="img-zoomable" src="/coursera/fb_summary.jpeg" alt="forward backward summary" />
+<p><img class="img-zoomable" src="/coursera_dl/fb_summary.jpeg" alt="forward backward summary" />
 </p>
 <blockquote>
 <p>A lot of complexity of your learning algorith comes from the data rather than necessarily from your writing thousands and thousands of lines of code.</p>
@@ -156,25 +158,25 @@ $$</p>
 <h3 id="forward-propagation">Forward Propagation</h3>
 <p>$$
 \begin{aligned}
-Z^{[1]} &amp;= W^{[1]} X + b^{[1]} \\
-A^{[1]} &amp;= g^{[1]} (Z^{[1]}) \\
-Z^{[2]} &amp;= W^{[2]} A^{[1]} + b^{[2]} \\
-A^{[2]} &amp;= g^{[2]} (Z^{[2]}) \\
-&amp; \qquad \vdots \\
+Z^{[1]} &amp;= W^{[1]} X + b^{[1]} \\<br>
+A^{[1]} &amp;= g^{[1]} (Z^{[1]}) \\<br>
+Z^{[2]} &amp;= W^{[2]} A^{[1]} + b^{[2]} \\<br>
+A^{[2]} &amp;= g^{[2]} (Z^{[2]}) \\<br>
+&amp; \qquad \vdots \\<br>
 A^{[L]} &amp;= g^{[L]} (Z^{[L]}) = {\hat Y}
 \end{aligned}
 $$</p>
 <h3 id="backward-propagation">Backward Propagation</h3>
 <p>$$
 \begin{aligned}
-dZ^{[L]} &amp;= A^{[L]} -Y \\
-dW^{[L]} &amp;= \frac{1}{m} dZ^{[L]} A^{[L-1]T} \\
-db^{[L]} &amp;= \frac{1}{m} np.sum (dZ^{[L]}, axis = 1, keepdims = True) \\
-dZ^{[L-1]} &amp;= W^{[L]T} dZ^{[L]} * g'^{[L-1]}(Z^{[L-1]}) \\
-&amp; \qquad \vdots \\
-dZ^{[1]} &amp;= W^{[2]} dZ^{[2]} * g'^{[1]} (Z^{[1]}) \\
-dW^{[1]} &amp;= \frac{1}{m} dZ^{[1]} A^{[0]T} \\
-db^{[1]} &amp;= \frac{1}{m} np.sum (dZ^{[1]}, axis = 1, keepdims = True) \\
+dZ^{[L]} &amp;= A^{[L]} -Y \\<br>
+dW^{[L]} &amp;= \frac{1}{m} dZ^{[L]} A^{[L-1]T} \\<br>
+db^{[L]} &amp;= \frac{1}{m} np.sum (dZ^{[L]}, axis = 1, keepdims = True) \\<br>
+dZ^{[L-1]} &amp;= W^{[L]T} dZ^{[L]} * g'^{[L-1]}(Z^{[L-1]}) \\<br>
+&amp; \qquad \vdots \\<br>
+dZ^{[1]} &amp;= W^{[2]} dZ^{[2]} * g'^{[1]} (Z^{[1]}) \\<br>
+dW^{[1]} &amp;= \frac{1}{m} dZ^{[1]} A^{[0]T} \\<br>
+db^{[1]} &amp;= \frac{1}{m} np.sum (dZ^{[1]}, axis = 1, keepdims = True) \\<br>
 \end{aligned}
 $$</p>
 <h2 id="parameters-vs-hyperparameters">Parameters vs Hyperparameters</h2>
@@ -225,6 +227,10 @@ $$</p>
             
             <span>
                 <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
             </span>
             
             <span>
@@ -293,6 +299,10 @@ $$</p>
             
             <span>
                 <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
             </span>
             
             <span>
