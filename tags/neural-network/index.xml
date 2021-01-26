@@ -6,7 +6,18 @@
     <description>Recent content in neural network on ps126.5</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 Jan 2021 16:53:28 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/tags/neural-network/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Jan 2021 10:29:44 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/tags/neural-network/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Optimization Algorithms M2W2</title>
+      <link>https://tjdoc.github.io/posts/2021-01-26-coursera_m2w2/</link>
+      <pubDate>Tue, 26 Jan 2021 10:29:44 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-26-coursera_m2w2/</guid>
+      <description>mini batch gradient descent 1 epoch: pass through training set. In this case, 5000 gradient decsents.
+training with mini batch gradient descent Mini batch Cost function is much more noisier than the batch gradient descent, but nonetheless the overall trend will decrease.
+choosing your mini-batch size  mini-batch size: m \(\implies\) Batch gradient descent  Smooth convergence of the cost Takes too long per iteration   mini-batch size: 1 \(\implies\) Stochastic gradient descent  Does not completely converge (noisy cost minimization) Loses speedup from vectorization   mini-batch size: between 1 and m \(\implies\) best performance in practice  Fastest learning Vectorization (~1000 batch size) Make progress without passing the entire training set    Guidelines for choosing your mini-batch size</description>
+    </item>
+    
     <item>
       <title>coursera m2w1p</title>
       <link>https://tjdoc.github.io/posts/2021-01-25-coursera_m2w1p/</link>
