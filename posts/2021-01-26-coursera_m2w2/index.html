@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.80.0" />
+<meta name="generator" content="Hugo 0.83.1" />
 
 
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
@@ -178,6 +178,60 @@ $$</p>
 <h2 id="gradient-descent-with-momentum">gradient descent with momentum</h2>
 <p><img class="img-zoomable" src="/coursera_dl/gdmomentum.jpeg" alt="momentum" />
 </p>
+<h2 id="rms-prop">rms prop</h2>
+<p><img class="img-zoomable" src="/coursera_dl/rmsprop.jpeg" alt="rms prop" />
+</p>
+<h2 id="adam-optimization-algorithm">Adam optimization algorithm</h2>
+<p><img class="img-zoomable" src="/coursera_dl/adamoptimization.jpeg" alt="adam optimizaiton" />
+</p>
+<p>correction</p>
+<p>$$ S_{db} = \beta_2 S_{db} + (1-\beta_2) db^2 $$</p>
+<p>the square is missing in the figure</p>
+<h3 id="adam-optimization-hyperparameter-choice">Adam optimization hyperparameter choice</h3>
+<p>adam: adaptive moment estimation</p>
+<ul>
+<li>alpma: needs to be tuned</li>
+<li>beta 1: 0.9 (dw)</li>
+<li>beta 2: 0.999 (dw^2)</li>
+<li>epsilon: 10^(-8)</li>
+</ul>
+<h2 id="learning-rate-decay">learning rate decay</h2>
+<table>
+<thead>
+<tr>
+<th>Epoch</th>
+<th>\(\alpha\)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.067</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.05</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.04</td>
+</tr>
+</tbody>
+</table>
+<p>$$ \alpha = \frac{1}{1+decayRate \times epochNum} \alpha_0 $$</p>
+<h2 id="other-learning-rate-decay-methods">other learning rate decay methods</h2>
+<p><img class="img-zoomable" src="/coursera_dl/otherDecay.png" alt="other decay" />
+</p>
+<h2 id="the-problem-of-local-optima">the problem of local optima</h2>
+<p><img class="img-zoomable" src="/coursera_dl/localOptima.jpeg" alt="local optima" />
+</p>
+<h2 id="problem-of-plateaus">problem of plateaus</h2>
+<p><img class="img-zoomable" src="/coursera_Dl/plateaus.jpeg" alt="plateau" />
+</p>
 
     </div>
 </article>
@@ -207,6 +261,14 @@ $$</p>
         <div>
             
             <span>
+                <a href="/tags/bible/">bible</a>
+            </span>
+            
+            <span>
+                <a href="/tags/cnn/">cnn</a>
+            </span>
+            
+            <span>
                 <a href="/tags/coursera/">coursera</a>
             </span>
             
@@ -219,7 +281,23 @@ $$</p>
             </span>
             
             <span>
+                <a href="/tags/neural-networks/">neural networks</a>
+            </span>
+            
+            <span>
+                <a href="/tags/optimization/">optimization</a>
+            </span>
+            
+            <span>
                 <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+            <span>
+                <a href="/tags/regularization/">regularization</a>
+            </span>
+            
+            <span>
+                <a href="/tags/tensorflow/">tensorflow</a>
             </span>
             
         </div>
@@ -234,6 +312,16 @@ $$</p>
     <li><a href="#implementing-exponentially-weighted-averages">implementing exponentially weighted averages</a></li>
     <li><a href="#bias-correction">Bias correction</a></li>
     <li><a href="#gradient-descent-with-momentum">gradient descent with momentum</a></li>
+    <li><a href="#rms-prop">rms prop</a></li>
+    <li><a href="#adam-optimization-algorithm">Adam optimization algorithm</a>
+      <ul>
+        <li><a href="#adam-optimization-hyperparameter-choice">Adam optimization hyperparameter choice</a></li>
+      </ul>
+    </li>
+    <li><a href="#learning-rate-decay">learning rate decay</a></li>
+    <li><a href="#other-learning-rate-decay-methods">other learning rate decay methods</a></li>
+    <li><a href="#the-problem-of-local-optima">the problem of local optima</a></li>
+    <li><a href="#problem-of-plateaus">problem of plateaus</a></li>
   </ul>
 </nav></div>
 </aside>
@@ -271,6 +359,14 @@ $$</p>
         <div>
             
             <span>
+                <a href="/tags/bible/">bible</a>
+            </span>
+            
+            <span>
+                <a href="/tags/cnn/">cnn</a>
+            </span>
+            
+            <span>
                 <a href="/tags/coursera/">coursera</a>
             </span>
             
@@ -283,7 +379,23 @@ $$</p>
             </span>
             
             <span>
+                <a href="/tags/neural-networks/">neural networks</a>
+            </span>
+            
+            <span>
+                <a href="/tags/optimization/">optimization</a>
+            </span>
+            
+            <span>
                 <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+            <span>
+                <a href="/tags/regularization/">regularization</a>
+            </span>
+            
+            <span>
+                <a href="/tags/tensorflow/">tensorflow</a>
             </span>
             
         </div>

@@ -1,139 +1,121 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
+    <loc>https://tjdoc.github.io/tags/bible/</loc>
+    <lastmod>2021-05-13T15:44:52+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/posts/</loc>
+    <lastmod>2021-05-13T15:44:52+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/</loc>
+    <lastmod>2021-05-13T15:44:52+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/tags/</loc>
+    <lastmod>2021-05-13T15:44:52+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/posts/2021-05-13-test/</loc>
+    <lastmod>2021-05-13T15:44:52+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/tags/cnn/</loc>
+    <lastmod>2021-02-02T15:22:09+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/posts/2021-02-02-coursera_m4w2/</loc>
+    <lastmod>2021-02-02T15:22:09+09:00</lastmod>
+  </url><url>
     <loc>https://tjdoc.github.io/tags/coursera/</loc>
-    <lastmod>2021-01-26T10:29:44+09:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-02-02T15:22:09+09:00</lastmod>
+  </url><url>
     <loc>https://tjdoc.github.io/tags/neural-network/</loc>
-    <lastmod>2021-01-26T10:29:44+09:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-02-02T15:22:09+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/posts/2021-02-01-coursera_m4w1/</loc>
+    <lastmod>2021-02-01T11:37:08+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/posts/2021-01-28-coursera_m2w3p/</loc>
+    <lastmod>2021-01-28T23:52:40+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/tags/tensorflow/</loc>
+    <lastmod>2021-01-28T23:52:40+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/tags/hyperparameter-tuning/</loc>
+    <lastmod>2021-01-28T18:19:55+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/posts/2021-01-28-coursera_m2w3/</loc>
+    <lastmod>2021-01-28T18:19:55+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/tags/neural-networks/</loc>
+    <lastmod>2021-01-28T18:19:55+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/tags/regularization/</loc>
+    <lastmod>2021-01-28T18:19:55+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/posts/2021-01-27-coursera_m2w2p/</loc>
+    <lastmod>2021-01-27T16:16:06+09:00</lastmod>
+  </url><url>
+    <loc>https://tjdoc.github.io/tags/optimization/</loc>
+    <lastmod>2021-01-27T16:16:06+09:00</lastmod>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-26-coursera_m2w2/</loc>
     <lastmod>2021-01-26T10:29:44+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tjdoc.github.io/posts/</loc>
-    <lastmod>2021-01-26T10:29:44+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tjdoc.github.io/</loc>
-    <lastmod>2021-01-26T10:29:44+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tjdoc.github.io/tags/</loc>
-    <lastmod>2021-01-26T10:29:44+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-25-coursera_m2w1p/</loc>
     <lastmod>2021-01-25T16:53:28+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tjdoc.github.io/tags/hyperparameter-tuning/</loc>
-    <lastmod>2021-01-25T10:10:50+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-24-coursera_m2w1/</loc>
     <lastmod>2021-01-25T10:10:50+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-23-m1w4p2_review/</loc>
     <lastmod>2021-01-23T20:02:24+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4p2/</loc>
     <lastmod>2021-01-22T21:09:54+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4p1/</loc>
     <lastmod>2021-01-22T18:24:13+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-22-coursera_m1w4/</loc>
     <lastmod>2021-01-22T16:13:24+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/tags/reflection/</loc>
     <lastmod>2021-01-20T10:09:43+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-20-2cor10/</loc>
     <lastmod>2021-01-20T10:09:43+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-19-m1w3_code/</loc>
     <lastmod>2021-01-19T19:12:37+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-19-coursera_m1w3/</loc>
     <lastmod>2021-01-19T10:27:23+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-19-ps27/</loc>
     <lastmod>2021-01-19T06:55:37+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-18-coursera_m1w2_lab/</loc>
     <lastmod>2021-01-18T18:42:17+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-18-coursera_m1w2_code/</loc>
     <lastmod>2021-01-18T14:57:04+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-18-gal69/</loc>
     <lastmod>2021-01-18T00:18:49+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-15-coursera_m1w2/</loc>
     <lastmod>2021-01-15T10:52:30+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-15-ps20/</loc>
     <lastmod>2021-01-15T08:47:21+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-15-sleep/</loc>
     <lastmod>2021-01-15T05:52:58+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-14-coursera_m1w1/</loc>
     <lastmod>2021-01-14T21:06:56+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/posts/2021-01-14-start/</loc>
     <lastmod>2021-01-14T02:38:37+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://tjdoc.github.io/categories/</loc>
   </url>
-  
 </urlset>

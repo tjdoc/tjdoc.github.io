@@ -6,7 +6,17 @@
     <description>Recent content in hyperparameter tuning on ps126.5</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 Jan 2021 10:10:50 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/tags/hyperparameter-tuning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Jan 2021 18:19:55 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/tags/hyperparameter-tuning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Improving Deep Neural Networks M2W3</title>
+      <link>https://tjdoc.github.io/posts/2021-01-28-coursera_m2w3/</link>
+      <pubDate>Thu, 28 Jan 2021 18:19:55 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-28-coursera_m2w3/</guid>
+      <description>Hyperparameters in the order of importance
+ alpha - most important   beta (momentum, default: 0.9) number of hidden units mini-batch size   number of layers learning rate decay beta1, beta2, epsilon (Adam optimization, 0.9, 0.999, 10^-8)  Tuning process  Try random sampling, don&amp;rsquo;t use grid  it is difficult to know in advance which setting will work better   use coarse to fine sampling once you have some idea which range works better - sample that region more densely  picking hyperparameters at random  uniformly random (random version of np.</description>
+    </item>
+    
     <item>
       <title>Improving Deep Neural Networks m2w1</title>
       <link>https://tjdoc.github.io/posts/2021-01-24-coursera_m2w1/</link>

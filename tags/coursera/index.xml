@@ -6,7 +6,57 @@
     <description>Recent content in coursera on ps126.5</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Jan 2021 10:29:44 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/tags/coursera/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 02 Feb 2021 15:22:09 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/tags/coursera/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CNN m4w2</title>
+      <link>https://tjdoc.github.io/posts/2021-02-02-coursera_m4w2/</link>
+      <pubDate>Tue, 02 Feb 2021 15:22:09 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-02-02-coursera_m4w2/</guid>
+      <description>classic networks LeNet-5 AlexNet  many similarities with LeNet5 but much bigger. (10K parameters vs 60M parameters) Uses ReLU instead of traditional sigmoid, tanh Multiple GPUs local response normalization (not used much nowadays)  VGG-16 simplified the nn architechture
+ResNets networks in networks and 1x1 convolutions  pulling layers reduce nh, nw 1x1 convolution lets you reduce (or increase) number of channels  inception network </description>
+    </item>
+    
+    <item>
+      <title>convolutional neural network</title>
+      <link>https://tjdoc.github.io/posts/2021-02-01-coursera_m4w1/</link>
+      <pubDate>Mon, 01 Feb 2021 11:37:08 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-02-01-coursera_m4w1/</guid>
+      <description>Computer vision convolution operator
+summation of the elementwise multiplication with the convolution operator
+ python: conv-forward tensorflow: tf.nn.conv2d keras: conv2d  padding with padding, you can
+ prevent shrinking output prevent throwing away info from edge padding can be as large as you want  Valid and same convolutions  valid: no padding same: pad so that output size is the same as the input size  you may want odd number filters</description>
+    </item>
+    
+    <item>
+      <title>m2w3p tesorflow tutorial</title>
+      <link>https://tjdoc.github.io/posts/2021-01-28-coursera_m2w3p/</link>
+      <pubDate>Thu, 28 Jan 2021 23:52:40 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-28-coursera_m2w3p/</guid>
+      <description>tf_utils.py import h5py import numpy as np import tensorflow as tf import math def load_dataset(): train_dataset = h5py.File(&amp;#39;datasets/train_signs.h5&amp;#39;, &amp;#34;r&amp;#34;) train_set_x_orig = np.array(train_dataset[&amp;#34;train_set_x&amp;#34;][:]) # your train set features train_set_y_orig = np.array(train_dataset[&amp;#34;train_set_y&amp;#34;][:]) # your train set labels test_dataset = h5py.File(&amp;#39;datasets/test_signs.h5&amp;#39;, &amp;#34;r&amp;#34;) test_set_x_orig = np.array(test_dataset[&amp;#34;test_set_x&amp;#34;][:]) # your test set features test_set_y_orig = np.array(test_dataset[&amp;#34;test_set_y&amp;#34;][:]) # your test set labels classes = np.array(test_dataset[&amp;#34;list_classes&amp;#34;][:]) # the list of classes train_set_y_orig = train_set_y_orig.reshape((1, train_set_y_orig.shape[0])) test_set_y_orig = test_set_y_orig.reshape((1, test_set_y_orig.</description>
+    </item>
+    
+    <item>
+      <title>Improving Deep Neural Networks M2W3</title>
+      <link>https://tjdoc.github.io/posts/2021-01-28-coursera_m2w3/</link>
+      <pubDate>Thu, 28 Jan 2021 18:19:55 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-28-coursera_m2w3/</guid>
+      <description>Hyperparameters in the order of importance
+ alpha - most important   beta (momentum, default: 0.9) number of hidden units mini-batch size   number of layers learning rate decay beta1, beta2, epsilon (Adam optimization, 0.9, 0.999, 10^-8)  Tuning process  Try random sampling, don&amp;rsquo;t use grid  it is difficult to know in advance which setting will work better   use coarse to fine sampling once you have some idea which range works better - sample that region more densely  picking hyperparameters at random  uniformly random (random version of np.</description>
+    </item>
+    
+    <item>
+      <title>coursera m2w2p</title>
+      <link>https://tjdoc.github.io/posts/2021-01-27-coursera_m2w2p/</link>
+      <pubDate>Wed, 27 Jan 2021 16:16:06 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-27-coursera_m2w2p/</guid>
+      <description>op utils import numpy as np import matplotlib.pyplot as plt import h5py import scipy.io import sklearn import sklearn.datasets def sigmoid(x): &amp;#34;&amp;#34;&amp;#34; Compute the sigmoid of x Arguments: x -- A scalar or numpy array of any size. Return: s -- sigmoid(x) &amp;#34;&amp;#34;&amp;#34; s = 1/(1+np.exp(-x)) return s def relu(x): &amp;#34;&amp;#34;&amp;#34; Compute the relu of x Arguments: x -- A scalar or numpy array of any size. Return: s -- relu(x) &amp;#34;&amp;#34;&amp;#34; s = np.</description>
+    </item>
+    
     <item>
       <title>Optimization Algorithms M2W2</title>
       <link>https://tjdoc.github.io/posts/2021-01-26-coursera_m2w2/</link>

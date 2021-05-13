@@ -6,11 +6,29 @@
     <description>Recent content in Tags on ps126.5</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Jan 2021 10:29:44 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 13 May 2021 15:44:52 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>bible</title>
+      <link>https://tjdoc.github.io/tags/bible/</link>
+      <pubDate>Thu, 13 May 2021 15:44:52 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/tags/bible/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cnn</title>
+      <link>https://tjdoc.github.io/tags/cnn/</link>
+      <pubDate>Tue, 02 Feb 2021 15:22:09 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/tags/cnn/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>coursera</title>
       <link>https://tjdoc.github.io/tags/coursera/</link>
-      <pubDate>Tue, 26 Jan 2021 10:29:44 +0900</pubDate>
+      <pubDate>Tue, 02 Feb 2021 15:22:09 +0900</pubDate>
       
       <guid>https://tjdoc.github.io/tags/coursera/</guid>
       <description></description>
@@ -19,18 +37,54 @@
     <item>
       <title>neural network</title>
       <link>https://tjdoc.github.io/tags/neural-network/</link>
-      <pubDate>Tue, 26 Jan 2021 10:29:44 +0900</pubDate>
+      <pubDate>Tue, 02 Feb 2021 15:22:09 +0900</pubDate>
       
       <guid>https://tjdoc.github.io/tags/neural-network/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>tensorflow</title>
+      <link>https://tjdoc.github.io/tags/tensorflow/</link>
+      <pubDate>Thu, 28 Jan 2021 23:52:40 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/tags/tensorflow/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>hyperparameter tuning</title>
       <link>https://tjdoc.github.io/tags/hyperparameter-tuning/</link>
-      <pubDate>Mon, 25 Jan 2021 10:10:50 +0900</pubDate>
+      <pubDate>Thu, 28 Jan 2021 18:19:55 +0900</pubDate>
       
       <guid>https://tjdoc.github.io/tags/hyperparameter-tuning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>neural networks</title>
+      <link>https://tjdoc.github.io/tags/neural-networks/</link>
+      <pubDate>Thu, 28 Jan 2021 18:19:55 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/tags/neural-networks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>regularization</title>
+      <link>https://tjdoc.github.io/tags/regularization/</link>
+      <pubDate>Thu, 28 Jan 2021 18:19:55 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/tags/regularization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>optimization</title>
+      <link>https://tjdoc.github.io/tags/optimization/</link>
+      <pubDate>Wed, 27 Jan 2021 16:16:06 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/tags/optimization/</guid>
       <description></description>
     </item>
     

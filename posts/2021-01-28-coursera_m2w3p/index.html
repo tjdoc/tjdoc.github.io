@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.83.1" />
+
+
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
+
+
+<title>m2w3p tesorflow tutorial - ps126.5</title>
+
+
+
+
+<meta name="keywords" content="coursera, tensorflow" />
+
+
+<meta property="og:title" content="m2w3p tesorflow tutorial" />
+<meta name="twitter:title" content="m2w3p tesorflow tutorial" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tjdoc.github.io/posts/2021-01-28-coursera_m2w3p/" /><meta property="og:description" content="tf_utils.py import h5py import numpy as np import tensorflow as tf import math def load_dataset(): train_dataset = h5py.File(&#39;datasets/train_signs.h5&#39;, &#34;r&#34;) train_set_x_orig = np.array(train_dataset[&#34;train_set_x&#34;][:]) # your train set features train_set_y_orig = np.array(train_dataset[&#34;train_set_y&#34;][:]) # your train set labels test_dataset = h5py.File(&#39;datasets/test_signs.h5&#39;, &#34;r&#34;) test_set_x_orig = np.array(test_dataset[&#34;test_set_x&#34;][:]) # your test set features test_set_y_orig = np.array(test_dataset[&#34;test_set_y&#34;][:]) # your test set labels classes = np.array(test_dataset[&#34;list_classes&#34;][:]) # the list of classes train_set_y_orig = train_set_y_orig.reshape((1, train_set_y_orig.shape[0])) test_set_y_orig = test_set_y_orig.reshape((1, test_set_y_orig." />
+<meta name="twitter:description" content="tf_utils.py import h5py import numpy as np import tensorflow as tf import math def load_dataset(): train_dataset = h5py.File(&#39;datasets/train_signs.h5&#39;, &#34;r&#34;) train_set_x_orig = np.array(train_dataset[&#34;train_set_x&#34;][:]) # your train set features train_set_y_orig = np.array(train_dataset[&#34;train_set_y&#34;][:]) # your train set labels test_dataset = h5py.File(&#39;datasets/test_signs.h5&#39;, &#34;r&#34;) test_set_x_orig = np.array(test_dataset[&#34;test_set_x&#34;][:]) # your test set features test_set_y_orig = np.array(test_dataset[&#34;test_set_y&#34;][:]) # your test set labels classes = np.array(test_dataset[&#34;list_classes&#34;][:]) # the list of classes train_set_y_orig = train_set_y_orig.reshape((1, train_set_y_orig.shape[0])) test_set_y_orig = test_set_y_orig.reshape((1, test_set_y_orig." /><meta name="twitter:card" content="summary" /><meta property="article:published_time" content="2021-01-28T23:52:40+09:00" /><meta property="article:modified_time" content="2021-01-28T23:52:40+09:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://tjdoc.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://tjdoc.github.io/">ps126.5</a>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-28-coursera_m2w3p/">m2w3p tesorflow tutorial</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-28</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/tensorflow">tensorflow</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2 id="tf_utilspy">tf_utils.py</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> h5py
+<span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<span style="color:#fff;font-weight:bold">import</span> tensorflow <span style="color:#fff;font-weight:bold">as</span> tf
+<span style="color:#fff;font-weight:bold">import</span> math
+
+<span style="color:#fff;font-weight:bold">def</span> load_dataset():
+    train_dataset = h5py.File(<span style="color:#0ff;font-weight:bold">&#39;datasets/train_signs.h5&#39;</span>, <span style="color:#0ff;font-weight:bold">&#34;r&#34;</span>)
+    train_set_x_orig = np.array(train_dataset[<span style="color:#0ff;font-weight:bold">&#34;train_set_x&#34;</span>][:]) <span style="color:#007f7f"># your train set features</span>
+    train_set_y_orig = np.array(train_dataset[<span style="color:#0ff;font-weight:bold">&#34;train_set_y&#34;</span>][:]) <span style="color:#007f7f"># your train set labels</span>
+
+    test_dataset = h5py.File(<span style="color:#0ff;font-weight:bold">&#39;datasets/test_signs.h5&#39;</span>, <span style="color:#0ff;font-weight:bold">&#34;r&#34;</span>)
+    test_set_x_orig = np.array(test_dataset[<span style="color:#0ff;font-weight:bold">&#34;test_set_x&#34;</span>][:]) <span style="color:#007f7f"># your test set features</span>
+    test_set_y_orig = np.array(test_dataset[<span style="color:#0ff;font-weight:bold">&#34;test_set_y&#34;</span>][:]) <span style="color:#007f7f"># your test set labels</span>
+
+    classes = np.array(test_dataset[<span style="color:#0ff;font-weight:bold">&#34;list_classes&#34;</span>][:]) <span style="color:#007f7f"># the list of classes</span>
+    
+    train_set_y_orig = train_set_y_orig.reshape((<span style="color:#ff0;font-weight:bold">1</span>, train_set_y_orig.shape[<span style="color:#ff0;font-weight:bold">0</span>]))
+    test_set_y_orig = test_set_y_orig.reshape((<span style="color:#ff0;font-weight:bold">1</span>, test_set_y_orig.shape[<span style="color:#ff0;font-weight:bold">0</span>]))
+    
+    <span style="color:#fff;font-weight:bold">return</span> train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
+
+
+<span style="color:#fff;font-weight:bold">def</span> random_mini_batches(X, Y, mini_batch_size = <span style="color:#ff0;font-weight:bold">64</span>, seed = <span style="color:#ff0;font-weight:bold">0</span>):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Creates a list of random minibatches from (X, Y)
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    X -- input data, of shape (input size, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    Y -- true &#34;label&#34; vector (containing 0 if cat, 1 if non-cat), of shape (1, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    mini_batch_size - size of the mini-batches, integer
+</span><span style="color:#0ff;font-weight:bold">    seed -- this is only for the purpose of grading, so that you&#39;re &#34;random minibatches are the same as ours.
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    mini_batches -- list of synchronous (mini_batch_X, mini_batch_Y)
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    m = X.shape[<span style="color:#ff0;font-weight:bold">1</span>]                  <span style="color:#007f7f"># number of training examples</span>
+    mini_batches = []
+    np.random.seed(seed)
+    
+    <span style="color:#007f7f"># Step 1: Shuffle (X, Y)</span>
+    permutation = <span style="color:#fff;font-weight:bold">list</span>(np.random.permutation(m))
+    shuffled_X = X[:, permutation]
+    shuffled_Y = Y[:, permutation].reshape((Y.shape[<span style="color:#ff0;font-weight:bold">0</span>],m))
+
+    <span style="color:#007f7f"># Step 2: Partition (shuffled_X, shuffled_Y). Minus the end case.</span>
+    num_complete_minibatches = math.floor(m/mini_batch_size) <span style="color:#007f7f"># number of mini batches of size mini_batch_size in your partitionning</span>
+    <span style="color:#fff;font-weight:bold">for</span> k in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">0</span>, num_complete_minibatches):
+        mini_batch_X = shuffled_X[:, k * mini_batch_size : k * mini_batch_size + mini_batch_size]
+        mini_batch_Y = shuffled_Y[:, k * mini_batch_size : k * mini_batch_size + mini_batch_size]
+        mini_batch = (mini_batch_X, mini_batch_Y)
+        mini_batches.append(mini_batch)
+    
+    <span style="color:#007f7f"># Handling the end case (last mini-batch &lt; mini_batch_size)</span>
+    <span style="color:#fff;font-weight:bold">if</span> m % mini_batch_size != <span style="color:#ff0;font-weight:bold">0</span>:
+        mini_batch_X = shuffled_X[:, num_complete_minibatches * mini_batch_size : m]
+        mini_batch_Y = shuffled_Y[:, num_complete_minibatches * mini_batch_size : m]
+        mini_batch = (mini_batch_X, mini_batch_Y)
+        mini_batches.append(mini_batch)
+    
+    <span style="color:#fff;font-weight:bold">return</span> mini_batches
+
+<span style="color:#fff;font-weight:bold">def</span> convert_to_one_hot(Y, C):
+    Y = np.eye(C)[Y.reshape(-<span style="color:#ff0;font-weight:bold">1</span>)].T
+    <span style="color:#fff;font-weight:bold">return</span> Y
+
+
+<span style="color:#fff;font-weight:bold">def</span> predict(X, parameters):
+    
+    W1 = tf.convert_to_tensor(parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>])
+    b1 = tf.convert_to_tensor(parameters[<span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>])
+    W2 = tf.convert_to_tensor(parameters[<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>])
+    b2 = tf.convert_to_tensor(parameters[<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>])
+    W3 = tf.convert_to_tensor(parameters[<span style="color:#0ff;font-weight:bold">&#34;W3&#34;</span>])
+    b3 = tf.convert_to_tensor(parameters[<span style="color:#0ff;font-weight:bold">&#34;b3&#34;</span>])
+    
+    params = {<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>: W1,
+              <span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>: b1,
+              <span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>: W2,
+              <span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>: b2,
+              <span style="color:#0ff;font-weight:bold">&#34;W3&#34;</span>: W3,
+              <span style="color:#0ff;font-weight:bold">&#34;b3&#34;</span>: b3}
+    
+    x = tf.placeholder(<span style="color:#0ff;font-weight:bold">&#34;float&#34;</span>, [<span style="color:#ff0;font-weight:bold">12288</span>, <span style="color:#ff0;font-weight:bold">1</span>])
+    
+    z3 = forward_propagation_for_predict(x, params)
+    p = tf.argmax(z3)
+    
+    sess = tf.Session()
+    prediction = sess.run(p, feed_dict = {x: X})
+        
+    <span style="color:#fff;font-weight:bold">return</span> prediction
+
+<span style="color:#fff;font-weight:bold">def</span> forward_propagation_for_predict(X, parameters):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implements the forward propagation for the model: LINEAR -&gt; RELU -&gt; LINEAR -&gt; RELU -&gt; LINEAR -&gt; SOFTMAX
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    X -- input dataset placeholder, of shape (input size, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your parameters &#34;W1&#34;, &#34;b1&#34;, &#34;W2&#34;, &#34;b2&#34;, &#34;W3&#34;, &#34;b3&#34;
+</span><span style="color:#0ff;font-weight:bold">                  the shapes are given in initialize_parameters
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    Z3 -- the output of the last LINEAR unit
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    <span style="color:#007f7f"># Retrieve the parameters from the dictionary &#34;parameters&#34; </span>
+    W1 = parameters[<span style="color:#0ff;font-weight:bold">&#39;W1&#39;</span>]
+    b1 = parameters[<span style="color:#0ff;font-weight:bold">&#39;b1&#39;</span>]
+    W2 = parameters[<span style="color:#0ff;font-weight:bold">&#39;W2&#39;</span>]
+    b2 = parameters[<span style="color:#0ff;font-weight:bold">&#39;b2&#39;</span>]
+    W3 = parameters[<span style="color:#0ff;font-weight:bold">&#39;W3&#39;</span>]
+    b3 = parameters[<span style="color:#0ff;font-weight:bold">&#39;b3&#39;</span>] 
+                                                           <span style="color:#007f7f"># Numpy Equivalents:</span>
+    Z1 = tf.add(tf.matmul(W1, X), b1)                      <span style="color:#007f7f"># Z1 = np.dot(W1, X) + b1</span>
+    A1 = tf.nn.relu(Z1)                                    <span style="color:#007f7f"># A1 = relu(Z1)</span>
+    Z2 = tf.add(tf.matmul(W2, A1), b2)                     <span style="color:#007f7f"># Z2 = np.dot(W2, a1) + b2</span>
+    A2 = tf.nn.relu(Z2)                                    <span style="color:#007f7f"># A2 = relu(Z2)</span>
+    Z3 = tf.add(tf.matmul(W3, A2), b3)                     <span style="color:#007f7f"># Z3 = np.dot(W3,Z2) + b3</span>
+    
+    <span style="color:#fff;font-weight:bold">return</span> Z3
+</code></pre></div><h2 id="improv_utilspy">improv_utils.py</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> h5py
+<span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<span style="color:#fff;font-weight:bold">import</span> tensorflow <span style="color:#fff;font-weight:bold">as</span> tf
+<span style="color:#fff;font-weight:bold">import</span> math
+
+<span style="color:#fff;font-weight:bold">def</span> load_dataset():
+    train_dataset = h5py.File(<span style="color:#0ff;font-weight:bold">&#39;datasets/train_signs.h5&#39;</span>, <span style="color:#0ff;font-weight:bold">&#34;r&#34;</span>)
+    train_set_x_orig = np.array(train_dataset[<span style="color:#0ff;font-weight:bold">&#34;train_set_x&#34;</span>][:]) <span style="color:#007f7f"># your train set features</span>
+    train_set_y_orig = np.array(train_dataset[<span style="color:#0ff;font-weight:bold">&#34;train_set_y&#34;</span>][:]) <span style="color:#007f7f"># your train set labels</span>
+
+    test_dataset = h5py.File(<span style="color:#0ff;font-weight:bold">&#39;datasets/test_signs.h5&#39;</span>, <span style="color:#0ff;font-weight:bold">&#34;r&#34;</span>)
+    test_set_x_orig = np.array(test_dataset[<span style="color:#0ff;font-weight:bold">&#34;test_set_x&#34;</span>][:]) <span style="color:#007f7f"># your test set features</span>
+    test_set_y_orig = np.array(test_dataset[<span style="color:#0ff;font-weight:bold">&#34;test_set_y&#34;</span>][:]) <span style="color:#007f7f"># your test set labels</span>
+
+    classes = np.array(test_dataset[<span style="color:#0ff;font-weight:bold">&#34;list_classes&#34;</span>][:]) <span style="color:#007f7f"># the list of classes</span>
+    
+    train_set_y_orig = train_set_y_orig.reshape((<span style="color:#ff0;font-weight:bold">1</span>, train_set_y_orig.shape[<span style="color:#ff0;font-weight:bold">0</span>]))
+    test_set_y_orig = test_set_y_orig.reshape((<span style="color:#ff0;font-weight:bold">1</span>, test_set_y_orig.shape[<span style="color:#ff0;font-weight:bold">0</span>]))
+    
+    <span style="color:#fff;font-weight:bold">return</span> train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
+
+
+<span style="color:#fff;font-weight:bold">def</span> random_mini_batches(X, Y, mini_batch_size = <span style="color:#ff0;font-weight:bold">64</span>, seed = <span style="color:#ff0;font-weight:bold">0</span>):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Creates a list of random minibatches from (X, Y)
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    X -- input data, of shape (input size, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    Y -- true &#34;label&#34; vector (containing 0 if cat, 1 if non-cat), of shape (1, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    mini_batch_size - size of the mini-batches, integer
+</span><span style="color:#0ff;font-weight:bold">    seed -- this is only for the purpose of grading, so that you&#39;re &#34;random minibatches are the same as ours.
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    mini_batches -- list of synchronous (mini_batch_X, mini_batch_Y)
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    m = X.shape[<span style="color:#ff0;font-weight:bold">1</span>]                  <span style="color:#007f7f"># number of training examples</span>
+    mini_batches = []
+    np.random.seed(seed)
+    
+    <span style="color:#007f7f"># Step 1: Shuffle (X, Y)</span>
+    permutation = <span style="color:#fff;font-weight:bold">list</span>(np.random.permutation(m))
+    shuffled_X = X[:, permutation]
+    shuffled_Y = Y[:, permutation].reshape((Y.shape[<span style="color:#ff0;font-weight:bold">0</span>],m))
+
+    <span style="color:#007f7f"># Step 2: Partition (shuffled_X, shuffled_Y). Minus the end case.</span>
+    num_complete_minibatches = math.floor(m/mini_batch_size) <span style="color:#007f7f"># number of mini batches of size mini_batch_size in your partitionning</span>
+    <span style="color:#fff;font-weight:bold">for</span> k in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">0</span>, num_complete_minibatches):
+        mini_batch_X = shuffled_X[:, k * mini_batch_size : k * mini_batch_size + mini_batch_size]
+        mini_batch_Y = shuffled_Y[:, k * mini_batch_size : k * mini_batch_size + mini_batch_size]
+        mini_batch = (mini_batch_X, mini_batch_Y)
+        mini_batches.append(mini_batch)
+    
+    <span style="color:#007f7f"># Handling the end case (last mini-batch &lt; mini_batch_size)</span>
+    <span style="color:#fff;font-weight:bold">if</span> m % mini_batch_size != <span style="color:#ff0;font-weight:bold">0</span>:
+        mini_batch_X = shuffled_X[:, num_complete_minibatches * mini_batch_size : m]
+        mini_batch_Y = shuffled_Y[:, num_complete_minibatches * mini_batch_size : m]
+        mini_batch = (mini_batch_X, mini_batch_Y)
+        mini_batches.append(mini_batch)
+    
+    <span style="color:#fff;font-weight:bold">return</span> mini_batches
+
+<span style="color:#fff;font-weight:bold">def</span> convert_to_one_hot(Y, C):
+    Y = np.eye(C)[Y.reshape(-<span style="color:#ff0;font-weight:bold">1</span>)].T
+    <span style="color:#fff;font-weight:bold">return</span> Y
+
+<span style="color:#fff;font-weight:bold">def</span> predict(X, parameters):
+    
+    W1 = tf.convert_to_tensor(parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>])
+    b1 = tf.convert_to_tensor(parameters[<span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>])
+    W2 = tf.convert_to_tensor(parameters[<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>])
+    b2 = tf.convert_to_tensor(parameters[<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>])
+    W3 = tf.convert_to_tensor(parameters[<span style="color:#0ff;font-weight:bold">&#34;W3&#34;</span>])
+    b3 = tf.convert_to_tensor(parameters[<span style="color:#0ff;font-weight:bold">&#34;b3&#34;</span>])
+    
+    params = {<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>: W1,
+              <span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>: b1,
+              <span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>: W2,
+              <span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>: b2,
+              <span style="color:#0ff;font-weight:bold">&#34;W3&#34;</span>: W3,
+              <span style="color:#0ff;font-weight:bold">&#34;b3&#34;</span>: b3}
+    
+    x = tf.placeholder(<span style="color:#0ff;font-weight:bold">&#34;float&#34;</span>, [<span style="color:#ff0;font-weight:bold">12288</span>, <span style="color:#ff0;font-weight:bold">1</span>])
+    
+    z3 = forward_propagation(x, params)
+    p = tf.argmax(z3)
+    
+    <span style="color:#fff;font-weight:bold">with</span> tf.Session() <span style="color:#fff;font-weight:bold">as</span> sess:
+        prediction = sess.run(p, feed_dict = {x: X})
+        
+    <span style="color:#fff;font-weight:bold">return</span> prediction
+    
+
+<span style="color:#fff;font-weight:bold">def</span> create_placeholders(n_x, n_y):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Creates the placeholders for the tensorflow session.
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    n_x -- scalar, size of an image vector (num_px * num_px = 64 * 64 * 3 = 12288)
+</span><span style="color:#0ff;font-weight:bold">    n_y -- scalar, number of classes (from 0 to 5, so -&gt; 6)
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    X -- placeholder for the data input, of shape [n_x, None] and dtype &#34;float&#34;
+</span><span style="color:#0ff;font-weight:bold">    Y -- placeholder for the input labels, of shape [n_y, None] and dtype &#34;float&#34;
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Tips:
+</span><span style="color:#0ff;font-weight:bold">    - You will use None because it let&#39;s us be flexible on the number of examples you will for the placeholders.
+</span><span style="color:#0ff;font-weight:bold">      In fact, the number of examples during test/train is different.
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+
+    <span style="color:#007f7f">### START CODE HERE ### (approx. 2 lines)</span>
+    X = tf.placeholder(<span style="color:#0ff;font-weight:bold">&#34;float&#34;</span>, [n_x, None])
+    Y = tf.placeholder(<span style="color:#0ff;font-weight:bold">&#34;float&#34;</span>, [n_y, None])
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">return</span> X, Y
+
+
+<span style="color:#fff;font-weight:bold">def</span> initialize_parameters():
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Initializes parameters to build a neural network with tensorflow. The shapes are:
+</span><span style="color:#0ff;font-weight:bold">                        W1 : [25, 12288]
+</span><span style="color:#0ff;font-weight:bold">                        b1 : [25, 1]
+</span><span style="color:#0ff;font-weight:bold">                        W2 : [12, 25]
+</span><span style="color:#0ff;font-weight:bold">                        b2 : [12, 1]
+</span><span style="color:#0ff;font-weight:bold">                        W3 : [6, 12]
+</span><span style="color:#0ff;font-weight:bold">                        b3 : [6, 1]
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- a dictionary of tensors containing W1, b1, W2, b2, W3, b3
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    tf.set_random_seed(<span style="color:#ff0;font-weight:bold">1</span>)                              <span style="color:#007f7f"># so that your &#34;random&#34; numbers match ours</span>
+        
+    <span style="color:#007f7f">### START CODE HERE ### (approx. 6 lines of code)</span>
+    W1 = tf.get_variable(<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>, [<span style="color:#ff0;font-weight:bold">25</span>,<span style="color:#ff0;font-weight:bold">12288</span>], initializer = tf.contrib.layers.xavier_initializer(seed = <span style="color:#ff0;font-weight:bold">1</span>))
+    b1 = tf.get_variable(<span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>, [<span style="color:#ff0;font-weight:bold">25</span>,<span style="color:#ff0;font-weight:bold">1</span>], initializer = tf.zeros_initializer())
+    W2 = tf.get_variable(<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>, [<span style="color:#ff0;font-weight:bold">12</span>,<span style="color:#ff0;font-weight:bold">25</span>], initializer = tf.contrib.layers.xavier_initializer(seed = <span style="color:#ff0;font-weight:bold">1</span>))
+    b2 = tf.get_variable(<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>, [<span style="color:#ff0;font-weight:bold">12</span>,<span style="color:#ff0;font-weight:bold">1</span>], initializer = tf.zeros_initializer())
+    W3 = tf.get_variable(<span style="color:#0ff;font-weight:bold">&#34;W3&#34;</span>, [<span style="color:#ff0;font-weight:bold">6</span>,<span style="color:#ff0;font-weight:bold">12</span>], initializer = tf.contrib.layers.xavier_initializer(seed = <span style="color:#ff0;font-weight:bold">1</span>))
+    b3 = tf.get_variable(<span style="color:#0ff;font-weight:bold">&#34;b3&#34;</span>, [<span style="color:#ff0;font-weight:bold">6</span>,<span style="color:#ff0;font-weight:bold">1</span>], initializer = tf.zeros_initializer())
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+
+    parameters = {<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>: W1,
+                  <span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>: b1,
+                  <span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>: W2,
+                  <span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>: b2,
+                  <span style="color:#0ff;font-weight:bold">&#34;W3&#34;</span>: W3,
+                  <span style="color:#0ff;font-weight:bold">&#34;b3&#34;</span>: b3}
+    
+    <span style="color:#fff;font-weight:bold">return</span> parameters
+
+
+<span style="color:#fff;font-weight:bold">def</span> compute_cost(z3, Y):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Computes the cost
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    z3 -- output of forward propagation (output of the last LINEAR unit), of shape (10, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    Y -- &#34;true&#34; labels vector placeholder, same shape as z3
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    cost - Tensor of the cost function
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    <span style="color:#007f7f"># to fit the tensorflow requirement for tf.nn.softmax_cross_entropy_with_logits()</span>
+    logits = tf.transpose(z3)
+    labels = tf.transpose(Y)
+    
+    <span style="color:#007f7f">### START CODE HERE ### (1 line of code)</span>
+    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits = logits, labels = labels))
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">return</span> cost
+
+
+
+
+
+
+
+<span style="color:#fff;font-weight:bold">def</span> model(X_train, Y_train, X_test, Y_test, learning_rate = <span style="color:#ff0;font-weight:bold">0.0001</span>,
+          num_epochs = <span style="color:#ff0;font-weight:bold">1500</span>, minibatch_size = <span style="color:#ff0;font-weight:bold">32</span>, print_cost = True):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implements a three-layer tensorflow neural network: LINEAR-&gt;RELU-&gt;LINEAR-&gt;RELU-&gt;LINEAR-&gt;SOFTMAX.
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    X_train -- training set, of shape (input size = 12288, number of training examples = 1080)
+</span><span style="color:#0ff;font-weight:bold">    Y_train -- test set, of shape (output size = 6, number of training examples = 1080)
+</span><span style="color:#0ff;font-weight:bold">    X_test -- training set, of shape (input size = 12288, number of training examples = 120)
+</span><span style="color:#0ff;font-weight:bold">    Y_test -- test set, of shape (output size = 6, number of test examples = 120)
+</span><span style="color:#0ff;font-weight:bold">    learning_rate -- learning rate of the optimization
+</span><span style="color:#0ff;font-weight:bold">    num_epochs -- number of epochs of the optimization loop
+</span><span style="color:#0ff;font-weight:bold">    minibatch_size -- size of a minibatch
+</span><span style="color:#0ff;font-weight:bold">    print_cost -- True to print the cost every 100 epochs
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- parameters learnt by the model. They can then be used to predict.
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    ops.reset_default_graph()                         <span style="color:#007f7f"># to be able to rerun the model without overwriting tf variables</span>
+    tf.set_random_seed(<span style="color:#ff0;font-weight:bold">1</span>)                             <span style="color:#007f7f"># to keep consistent results</span>
+    seed = <span style="color:#ff0;font-weight:bold">3</span>                                          <span style="color:#007f7f"># to keep consistent results</span>
+    (n_x, m) = X_train.shape                          <span style="color:#007f7f"># (n_x: input size, m : number of examples in the train set)</span>
+    n_y = Y_train.shape[<span style="color:#ff0;font-weight:bold">0</span>]                                  <span style="color:#007f7f"># n_y : output size</span>
+    costs = []                                        <span style="color:#007f7f"># To keep track of the cost</span>
+    
+    <span style="color:#007f7f"># Create Placeholders of shape (n_x, n_y)</span>
+    <span style="color:#007f7f">### START CODE HERE ### (1 line)</span>
+    X, Y = create_placeholders(n_x, n_y)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+
+    <span style="color:#007f7f"># Initialize parameters</span>
+    <span style="color:#007f7f">### START CODE HERE ### (1 line)</span>
+    parameters = initialize_parameters()
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Forward propagation: Build the forward propagation in the tensorflow graph</span>
+    <span style="color:#007f7f">### START CODE HERE ### (1 line)</span>
+    z3 = forward_propagation(X, parameters)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Cost function: Add cost function to tensorflow graph</span>
+    <span style="color:#007f7f">### START CODE HERE ### (1 line)</span>
+    cost = compute_cost(z3, Y)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Backpropagation: Define the tensorflow optimizer. Use an AdamOptimizer.</span>
+    <span style="color:#007f7f">### START CODE HERE ### (1 line)</span>
+    optimizer = tf.train.AdamOptimizer(learning_rate = learning_rate).minimize(cost)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Initialize all the variables</span>
+    init = tf.global_variables_initializer()
+
+    <span style="color:#007f7f"># Start the session to compute the tensorflow graph</span>
+    <span style="color:#fff;font-weight:bold">with</span> tf.Session() <span style="color:#fff;font-weight:bold">as</span> sess:
+        
+        <span style="color:#007f7f"># Run the initialization</span>
+        sess.run(init)
+        
+        <span style="color:#007f7f"># Do the training loop</span>
+        <span style="color:#fff;font-weight:bold">for</span> epoch in <span style="color:#fff;font-weight:bold">range</span>(num_epochs):
+
+            minibatch_cost = <span style="color:#ff0;font-weight:bold">0.</span>
+            num_minibatches = <span style="color:#fff;font-weight:bold">int</span>(m / minibatch_size) <span style="color:#007f7f"># number of minibatches of size minibatch_size in the train set</span>
+            seed = seed + <span style="color:#ff0;font-weight:bold">1</span>
+            minibatches = random_mini_batches(X_train, Y_train, minibatch_size, seed)
+
+            <span style="color:#fff;font-weight:bold">for</span> minibatch in minibatches:
+
+                <span style="color:#007f7f"># Select a minibatch</span>
+                (minibatch_X, minibatch_Y) = minibatch
+                
+                <span style="color:#007f7f"># IMPORTANT: The line that runs the graph on a minibatch.</span>
+                <span style="color:#007f7f"># Run the session to execute the optimizer and the cost, the feedict should contain a minibatch for (X,Y).</span>
+                <span style="color:#007f7f">### START CODE HERE ### (1 line)</span>
+                _ , temp_cost = sess.run([optimizer, cost], feed_dict={X: minibatch_X, Y: minibatch_Y})
+                <span style="color:#007f7f">### END CODE HERE ###</span>
+                
+                minibatch_cost += temp_cost / num_minibatches
+
+            <span style="color:#007f7f"># Print the cost every epoch</span>
+            <span style="color:#fff;font-weight:bold">if</span> print_cost == True and epoch % <span style="color:#ff0;font-weight:bold">100</span> == <span style="color:#ff0;font-weight:bold">0</span>:
+                <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Cost after epoch </span><span style="color:#0ff;font-weight:bold">%i</span><span style="color:#0ff;font-weight:bold">: </span><span style="color:#0ff;font-weight:bold">%f</span><span style="color:#0ff;font-weight:bold">&#34;</span> % (epoch, minibatch_cost))
+            <span style="color:#fff;font-weight:bold">if</span> print_cost == True and epoch % <span style="color:#ff0;font-weight:bold">5</span> == <span style="color:#ff0;font-weight:bold">0</span>:
+                costs.append(minibatch_cost)
+                
+        <span style="color:#007f7f"># plot the cost</span>
+        plt.plot(np.squeeze(costs))
+        plt.ylabel(<span style="color:#0ff;font-weight:bold">&#39;cost&#39;</span>)
+        plt.xlabel(<span style="color:#0ff;font-weight:bold">&#39;iterations (per tens)&#39;</span>)
+        plt.title(<span style="color:#0ff;font-weight:bold">&#34;Learning rate =&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(learning_rate))
+        plt.show()
+
+        <span style="color:#007f7f"># lets save the parameters in a variable</span>
+        parameters = sess.run(parameters)
+        <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Parameters have been trained!&#34;</span>)
+
+        <span style="color:#007f7f"># Calculate the correct predictions</span>
+        correct_prediction = tf.equal(tf.argmax(z3), tf.argmax(Y))
+
+        <span style="color:#007f7f"># Calculate accuracy on the test set</span>
+        accuracy = tf.reduce_mean(tf.cast(correct_prediction, <span style="color:#0ff;font-weight:bold">&#34;float&#34;</span>))
+
+        <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Train Accuracy:&#34;</span>, accuracy.eval({X: X_train, Y: Y_train}))
+        <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Test Accuracy:&#34;</span>, accuracy.eval({X: X_test, Y: Y_test}))
+        
+        <span style="color:#fff;font-weight:bold">return</span> parameters
+</code></pre></div><h2 id="tensorflow-tutorial">TensorFlow Tutorial</h2>
+<p>Welcome to this week&rsquo;s programming assignment. Until now, you&rsquo;ve always used numpy to build neural networks. Now we will step you through a deep learning framework that will allow you to build neural networks more easily. Machine learning frameworks like TensorFlow, PaddlePaddle, Torch, Caffe, Keras, and many others can speed up your machine learning development significantly. All of these frameworks also have a lot of documentation, which you should feel free to read. In this assignment, you will learn to do the following in TensorFlow:</p>
+<ul>
+<li>Initialize variables</li>
+<li>Start your own session</li>
+<li>Train algorithms</li>
+<li>Implement a Neural Network</li>
+</ul>
+<p>Programing frameworks can not only shorten your coding time, but sometimes also perform optimizations that speed up your code.</p>
+<h4 id="if-you-were-working-on-the-notebook-before-this-update">If you were working on the notebook before this update&hellip;</h4>
+<ul>
+<li>The current notebook is version &ldquo;v3b&rdquo;.</li>
+<li>You can find your original work saved in the notebook with the previous version name (it may be either TensorFlow Tutorial version 3&quot; or &ldquo;TensorFlow Tutorial version 3a.)</li>
+<li>To view the file directory, click on the &ldquo;Coursera&rdquo; icon in the top left of this notebook.</li>
+</ul>
+<h4 id="list-of-updates">List of updates</h4>
+<ul>
+<li>forward_propagation instruction now says &lsquo;A1&rsquo; instead of &lsquo;a1&rsquo; in the formula for Z2;<br>
+and are updated to say &lsquo;A2&rsquo; instead of &lsquo;Z2&rsquo; in the formula for Z3.</li>
+<li>create_placeholders instruction refer to the data type &ldquo;tf.float32&rdquo; instead of float.</li>
+<li>in the model function, the x axis of the plot now says &ldquo;iterations (per fives)&rdquo; instead of iterations(per tens)</li>
+<li>In the linear_function, comments remind students to create the variables in the order suggested by the starter code.  The comments are updated to reflect this order.</li>
+<li>The test of the cost function now creates the logits without passing them through a sigmoid function (since the cost function will include the sigmoid in the built-in tensorflow function).</li>
+<li>In the &lsquo;model&rsquo; function, the minibatch_cost is now divided by minibatch_size (instead of num_minibatches).</li>
+<li>Updated print statements and &lsquo;expected output that are used to check functions, for easier visual comparison.</li>
+</ul>
+<h2 id="1---exploring-the-tensorflow-library">1 - Exploring the Tensorflow Library</h2>
+<p>To start, you will import the library:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> math
+<span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<span style="color:#fff;font-weight:bold">import</span> h5py
+<span style="color:#fff;font-weight:bold">import</span> matplotlib.pyplot <span style="color:#fff;font-weight:bold">as</span> plt
+<span style="color:#fff;font-weight:bold">import</span> tensorflow <span style="color:#fff;font-weight:bold">as</span> tf
+<span style="color:#fff;font-weight:bold">from</span> tensorflow.python.framework <span style="color:#fff;font-weight:bold">import</span> ops
+<span style="color:#fff;font-weight:bold">from</span> tf_utils <span style="color:#fff;font-weight:bold">import</span> load_dataset, random_mini_batches, convert_to_one_hot, predict
+
+%matplotlib inline
+np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
+</code></pre></div><p>Now that you have imported the library, we will walk you through its different applications. You will start with an example, where we compute for you the loss of one training example.
+$$loss = \mathcal{L}(\hat{y}, y) = (\hat y^{(i)} - y^{(i)})^2 \tag{1}$$</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">y_hat = tf.constant(<span style="color:#ff0;font-weight:bold">36</span>, name=<span style="color:#0ff;font-weight:bold">&#39;y_hat&#39;</span>)            <span style="color:#007f7f"># Define y_hat constant. Set to 36.</span>
+y = tf.constant(<span style="color:#ff0;font-weight:bold">39</span>, name=<span style="color:#0ff;font-weight:bold">&#39;y&#39;</span>)                    <span style="color:#007f7f"># Define y. Set to 39</span>
+
+loss = tf.Variable((y - y_hat)**<span style="color:#ff0;font-weight:bold">2</span>, name=<span style="color:#0ff;font-weight:bold">&#39;loss&#39;</span>)  <span style="color:#007f7f"># Create a variable for the loss</span>
+
+init = tf.global_variables_initializer()         <span style="color:#007f7f"># When init is run later (session.run(init)),</span>
+                                                 <span style="color:#007f7f"># the loss variable will be initialized and ready to be computed</span>
+<span style="color:#fff;font-weight:bold">with</span> tf.Session() <span style="color:#fff;font-weight:bold">as</span> session:                    <span style="color:#007f7f"># Create a session and print the output</span>
+    session.run(init)                            <span style="color:#007f7f"># Initializes the variables</span>
+    <span style="color:#fff;font-weight:bold">print</span>(session.run(loss))                     <span style="color:#007f7f"># Prints the loss</span>
+</code></pre></div><pre><code>9
+</code></pre>
+<p>Writing and running programs in TensorFlow has the following steps:</p>
+<ol>
+<li>Create Tensors (variables) that are not yet executed/evaluated.</li>
+<li>Write operations between those Tensors.</li>
+<li>Initialize your Tensors.</li>
+<li>Create a Session.</li>
+<li>Run the Session. This will run the operations you&rsquo;d written above.</li>
+</ol>
+<p>Therefore, when we created a variable for the loss, we simply defined the loss as a function of other quantities, but did not evaluate its value. To evaluate it, we had to run <code>init=tf.global_variables_initializer()</code>. That initialized the loss variable, and in the last line we were finally able to evaluate the value of <code>loss</code> and print its value.</p>
+<p>Now let us look at an easy example. Run the cell below:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a = tf.constant(<span style="color:#ff0;font-weight:bold">2</span>)
+b = tf.constant(<span style="color:#ff0;font-weight:bold">10</span>)
+c = tf.multiply(a,b)
+<span style="color:#fff;font-weight:bold">print</span>(c)
+</code></pre></div><pre><code>Tensor(&quot;Mul:0&quot;, shape=(), dtype=int32)
+</code></pre>
+<p>As expected, you will not see 20! You got a tensor saying that the result is a tensor that does not have the shape attribute, and is of type &ldquo;int32&rdquo;. All you did was put in the &lsquo;computation graph&rsquo;, but you have not run this computation yet. In order to actually multiply the two numbers, you will have to create a session and run it.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sess = tf.Session()
+<span style="color:#fff;font-weight:bold">print</span>(sess.run(c))
+</code></pre></div><pre><code>20
+</code></pre>
+<p>Great! To summarize, <strong>remember to initialize your variables, create a session and run the operations inside the session</strong>.</p>
+<p>Next, you&rsquo;ll also have to know about placeholders. A placeholder is an object whose value you can specify only later.
+To specify values for a placeholder, you can pass in values by using a &ldquo;feed dictionary&rdquo; (<code>feed_dict</code> variable). Below, we created a placeholder for x. This allows us to pass in a number later when we run the session.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># Change the value of x in the feed_dict</span>
+
+x = tf.placeholder(tf.int64, name = <span style="color:#0ff;font-weight:bold">&#39;x&#39;</span>)
+<span style="color:#fff;font-weight:bold">print</span>(sess.run(<span style="color:#ff0;font-weight:bold">2</span> * x, feed_dict = {x: <span style="color:#ff0;font-weight:bold">5</span>}))
+sess.close()
+</code></pre></div><pre><code>10
+</code></pre>
+<p>When you first defined <code>x</code> you did not have to specify a value for it. A placeholder is simply a variable that you will assign data to only later, when running the session. We say that you <strong>feed data</strong> to these placeholders when running the session.</p>
+<p>Here&rsquo;s what&rsquo;s happening: When you specify the operations needed for a computation, you are telling TensorFlow how to construct a computation graph. The computation graph can have some placeholders whose values you will specify only later. Finally, when you run the session, you are telling TensorFlow to execute the computation graph.</p>
+<h3 id="11---linear-function">1.1 - Linear function</h3>
+<p>Lets start this programming exercise by computing the following equation: \(Y = WX + b\), where \(W\) and \(X\) are random matrices and b is a random vector.</p>
+<p><strong>Exercise</strong>: Compute \(WX + b\) where \(W, X\), and \(b\) are drawn from a random normal distribution. W is of shape (4, 3), X is (3,1) and b is (4,1). As an example, here is how you would define a constant X that has shape (3,1):</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X = tf.constant(np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">1</span>), name = <span style="color:#0ff;font-weight:bold">&#34;X&#34;</span>)
+
+</code></pre></div><p>You might find the following functions helpful:</p>
+<ul>
+<li>tf.matmul(&hellip;, &hellip;) to do a matrix multiplication</li>
+<li>tf.add(&hellip;, &hellip;) to do an addition</li>
+<li>np.random.randn(&hellip;) to initialize randomly</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: linear_function</span>
+
+<span style="color:#fff;font-weight:bold">def</span> linear_function():
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implements a linear function: 
+</span><span style="color:#0ff;font-weight:bold">            Initializes X to be a random tensor of shape (3,1)
+</span><span style="color:#0ff;font-weight:bold">            Initializes W to be a random tensor of shape (4,3)
+</span><span style="color:#0ff;font-weight:bold">            Initializes b to be a random tensor of shape (4,1)
+</span><span style="color:#0ff;font-weight:bold">    Returns: 
+</span><span style="color:#0ff;font-weight:bold">    result -- runs the session for Y = WX + b 
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
+    
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Note, to ensure that the &#34;random&#34; numbers generated match the expected results,
+</span><span style="color:#0ff;font-weight:bold">    please create the variables in the order given in the starting code below.
+</span><span style="color:#0ff;font-weight:bold">    (Do not re-arrange the order).
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    <span style="color:#007f7f">### START CODE HERE ### (4 lines of code)</span>
+    X = tf.constant(np.random.randn(<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">1</span>), name=<span style="color:#0ff;font-weight:bold">&#34;X&#34;</span>)
+    W = tf.constant(np.random.randn(<span style="color:#ff0;font-weight:bold">4</span>,<span style="color:#ff0;font-weight:bold">3</span>), name=<span style="color:#0ff;font-weight:bold">&#34;X&#34;</span>)
+    b = tf.constant(np.random.randn(<span style="color:#ff0;font-weight:bold">4</span>,<span style="color:#ff0;font-weight:bold">1</span>), name=<span style="color:#0ff;font-weight:bold">&#34;X&#34;</span>)
+    Y = tf.add(tf.matmul(W, X), b)
+    <span style="color:#007f7f">### END CODE HERE ### </span>
+    
+    <span style="color:#007f7f"># Create the session using tf.Session() and run it with sess.run(...) on the variable you want to calculate</span>
+    
+    <span style="color:#007f7f">### START CODE HERE ###</span>
+    sess = tf.Session()
+    result = sess.run(Y)
+    <span style="color:#007f7f">### END CODE HERE ### </span>
+    
+    <span style="color:#007f7f"># close the session </span>
+    sess.close()
+
+    <span style="color:#fff;font-weight:bold">return</span> result
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">print</span>( <span style="color:#0ff;font-weight:bold">&#34;result = </span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(linear_function()))
+</code></pre></div><pre><code>result = 
+[[-2.15657382]
+ [ 2.95891446]
+ [-1.08926781]
+ [-0.84538042]]
+</code></pre>
+<p>** Expected Output **:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">result = 
+[[-2.15657382]
+ [ 2.95891446]
+ [-1.08926781]
+ [-0.84538042]]
+</code></pre></div><h3 id="12---computing-the-sigmoid">1.2 - Computing the sigmoid</h3>
+<p>Great! You just implemented a linear function. Tensorflow offers a variety of commonly used neural network functions like <code>tf.sigmoid</code> and <code>tf.softmax</code>. For this exercise lets compute the sigmoid function of an input.</p>
+<p>You will do this exercise using a placeholder variable <code>x</code>. When running the session, you should use the feed dictionary to pass in the input <code>z</code>. In this exercise, you will have to (i) create a placeholder <code>x</code>, (ii) define the operations needed to compute the sigmoid using <code>tf.sigmoid</code>, and then (iii) run the session.</p>
+<p>** Exercise **: Implement the sigmoid function below. You should use the following:</p>
+<ul>
+<li><code>tf.placeholder(tf.float32, name = &quot;...&quot;)</code></li>
+<li><code>tf.sigmoid(...)</code></li>
+<li><code>sess.run(..., feed_dict = {x: z})</code></li>
+</ul>
+<p>Note that there are two typical ways to create and use sessions in tensorflow:</p>
+<p><strong>Method 1:</strong></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sess = tf.Session()
+<span style="color:#007f7f"># Run the variables initialization (if needed), run the operations</span>
+result = sess.run(..., feed_dict = {...})
+sess.close() <span style="color:#007f7f"># Close the session</span>
+</code></pre></div><p><strong>Method 2:</strong></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">with</span> tf.Session() <span style="color:#fff;font-weight:bold">as</span> sess: 
+    <span style="color:#007f7f"># run the variables initialization (if needed), run the operations</span>
+    result = sess.run(..., feed_dict = {...})
+    <span style="color:#007f7f"># This takes care of closing the session for you :)</span>
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: sigmoid</span>
+
+<span style="color:#fff;font-weight:bold">def</span> sigmoid(z):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Computes the sigmoid of z
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    z -- input value, scalar or vector
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns: 
+</span><span style="color:#0ff;font-weight:bold">    results -- the sigmoid of z
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    <span style="color:#007f7f">### START CODE HERE ### ( approx. 4 lines of code)</span>
+    <span style="color:#007f7f"># Create a placeholder for x. Name it &#39;x&#39;.</span>
+    x = tf.placeholder(tf.float32, name=<span style="color:#0ff;font-weight:bold">&#34;x&#34;</span>)
+
+    <span style="color:#007f7f"># compute sigmoid(x)</span>
+    sigmoid = tf.sigmoid(x)
+
+    <span style="color:#007f7f"># Create a session, and run it. Please use the method 2 explained above. </span>
+    <span style="color:#007f7f"># You should use a feed_dict to pass z&#39;s value to x. </span>
+    <span style="color:#fff;font-weight:bold">with</span> tf.Session() <span style="color:#fff;font-weight:bold">as</span> sess:
+        <span style="color:#007f7f"># Run session and call the output &#34;result&#34;</span>
+        result = sess.run(sigmoid, feed_dict={x: z})
+
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">return</span> result
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;sigmoid(0) = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(sigmoid(<span style="color:#ff0;font-weight:bold">0</span>)))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;sigmoid(12) = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(sigmoid(<span style="color:#ff0;font-weight:bold">12</span>)))
+</code></pre></div><p><strong>Expected Output</strong></p>
+<pre><code>sigmoid(0) = 0.5
+sigmoid(12) = 0.999994
+</code></pre>
+<p><strong>To summarize, you how know how to</strong>:</p>
+<ol>
+<li>Create placeholders</li>
+<li>Specify the computation graph corresponding to operations you want to compute</li>
+<li>Create the session</li>
+<li>Run the session, using a feed dictionary if necessary to specify placeholder variables&rsquo; values.</li>
+</ol>
+<h3 id="13----computing-the-cost">1.3 -  Computing the Cost</h3>
+<p>You can also use a built-in function to compute the cost of your neural network. So instead of needing to write code to compute this as a function of \(a^{<a href="i">2</a>}\) and \(y^{(i)}\) for i=1&hellip;m:
+$$ J = - \frac{1}{m}  \sum_{i = 1}^m  \large ( \small y^{(i)} \log a^{ [2] (i)} + (1-y^{(i)})\log (1-a^{ [2] (i)} )\large )\small\tag{2}$$</p>
+<p>you can do it in one line of code in tensorflow!</p>
+<p><strong>Exercise</strong>: Implement the cross entropy loss. The function you will use is:</p>
+<ul>
+<li><code>tf.nn.sigmoid_cross_entropy_with_logits(logits = ...,  labels = ...)</code></li>
+</ul>
+<p>Your code should input <code>z</code>, compute the sigmoid (to get <code>a</code>) and then compute the cross entropy cost \(J\). All this can be done using one call to <code>tf.nn.sigmoid_cross_entropy_with_logits</code>, which computes</p>
+<p>$$- \frac{1}{m}  \sum_{i = 1}^m  \large ( \small y^{(i)} \log \sigma(z^{<a href="i">2</a>}) + (1-y^{(i)})\log (1-\sigma(z^{<a href="i">2</a>})\large )\small\tag{2}$$</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: cost</span>
+
+<span style="color:#fff;font-weight:bold">def</span> cost(logits, labels):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Computes the cost using the sigmoid cross entropy
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    logits -- vector containing z, output of the last linear unit (before the final sigmoid activation)
+</span><span style="color:#0ff;font-weight:bold">    labels -- vector of labels y (1 or 0) 
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Note: What we&#39;ve been calling &#34;z&#34; and &#34;y&#34; in this class are respectively called &#34;logits&#34; and &#34;labels&#34; 
+</span><span style="color:#0ff;font-weight:bold">    in the TensorFlow documentation. So logits will feed into z, and labels into y. 
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    cost -- runs the session of the cost (formula (2))
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    <span style="color:#007f7f">### START CODE HERE ### </span>
+    
+    <span style="color:#007f7f"># Create the placeholders for &#34;logits&#34; (z) and &#34;labels&#34; (y) (approx. 2 lines)</span>
+    z = tf.placeholder(tf.float32, name=<span style="color:#0ff;font-weight:bold">&#34;z&#34;</span>)
+    y = tf.placeholder(tf.float32, name=<span style="color:#0ff;font-weight:bold">&#34;y&#34;</span>)
+    
+    <span style="color:#007f7f"># Use the loss function (approx. 1 line)</span>
+    cost = tf.nn.sigmoid_cross_entropy_with_logits(logits=z, labels=y)
+    
+    <span style="color:#007f7f"># Create a session (approx. 1 line). See method 1 above.</span>
+    sess = tf.Session()
+    
+    <span style="color:#007f7f"># Run the session (approx. 1 line).</span>
+    cost = sess.run(cost, feed_dict={z:logits, y:labels})
+    
+    <span style="color:#007f7f"># Close the session (approx. 1 line). See method 1 above.</span>
+    sess.close()
+    
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">return</span> cost
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">logits = np.array([<span style="color:#ff0;font-weight:bold">0.2</span>,<span style="color:#ff0;font-weight:bold">0.4</span>,<span style="color:#ff0;font-weight:bold">0.7</span>,<span style="color:#ff0;font-weight:bold">0.9</span>])
+
+cost = cost(logits, np.array([<span style="color:#ff0;font-weight:bold">0</span>,<span style="color:#ff0;font-weight:bold">0</span>,<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">1</span>]))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;cost = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(cost))
+</code></pre></div><pre><code>cost = [ 0.79813886  0.91301525  0.40318605  0.34115386]
+</code></pre>
+<p>** Expected Output** :</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cost = [ 0.79813886  0.91301525  0.40318605  0.34115386]
+</code></pre></div><h3 id="14---using-one-hot-encodings">1.4 - Using One Hot encodings</h3>
+<p>Many times in deep learning you will have a y vector with numbers ranging from 0 to C-1, where C is the number of classes. If C is for example 4, then you might have the following y vector which you will need to convert as follows:</p>
+<p><img class="img-zoomable" src="/coursera_dl/onehot.png" alt="png" />
+</p>
+<p>This is called a &ldquo;one hot&rdquo; encoding, because in the converted representation exactly one element of each column is &ldquo;hot&rdquo; (meaning set to 1). To do this conversion in numpy, you might have to write a few lines of code. In tensorflow, you can use one line of code:</p>
+<ul>
+<li>tf.one_hot(labels, depth, axis)</li>
+</ul>
+<p><strong>Exercise:</strong> Implement the function below to take one vector of labels and the total number of classes \(C\), and return the one hot encoding. Use <code>tf.one_hot()</code> to do this.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: one_hot_matrix</span>
+
+<span style="color:#fff;font-weight:bold">def</span> one_hot_matrix(labels, C):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Creates a matrix where the i-th row corresponds to the ith class number and the jth column
+</span><span style="color:#0ff;font-weight:bold">                     corresponds to the jth training example. So if example j had a label i. Then entry (i,j) 
+</span><span style="color:#0ff;font-weight:bold">                     will be 1. 
+</span><span style="color:#0ff;font-weight:bold">                     
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    labels -- vector containing the labels 
+</span><span style="color:#0ff;font-weight:bold">    C -- number of classes, the depth of the one hot dimension
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns: 
+</span><span style="color:#0ff;font-weight:bold">    one_hot -- one hot matrix
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    <span style="color:#007f7f">### START CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Create a tf.constant equal to C (depth), name it &#39;C&#39;. (approx. 1 line)</span>
+    C = tf.constant(C, name=<span style="color:#0ff;font-weight:bold">&#34;C&#34;</span>)
+    
+    <span style="color:#007f7f"># Use tf.one_hot, be careful with the axis (approx. 1 line)</span>
+    one_hot_matrix = tf.one_hot(labels, C, axis=<span style="color:#ff0;font-weight:bold">0</span>)
+    
+    <span style="color:#007f7f"># Create the session (approx. 1 line)</span>
+    sess = tf.Session()
+    
+    <span style="color:#007f7f"># Run the session (approx. 1 line)</span>
+    one_hot = sess.run(one_hot_matrix)
+    
+    <span style="color:#007f7f"># Close the session (approx. 1 line). See method 1 above.</span>
+    sess.close()
+    
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">return</span> one_hot
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">labels = np.array([<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">2</span>,<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">0</span>,<span style="color:#ff0;font-weight:bold">2</span>,<span style="color:#ff0;font-weight:bold">1</span>])
+one_hot = one_hot_matrix(labels, C = <span style="color:#ff0;font-weight:bold">4</span>)
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;one_hot = </span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(one_hot))
+</code></pre></div><pre><code>one_hot = 
+[[ 0.  0.  0.  1.  0.  0.]
+ [ 1.  0.  0.  0.  0.  1.]
+ [ 0.  1.  0.  0.  1.  0.]
+ [ 0.  0.  1.  0.  0.  0.]]
+</code></pre>
+<p><strong>Expected Output</strong>:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">one_hot = 
+[[ 0.  0.  0.  1.  0.  0.]
+ [ 1.  0.  0.  0.  0.  1.]
+ [ 0.  1.  0.  0.  1.  0.]
+ [ 0.  0.  1.  0.  0.  0.]]
+</code></pre></div><h3 id="15---initialize-with-zeros-and-ones">1.5 - Initialize with zeros and ones</h3>
+<p>Now you will learn how to initialize a vector of zeros and ones. The function you will be calling is <code>tf.ones()</code>. To initialize with zeros you could use tf.zeros() instead. These functions take in a shape and return an array of dimension shape full of zeros and ones respectively.</p>
+<p><strong>Exercise:</strong> Implement the function below to take in a shape and to return an array (of the shape&rsquo;s dimension of ones).</p>
+<ul>
+<li>tf.ones(shape)</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: ones</span>
+
+<span style="color:#fff;font-weight:bold">def</span> ones(shape):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Creates an array of ones of dimension shape
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    shape -- shape of the array you want to create
+</span><span style="color:#0ff;font-weight:bold">        
+</span><span style="color:#0ff;font-weight:bold">    Returns: 
+</span><span style="color:#0ff;font-weight:bold">    ones -- array containing only ones
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    <span style="color:#007f7f">### START CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Create &#34;ones&#34; tensor using tf.ones(...). (approx. 1 line)</span>
+    ones = tf.ones(shape)
+    
+    <span style="color:#007f7f"># Create the session (approx. 1 line)</span>
+    sess = tf.Session()
+    
+    <span style="color:#007f7f"># Run the session to compute &#39;ones&#39; (approx. 1 line)</span>
+    ones = sess.run(ones)
+    
+    <span style="color:#007f7f"># Close the session (approx. 1 line). See method 1 above.</span>
+    sess.close()
+    
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    <span style="color:#fff;font-weight:bold">return</span> ones
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;ones = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(ones([<span style="color:#ff0;font-weight:bold">3</span>])))
+</code></pre></div><p><strong>Expected Output:</strong>
+ones = [ 1.  1.  1.]</p>
+<h2 id="2---building-your-first-neural-network-in-tensorflow">2 - Building your first neural network in tensorflow</h2>
+<p>In this part of the assignment you will build a neural network using tensorflow. Remember that there are two parts to implement a tensorflow model:</p>
+<ul>
+<li>Create the computation graph</li>
+<li>Run the graph</li>
+</ul>
+<p>Let&rsquo;s delve into the problem you&rsquo;d like to solve!</p>
+<h3 id="20---problem-statement-signs-dataset">2.0 - Problem statement: SIGNS Dataset</h3>
+<p>One afternoon, with some friends we decided to teach our computers to decipher sign language. We spent a few hours taking pictures in front of a white wall and came up with the following dataset. It&rsquo;s now your job to build an algorithm that would facilitate communications from a speech-impaired person to someone who doesn&rsquo;t understand sign language.</p>
+<ul>
+<li><strong>Training set</strong>: 1080 pictures (64 by 64 pixels) of signs representing numbers from 0 to 5 (180 pictures per number).</li>
+<li><strong>Test set</strong>: 120 pictures (64 by 64 pixels) of signs representing numbers from 0 to 5 (20 pictures per number).</li>
+</ul>
+<p>Note that this is a subset of the SIGNS dataset. The complete dataset contains many more signs.</p>
+<p>Here are examples for each number, and how an explanation of how we represent the labels. These are the original pictures, before we lowered the image resolutoion to 64 by 64 pixels.
+<img class="img-zoomable" src="/coursera_dl/hands.png" alt="png" />
+</p>
+<p>Run the following code to load the dataset.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># Loading the dataset</span>
+X_train_orig, Y_train_orig, X_test_orig, Y_test_orig, classes = load_dataset()
+</code></pre></div><p>Change the index below and run the cell to visualize some examples in the dataset.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># Example of a picture</span>
+index = <span style="color:#ff0;font-weight:bold">0</span>
+plt.imshow(X_train_orig[index])
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;y = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(np.squeeze(Y_train_orig[:, index])))
+</code></pre></div><pre><code>y = 5
+</code></pre>
+<p><img class="img-zoomable" src="/coursera_dl/output_37_1.png" alt="png" />
+</p>
+<p>As usual you flatten the image dataset, then normalize it by dividing by 255. On top of that, you will convert each label to a one-hot vector as shown in Figure 1. Run the cell below to do so.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># Flatten the training and test images</span>
+X_train_flatten = X_train_orig.reshape(X_train_orig.shape[<span style="color:#ff0;font-weight:bold">0</span>], -<span style="color:#ff0;font-weight:bold">1</span>).T
+X_test_flatten = X_test_orig.reshape(X_test_orig.shape[<span style="color:#ff0;font-weight:bold">0</span>], -<span style="color:#ff0;font-weight:bold">1</span>).T
+<span style="color:#007f7f"># Normalize image vectors</span>
+X_train = X_train_flatten/<span style="color:#ff0;font-weight:bold">255.</span>
+X_test = X_test_flatten/<span style="color:#ff0;font-weight:bold">255.</span>
+<span style="color:#007f7f"># Convert training and test labels to one hot matrices</span>
+Y_train = convert_to_one_hot(Y_train_orig, <span style="color:#ff0;font-weight:bold">6</span>)
+Y_test = convert_to_one_hot(Y_test_orig, <span style="color:#ff0;font-weight:bold">6</span>)
+
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;number of training examples = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(X_train.shape[<span style="color:#ff0;font-weight:bold">1</span>]))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;number of test examples = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(X_test.shape[<span style="color:#ff0;font-weight:bold">1</span>]))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;X_train shape: &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(X_train.shape))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Y_train shape: &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(Y_train.shape))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;X_test shape: &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(X_test.shape))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Y_test shape: &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(Y_test.shape))
+</code></pre></div><pre><code>number of training examples = 1080
+number of test examples = 120
+X_train shape: (12288, 1080)
+Y_train shape: (6, 1080)
+X_test shape: (12288, 120)
+Y_test shape: (6, 120)
+</code></pre>
+<p><strong>Note</strong> that 12288 comes from \(64 \times 64 \times 3\). Each image is square, 64 by 64 pixels, and 3 is for the RGB colors. Please make sure all these shapes make sense to you before continuing.</p>
+<p><strong>Your goal</strong> is to build an algorithm capable of recognizing a sign with high accuracy. To do so, you are going to build a tensorflow model that is almost the same as one you have previously built in numpy for cat recognition (but now using a softmax output). It is a great occasion to compare your numpy implementation to the tensorflow one.</p>
+<p><strong>The model</strong> is <em>LINEAR -&gt; RELU -&gt; LINEAR -&gt; RELU -&gt; LINEAR -&gt; SOFTMAX</em>. The SIGMOID output layer has been converted to a SOFTMAX. A SOFTMAX layer generalizes SIGMOID to when there are more than two classes.</p>
+<h3 id="21---create-placeholders">2.1 - Create placeholders</h3>
+<p>Your first task is to create placeholders for <code>X</code> and <code>Y</code>. This will allow you to later pass your training data in when you run your session.</p>
+<p><strong>Exercise:</strong> Implement the function below to create the placeholders in tensorflow.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: create_placeholders</span>
+
+<span style="color:#fff;font-weight:bold">def</span> create_placeholders(n_x, n_y):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Creates the placeholders for the tensorflow session.
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    n_x -- scalar, size of an image vector (num_px * num_px = 64 * 64 * 3 = 12288)
+</span><span style="color:#0ff;font-weight:bold">    n_y -- scalar, number of classes (from 0 to 5, so -&gt; 6)
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    X -- placeholder for the data input, of shape [n_x, None] and dtype &#34;tf.float32&#34;
+</span><span style="color:#0ff;font-weight:bold">    Y -- placeholder for the input labels, of shape [n_y, None] and dtype &#34;tf.float32&#34;
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Tips:
+</span><span style="color:#0ff;font-weight:bold">    - You will use None because it let&#39;s us be flexible on the number of examples you will for the placeholders.
+</span><span style="color:#0ff;font-weight:bold">      In fact, the number of examples during test/train is different.
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+
+    <span style="color:#007f7f">### START CODE HERE ### (approx. 2 lines)</span>
+    X = tf.placeholder(tf.float32, shape=(n_x, None))
+    Y = tf.placeholder(tf.float32, shape=(n_y, None))
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">return</span> X, Y
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X, Y = create_placeholders(<span style="color:#ff0;font-weight:bold">12288</span>, <span style="color:#ff0;font-weight:bold">6</span>)
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;X = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(X))
+<span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Y = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(Y))
+</code></pre></div><p><strong>Expected Output</strong>:</p>
+<pre><code>X = Tensor(&quot;Placeholder:0&quot;, shape=(12288, ?), dtype=float32)
+Y = Tensor(&quot;Placeholder_1:0&quot;, shape=(6, ?), dtype=float32)
+</code></pre>
+<h3 id="22---initializing-the-parameters">2.2 - Initializing the parameters</h3>
+<p>Your second task is to initialize the parameters in tensorflow.</p>
+<p><strong>Exercise:</strong> Implement the function below to initialize the parameters in tensorflow. You are going use Xavier Initialization for weights and Zero Initialization for biases. The shapes are given below. As an example, to help you, for W1 and b1 you could use:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">W1 = tf.get_variable(<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>, [<span style="color:#ff0;font-weight:bold">25</span>,<span style="color:#ff0;font-weight:bold">12288</span>], initializer = tf.contrib.layers.xavier_initializer(seed = <span style="color:#ff0;font-weight:bold">1</span>))
+b1 = tf.get_variable(<span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>, [<span style="color:#ff0;font-weight:bold">25</span>,<span style="color:#ff0;font-weight:bold">1</span>], initializer = tf.zeros_initializer())
+</code></pre></div><p>Please use <code>seed = 1</code> to make sure your results match ours.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: initialize_parameters</span>
+
+<span style="color:#fff;font-weight:bold">def</span> initialize_parameters():
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Initializes parameters to build a neural network with tensorflow. The shapes are:
+</span><span style="color:#0ff;font-weight:bold">                        W1 : [25, 12288]
+</span><span style="color:#0ff;font-weight:bold">                        b1 : [25, 1]
+</span><span style="color:#0ff;font-weight:bold">                        W2 : [12, 25]
+</span><span style="color:#0ff;font-weight:bold">                        b2 : [12, 1]
+</span><span style="color:#0ff;font-weight:bold">                        W3 : [6, 12]
+</span><span style="color:#0ff;font-weight:bold">                        b3 : [6, 1]
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- a dictionary of tensors containing W1, b1, W2, b2, W3, b3
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    tf.set_random_seed(<span style="color:#ff0;font-weight:bold">1</span>)                   <span style="color:#007f7f"># so that your &#34;random&#34; numbers match ours</span>
+        
+    <span style="color:#007f7f">### START CODE HERE ### (approx. 6 lines of code)</span>
+    W1 = tf.get_variable(<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>, [<span style="color:#ff0;font-weight:bold">25</span>,<span style="color:#ff0;font-weight:bold">12288</span>], initializer = tf.contrib.layers.xavier_initializer(seed = <span style="color:#ff0;font-weight:bold">1</span>))
+    b1 = tf.get_variable(<span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>, [<span style="color:#ff0;font-weight:bold">25</span>,<span style="color:#ff0;font-weight:bold">1</span>], initializer = tf.zeros_initializer())
+    W2 = tf.get_variable(<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>, [<span style="color:#ff0;font-weight:bold">12</span>,<span style="color:#ff0;font-weight:bold">25</span>], initializer = tf.contrib.layers.xavier_initializer(seed = <span style="color:#ff0;font-weight:bold">1</span>))
+    b2 = tf.get_variable(<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>, [<span style="color:#ff0;font-weight:bold">12</span>,<span style="color:#ff0;font-weight:bold">1</span>], initializer = tf.zeros_initializer())
+    W3 = tf.get_variable(<span style="color:#0ff;font-weight:bold">&#34;W3&#34;</span>, [<span style="color:#ff0;font-weight:bold">6</span>,<span style="color:#ff0;font-weight:bold">12</span>], initializer = tf.contrib.layers.xavier_initializer(seed = <span style="color:#ff0;font-weight:bold">1</span>))
+    b3 = tf.get_variable(<span style="color:#0ff;font-weight:bold">&#34;b3&#34;</span>, [<span style="color:#ff0;font-weight:bold">6</span>,<span style="color:#ff0;font-weight:bold">1</span>], initializer = tf.zeros_initializer())
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+
+    parameters = {<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>: W1,
+                  <span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>: b1,
+                  <span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>: W2,
+                  <span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>: b2,
+                  <span style="color:#0ff;font-weight:bold">&#34;W3&#34;</span>: W3,
+                  <span style="color:#0ff;font-weight:bold">&#34;b3&#34;</span>: b3}
+    
+    <span style="color:#fff;font-weight:bold">return</span> parameters
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tf.reset_default_graph()
+<span style="color:#fff;font-weight:bold">with</span> tf.Session() <span style="color:#fff;font-weight:bold">as</span> sess:
+    parameters = initialize_parameters()
+    <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;W1 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>]))
+    <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;b1 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;b1&#34;</span>]))
+    <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;W2 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>]))
+    <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;b2 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>]))
+</code></pre></div><p><strong>Expected Output</strong>:</p>
+<pre><code>W1 = &lt;tf.Variable 'W1:0' shape=(25, 12288) dtype=float32_ref&gt;
+b1 = &lt;tf.Variable 'b1:0' shape=(25, 1) dtype=float32_ref&gt;
+W2 = &lt;tf.Variable 'W2:0' shape=(12, 25) dtype=float32_ref&gt;
+b2 = &lt;tf.Variable 'b2:0' shape=(12, 1) dtype=float32_ref&gt;
+</code></pre>
+<p>As expected, the parameters haven&rsquo;t been evaluated yet.</p>
+<h3 id="23---forward-propagation-in-tensorflow">2.3 - Forward propagation in tensorflow</h3>
+<p>You will now implement the forward propagation module in tensorflow. The function will take in a dictionary of parameters and it will complete the forward pass. The functions you will be using are:</p>
+<ul>
+<li><code>tf.add(...,...)</code> to do an addition</li>
+<li><code>tf.matmul(...,...)</code> to do a matrix multiplication</li>
+<li><code>tf.nn.relu(...)</code> to apply the ReLU activation</li>
+</ul>
+<p><strong>Question:</strong> Implement the forward pass of the neural network. We commented for you the numpy equivalents so that you can compare the tensorflow implementation to numpy. It is important to note that the forward propagation stops at <code>z3</code>. The reason is that in tensorflow the last linear layer output is given as input to the function computing the loss. Therefore, you don&rsquo;t need <code>a3</code>!</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: forward_propagation</span>
+
+<span style="color:#fff;font-weight:bold">def</span> forward_propagation(X, parameters):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implements the forward propagation for the model: LINEAR -&gt; RELU -&gt; LINEAR -&gt; RELU -&gt; LINEAR -&gt; SOFTMAX
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    X -- input dataset placeholder, of shape (input size, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    parameters -- python dictionary containing your parameters &#34;W1&#34;, &#34;b1&#34;, &#34;W2&#34;, &#34;b2&#34;, &#34;W3&#34;, &#34;b3&#34;
+</span><span style="color:#0ff;font-weight:bold">                  the shapes are given in initialize_parameters
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    Z3 -- the output of the last LINEAR unit
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    <span style="color:#007f7f"># Retrieve the parameters from the dictionary &#34;parameters&#34; </span>
+    W1 = parameters[<span style="color:#0ff;font-weight:bold">&#39;W1&#39;</span>]
+    b1 = parameters[<span style="color:#0ff;font-weight:bold">&#39;b1&#39;</span>]
+    W2 = parameters[<span style="color:#0ff;font-weight:bold">&#39;W2&#39;</span>]
+    b2 = parameters[<span style="color:#0ff;font-weight:bold">&#39;b2&#39;</span>]
+    W3 = parameters[<span style="color:#0ff;font-weight:bold">&#39;W3&#39;</span>]
+    b3 = parameters[<span style="color:#0ff;font-weight:bold">&#39;b3&#39;</span>]
+    
+    <span style="color:#007f7f">### START CODE HERE ### (approx. 5 lines)           # Numpy Equivalents:</span>
+    Z1 = tf.matmul(W1, X)+b1                            <span style="color:#007f7f"># Z1 = np.dot(W1, X) + b1</span>
+    A1 = tf.nn.relu(Z1)                                 <span style="color:#007f7f"># A1 = relu(Z1)</span>
+    Z2 = tf.matmul(W2, A1)+b2                           <span style="color:#007f7f"># Z2 = np.dot(W2, A1) + b2</span>
+    A2 = tf.nn.relu(Z2)                                 <span style="color:#007f7f"># A2 = relu(Z2)</span>
+    Z3 = tf.matmul(W3, A2)+b3                                              <span style="color:#007f7f"># Z3 = np.dot(W3, A2) + b3</span>
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">return</span> Z3
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tf.reset_default_graph()
+
+<span style="color:#fff;font-weight:bold">with</span> tf.Session() <span style="color:#fff;font-weight:bold">as</span> sess:
+    X, Y = create_placeholders(<span style="color:#ff0;font-weight:bold">12288</span>, <span style="color:#ff0;font-weight:bold">6</span>)
+    parameters = initialize_parameters()
+    Z3 = forward_propagation(X, parameters)
+    <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Z3 = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(Z3))
+</code></pre></div><p><strong>Expected Output</strong>:</p>
+<pre><code>Z3 = Tensor(&quot;add_2:0&quot;, shape=(6, ?), dtype=float32)
+</code></pre>
+<p>You may have noticed that the forward propagation doesn&rsquo;t output any cache. You will understand why below, when we get to brackpropagation.</p>
+<h3 id="24-compute-cost">2.4 Compute cost</h3>
+<p>As seen before, it is very easy to compute the cost using:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits = ..., labels = ...))
+</code></pre></div><p><strong>Question</strong>: Implement the cost function below.</p>
+<ul>
+<li>It is important to know that the &ldquo;<code>logits</code>&rdquo; and &ldquo;<code>labels</code>&rdquo; inputs of <code>tf.nn.softmax_cross_entropy_with_logits</code> are expected to be of shape (number of examples, num_classes). We have thus transposed Z3 and Y for you.</li>
+<li>Besides, <code>tf.reduce_mean</code> basically does the summation over the examples.</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: compute_cost </span>
+
+<span style="color:#fff;font-weight:bold">def</span> compute_cost(Z3, Y):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Computes the cost
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    Z3 -- output of forward propagation (output of the last LINEAR unit), of shape (6, number of examples)
+</span><span style="color:#0ff;font-weight:bold">    Y -- &#34;true&#34; labels vector placeholder, same shape as Z3
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    cost - Tensor of the cost function
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    <span style="color:#007f7f"># to fit the tensorflow requirement for tf.nn.softmax_cross_entropy_with_logits(...,...)</span>
+    logits = tf.transpose(Z3)
+    labels = tf.transpose(Y)
+    
+    <span style="color:#007f7f">### START CODE HERE ### (1 line of code)</span>
+    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits = logits, labels = labels))
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#fff;font-weight:bold">return</span> cost
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tf.reset_default_graph()
+
+<span style="color:#fff;font-weight:bold">with</span> tf.Session() <span style="color:#fff;font-weight:bold">as</span> sess:
+    X, Y = create_placeholders(<span style="color:#ff0;font-weight:bold">12288</span>, <span style="color:#ff0;font-weight:bold">6</span>)
+    parameters = initialize_parameters()
+    Z3 = forward_propagation(X, parameters)
+    cost = compute_cost(Z3, Y)
+    <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;cost = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(cost))
+</code></pre></div><p><strong>Expected Output</strong>:</p>
+<pre><code>cost = Tensor(&quot;Mean:0&quot;, shape=(), dtype=float32)
+</code></pre>
+<h3 id="25---backward-propagation--parameter-updates">2.5 - Backward propagation &amp; parameter updates</h3>
+<p>This is where you become grateful to programming frameworks. All the backpropagation and the parameters update is taken care of in 1 line of code. It is very easy to incorporate this line in the model.</p>
+<p>After you compute the cost function. You will create an &ldquo;<code>optimizer</code>&rdquo; object. You have to call this object along with the cost when running the tf.session. When called, it will perform an optimization on the given cost with the chosen method and learning rate.</p>
+<p>For instance, for gradient descent the optimizer would be:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">optimizer = tf.train.GradientDescentOptimizer(learning_rate = learning_rate).minimize(cost)
+</code></pre></div><p>To make the optimization you would do:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">_ , c = sess.run([optimizer, cost], feed_dict={X: minibatch_X, Y: minibatch_Y})
+</code></pre></div><p>This computes the backpropagation by passing through the tensorflow graph in the reverse order. From cost to inputs.</p>
+<p><strong>Note</strong> When coding, we often use <code>_</code> as a &ldquo;throwaway&rdquo; variable to store values that we won&rsquo;t need to use later. Here, <code>_</code> takes on the evaluated value of <code>optimizer</code>, which we don&rsquo;t need (and <code>c</code> takes the value of the <code>cost</code> variable).</p>
+<h3 id="26---building-the-model">2.6 - Building the model</h3>
+<p>Now, you will bring it all together!</p>
+<p><strong>Exercise:</strong> Implement the model. You will be calling the functions you had previously implemented.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f00">?</span> tf.train.AdamOptimizer
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> model(X_train, Y_train, X_test, Y_test, learning_rate = <span style="color:#ff0;font-weight:bold">0.0001</span>,
+          num_epochs = <span style="color:#ff0;font-weight:bold">1500</span>, minibatch_size = <span style="color:#ff0;font-weight:bold">32</span>, print_cost = True):
+    <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Implements a three-layer tensorflow neural network: LINEAR-&gt;RELU-&gt;LINEAR-&gt;RELU-&gt;LINEAR-&gt;SOFTMAX.
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Arguments:
+</span><span style="color:#0ff;font-weight:bold">    X_train -- training set, of shape (input size = 12288, number of training examples = 1080)
+</span><span style="color:#0ff;font-weight:bold">    Y_train -- test set, of shape (output size = 6, number of training examples = 1080)
+</span><span style="color:#0ff;font-weight:bold">    X_test -- training set, of shape (input size = 12288, number of training examples = 120)
+</span><span style="color:#0ff;font-weight:bold">    Y_test -- test set, of shape (output size = 6, number of test examples = 120)
+</span><span style="color:#0ff;font-weight:bold">    learning_rate -- learning rate of the optimization
+</span><span style="color:#0ff;font-weight:bold">    num_epochs -- number of epochs of the optimization loop
+</span><span style="color:#0ff;font-weight:bold">    minibatch_size -- size of a minibatch
+</span><span style="color:#0ff;font-weight:bold">    print_cost -- True to print the cost every 100 epochs
+</span><span style="color:#0ff;font-weight:bold">    
+</span><span style="color:#0ff;font-weight:bold">    Returns:
+</span><span style="color:#0ff;font-weight:bold">    parameters -- parameters learnt by the model. They can then be used to predict.
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    
+    ops.reset_default_graph()                         <span style="color:#007f7f"># to be able to rerun the model without overwriting tf variables</span>
+    tf.set_random_seed(<span style="color:#ff0;font-weight:bold">1</span>)                             <span style="color:#007f7f"># to keep consistent results</span>
+    seed = <span style="color:#ff0;font-weight:bold">3</span>                                          <span style="color:#007f7f"># to keep consistent results</span>
+    (n_x, m) = X_train.shape                          <span style="color:#007f7f"># (n_x: input size, m : number of examples in the train set)</span>
+    n_y = Y_train.shape[<span style="color:#ff0;font-weight:bold">0</span>]                            <span style="color:#007f7f"># n_y : output size</span>
+    costs = []                                        <span style="color:#007f7f"># To keep track of the cost</span>
+    
+    <span style="color:#007f7f"># Create Placeholders of shape (n_x, n_y)</span>
+    <span style="color:#007f7f">### START CODE HERE ### (1 line)</span>
+    X, Y = create_placeholders(n_x, n_y)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+
+    <span style="color:#007f7f"># Initialize parameters</span>
+    <span style="color:#007f7f">### START CODE HERE ### (1 line)</span>
+    parameters = initialize_parameters()
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Forward propagation: Build the forward propagation in the tensorflow graph</span>
+    <span style="color:#007f7f">### START CODE HERE ### (1 line)</span>
+    Z3 = forward_propagation(X, parameters)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Cost function: Add cost function to tensorflow graph</span>
+    <span style="color:#007f7f">### START CODE HERE ### (1 line)</span>
+    cost = compute_cost(Z3, Y)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Backpropagation: Define the tensorflow optimizer. Use an AdamOptimizer.</span>
+    <span style="color:#007f7f">### START CODE HERE ### (1 line)</span>
+    optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
+    <span style="color:#007f7f">### END CODE HERE ###</span>
+    
+    <span style="color:#007f7f"># Initialize all the variables</span>
+    init = tf.global_variables_initializer()
+
+    <span style="color:#007f7f"># Start the session to compute the tensorflow graph</span>
+    <span style="color:#fff;font-weight:bold">with</span> tf.Session() <span style="color:#fff;font-weight:bold">as</span> sess:
+        
+        <span style="color:#007f7f"># Run the initialization</span>
+        sess.run(init)
+        
+        <span style="color:#007f7f"># Do the training loop</span>
+        <span style="color:#fff;font-weight:bold">for</span> epoch in <span style="color:#fff;font-weight:bold">range</span>(num_epochs):
+
+            epoch_cost = <span style="color:#ff0;font-weight:bold">0.</span>                       <span style="color:#007f7f"># Defines a cost related to an epoch</span>
+            num_minibatches = <span style="color:#fff;font-weight:bold">int</span>(m / minibatch_size) <span style="color:#007f7f"># number of minibatches of size minibatch_size in the train set</span>
+            seed = seed + <span style="color:#ff0;font-weight:bold">1</span>
+            minibatches = random_mini_batches(X_train, Y_train, minibatch_size, seed)
+
+            <span style="color:#fff;font-weight:bold">for</span> minibatch in minibatches:
+
+                <span style="color:#007f7f"># Select a minibatch</span>
+                (minibatch_X, minibatch_Y) = minibatch
+                
+                <span style="color:#007f7f"># IMPORTANT: The line that runs the graph on a minibatch.</span>
+                <span style="color:#007f7f"># Run the session to execute the &#34;optimizer&#34; and the &#34;cost&#34;, the feedict should contain a minibatch for (X,Y).</span>
+                <span style="color:#007f7f">### START CODE HERE ### (1 line)</span>
+                _ , minibatch_cost = sess.run([optimizer, cost], feed_dict={X: minibatch_X, Y: minibatch_Y})
+                <span style="color:#007f7f">### END CODE HERE ###</span>
+                
+                epoch_cost += minibatch_cost / minibatch_size
+
+            <span style="color:#007f7f"># Print the cost every epoch</span>
+            <span style="color:#fff;font-weight:bold">if</span> print_cost == True and epoch % <span style="color:#ff0;font-weight:bold">100</span> == <span style="color:#ff0;font-weight:bold">0</span>:
+                <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Cost after epoch </span><span style="color:#0ff;font-weight:bold">%i</span><span style="color:#0ff;font-weight:bold">: </span><span style="color:#0ff;font-weight:bold">%f</span><span style="color:#0ff;font-weight:bold">&#34;</span> % (epoch, epoch_cost))
+            <span style="color:#fff;font-weight:bold">if</span> print_cost == True and epoch % <span style="color:#ff0;font-weight:bold">5</span> == <span style="color:#ff0;font-weight:bold">0</span>:
+                costs.append(epoch_cost)
+                
+        <span style="color:#007f7f"># plot the cost</span>
+        plt.plot(np.squeeze(costs))
+        plt.ylabel(<span style="color:#0ff;font-weight:bold">&#39;cost&#39;</span>)
+        plt.xlabel(<span style="color:#0ff;font-weight:bold">&#39;iterations (per fives)&#39;</span>)
+        plt.title(<span style="color:#0ff;font-weight:bold">&#34;Learning rate =&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(learning_rate))
+        plt.show()
+
+        <span style="color:#007f7f"># lets save the parameters in a variable</span>
+        parameters = sess.run(parameters)
+        <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Parameters have been trained!&#34;</span>)
+
+        <span style="color:#007f7f"># Calculate the correct predictions</span>
+        correct_prediction = tf.equal(tf.argmax(Z3), tf.argmax(Y))
+
+        <span style="color:#007f7f"># Calculate accuracy on the test set</span>
+        accuracy = tf.reduce_mean(tf.cast(correct_prediction, <span style="color:#0ff;font-weight:bold">&#34;float&#34;</span>))
+
+        <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Train Accuracy:&#34;</span>, accuracy.eval({X: X_train, Y: Y_train}))
+        <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;Test Accuracy:&#34;</span>, accuracy.eval({X: X_test, Y: Y_test}))
+        
+        <span style="color:#fff;font-weight:bold">return</span> parameters
+</code></pre></div><p>Run the following cell to train your model! On our machine it takes about 5 minutes. Your &ldquo;Cost after epoch 100&rdquo; should be 1.048222. If it&rsquo;s not, don&rsquo;t waste time; interrupt the training by clicking on the square (⬛) in the upper bar of the notebook, and try to correct your code. If it is the correct cost, take a break and come back in 5 minutes!</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parameters = model(X_train, Y_train, X_test, Y_test)
+</code></pre></div><p><strong>Expected Output</strong>:</p>
+<pre><code>Cost after epoch 0: 1.913693
+Cost after epoch 100: 1.048222
+Cost after epoch 200: 0.756012
+Cost after epoch 300: 0.590844
+Cost after epoch 400: 0.483423
+Cost after epoch 500: 0.392928
+Cost after epoch 600: 0.323629
+Cost after epoch 700: 0.262100
+Cost after epoch 800: 0.210199
+Cost after epoch 900: 0.171622
+Cost after epoch 1000: 0.145907
+Cost after epoch 1100: 0.110942
+Cost after epoch 1200: 0.088966
+Cost after epoch 1300: 0.061226
+</code></pre>
+<p>Amazing, your algorithm can recognize a sign representing a figure between 0 and 5 with 71.7% accuracy.</p>
+<p><strong>Insights</strong>:</p>
+<ul>
+<li>Your model seems big enough to fit the training set well. However, given the difference between train and test accuracy, you could try to add L2 or dropout regularization to reduce overfitting.</li>
+<li>Think about the session as a block of code to train the model. Each time you run the session on a minibatch, it trains the parameters. In total you have run the session a large number of times (1500 epochs) until you obtained well trained parameters.</li>
+</ul>
+<h3 id="27---test-with-your-own-image">2.7 - Test with your own image</h3>
+<p>Congratulations on finishing this assignment. You can now take a picture of your hand and see the output of your model. To do that:
+1. Click on &ldquo;File&rdquo; in the upper bar of this notebook, then click &ldquo;Open&rdquo; to go on your Coursera Hub.
+2. Add your image to this Jupyter Notebook&rsquo;s directory, in the &ldquo;images&rdquo; folder
+3. Write your image&rsquo;s name in the following code
+4. Run the code and check if the algorithm is right!</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> scipy
+<span style="color:#fff;font-weight:bold">from</span> PIL <span style="color:#fff;font-weight:bold">import</span> Image
+<span style="color:#fff;font-weight:bold">from</span> scipy <span style="color:#fff;font-weight:bold">import</span> ndimage
+
+<span style="color:#007f7f">## START CODE HERE ## (PUT YOUR IMAGE NAME) </span>
+my_image = <span style="color:#0ff;font-weight:bold">&#34;ex2.jpg&#34;</span>
+<span style="color:#007f7f">## END CODE HERE ##</span>
+
+<span style="color:#007f7f"># We preprocess your image to fit your algorithm.</span>
+fname = <span style="color:#0ff;font-weight:bold">&#34;images/&#34;</span> + my_image
+image = np.array(ndimage.imread(fname, flatten=False))
+image = image/<span style="color:#ff0;font-weight:bold">255.</span>
+my_image = scipy.misc.imresize(image, size=(<span style="color:#ff0;font-weight:bold">64</span>,<span style="color:#ff0;font-weight:bold">64</span>)).reshape((<span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">64</span>*<span style="color:#ff0;font-weight:bold">64</span>*<span style="color:#ff0;font-weight:bold">3</span>)).T
+my_image_prediction = predict(my_image, parameters)
+
+plt.imshow(image)
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Your algorithm predicts: y = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(np.squeeze(my_image_prediction)))
+</code></pre></div><pre><code>Your algorithm predicts: y = 5
+</code></pre>
+<p><img class="img-zoomable" src="/coursera_dl/output_68_1.png" alt="png" />
+</p>
+<p>You indeed deserved a &ldquo;thumbs-up&rdquo; although as you can see the algorithm seems to classify it incorrectly. The reason is that the training set doesn&rsquo;t contain any &ldquo;thumbs-up&rdquo;, so the model doesn&rsquo;t know how to deal with it! We call that a &ldquo;mismatched data distribution&rdquo; and it is one of the various of the next course on &ldquo;Structuring Machine Learning Projects&rdquo;.</p>
+<p><strong>What you should remember</strong>:</p>
+<ul>
+<li>Tensorflow is a programming framework used in deep learning</li>
+<li>The two main object classes in tensorflow are Tensors and Operators.</li>
+<li>When you code in tensorflow you have to take the following steps:
+<ul>
+<li>Create a graph containing Tensors (Variables, Placeholders &hellip;) and Operations (tf.matmul, tf.add, &hellip;)</li>
+<li>Create a session</li>
+<li>Initialize the session</li>
+<li>Run the session to execute the graph</li>
+</ul>
+</li>
+<li>You can execute the graph multiple times as you&rsquo;ve seen in model()</li>
+<li>The backpropagation and optimization is automatically done when running the session on the &ldquo;optimizer&rdquo; object.</li>
+</ul>
+
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/bible/">bible</a>
+            </span>
+            
+            <span>
+                <a href="/tags/cnn/">cnn</a>
+            </span>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-networks/">neural networks</a>
+            </span>
+            
+            <span>
+                <a href="/tags/optimization/">optimization</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+            <span>
+                <a href="/tags/regularization/">regularization</a>
+            </span>
+            
+            <span>
+                <a href="/tags/tensorflow/">tensorflow</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#tf_utilspy">tf_utils.py</a></li>
+    <li><a href="#improv_utilspy">improv_utils.py</a></li>
+    <li><a href="#tensorflow-tutorial">TensorFlow Tutorial</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#1---exploring-the-tensorflow-library">1 - Exploring the Tensorflow Library</a>
+      <ul>
+        <li><a href="#11---linear-function">1.1 - Linear function</a></li>
+        <li><a href="#12---computing-the-sigmoid">1.2 - Computing the sigmoid</a></li>
+        <li><a href="#13----computing-the-cost">1.3 -  Computing the Cost</a></li>
+        <li><a href="#14---using-one-hot-encodings">1.4 - Using One Hot encodings</a></li>
+        <li><a href="#15---initialize-with-zeros-and-ones">1.5 - Initialize with zeros and ones</a></li>
+      </ul>
+    </li>
+    <li><a href="#2---building-your-first-neural-network-in-tensorflow">2 - Building your first neural network in tensorflow</a>
+      <ul>
+        <li><a href="#20---problem-statement-signs-dataset">2.0 - Problem statement: SIGNS Dataset</a></li>
+        <li><a href="#21---create-placeholders">2.1 - Create placeholders</a></li>
+        <li><a href="#22---initializing-the-parameters">2.2 - Initializing the parameters</a></li>
+        <li><a href="#23---forward-propagation-in-tensorflow">2.3 - Forward propagation in tensorflow</a></li>
+        <li><a href="#24-compute-cost">2.4 Compute cost</a></li>
+        <li><a href="#25---backward-propagation--parameter-updates">2.5 - Backward propagation &amp; parameter updates</a></li>
+        <li><a href="#26---building-the-model">2.6 - Building the model</a></li>
+        <li><a href="#27---test-with-your-own-image">2.7 - Test with your own image</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/bible/">bible</a>
+            </span>
+            
+            <span>
+                <a href="/tags/cnn/">cnn</a>
+            </span>
+            
+            <span>
+                <a href="/tags/coursera/">coursera</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hyperparameter-tuning/">hyperparameter tuning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-network/">neural network</a>
+            </span>
+            
+            <span>
+                <a href="/tags/neural-networks/">neural networks</a>
+            </span>
+            
+            <span>
+                <a href="/tags/optimization/">optimization</a>
+            </span>
+            
+            <span>
+                <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+            <span>
+                <a href="/tags/regularization/">regularization</a>
+            </span>
+            
+            <span>
+                <a href="/tags/tensorflow/">tensorflow</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021
+                <a href="https://tjdoc.github.io/"></a>
+                
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.0/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>

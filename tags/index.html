@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.80.0" />
+<meta name="generator" content="Hugo 0.83.1" />
 
 
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
@@ -24,7 +24,7 @@
 <meta property="og:title" content="Tags" />
 <meta name="twitter:title" content="Tags" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://tjdoc.github.io/tags/" /><meta name="twitter:card" content="summary" /><meta property="og:updated_time" content="2021-01-26T10:29:44+09:00" />
+<meta property="og:url" content="https://tjdoc.github.io/tags/" /><meta name="twitter:card" content="summary" /><meta property="og:updated_time" content="2021-05-13T15:44:52+09:00" />
 
 
 <style>
@@ -79,6 +79,90 @@
                 
 
 
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-05-13-test/">test</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-05-13</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/bible">bible</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        낙심하지 않으면 ..
+우리가 선을 행하되 낙심하지 말지니 포기하지 아니하면 때가 이르매 거두리라
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-02-02-coursera_m4w2/">CNN m4w2</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-02-02</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/cnn">cnn</a>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        classic networks LeNet-5 AlexNet  many similarities with LeNet5 but much bigger. (10K parameters vs 60M parameters) Uses ReLU instead of traditional sigmoid, tanh Multiple GPUs local response normalization (not used much nowadays)  VGG-16 simplified the nn architechture
+ResNets networks in networks and 1x1 convolutions  pulling layers reduce nh, nw 1x1 convolution lets you reduce (or increase) number of channels  inception network 
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-02-01-coursera_m4w1/">convolutional neural network</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-02-01</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/cnn">cnn</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        Computer vision convolution operator
+summation of the elementwise multiplication with the convolution operator
+ python: conv-forward tensorflow: tf.nn.conv2d keras: conv2d  padding with padding, you can
+ prevent shrinking output prevent throwing away info from edge padding can be as large as you want  Valid and same convolutions  valid: no padding same: pad so that output size is the same as the input size  you may want odd number filters
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-28-coursera_m2w3p/">m2w3p tesorflow tutorial</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-28</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/tensorflow">tensorflow</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        tf_utils.py import h5py import numpy as np import tensorflow as tf import math def load_dataset(): train_dataset = h5py.File(&#39;datasets/train_signs.h5&#39;, &#34;r&#34;) train_set_x_orig = np.array(train_dataset[&#34;train_set_x&#34;][:]) # your train set features train_set_y_orig = np.array(train_dataset[&#34;train_set_y&#34;][:]) # your train set labels test_dataset = h5py.File(&#39;datasets/test_signs.h5&#39;, &#34;r&#34;) test_set_x_orig = np.array(test_dataset[&#34;test_set_x&#34;][:]) # your test set features test_set_y_orig = np.array(test_dataset[&#34;test_set_y&#34;][:]) # your test set labels classes = np.array(test_dataset[&#34;list_classes&#34;][:]) # the list of classes train_set_y_orig = train_set_y_orig.reshape((1, train_set_y_orig.shape[0])) test_set_y_orig = test_set_y_orig.reshape((1, test_set_y_orig.
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-28-coursera_m2w3/">Improving Deep Neural Networks M2W3</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-28</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-networks">neural networks</a>&nbsp;<a href="/tags/hyperparameter-tuning">hyperparameter tuning</a>&nbsp;<a href="/tags/regularization">regularization</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        Hyperparameters in the order of importance
+ alpha - most important   beta (momentum, default: 0.9) number of hidden units mini-batch size   number of layers learning rate decay beta1, beta2, epsilon (Adam optimization, 0.9, 0.999, 10^-8)  Tuning process  Try random sampling, don&rsquo;t use grid  it is difficult to know in advance which setting will work better   use coarse to fine sampling once you have some idea which range works better - sample that region more densely  picking hyperparameters at random  uniformly random (random version of np.
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://tjdoc.github.io/posts/2021-01-27-coursera_m2w2p/">coursera m2w2p</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-27</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;<a href="/tags/optimization">optimization</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        op utils import numpy as np import matplotlib.pyplot as plt import h5py import scipy.io import sklearn import sklearn.datasets def sigmoid(x): &#34;&#34;&#34; Compute the sigmoid of x Arguments: x -- A scalar or numpy array of any size. Return: s -- sigmoid(x) &#34;&#34;&#34; s = 1/(1+np.exp(-x)) return s def relu(x): &#34;&#34;&#34; Compute the relu of x Arguments: x -- A scalar or numpy array of any size. Return: s -- relu(x) &#34;&#34;&#34; s = np.
+    </div>
+</div>
 
 <div class="post">
     <h2 class="post-item post-title">
@@ -289,90 +373,48 @@ CJB gal 6:9. So let us not grow weary of doing what is good; for if we don’t g
     </div>
 </div>
 
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://tjdoc.github.io/posts/2021-01-15-coursera_m1w2/">Neural Networks and Deep Learning W2: Logistic Regression as a Neural Network</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-15</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
 
+
+
+
+
+
+
+<div class="pagination">
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="pag-item pag-current">
+        <a href="/tags/">1</a>
     </div>
-    <div class="post-item post-summary markdown-body">
-        Logistic Regression Given x, we want \({\hat y} = P(y=1 |_x)\) where
-input vector: \( x \in \Re^{n_x} \)
-Parameters: \(w \in \Re^{n_x}\), \(b \in \Re \)
-Output: \({\hat y} = \sigma (w^T x + b)\)
-Here, \( \sigma(z) = \frac{1}{1+e^{-z}} \) is the sigmoid function that enforces \( 0 \le {\hat y} \le 1 \)
-Given \( \{{ (x^{(1)} , y^{(1)}) , &hellip;, (x^{(m)} , y^{(m)}) \}} \)
-we want \( {\hat y}^{(i)} \approx y^{(i)} \)
+    
+    
+    
+    
+    
+    
+    
+    <div class="pag-item">
+        <a href="/tags/page/2/">2</a>
     </div>
+    
+    
+    
+    <div class="pag-next">
+        <a href="/tags/page/2/"><i class="iconfont icon-chevron-forward-circle-sharp"></i></i></a>
+    </div>
+    
+    
+    <div class="pag-last">
+        <a href="/tags/page/2/"><i class="iconfont icon-caret-forward-circle-sharp"></i></a>
+    </div>
+    
 </div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://tjdoc.github.io/posts/2021-01-15-ps20/">Psalm 20</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-15</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/reflection">reflection</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        For the leader. A psalm of David: May Adonai answer you in times of distress, may the name of the God of Ya‘akov protect you. May he send you help from the sanctuary and give you support from Tziyon. May he be reminded by all your grain offerings and accept the fat of your burnt offerings. (Selah) May he grant you your heart’s desire and bring all your plans to success.
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://tjdoc.github.io/posts/2021-01-15-sleep/">sleep</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-15</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/reflection">reflection</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        NKRV ps 127:2. 너희가 일찍이 일어나고 늦게 누우며 수고의 떡을 먹음이 헛되도다 그러므로 여호와께서 그의 사랑하시는 자에게는 잠을 주시는도다
-  KJV ps 127:2. It is vain for you to rise up early, to sit up late, to eat the bread of sorrows: for so he giveth his beloved sleep.
-  CJB ps 127:2. In vain do you get up early and put off going to bed, working hard to earn a living; for he provides for his beloved, even when they sleep.
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://tjdoc.github.io/posts/2021-01-14-coursera_m1w1/">Neural Networks and Deep Learning W1: What is a neural network?</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-14</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/coursera">coursera</a>&nbsp;<a href="/tags/neural-network">neural network</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        Terminology  x: input y: output Deep Learning: Same thing as Neural Network but sounds better brandwise  Application Standard Neural Network
- Real estate Online Advertising  Convolutional NN (CNN)
- Image data Photo tagging  Recurrent NN (RNN)
- Data invoving temporal component Speech recognition Machine transaltion  Custom Hybrid
- Automous driving  Data kinds  Supervised Data: Database Unstructured Data  audio image text    Why is deep learning taking off?
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://tjdoc.github.io/posts/2021-01-14-start/">Start</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-01-14</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/reflection">reflection</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        They that sow in tears shall reap in joy. ps 126:5
- start
-    </div>
-</div>
-
-
-
-
-
-
-
 
 
 
@@ -398,6 +440,14 @@ we want \( {\hat y}^{(i)} \approx y^{(i)} \)
         <div>
             
             <span>
+                <a href="/tags/bible/">bible</a>
+            </span>
+            
+            <span>
+                <a href="/tags/cnn/">cnn</a>
+            </span>
+            
+            <span>
                 <a href="/tags/coursera/">coursera</a>
             </span>
             
@@ -410,7 +460,23 @@ we want \( {\hat y}^{(i)} \approx y^{(i)} \)
             </span>
             
             <span>
+                <a href="/tags/neural-networks/">neural networks</a>
+            </span>
+            
+            <span>
+                <a href="/tags/optimization/">optimization</a>
+            </span>
+            
+            <span>
                 <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+            <span>
+                <a href="/tags/regularization/">regularization</a>
+            </span>
+            
+            <span>
+                <a href="/tags/tensorflow/">tensorflow</a>
             </span>
             
         </div>
@@ -453,6 +519,14 @@ we want \( {\hat y}^{(i)} \approx y^{(i)} \)
         <div>
             
             <span>
+                <a href="/tags/bible/">bible</a>
+            </span>
+            
+            <span>
+                <a href="/tags/cnn/">cnn</a>
+            </span>
+            
+            <span>
                 <a href="/tags/coursera/">coursera</a>
             </span>
             
@@ -465,7 +539,23 @@ we want \( {\hat y}^{(i)} \approx y^{(i)} \)
             </span>
             
             <span>
+                <a href="/tags/neural-networks/">neural networks</a>
+            </span>
+            
+            <span>
+                <a href="/tags/optimization/">optimization</a>
+            </span>
+            
+            <span>
                 <a href="/tags/reflection/">reflection</a>
+            </span>
+            
+            <span>
+                <a href="/tags/regularization/">regularization</a>
+            </span>
+            
+            <span>
+                <a href="/tags/tensorflow/">tensorflow</a>
             </span>
             
         </div>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>optimization on ps126.5</title>
+    <link>https://tjdoc.github.io/tags/optimization/</link>
+    <description>Recent content in optimization on ps126.5</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 27 Jan 2021 16:16:06 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/tags/optimization/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>coursera m2w2p</title>
+      <link>https://tjdoc.github.io/posts/2021-01-27-coursera_m2w2p/</link>
+      <pubDate>Wed, 27 Jan 2021 16:16:06 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-27-coursera_m2w2p/</guid>
+      <description>op utils import numpy as np import matplotlib.pyplot as plt import h5py import scipy.io import sklearn import sklearn.datasets def sigmoid(x): &amp;#34;&amp;#34;&amp;#34; Compute the sigmoid of x Arguments: x -- A scalar or numpy array of any size. Return: s -- sigmoid(x) &amp;#34;&amp;#34;&amp;#34; s = 1/(1+np.exp(-x)) return s def relu(x): &amp;#34;&amp;#34;&amp;#34; Compute the relu of x Arguments: x -- A scalar or numpy array of any size. Return: s -- relu(x) &amp;#34;&amp;#34;&amp;#34; s = np.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,7 +6,38 @@
     <description>Recent content in neural network on ps126.5</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Jan 2021 10:29:44 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/tags/neural-network/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 02 Feb 2021 15:22:09 +0900</lastBuildDate><atom:link href="https://tjdoc.github.io/tags/neural-network/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CNN m4w2</title>
+      <link>https://tjdoc.github.io/posts/2021-02-02-coursera_m4w2/</link>
+      <pubDate>Tue, 02 Feb 2021 15:22:09 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-02-02-coursera_m4w2/</guid>
+      <description>classic networks LeNet-5 AlexNet  many similarities with LeNet5 but much bigger. (10K parameters vs 60M parameters) Uses ReLU instead of traditional sigmoid, tanh Multiple GPUs local response normalization (not used much nowadays)  VGG-16 simplified the nn architechture
+ResNets networks in networks and 1x1 convolutions  pulling layers reduce nh, nw 1x1 convolution lets you reduce (or increase) number of channels  inception network </description>
+    </item>
+    
+    <item>
+      <title>convolutional neural network</title>
+      <link>https://tjdoc.github.io/posts/2021-02-01-coursera_m4w1/</link>
+      <pubDate>Mon, 01 Feb 2021 11:37:08 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-02-01-coursera_m4w1/</guid>
+      <description>Computer vision convolution operator
+summation of the elementwise multiplication with the convolution operator
+ python: conv-forward tensorflow: tf.nn.conv2d keras: conv2d  padding with padding, you can
+ prevent shrinking output prevent throwing away info from edge padding can be as large as you want  Valid and same convolutions  valid: no padding same: pad so that output size is the same as the input size  you may want odd number filters</description>
+    </item>
+    
+    <item>
+      <title>coursera m2w2p</title>
+      <link>https://tjdoc.github.io/posts/2021-01-27-coursera_m2w2p/</link>
+      <pubDate>Wed, 27 Jan 2021 16:16:06 +0900</pubDate>
+      
+      <guid>https://tjdoc.github.io/posts/2021-01-27-coursera_m2w2p/</guid>
+      <description>op utils import numpy as np import matplotlib.pyplot as plt import h5py import scipy.io import sklearn import sklearn.datasets def sigmoid(x): &amp;#34;&amp;#34;&amp;#34; Compute the sigmoid of x Arguments: x -- A scalar or numpy array of any size. Return: s -- sigmoid(x) &amp;#34;&amp;#34;&amp;#34; s = 1/(1+np.exp(-x)) return s def relu(x): &amp;#34;&amp;#34;&amp;#34; Compute the relu of x Arguments: x -- A scalar or numpy array of any size. Return: s -- relu(x) &amp;#34;&amp;#34;&amp;#34; s = np.</description>
+    </item>
+    
     <item>
       <title>Optimization Algorithms M2W2</title>
       <link>https://tjdoc.github.io/posts/2021-01-26-coursera_m2w2/</link>
