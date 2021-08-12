@@ -124,17 +124,21 @@ def sigmoid_derivative(x): s = sigmoid(x) ds = s*(1-s) return ds Reshaping arbit
 <p>Gradient descent converges much faster after normalization. Here, by normalization, we mean changing \( x \) to \( \frac{x}{||x||} \) (dividing each row vector of x by its norm.
 for example</p>
 <p>$$
-x = \begin{bmatrix} 0 &amp; 3 &amp; 4 \ 2 &amp; 6 &amp; 4 \end{bmatrix}
+x =
+\begin{bmatrix}
+0 &amp; 3 &amp; 4 \\
+2 &amp; 6 &amp; 4
+\end{bmatrix}
 $$</p>
 <p>then</p>
 <p>$$
-||x|| = \text{np.linalg.norm(x, axis = 1, keepdims = True)} = \begin{bmatrix} 5 \ \sqrt{56} \end{bmatrix}
+||x|| = \text{np.linalg.norm(x, axis = 1, keepdims = True)} = \begin{bmatrix} 5 \\ \sqrt{56} \end{bmatrix}
 $$</p>
 <p>and</p>
 <p>$$
 \text{x_normalized} = \frac{x}{||x||} =
 \begin{bmatrix}
-0 &amp; \frac{3}{5} &amp; \frac{4}{5} \<br>
+0 &amp; \frac{3}{5} &amp; \frac{4}{5} \\<br>
 \frac{2}{\sqrt{56}} &amp; \frac{6}{\sqrt{56}} &amp; \frac{4}{\sqrt{56}}
 \end{bmatrix}
 $$</p>
