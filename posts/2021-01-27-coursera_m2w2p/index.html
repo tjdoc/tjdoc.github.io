@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.83.1" />
+<meta name="generator" content="Hugo 0.87.0" />
 
 
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
@@ -92,7 +92,7 @@
     
     <div class="post-content markdown-body">
         <h2 id="op-utils">op utils</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
 <span style="color:#fff;font-weight:bold">import</span> matplotlib.pyplot <span style="color:#fff;font-weight:bold">as</span> plt
 <span style="color:#fff;font-weight:bold">import</span> h5py
 <span style="color:#fff;font-weight:bold">import</span> scipy.io
@@ -251,17 +251,17 @@
     
     dz3 = <span style="color:#ff0;font-weight:bold">1.</span>/m * (a3 - Y)
     dW3 = np.dot(dz3, a2.T)
-    db3 = np.sum(dz3, axis=<span style="color:#ff0;font-weight:bold">1</span>, keepdims = True)
+    db3 = np.sum(dz3, axis=<span style="color:#ff0;font-weight:bold">1</span>, keepdims = <span style="color:#fff;font-weight:bold">True</span>)
     
     da2 = np.dot(W3.T, dz3)
     dz2 = np.multiply(da2, np.int64(a2 &gt; <span style="color:#ff0;font-weight:bold">0</span>))
     dW2 = np.dot(dz2, a1.T)
-    db2 = np.sum(dz2, axis=<span style="color:#ff0;font-weight:bold">1</span>, keepdims = True)
+    db2 = np.sum(dz2, axis=<span style="color:#ff0;font-weight:bold">1</span>, keepdims = <span style="color:#fff;font-weight:bold">True</span>)
     
     da1 = np.dot(W2.T, dz2)
     dz1 = np.multiply(da1, np.int64(a1 &gt; <span style="color:#ff0;font-weight:bold">0</span>))
     dW1 = np.dot(dz1, X.T)
-    db1 = np.sum(dz1, axis=<span style="color:#ff0;font-weight:bold">1</span>, keepdims = True)
+    db1 = np.sum(dz1, axis=<span style="color:#ff0;font-weight:bold">1</span>, keepdims = <span style="color:#fff;font-weight:bold">True</span>)
     
     gradients = {<span style="color:#0ff;font-weight:bold">&#34;dz3&#34;</span>: dz3, <span style="color:#0ff;font-weight:bold">&#34;dW3&#34;</span>: dW3, <span style="color:#0ff;font-weight:bold">&#34;db3&#34;</span>: db3,
                  <span style="color:#0ff;font-weight:bold">&#34;da2&#34;</span>: da2, <span style="color:#0ff;font-weight:bold">&#34;dz2&#34;</span>: dz2, <span style="color:#0ff;font-weight:bold">&#34;dW2&#34;</span>: dW2, <span style="color:#0ff;font-weight:bold">&#34;db2&#34;</span>: db2,
@@ -349,7 +349,7 @@
 
 <span style="color:#fff;font-weight:bold">def</span> load_dataset():
     np.random.seed(<span style="color:#ff0;font-weight:bold">3</span>)
-    train_X, train_Y = sklearn.datasets.make_moons(n_samples=<span style="color:#ff0;font-weight:bold">300</span>, noise=.<span style="color:#ff0;font-weight:bold">2</span>) <span style="color:#007f7f">#300 #0.2 </span>
+    train_X, train_Y = sklearn.datasets.make_moons(n_samples=<span style="color:#ff0;font-weight:bold">300</span>, noise=<span style="color:#ff0;font-weight:bold">.2</span>) <span style="color:#007f7f">#300 #0.2 </span>
     <span style="color:#007f7f"># Visualize the data</span>
     plt.scatter(train_X[:, <span style="color:#ff0;font-weight:bold">0</span>], train_X[:, <span style="color:#ff0;font-weight:bold">1</span>], c=train_Y, s=<span style="color:#ff0;font-weight:bold">40</span>, cmap=plt.cm.Spectral);
     train_X = train_X.T
@@ -357,7 +357,7 @@
     
     <span style="color:#fff;font-weight:bold">return</span> train_X, train_Y
 </code></pre></div><h2 id="test-cases">test cases</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
 
 <span style="color:#fff;font-weight:bold">def</span> update_parameters_with_gd_test_case():
     np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
@@ -462,7 +462,7 @@
     
     <span style="color:#fff;font-weight:bold">return</span> parameters, grads, v, s
 </code></pre></div><h2 id="load-libraries">load libraries</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
 <span style="color:#fff;font-weight:bold">import</span> matplotlib.pyplot <span style="color:#fff;font-weight:bold">as</span> plt
 <span style="color:#fff;font-weight:bold">import</span> scipy.io
 <span style="color:#fff;font-weight:bold">import</span> math
@@ -483,7 +483,7 @@ plt.rcParams[<span style="color:#0ff;font-weight:bold">&#39;image.cmap&#39;</spa
 $$ W^{[l]} = W^{[l]} - \alpha \text{ } dW^{[l]} \tag{1}$$
 $$ b^{[l]} = b^{[l]} - \alpha \text{ } db^{[l]} \tag{2}$$</p>
 <p>where L is the number of layers and \(\alpha\) is the learning rate. All parameters should be stored in the <code>parameters</code> dictionary. Note that the iterator <code>l</code> starts at 0 in the <code>for</code> loop while the first parameters are \(W^{[1]}\) and \(b^{[1]}\). You need to shift <code>l</code> to <code>l+1</code> when coding.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: update_parameters_with_gd</span>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: update_parameters_with_gd</span>
 
 <span style="color:#fff;font-weight:bold">def</span> update_parameters_with_gd(parameters, grads, learning_rate):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
@@ -512,7 +512,7 @@ $$ b^{[l]} = b^{[l]} - \alpha \text{ } db^{[l]} \tag{2}$$</p>
         <span style="color:#007f7f">### END CODE HERE ###</span>
         
     <span style="color:#fff;font-weight:bold">return</span> parameters
-</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parameters, grads, learning_rate = update_parameters_with_gd_test_case()
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parameters, grads, learning_rate = update_parameters_with_gd_test_case()
 
 parameters = update_parameters_with_gd(parameters, grads, learning_rate)
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;W1 =</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>]))
@@ -520,7 +520,7 @@ parameters = update_parameters_with_gd(parameters, grads, learning_rate)
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;W2 =</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;W2&#34;</span>]))
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;b2 =</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>]))
 </code></pre></div><p><strong>Expected Output</strong>:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">W1 =
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">W1 =
 [[ 1.63535156 -0.62320365 -0.53718766]
  [-1.07799357  0.85639907 -2.29470142]]
 b1 =
@@ -538,7 +538,7 @@ b2 =
 <ul>
 <li><strong>(Batch) Gradient Descent</strong>:</li>
 </ul>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X = data_input
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X = data_input
 Y = labels
 parameters = initialize_parameters(layers_dims)
 <span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">0</span>, num_iterations):
@@ -554,7 +554,7 @@ parameters = initialize_parameters(layers_dims)
 </code></pre></div><ul>
 <li><strong>Stochastic Gradient Descent</strong>:</li>
 </ul>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X = data_input
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X = data_input
 Y = labels
 parameters = initialize_parameters(layers_dims)
 <span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">0</span>, num_iterations):
@@ -601,14 +601,14 @@ parameters = initialize_parameters(layers_dims)
 <p><img class="img-zoomable" src="/coursera_dl/kiank_partition.png" alt="partition" />
 </p>
 <p><strong>Exercise</strong>: Implement <code>random_mini_batches</code>. We coded the shuffling part for you. To help you with the partitioning step, we give you the following code that selects the indexes for the \(1^{st}\) and \(2^{nd}\) mini-batches:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">first_mini_batch_X = shuffled_X[:, <span style="color:#ff0;font-weight:bold">0</span> : mini_batch_size]
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">first_mini_batch_X = shuffled_X[:, <span style="color:#ff0;font-weight:bold">0</span> : mini_batch_size]
 second_mini_batch_X = shuffled_X[:, mini_batch_size : <span style="color:#ff0;font-weight:bold">2</span> * mini_batch_size]
 ...
 </code></pre></div><p>Note that the last mini-batch might end up smaller than <code>mini_batch_size=64</code>. Let \(\lfloor s \rfloor\) represents \(s\) rounded down to the nearest integer (this is <code>math.floor(s)</code> in Python). If the total number of examples is not a multiple of <code>mini_batch_size=64</code> then there will be</p>
 <p>$$\lfloor \frac{m}{mini batch size}\rfloor$$</p>
 <p>mini-batches with a full 64 examples, and the number of examples in the final mini-batch will be</p>
 <p>$$m-mini batch size \times \lfloor \frac{m}{mini batch size}\rfloor$$</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: random_mini_batches</span>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: random_mini_batches</span>
 
 <span style="color:#fff;font-weight:bold">def</span> random_mini_batches(X, Y, mini_batch_size = <span style="color:#ff0;font-weight:bold">64</span>, seed = <span style="color:#ff0;font-weight:bold">0</span>):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
@@ -652,7 +652,7 @@ second_mini_batch_X = shuffled_X[:, mini_batch_size : <span style="color:#ff0;fo
         mini_batches.append(mini_batch)
     
     <span style="color:#fff;font-weight:bold">return</span> mini_batches
-</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X_assess, Y_assess, mini_batch_size = random_mini_batches_test_case()
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X_assess, Y_assess, mini_batch_size = random_mini_batches_test_case()
 mini_batches = random_mini_batches(X_assess, Y_assess, mini_batch_size)
 
 <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;shape of the 1st mini_batch_X: &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(mini_batches[<span style="color:#ff0;font-weight:bold">0</span>][<span style="color:#ff0;font-weight:bold">0</span>].shape))
@@ -684,10 +684,10 @@ mini batch sanity check: [ 0.90085595 -0.7612069   0.2344157 ]
 <p>The red arrows shows the direction taken by one step of mini-batch gradient descent with momentum. The blue points show the direction of the gradient (with respect to the current mini-batch) on each step. Rather than just following the gradient, we let the gradient influence \(v\) and then take a step in the direction of \(v\).</p>
 <p><strong>Exercise</strong>: Initialize the velocity. The velocity, \(v\), is a python dictionary that needs to be initialized with arrays of zeros. Its keys are the same as those in the <code>grads</code> dictionary, that is:
 for \(l =1,&hellip;,L\):</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v[<span style="color:#0ff;font-weight:bold">&#34;dW&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)] = ... <span style="color:#007f7f">#(numpy array of zeros with the same shape as parameters[&#34;W&#34; + str(l+1)])</span>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v[<span style="color:#0ff;font-weight:bold">&#34;dW&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)] = ... <span style="color:#007f7f">#(numpy array of zeros with the same shape as parameters[&#34;W&#34; + str(l+1)])</span>
 v[<span style="color:#0ff;font-weight:bold">&#34;db&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)] = ... <span style="color:#007f7f">#(numpy array of zeros with the same shape as parameters[&#34;b&#34; + str(l+1)])</span>
 </code></pre></div><p><strong>Note</strong> that the iterator l starts at 0 in the for loop while the first parameters are v[&ldquo;dW1&rdquo;] and v[&ldquo;db1&rdquo;] (that&rsquo;s a &ldquo;one&rdquo; on the superscript). This is why we are shifting l to l+1 in the <code>for</code> loop.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: initialize_velocity</span>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: initialize_velocity</span>
 
 <span style="color:#fff;font-weight:bold">def</span> initialize_velocity(parameters):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
@@ -716,7 +716,7 @@ v[<span style="color:#0ff;font-weight:bold">&#34;db&#34;</span> + <span style="c
         <span style="color:#007f7f">### END CODE HERE ###</span>
         
     <span style="color:#fff;font-weight:bold">return</span> v
-</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parameters = initialize_velocity_test_case()
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parameters = initialize_velocity_test_case()
 
 v = initialize_velocity(parameters)
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;v[</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">dW1</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">] =</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(v[<span style="color:#0ff;font-weight:bold">&#34;dW1&#34;</span>]))
@@ -724,7 +724,7 @@ v = initialize_velocity(parameters)
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;v[</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">dW2</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">] =</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(v[<span style="color:#0ff;font-weight:bold">&#34;dW2&#34;</span>]))
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;v[</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">db2</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">] =</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(v[<span style="color:#0ff;font-weight:bold">&#34;db2&#34;</span>]))
 </code></pre></div><p><strong>Expected Output</strong>:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">v[&#34;dW1&#34;] =
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">v[&#34;dW1&#34;] =
 [[ 0.  0.  0.]
  [ 0.  0.  0.]]
 v[&#34;db1&#34;] =
@@ -748,7 +748,7 @@ v_{db^{[l]}} = \beta v_{db^{[l]}} + (1 - \beta) db^{[l]} \\
 b^{[l]} = b^{[l]} - \alpha v_{db^{[l]}}
 \end{cases}\tag{4}$$</p>
 <p>where L is the number of layers, \(\beta\) is the momentum and \(\alpha\) is the learning rate. All parameters should be stored in the <code>parameters</code> dictionary.  Note that the iterator <code>l</code> starts at 0 in the <code>for</code> loop while the first parameters are \(W^{[1]}\) and \(b^{[1]}\) (that&rsquo;s a &ldquo;one&rdquo; on the superscript). So you will need to shift <code>l</code> to <code>l+1</code> when coding.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: update_parameters_with_momentum</span>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: update_parameters_with_momentum</span>
 
 <span style="color:#fff;font-weight:bold">def</span> update_parameters_with_momentum(parameters, grads, v, beta, learning_rate):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
@@ -787,7 +787,7 @@ b^{[l]} = b^{[l]} - \alpha v_{db^{[l]}}
         <span style="color:#007f7f">### END CODE HERE ###</span>
         
     <span style="color:#fff;font-weight:bold">return</span> parameters, v
-</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parameters, grads, v = update_parameters_with_momentum_test_case()
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parameters, grads, v = update_parameters_with_momentum_test_case()
 
 parameters, v = update_parameters_with_momentum(parameters, grads, v, beta = <span style="color:#ff0;font-weight:bold">0.9</span>, learning_rate = <span style="color:#ff0;font-weight:bold">0.01</span>)
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;W1 = </span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>]))
@@ -799,7 +799,7 @@ parameters, v = update_parameters_with_momentum(parameters, grads, v, beta = <sp
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;v[</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">dW2</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">] = </span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(v[<span style="color:#0ff;font-weight:bold">&#34;dW2&#34;</span>]))
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;v[</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">db2</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">] = v&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(v[<span style="color:#0ff;font-weight:bold">&#34;db2&#34;</span>]))
 </code></pre></div><p><strong>Expected Output</strong>:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">W1 = 
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">W1 = 
 [[ 1.62544598 -0.61290114 -0.52907334]
  [-1.07347112  0.86450677 -2.30085497]]
 b1 = 
@@ -870,12 +870,12 @@ where:</p>
 <p><strong>Exercise</strong>: Initialize the Adam variables \(v, s\) which keep track of the past information.</p>
 <p><strong>Instruction</strong>: The variables \(v, s\) are python dictionaries that need to be initialized with arrays of zeros. Their keys are the same as for <code>grads</code>, that is:
 for \(l = 1, &hellip;, L\):</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v[<span style="color:#0ff;font-weight:bold">&#34;dW&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)] = ... <span style="color:#007f7f">#(numpy array of zeros with the same shape as parameters[&#34;W&#34; + str(l+1)])</span>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v[<span style="color:#0ff;font-weight:bold">&#34;dW&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)] = ... <span style="color:#007f7f">#(numpy array of zeros with the same shape as parameters[&#34;W&#34; + str(l+1)])</span>
 v[<span style="color:#0ff;font-weight:bold">&#34;db&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)] = ... <span style="color:#007f7f">#(numpy array of zeros with the same shape as parameters[&#34;b&#34; + str(l+1)])</span>
 s[<span style="color:#0ff;font-weight:bold">&#34;dW&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)] = ... <span style="color:#007f7f">#(numpy array of zeros with the same shape as parameters[&#34;W&#34; + str(l+1)])</span>
 s[<span style="color:#0ff;font-weight:bold">&#34;db&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(l+<span style="color:#ff0;font-weight:bold">1</span>)] = ... <span style="color:#007f7f">#(numpy array of zeros with the same shape as parameters[&#34;b&#34; + str(l+1)])</span>
 
-</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: initialize_adam</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: initialize_adam</span>
 
 <span style="color:#fff;font-weight:bold">def</span> initialize_adam(parameters) :
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
@@ -912,7 +912,7 @@ s[<span style="color:#0ff;font-weight:bold">&#34;db&#34;</span> + <span style="c
     <span style="color:#007f7f">### END CODE HERE ###</span>
     
     <span style="color:#fff;font-weight:bold">return</span> v, s
-</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parameters = initialize_adam_test_case()
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parameters = initialize_adam_test_case()
 
 v, s = initialize_adam(parameters)
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;v[</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">dW1</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">] = </span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(v[<span style="color:#0ff;font-weight:bold">&#34;dW1&#34;</span>]))
@@ -924,7 +924,7 @@ v, s = initialize_adam(parameters)
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;s[</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">dW2</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">] = </span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(s[<span style="color:#0ff;font-weight:bold">&#34;dW2&#34;</span>]))
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;s[</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">db2</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">] = </span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(s[<span style="color:#0ff;font-weight:bold">&#34;db2&#34;</span>]))
 </code></pre></div><p><strong>Expected Output</strong>:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">v[&#34;dW1&#34;] = 
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">v[&#34;dW1&#34;] = 
 [[ 0.  0.  0.]
  [ 0.  0.  0.]]
 v[&#34;db1&#34;] = 
@@ -961,7 +961,7 @@ s^{corrected}_{W^{[l]}} = \frac{s_{W^{[l]}}}{1 - (\beta_2)^t} \\
 W^{[l]} = W^{[l]} - \alpha \frac{v^{corrected}_{W^{[l]}}}{\sqrt{s^{corrected}_{W^{[l]}}}+\varepsilon}
 \end{cases}$$</p>
 <p><strong>Note</strong> that the iterator <code>l</code> starts at 0 in the <code>for</code> loop while the first parameters are \(W^{[1]}\) and \(b^{[1]}\). You need to shift <code>l</code> to <code>l+1</code> when coding.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: update_parameters_with_adam</span>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># GRADED FUNCTION: update_parameters_with_adam</span>
 
 <span style="color:#fff;font-weight:bold">def</span> update_parameters_with_adam(parameters, grads, v, s, t, learning_rate = <span style="color:#ff0;font-weight:bold">0.01</span>,
                                 beta1 = <span style="color:#ff0;font-weight:bold">0.9</span>, beta2 = <span style="color:#ff0;font-weight:bold">0.999</span>,  epsilon = <span style="color:#ff0;font-weight:bold">1e-8</span>):
@@ -1025,7 +1025,7 @@ W^{[l]} = W^{[l]} - \alpha \frac{v^{corrected}_{W^{[l]}}}{\sqrt{s^{corrected}_{W
         <span style="color:#007f7f">### END CODE HERE ###</span>
 
     <span style="color:#fff;font-weight:bold">return</span> parameters, v, s
-</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parameters, grads, v, s = update_parameters_with_adam_test_case()
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parameters, grads, v, s = update_parameters_with_adam_test_case()
 parameters, v, s  = update_parameters_with_adam(parameters, grads, v, s, t = <span style="color:#ff0;font-weight:bold">2</span>)
 
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;W1 = </span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;W1&#34;</span>]))
@@ -1041,7 +1041,7 @@ parameters, v, s  = update_parameters_with_adam(parameters, grads, v, s, t = <sp
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;s[</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">dW2</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">] = </span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(s[<span style="color:#0ff;font-weight:bold">&#34;dW2&#34;</span>]))
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;s[</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">db2</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">] = </span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(s[<span style="color:#0ff;font-weight:bold">&#34;db2&#34;</span>]))
 </code></pre></div><p><strong>Expected Output</strong>:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">W1 = 
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">W1 = 
 [[ 1.63178673 -0.61919778 -0.53561312]
  [-1.08040999  0.85796626 -2.29409733]]
 b1 = 
@@ -1086,7 +1086,7 @@ s[&#34;db2&#34;] =
 </code></pre></div><p>You now have three working optimization algorithms (mini-batch gradient descent, Momentum, Adam). Let&rsquo;s implement a model with each of these optimizers and observe the difference.</p>
 <h2 id="5---model-with-different-optimization-algorithms">5 - Model with different optimization algorithms</h2>
 <p>Lets use the following &ldquo;moons&rdquo; dataset to test the different optimization methods. (The dataset is named &ldquo;moons&rdquo; because the data from each of the two classes looks a bit like a crescent-shaped moon.)</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">train_X, train_Y = load_dataset()
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">train_X, train_Y = load_dataset()
 </code></pre></div><p><img class="img-zoomable" src="/coursera_dl/output_35_0.png" alt="png" />
 </p>
 <p>We have already implemented a 3-layer neural network. You will train it with:</p>
@@ -1107,8 +1107,8 @@ s[&#34;db2&#34;] =
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> model(X, Y, layers_dims, optimizer, learning_rate = <span style="color:#ff0;font-weight:bold">0.0007</span>, mini_batch_size = <span style="color:#ff0;font-weight:bold">64</span>, beta = <span style="color:#ff0;font-weight:bold">0.9</span>,
-          beta1 = <span style="color:#ff0;font-weight:bold">0.9</span>, beta2 = <span style="color:#ff0;font-weight:bold">0.999</span>,  epsilon = <span style="color:#ff0;font-weight:bold">1e-8</span>, num_epochs = <span style="color:#ff0;font-weight:bold">10000</span>, print_cost = True):
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> model(X, Y, layers_dims, optimizer, learning_rate = <span style="color:#ff0;font-weight:bold">0.0007</span>, mini_batch_size = <span style="color:#ff0;font-weight:bold">64</span>, beta = <span style="color:#ff0;font-weight:bold">0.9</span>,
+          beta1 = <span style="color:#ff0;font-weight:bold">0.9</span>, beta2 = <span style="color:#ff0;font-weight:bold">0.999</span>,  epsilon = <span style="color:#ff0;font-weight:bold">1e-8</span>, num_epochs = <span style="color:#ff0;font-weight:bold">10000</span>, print_cost = <span style="color:#fff;font-weight:bold">True</span>):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
 </span><span style="color:#0ff;font-weight:bold">    3-layer neural network model which can be run in different optimizer modes.
 </span><span style="color:#0ff;font-weight:bold">    
@@ -1196,7 +1196,7 @@ s[&#34;db2&#34;] =
 </code></pre></div><p>You will now run this 3 layer neural network with each of the 3 optimization methods.</p>
 <h3 id="51---mini-batch-gradient-descent">5.1 - Mini-batch Gradient descent</h3>
 <p>Run the following code to see how the model does with mini-batch gradient descent.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># train 3-layer model</span>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># train 3-layer model</span>
 layers_dims = [train_X.shape[<span style="color:#ff0;font-weight:bold">0</span>], <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">1</span>]
 parameters = model(train_X, train_Y, layers_dims, optimizer = <span style="color:#0ff;font-weight:bold">&#34;gd&#34;</span>)
 
@@ -1228,7 +1228,7 @@ Cost after epoch 9000: 0.468014
 </p>
 <h3 id="52---mini-batch-gradient-descent-with-momentum">5.2 - Mini-batch gradient descent with momentum</h3>
 <p>Run the following code to see how the model does with momentum. Because this example is relatively simple, the gains from using momemtum are small; but for more complex problems you might see bigger gains.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># train 3-layer model</span>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># train 3-layer model</span>
 layers_dims = [train_X.shape[<span style="color:#ff0;font-weight:bold">0</span>], <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">1</span>]
 parameters = model(train_X, train_Y, layers_dims, beta = <span style="color:#ff0;font-weight:bold">0.9</span>, optimizer = <span style="color:#0ff;font-weight:bold">&#34;momentum&#34;</span>)
 
@@ -1260,7 +1260,7 @@ Cost after epoch 9000: 0.468160
 </p>
 <h3 id="53---mini-batch-with-adam-mode">5.3 - Mini-batch with Adam mode</h3>
 <p>Run the following code to see how the model does with Adam.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># train 3-layer model</span>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># train 3-layer model</span>
 layers_dims = [train_X.shape[<span style="color:#ff0;font-weight:bold">0</span>], <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">1</span>]
 parameters = model(train_X, train_Y, layers_dims, optimizer = <span style="color:#0ff;font-weight:bold">&#34;adam&#34;</span>)
 
@@ -1326,7 +1326,7 @@ Cost after epoch 9000: 0.129118
 </ul>
 <p><strong>References</strong>:</p>
 <ul>
-<li>Adam paper: <a href="https://arxiv.org/pdf/1412.6980.pdf">https://arxiv.org/pdf/1412.6980.pdf</a></li>
+<li>Adam paper: <a href="https://arxiv.org/pdf/1412.6980.pdf" target="_blank">https://arxiv.org/pdf/1412.6980.pdf</a></li>
 </ul>
 
     </div>

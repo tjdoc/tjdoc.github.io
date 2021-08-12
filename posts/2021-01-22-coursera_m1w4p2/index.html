@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.83.1" />
+<meta name="generator" content="Hugo 0.87.0" />
 
 
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
@@ -91,7 +91,7 @@
     </div>
     
     <div class="post-content markdown-body">
-        <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+        <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
 <span style="color:#fff;font-weight:bold">import</span> matplotlib.pyplot <span style="color:#fff;font-weight:bold">as</span> plt
 <span style="color:#fff;font-weight:bold">import</span> h5py
 
@@ -146,7 +146,7 @@
 </span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
     
     Z = cache
-    dZ = np.array(dA, copy=True) <span style="color:#007f7f"># just converting dz to a correct object.</span>
+    dZ = np.array(dA, copy=<span style="color:#fff;font-weight:bold">True</span>) <span style="color:#007f7f"># just converting dz to a correct object.</span>
     
     <span style="color:#007f7f"># When z &lt;= 0, you should set dz to 0 as well. </span>
     dZ[Z &lt;= <span style="color:#ff0;font-weight:bold">0</span>] = <span style="color:#ff0;font-weight:bold">0</span>
@@ -378,7 +378,7 @@
     m = A_prev.shape[<span style="color:#ff0;font-weight:bold">1</span>]
 
     dW = <span style="color:#ff0;font-weight:bold">1.</span>/m * np.dot(dZ,A_prev.T)
-    db = <span style="color:#ff0;font-weight:bold">1.</span>/m * np.sum(dZ, axis = <span style="color:#ff0;font-weight:bold">1</span>, keepdims = True)
+    db = <span style="color:#ff0;font-weight:bold">1.</span>/m * np.sum(dZ, axis = <span style="color:#ff0;font-weight:bold">1</span>, keepdims = <span style="color:#fff;font-weight:bold">True</span>)
     dA_prev = np.dot(W.T,dZ)
     
     <span style="color:#fff;font-weight:bold">assert</span> (dA_prev.shape == A_prev.shape)
@@ -529,7 +529,7 @@
         plt.title(<span style="color:#0ff;font-weight:bold">&#34;Prediction: &#34;</span> + classes[<span style="color:#fff;font-weight:bold">int</span>(p[<span style="color:#ff0;font-weight:bold">0</span>,index])].decode(<span style="color:#0ff;font-weight:bold">&#34;utf-8&#34;</span>) + <span style="color:#0ff;font-weight:bold">&#34; </span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold"> Class: &#34;</span> + classes[y[<span style="color:#ff0;font-weight:bold">0</span>,index]].decode(<span style="color:#0ff;font-weight:bold">&#34;utf-8&#34;</span>))
 
 </code></pre></div><h2 id="import-packages">import packages</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> time
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> time
 <span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
 <span style="color:#fff;font-weight:bold">import</span> h5py
 <span style="color:#fff;font-weight:bold">import</span> matplotlib.pyplot <span style="color:#fff;font-weight:bold">as</span> plt
@@ -554,7 +554,7 @@ np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
 - a test set of m_test images labelled as cat and non-cat
 - each image is of shape (num_px, num_px, 3) where 3 is for the 3 channels (RGB).</p>
 <p>Let&rsquo;s get more familiar with the dataset. Load the data by running the cell below.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">train_x_orig, train_y, test_x_orig, test_y, classes = load_data()
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">train_x_orig, train_y, test_x_orig, test_y, classes = load_data()
 
 <span style="color:#007f7f"># Example of a picture</span>
 index = <span style="color:#ff0;font-weight:bold">10</span>
@@ -578,7 +578,7 @@ m_test = test_x_orig.shape[<span style="color:#ff0;font-weight:bold">0</span>]
 <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;test_x_orig shape: &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(test_x_orig.shape))
 <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;test_y shape: &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(test_y.shape))
 </code></pre></div><p>reshape and standardize images</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># Reshape the training and test examples 
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># Reshape the training and test examples 
 train_x_flatten = train_x_orig.reshape(train_x_orig.shape[0], -1).T   # The &#34;-1&#34; makes reshape flatten the remaining dimensions
 test_x_flatten = test_x_orig.reshape(test_x_orig.shape[0], -1).T
 
@@ -621,14 +621,14 @@ d. Update parameters (using parameters, and grads from backprop)</li>
 <li>Use trained parameters to predict labels</li>
 </ol>
 <p>Let&rsquo;s now implement those two models!</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f">### CONSTANTS DEFINING THE MODEL ####</span>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f">### CONSTANTS DEFINING THE MODEL ####</span>
 n_x = <span style="color:#ff0;font-weight:bold">12288</span>     <span style="color:#007f7f"># num_px * num_px * 3</span>
 n_h = <span style="color:#ff0;font-weight:bold">7</span>
 n_y = <span style="color:#ff0;font-weight:bold">1</span>
 layers_dims = (n_x, n_h, n_y)
 <span style="color:#007f7f"># GRADED FUNCTION: two_layer_model</span>
 
-<span style="color:#fff;font-weight:bold">def</span> two_layer_model(X, Y, layers_dims, learning_rate = <span style="color:#ff0;font-weight:bold">0.0075</span>, num_iterations = <span style="color:#ff0;font-weight:bold">3000</span>, print_cost=False):
+<span style="color:#fff;font-weight:bold">def</span> two_layer_model(X, Y, layers_dims, learning_rate = <span style="color:#ff0;font-weight:bold">0.0075</span>, num_iterations = <span style="color:#ff0;font-weight:bold">3000</span>, print_cost=<span style="color:#fff;font-weight:bold">False</span>):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
 </span><span style="color:#0ff;font-weight:bold">    Implements a two-layer neural network: LINEAR-&gt;RELU-&gt;LINEAR-&gt;SIGMOID.
 </span><span style="color:#0ff;font-weight:bold">    
@@ -704,7 +704,7 @@ layers_dims = (n_x, n_h, n_y)
         
         <span style="color:#007f7f"># Print the cost every 100 training example</span>
         <span style="color:#fff;font-weight:bold">if</span> print_cost and i % <span style="color:#ff0;font-weight:bold">100</span> == <span style="color:#ff0;font-weight:bold">0</span>:
-            <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Cost after iteration {}: {}&#34;</span>.format(i, np.squeeze(cost)))
+            <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Cost after iteration </span><span style="color:#0ff;font-weight:bold">{}</span><span style="color:#0ff;font-weight:bold">: </span><span style="color:#0ff;font-weight:bold">{}</span><span style="color:#0ff;font-weight:bold">&#34;</span>.format(i, np.squeeze(cost)))
         <span style="color:#fff;font-weight:bold">if</span> print_cost and i % <span style="color:#ff0;font-weight:bold">100</span> == <span style="color:#ff0;font-weight:bold">0</span>:
             costs.append(cost)
        
@@ -717,9 +717,9 @@ layers_dims = (n_x, n_h, n_y)
     plt.show()
     
     <span style="color:#fff;font-weight:bold">return</span> parameters
-parameters = two_layer_model(train_x, train_y, layers_dims = (n_x, n_h, n_y), num_iterations = <span style="color:#ff0;font-weight:bold">2500</span>, print_cost=True)
+parameters = two_layer_model(train_x, train_y, layers_dims = (n_x, n_h, n_y), num_iterations = <span style="color:#ff0;font-weight:bold">2500</span>, print_cost=<span style="color:#fff;font-weight:bold">True</span>)
 </code></pre></div><p>output</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Cost after iteration 0: 0.6930497356599888
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Cost after iteration 0: 0.6930497356599888
 Cost after iteration 100: 0.6464320953428849
 Cost after iteration 200: 0.6325140647912677
 Cost after iteration 300: 0.6015024920354665
@@ -747,18 +747,18 @@ Cost after iteration 2400: 0.048554785628770115
 
 </code></pre></div><p><img class="img-zoomable" src="/coursera_dl/2layer_cost.png" alt="2 layer cost" />
 </p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">predictions_train = predict(train_x, train_y, parameters)
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">predictions_train = predict(train_x, train_y, parameters)
 </code></pre></div><p>output</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Accuracy: 1.0
-</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">predictions_test = predict(test_x, test_y, parameters)
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Accuracy: 1.0
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">predictions_test = predict(test_x, test_y, parameters)
 </code></pre></div><p>output</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Accuracy: 0.72
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Accuracy: 0.72
 </code></pre></div><h2 id="l-layer-neural-network">L layer neural network</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f">### CONSTANTS ###</span>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f">### CONSTANTS ###</span>
 layers_dims = [<span style="color:#ff0;font-weight:bold">12288</span>, <span style="color:#ff0;font-weight:bold">20</span>, <span style="color:#ff0;font-weight:bold">7</span>, <span style="color:#ff0;font-weight:bold">5</span>, <span style="color:#ff0;font-weight:bold">1</span>] <span style="color:#007f7f">#  4-layer model</span>
 <span style="color:#007f7f"># GRADED FUNCTION: L_layer_model</span>
 
-<span style="color:#fff;font-weight:bold">def</span> L_layer_model(X, Y, layers_dims, learning_rate = <span style="color:#ff0;font-weight:bold">0.0075</span>, num_iterations = <span style="color:#ff0;font-weight:bold">3000</span>, print_cost=False):<span style="color:#007f7f">#lr was 0.009 0.0075</span>
+<span style="color:#fff;font-weight:bold">def</span> L_layer_model(X, Y, layers_dims, learning_rate = <span style="color:#ff0;font-weight:bold">0.0075</span>, num_iterations = <span style="color:#ff0;font-weight:bold">3000</span>, print_cost=<span style="color:#fff;font-weight:bold">False</span>):<span style="color:#007f7f">#lr was 0.009 0.0075</span>
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
 </span><span style="color:#0ff;font-weight:bold">    Implements a L-layer neural network: [LINEAR-&gt;RELU]*(L-1)-&gt;LINEAR-&gt;SIGMOID.
 </span><span style="color:#0ff;font-weight:bold">    
@@ -819,9 +819,9 @@ layers_dims = [<span style="color:#ff0;font-weight:bold">12288</span>, <span sty
     plt.show()
     
     <span style="color:#fff;font-weight:bold">return</span> parameters
-parameters = L_layer_model(train_x, train_y, layers_dims, num_iterations = <span style="color:#ff0;font-weight:bold">2500</span>, print_cost = True)
+parameters = L_layer_model(train_x, train_y, layers_dims, num_iterations = <span style="color:#ff0;font-weight:bold">2500</span>, print_cost = <span style="color:#fff;font-weight:bold">True</span>)
 </code></pre></div><p>output</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Cost after iteration 0: 0.695046
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Cost after iteration 0: 0.695046
 Cost after iteration 100: 0.589260
 Cost after iteration 200: 0.523261
 Cost after iteration 300: 0.449769
@@ -849,14 +849,14 @@ Cost after iteration 2400: 0.026615
 </code></pre></div><p><img class="img-zoomable" src="/coursera_dl/4layer_nn_cost.png" alt="4 layer NN" />
 </p>
 <h2 id="test">test</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f">## START CODE HERE ##</span>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f">## START CODE HERE ##</span>
 my_image = <span style="color:#0ff;font-weight:bold">&#34;funny.jpg&#34;</span> <span style="color:#007f7f"># change this to the name of your image file </span>
 my_label_y = [<span style="color:#ff0;font-weight:bold">1</span>] <span style="color:#007f7f"># the true class of your image (1 -&gt; cat, 0 -&gt; non-cat)</span>
 <span style="color:#007f7f">## END CODE HERE ##</span>
 
 <span style="color:#007f7f">#fname = &#34;images/&#34; + my_image</span>
 fname = my_image
-image = np.array(ndimage.imread(fname, flatten=False))
+image = np.array(ndimage.imread(fname, flatten=<span style="color:#fff;font-weight:bold">False</span>))
 my_image = scipy.misc.imresize(image, size=(num_px,num_px)).reshape((num_px*num_px*<span style="color:#ff0;font-weight:bold">3</span>,<span style="color:#ff0;font-weight:bold">1</span>))
 my_image = my_image/<span style="color:#ff0;font-weight:bold">255.</span>
 my_predicted_image = predict(my_image, my_label_y, parameters)
@@ -864,7 +864,7 @@ my_predicted_image = predict(my_image, my_label_y, parameters)
 plt.imshow(image)
 <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;y = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(np.squeeze(my_predicted_image)) + <span style="color:#0ff;font-weight:bold">&#34;, your L-layer model predicts a </span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold">&#34;</span> + classes[<span style="color:#fff;font-weight:bold">int</span>(np.squeeze(my_predicted_image)),].decode(<span style="color:#0ff;font-weight:bold">&#34;utf-8&#34;</span>) +  <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\&#34;</span><span style="color:#0ff;font-weight:bold"> picture.&#34;</span>)
 </code></pre></div><p>output</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Accuracy: 1.0
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Accuracy: 1.0
 y = 1.0, your L-layer model predicts a &#34;cat&#34; picture.
 </code></pre></div><p><img class="img-zoomable" src="/coursera_dl/funny.jpg" alt="test image of cat" />
 </p>

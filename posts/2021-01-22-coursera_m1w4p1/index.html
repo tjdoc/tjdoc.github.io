@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.83.1" />
+<meta name="generator" content="Hugo 0.87.0" />
 
 
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
@@ -92,7 +92,7 @@
     
     <div class="post-content markdown-body">
         <h2 id="dnn-utility">dnn utility</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
 
 <span style="color:#fff;font-weight:bold">def</span> sigmoid(Z):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
@@ -144,7 +144,7 @@
 </span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
     
     Z = cache
-    dZ = np.array(dA, copy=True) <span style="color:#007f7f"># just converting dz to a correct object.</span>
+    dZ = np.array(dA, copy=<span style="color:#fff;font-weight:bold">True</span>) <span style="color:#007f7f"># just converting dz to a correct object.</span>
     
     <span style="color:#007f7f"># When z &lt;= 0, you should set dz to 0 as well. </span>
     dZ[Z &lt;= <span style="color:#ff0;font-weight:bold">0</span>] = <span style="color:#ff0;font-weight:bold">0</span>
@@ -175,7 +175,7 @@
     <span style="color:#fff;font-weight:bold">return</span> dZ
 
 </code></pre></div><h2 id="test-cases">test cases</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
 
 <span style="color:#fff;font-weight:bold">def</span> linear_forward_test_case():
     np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
@@ -233,7 +233,7 @@
 
 <span style="color:#fff;font-weight:bold">def</span> compute_cost_test_case():
     Y = np.asarray([[<span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">0</span>]])
-    aL = np.array([[.<span style="color:#ff0;font-weight:bold">8</span>,.<span style="color:#ff0;font-weight:bold">9</span>,<span style="color:#ff0;font-weight:bold">0.4</span>]])
+    aL = np.array([[<span style="color:#ff0;font-weight:bold">.8</span>,<span style="color:#ff0;font-weight:bold">.9</span>,<span style="color:#ff0;font-weight:bold">0.4</span>]])
     
     <span style="color:#fff;font-weight:bold">return</span> Y, aL
 
@@ -389,7 +389,7 @@
     <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;dA1 = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(grads[<span style="color:#0ff;font-weight:bold">&#34;dA1&#34;</span>]))     
     
 </code></pre></div><h2 id="import-packages">import packages</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> numpy <span style="color:#fff;font-weight:bold">as</span> np
 <span style="color:#fff;font-weight:bold">import</span> h5py
 <span style="color:#fff;font-weight:bold">import</span> matplotlib.pyplot <span style="color:#fff;font-weight:bold">as</span> plt
 <span style="color:#fff;font-weight:bold">from</span> testCases_v4a <span style="color:#fff;font-weight:bold">import</span> *
@@ -439,7 +439,7 @@ np.random.seed(<span style="color:#ff0;font-weight:bold">1</span>)
 <li>Use random initialization for the weight matrices. Use <code>np.random.randn(shape)*0.01</code> with the correct shape.</li>
 <li>Use zero initialization for the biases. Use <code>np.zeros(shape)</code>.</li>
 </ul>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> initialize_parameters(n_x, n_h, n_y):
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> initialize_parameters(n_x, n_h, n_y):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
 </span><span style="color:#0ff;font-weight:bold">    Argument:
 </span><span style="color:#0ff;font-weight:bold">    n_x -- size of the input layer
@@ -515,10 +515,10 @@ $$</p>
 <li>We will store $n^{[l]}$, the number of units in different layers, in a variable <code>layer_dims</code>. For example, the <code>layer_dims</code> for the &ldquo;Planar Data classification model&rdquo; from last week would have been [2,4,1]: There were two inputs, one hidden layer with 4 hidden units, and an output layer with 1 output unit. This means <code>W1</code>&rsquo;s shape was (4,2), <code>b1</code> was (4,1), <code>W2</code> was (1,4) and <code>b2</code> was (1,1). Now you will generalize this to \(L\) layers!</li>
 <li>Here is the implementation for \(L=1\) (one layer neural network). It should inspire you to implement the general case (L-layer neural network).</li>
 </ul>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    <span style="color:#fff;font-weight:bold">if</span> L == <span style="color:#ff0;font-weight:bold">1</span>:
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    <span style="color:#fff;font-weight:bold">if</span> L == <span style="color:#ff0;font-weight:bold">1</span>:
         parameters[<span style="color:#0ff;font-weight:bold">&#34;W&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(L)] = np.random.randn(layer_dims[<span style="color:#ff0;font-weight:bold">1</span>], layer_dims[<span style="color:#ff0;font-weight:bold">0</span>]) * <span style="color:#ff0;font-weight:bold">0.01</span>
         parameters[<span style="color:#0ff;font-weight:bold">&#34;b&#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(L)] = np.zeros((layer_dims[<span style="color:#ff0;font-weight:bold">1</span>], <span style="color:#ff0;font-weight:bold">1</span>))
-</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> initialize_parameters_deep(layer_dims):
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> initialize_parameters_deep(layer_dims):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
 </span><span style="color:#0ff;font-weight:bold">    Arguments:
 </span><span style="color:#0ff;font-weight:bold">    layer_dims -- python array (list) containing the dimensions of each layer in our network
@@ -555,7 +555,7 @@ $$</p>
 <p>$$Z^{[l]} = W^{[l]}A^{[l-1]} +b^{[l]}$$</p>
 <p>where \(A^{[0]} = X\).</p>
 <p>The mathematical representation of this unit is \(Z^{[l]} = W^{[l]}A^{[l-1]} +b^{[l]}\). You may also find <code>np.dot()</code> useful. If your dimensions don&rsquo;t match, printing <code>W.shape</code> may help.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> linear_forward(A, W, b):
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> linear_forward(A, W, b):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
 </span><span style="color:#0ff;font-weight:bold">    Implement the linear part of a layer&#39;s forward propagation.
 </span><span style="color:#0ff;font-weight:bold">
@@ -584,10 +584,10 @@ Z, linear_cache = linear_forward(A, W, b)
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Z = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(Z))
 
 </code></pre></div><p>output</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Z = [[ 3.26295337 -1.23429987]]
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Z = [[ 3.26295337 -1.23429987]]
 
 </code></pre></div><h3 id="linear-activation-forward">linear activation forward</h3>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> linear_activation_forward(A_prev, W, b, activation):
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> linear_activation_forward(A_prev, W, b, activation):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
 </span><span style="color:#0ff;font-weight:bold">    Implement the forward propagation for the LINEAR-&gt;ACTIVATION layer
 </span><span style="color:#0ff;font-weight:bold">
@@ -631,11 +631,11 @@ A, linear_activation_cache = linear_activation_forward(A_prev, W, b, activation 
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;With ReLU: A = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(A))
 
 </code></pre></div><p>output</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">With sigmoid: A = [[ 0.96890023  0.11013289]]
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">With sigmoid: A = [[ 0.96890023  0.11013289]]
 With ReLU: A = [[ 3.43896131  0.        ]]
 </code></pre></div><p><img class="img-zoomable" src="/coursera_dl/model_architecture_kiank.png" alt="model architecture" />
 </p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> L_model_forward(X, parameters):
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> L_model_forward(X, parameters):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
 </span><span style="color:#0ff;font-weight:bold">    Implement forward propagation for the [LINEAR-&gt;RELU]*(L-1)-&gt;LINEAR-&gt;SIGMOID computation
 </span><span style="color:#0ff;font-weight:bold">    
@@ -676,13 +676,13 @@ AL, caches = L_model_forward(X, parameters)
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;AL = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(AL))
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Length of caches list = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(<span style="color:#fff;font-weight:bold">len</span>(caches)))
 </code></pre></div><p>output</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">AL = [[ 0.03921668  0.70498921  0.19734387  0.04728177]]
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">AL = [[ 0.03921668  0.70498921  0.19734387  0.04728177]]
 Length of caches list = 3
 </code></pre></div><h2 id="cost-function">Cost function</h2>
 <p>Now you will implement forward and backward propagation. You need to compute the cost, because you want to check if your model is actually learning.</p>
 <p>Compute the cross-entropy cost \(J\), using the following formula:</p>
 <p>$$ -\frac{1}{m} \sum\limits_{i = 1}^{m} (y^{(i)}\log\left(a^{\lbrack L \rbrack (i)}\right) + (1-y^{(i)})\log\left(1- a^{\lbrack L \rbrack (i)}\right)) $$</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 <span style="color:#fff;font-weight:bold">def</span> compute_cost(AL, Y):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
 </span><span style="color:#0ff;font-weight:bold">    Implement the cost function defined by equation (7).
@@ -710,7 +710,7 @@ Y, AL = compute_cost_test_case()
 <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;cost = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(compute_cost(AL, Y)))
 
 </code></pre></div><p>output</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cost = 0.2797765635793423
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cost = 0.2797765635793423
 
 </code></pre></div><h2 id="backward-propagation">Backward Propagation</h2>
 <p><img class="img-zoomable" src="/coursera_dl/backprop_kiank.png" alt="backward propagation" />
@@ -730,7 +730,7 @@ Y, AL = compute_cost_test_case()
 <p>$$ dW^{[l]} = \frac{\partial \mathcal{J} }{\partial W^{[l]}} = \frac{1}{m} dZ^{[l]} A^{[l-1] T}$$
 $$ db^{[l]} = \frac{\partial \mathcal{J} }{\partial b^{[l]}} = \frac{1}{m} \sum_{i = 1}^{m} dZ^{\lbrack l \rbrack (i)}$$
 $$ dA^{[l-1]} = \frac{\partial \mathcal{L} }{\partial A^{[l-1]}} = W^{[l] T} dZ^{[l]}$$</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> linear_backward(dZ, cache):
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> linear_backward(dZ, cache):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
 </span><span style="color:#0ff;font-weight:bold">    Implement the linear portion of backward propagation for a single layer (layer l)
 </span><span style="color:#0ff;font-weight:bold">
@@ -748,7 +748,7 @@ $$ dA^{[l-1]} = \frac{\partial \mathcal{L} }{\partial A^{[l-1]}} = W^{[l] T} dZ^
 
     <span style="color:#007f7f">### START CODE HERE ### (≈ 3 lines of code)</span>
     dW = np.dot(dZ, cache[<span style="color:#ff0;font-weight:bold">0</span>].T)/m
-    db = np.sum(dZ, axis=<span style="color:#ff0;font-weight:bold">1</span>, keepdims=True)/m
+    db = np.sum(dZ, axis=<span style="color:#ff0;font-weight:bold">1</span>, keepdims=<span style="color:#fff;font-weight:bold">True</span>)/m
     dA_prev = np.dot(cache[<span style="color:#ff0;font-weight:bold">1</span>].T, dZ)
     <span style="color:#007f7f">### END CODE HERE ###</span>
     
@@ -767,7 +767,7 @@ dA_prev, dW, db = linear_backward(dZ, linear_cache)
 <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;db = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(db))
 
 </code></pre></div><p>output</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">dA_prev = 
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">dA_prev = 
 [[-1.15171336  0.06718465 -0.3204696   2.09812712]
  [ 0.60345879 -3.72508701  5.81700741 -3.84326836]
  [-0.4319552  -1.30987417  1.72354705  0.05070578]
@@ -788,14 +788,14 @@ db =
 <ul>
 <li><strong><code>sigmoid_backward</code></strong>: Implements the backward propagation for SIGMOID unit. You can call it as follows:</li>
 </ul>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dZ = sigmoid_backward(dA, activation_cache)
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dZ = sigmoid_backward(dA, activation_cache)
 </code></pre></div><ul>
 <li><strong><code>relu_backward</code></strong>: Implements the backward propagation for RELU unit. You can call it as follows:</li>
 </ul>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dZ = relu_backward(dA, activation_cache)
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dZ = relu_backward(dA, activation_cache)
 </code></pre></div><p>If $g(.)$ is the activation function,
 <code>sigmoid_backward</code> and <code>relu_backward</code> compute $$dZ^{[l]} = dA^{[l]} * g'(Z^{[l]})$$.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 <span style="color:#fff;font-weight:bold">def</span> linear_activation_backward(dA, cache, activation):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
 </span><span style="color:#0ff;font-weight:bold">    Implement the backward propagation for the LINEAR-&gt;ACTIVATION layer.
@@ -840,7 +840,7 @@ dA_prev, dW, db = linear_activation_backward(dAL, linear_activation_cache, activ
 <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;dW = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(dW))
 <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;db = &#34;</span> + <span style="color:#fff;font-weight:bold">str</span>(db))
 </code></pre></div><p>output</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sigmoid:
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sigmoid:
 dA_prev = [[ 0.11017994  0.01105339]
  [ 0.09466817  0.00949723]
  [-0.05743092 -0.00576154]]
@@ -861,11 +861,11 @@ db = [[-0.20837892]]
 <p>To backpropagate through this network, we know that the output is,
 \(A^{[L]} = \sigma(Z^{[L]})\). Your code thus needs to compute <code>dAL</code> \(= \frac{\partial \mathcal{L}}{\partial A^{[L]}}\).
 To do so, use this formula (derived using calculus which you don&rsquo;t need in-depth knowledge of):</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dAL = - (np.divide(Y, AL) - np.divide(<span style="color:#ff0;font-weight:bold">1</span> - Y, <span style="color:#ff0;font-weight:bold">1</span> - AL)) <span style="color:#007f7f"># derivative of cost with respect to AL</span>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dAL = - (np.divide(Y, AL) - np.divide(<span style="color:#ff0;font-weight:bold">1</span> - Y, <span style="color:#ff0;font-weight:bold">1</span> - AL)) <span style="color:#007f7f"># derivative of cost with respect to AL</span>
 </code></pre></div><p>You can then use this post-activation gradient <code>dAL</code> to keep going backward. As seen in Figure 5, you can now feed in <code>dAL</code> into the LINEAR-&gt;SIGMOID backward function you implemented (which will use the cached values stored by the L_model_forward function). After that, you will have to use a <code>for</code> loop to iterate through all the other layers using the LINEAR-&gt;RELU backward function. You should store each dA, dW, and db in the grads dictionary. To do so, use this formula :</p>
 <p>$$grads[&ldquo;dW&rdquo; + str(l)] = dW^{[l]}\tag{15} $$</p>
 <p>For example, for \(l=3\) this would store \(dW^{[l]}\) in <code>grads[&quot;dW3&quot;]</code>.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> L_model_backward(AL, Y, caches):
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> L_model_backward(AL, Y, caches):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
 </span><span style="color:#0ff;font-weight:bold">    Implement the backward propagation for the [LINEAR-&gt;RELU] * (L-1) -&gt; LINEAR -&gt; SIGMOID group
 </span><span style="color:#0ff;font-weight:bold">    
@@ -917,7 +917,7 @@ grads = L_model_backward(AL, Y_assess, caches)
 print_grads(grads)
 
 </code></pre></div><p>output</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">dW1 = [[ 0.41010002  0.07807203  0.13798444  0.10502167]
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">dW1 = [[ 0.41010002  0.07807203  0.13798444  0.10502167]
  [ 0.          0.          0.          0.        ]
  [ 0.05283652  0.01005865  0.01777766  0.0135308 ]]
 db1 = [[-0.22007063]
@@ -928,7 +928,7 @@ dA1 = [[ 0.12913162 -0.44014127]
  [ 0.01663708 -0.05670698]]
 
 </code></pre></div><h2 id="gradient-descent---update-parameters">gradient descent - update parameters</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> update_parameters(parameters, grads, learning_rate):
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> update_parameters(parameters, grads, learning_rate):
     <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
 </span><span style="color:#0ff;font-weight:bold">    Update parameters using gradient descent
 </span><span style="color:#0ff;font-weight:bold">    
@@ -961,7 +961,7 @@ parameters = update_parameters(parameters, grads, <span style="color:#ff0;font-w
 <span style="color:#fff;font-weight:bold">print</span> (<span style="color:#0ff;font-weight:bold">&#34;b2 = &#34;</span>+ <span style="color:#fff;font-weight:bold">str</span>(parameters[<span style="color:#0ff;font-weight:bold">&#34;b2&#34;</span>]))
 
 </code></pre></div><p>output</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">W1 = [[-0.59562069 -0.09991781 -2.14584584  1.82662008]
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">W1 = [[-0.59562069 -0.09991781 -2.14584584  1.82662008]
  [-1.76569676 -0.80627147  0.51115557 -1.18258802]
  [-1.0535704  -0.86128581  0.68284052  2.20374577]]
 b1 = [[-0.04659241]
